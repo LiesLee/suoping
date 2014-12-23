@@ -1,0 +1,12 @@
+
+/bin/
+/gen/
+
+/proguard/
+/bom.xml
+/gradle
+/build
+/*.iml
+/gradlew
+/*.bat
+/*.gradle
