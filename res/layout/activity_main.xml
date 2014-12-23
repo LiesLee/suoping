@@ -36,7 +36,8 @@
                 android:button="@null"
                 android:drawableTop="@drawable/earnings_btn"
                 android:text="@string/earnings"
-                android:textColor="@drawable/tabhost_text_color" />
+                android:textColor="@drawable/tabhost_text_color"
+                android:checked="false"/>
 
             <RadioButton
                 android:id="@+id/mainTabs_radio_shop"

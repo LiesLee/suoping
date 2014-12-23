@@ -63,12 +63,7 @@ public class LockService extends Service {
 	public int onStartCommand(Intent intent , int flags , int startId){
 		
 		return Service.START_REDELIVER_INTENT;
-		/*
-		 * 	START_STICKY锛氬鏋渟ervice杩涚▼琚玨ill鎺夛紝淇濈暀service鐨勭姸鎬佷负寮�鐘舵�锛屼絾涓嶄繚鐣欓�閫佺殑intent瀵硅薄銆傞殢鍚庣郴缁熶細灏濊瘯閲嶆柊鍒涘缓service锛�
-				鐢变簬鏈嶅姟鐘舵�涓哄紑濮嬬姸鎬侊紝鎵�互鍒涘缓鏈嶅姟鍚庝竴瀹氫細璋冪敤onStartCommand(Intent,int,int)鏂规硶銆傚鏋滃湪姝ゆ湡闂存病鏈変换浣曞惎鍔ㄥ懡浠よ浼犻�鍒皊ervice锛岄偅涔堝弬鏁癐ntent灏嗕负null銆�
-			START_NOT_STICKY锛氣�闈炵矘鎬х殑鈥濄�浣跨敤杩欎釜杩斿洖鍊兼椂锛屽鏋滃湪鎵ц�?宱nStartCommand鍚庯紝鏈嶅姟琚紓甯竗ill鎺夛紝绯荤粺涓嶄細鑷姩閲嶅惎璇ユ湇鍔°�
-			START_REDELIVER_INTENT锛氶噸浼營ntent銆備娇鐢ㄨ繖涓繑鍥炲�鏃讹紝濡傛灉鍦ㄦ墽琛屽畬onStartCommand鍚庯紝鏈嶅姟琚紓甯竗ill鎺夛紝绯荤粺浼氳嚜鍔ㄩ噸鍚鏈嶅姟锛屽苟灏咺ntent鐨勫�浼犲叆銆�
-			START_STICKY_COMPATIBILITY锛歋TART_STICKY鐨勫吋�?圭増鏈紝浣嗕笉淇濊瘉鏈嶅姟琚玨ill鍚庝竴�?氳兘閲嶅惎銆�?		 */
+
 	}
 	
 	public void onDestroy(){

@@ -61,7 +61,7 @@ public class Activity_earnings extends Activity {
 		setContentView(R.layout.tab_earnings);
 		
 
-		RelativeLayout mapButtonRL = new RelativeLayout(this);
+		/*RelativeLayout mapButtonRL = new RelativeLayout(this);
 		  RelativeLayout.LayoutParams lp1 = new RelativeLayout.LayoutParams(
 		    ViewGroup.LayoutParams.WRAP_CONTENT,
 		    ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -100,7 +100,7 @@ public class Activity_earnings extends Activity {
 			}  
         }); 
 		mapButtonRL.addView(btn1, lp1);
-		setContentView(mapButtonRL);
+		setContentView(mapButtonRL);*/
 		
 		
 	}
