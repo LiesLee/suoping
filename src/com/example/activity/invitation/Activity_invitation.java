@@ -1,10 +1,11 @@
-package com.example.activity;
+package com.example.activity.invitation;
 
 import org.json.JSONObject;
 
 import android.os.Bundle;
 
 import com.android.volley.VolleyError;
+import com.example.activity.common.BaseActivity;
 import com.example.http.Protocol;
 import com.example.keyguard.R;
 

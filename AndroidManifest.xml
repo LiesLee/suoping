@@ -31,10 +31,10 @@
         <!--申明activity--> 
 		<activity android:name="com.example.keyguard.LockActivity"></activity> 
 		<activity android:name="com.example.keyguard.DownLoadWebActivity"></activity>    
-		<activity android:name="com.example.activity.Activity_earnings"></activity>
-		<activity android:name="com.example.activity.Activity_invitation"></activity>
-		<activity android:name="com.example.activity.Activity_more"></activity>
-		<activity android:name="com.example.activity.Activity_shop"></activity>
+		<activity android:name="com.example.activity.earnings.Activity_earnings"></activity>
+		<activity android:name="com.example.activity.invitation.Activity_invitation"></activity>
+		<activity android:name="com.example.activity.more.Activity_more"></activity>
+		<activity android:name="com.example.activity.shop.Activity_shop"></activity>
 		     
     </application>
 
