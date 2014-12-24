@@ -16,9 +16,9 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.util.LogUtil;
+import com.example.util.StringUtils;
 import com.google.gson.Gson;
-import com.istudy.utils.LogUtil;
-import com.istudy.utils.StringUtils;
 
 public class BaseRequest<T> implements Listener<String>, ErrorListener {
 	private final String TAG = BaseRequest.class.getSimpleName();

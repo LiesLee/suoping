@@ -18,10 +18,10 @@ import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.Toast;
 
-import com.example.activity.Activity_earnings;
-import com.example.activity.Activity_invitation;
-import com.example.activity.Activity_more;
-import com.example.activity.Activity_shop;
+import com.example.activity.earnings.Activity_earnings;
+import com.example.activity.invitation.Activity_invitation;
+import com.example.activity.more.Activity_more;
+import com.example.activity.shop.Activity_shop;
 
 public class MainActivity extends TabActivity implements OnCheckedChangeListener {
 
