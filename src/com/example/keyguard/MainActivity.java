@@ -118,4 +118,11 @@ public class MainActivity extends TabActivity implements OnCheckedChangeListener
 
 	};
 
+    @Override
+    protected void onStop()
+    {
+        unregisterReceiver(mBroadcastReceiver);
+        super.onStop();
+    }
+
 }
