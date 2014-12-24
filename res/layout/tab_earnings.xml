@@ -115,6 +115,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp">
             <LinearLayout
+                style="@style/earning_tab_bg"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -144,6 +145,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp">
             <LinearLayout
+                style="@style/earning_tab_bg"
                 android:orientation="vertical"
                 android:gravity="center"
                 android:layout_width="match_parent"
@@ -181,6 +183,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp">
             <LinearLayout
+                style="@style/earning_tab_bg"
                 android:orientation="vertical"
                 android:gravity="center"
                 android:layout_width="match_parent"
@@ -228,6 +231,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp">
                     <LinearLayout
+                        style="@style/earning_tab_bg"
                         android:orientation="vertical"
                         android:gravity="center"
                         android:layout_width="match_parent"
@@ -257,6 +261,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp">
                     <LinearLayout
+                        style="@style/earning_tab_bg"
                         android:orientation="vertical"
                         android:gravity="center"
                         android:layout_width="match_parent"
