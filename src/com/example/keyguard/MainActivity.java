@@ -60,7 +60,7 @@ public class MainActivity extends TabActivity implements OnCheckedChangeListener
 		IntentFilter myIntentFilter = new IntentFilter();
 		myIntentFilter.addAction("shut_down");
 		// 注册广播
-		registerReceiver(mBroadcastReceiver, myIntentFilter);
+		getApplicationContext().registerReceiver(mBroadcastReceiver, myIntentFilter);
 
 		KeyguardManager mKeyguardManager = null;
 		KeyguardManager.KeyguardLock mKeyguardLock = null;
@@ -112,17 +112,15 @@ public class MainActivity extends TabActivity implements OnCheckedChangeListener
 			String action = intent.getAction();
 			if (action.equals("shut_down")) {
 				// Toast.makeText(Test.this, "处理action名字相对应的广播", 200);
-				finish();
+				//finish();
 			}
 		}
 
 	};
 
     @Override
-    protected void onStop()
-    {
-        unregisterReceiver(mBroadcastReceiver);
-        super.onStop();
+    protected void onDestroy() {
+        getApplicationContext().unregisterReceiver(mBroadcastReceiver);
+        super.onDestroy();
     }
-
 }
