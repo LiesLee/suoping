@@ -1,10 +1,10 @@
 package com.example.util;
 
-import com.istudy.application.IStudyApplication;
-
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.widget.Toast;
+
+import com.example.activity.common.KeyGuardApplication;
 
 /**
  * @Description 公共工具类
@@ -24,7 +24,7 @@ public class PublicUtil {
 
 	public static boolean isApkDebugable() {
 		try {
-			ApplicationInfo info = IStudyApplication.getInstance().getApplicationInfo();
+			ApplicationInfo info = KeyGuardApplication.getInstance().getApplicationInfo();
 			return (info.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
 		} catch (Exception e) {
 
