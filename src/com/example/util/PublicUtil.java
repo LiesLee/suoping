@@ -1,6 +1,9 @@
 package com.example.util;
 
+import com.istudy.application.IStudyApplication;
+
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.widget.Toast;
 
 /**
@@ -17,5 +20,15 @@ public class PublicUtil {
 	 */
 	public static void showToast(Context context, String text) {
 		Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+	}
+
+	public static boolean isApkDebugable() {
+		try {
+			ApplicationInfo info = IStudyApplication.getInstance().getApplicationInfo();
+			return (info.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
+		} catch (Exception e) {
+
+		}
+		return false;
 	}
 }
