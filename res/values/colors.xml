@@ -12,5 +12,7 @@
     <color name="prevailing_red">#EE1A19</color>
     <color name="tab_red">#DA0E0D</color>
     <color name="black">#000000</color>
+    <!-- 灰色线 -->
+    <color name="line">#E4E4E4</color>
 
 </resources>
