@@ -27,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
+            android:background="#E4E4E4"
             android:gravity="left"
             android:orientation="horizontal" >
 
@@ -34,10 +35,10 @@
                 android:id="@+id/mainTabs_radio_earnings"
                 style="@style/mainTabs_radio"
                 android:button="@null"
+                android:checked="false"
                 android:drawableTop="@drawable/earnings_btn"
                 android:text="@string/earnings"
-                android:textColor="@drawable/tabhost_text_color"
-                android:checked="false"/>
+                android:textColor="@drawable/tabhost_text_color" />
 
             <RadioButton
                 android:id="@+id/mainTabs_radio_shop"
