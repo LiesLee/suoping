@@ -14,5 +14,7 @@
     <color name="black">#000000</color>
     <!-- 灰色线 -->
     <color name="line">#E4E4E4</color>
+    <!--PagerSlidingTabStrip配置颜色-->
+    <color name="background_tab_pressed">#6633B5E5</color>
 
 </resources>
