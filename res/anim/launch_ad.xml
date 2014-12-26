@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>   
+<!-- 每次进入程序的全屏广告 -->
+<set xmlns:android="http://schemas.android.com/apk/res/android">   
+     
+    <alpha   
+    android:fromAlpha="1.0"    
+    android:toAlpha="1.0"  
+    android:duration="2000" />   
+</set>
