@@ -58,7 +58,6 @@ public class Activity_Launch extends BaseActivity implements AnimationListener {
 	@Override
 	protected void initData() {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -91,4 +90,8 @@ public class Activity_Launch extends BaseActivity implements AnimationListener {
 
 	}
 
+	
+
+
+	
 }
