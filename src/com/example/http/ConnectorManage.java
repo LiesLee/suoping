@@ -1,6 +1,8 @@
 package com.example.http;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -20,6 +22,8 @@ public class ConnectorManage implements HttpCallBack {
 	@SuppressWarnings("rawtypes")
 	private HashMap<Long, Request> mapHttp = new HashMap<Long, Request>();
 
+    private List<HttpCallBack> fragmentCallBacks = new ArrayList<HttpCallBack>();
+
 	/** 页面请求返回 */
 	private HttpCallBack activityCallBack;
 
@@ -30,6 +34,18 @@ public class ConnectorManage implements HttpCallBack {
 		core.context = context;
 		return core;
 	}
+
+    // 添加一个回调
+    public void addFragmentCallBack(HttpCallBack callBack) {
+        if (!fragmentCallBacks.contains(callBack))
+            fragmentCallBacks.add(callBack);
+    }
+
+    // 取消一个回调
+    public void removeFragmentCallBack(HttpCallBack callBack) {
+        if (fragmentCallBacks.contains(callBack))
+            fragmentCallBacks.remove(callBack);
+    }
 
 	/**
 	 * @Description

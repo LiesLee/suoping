@@ -3,13 +3,12 @@
 
     <string name="app_name">keyguard</string>
     <string name="hello_world">Hello world!</string>
-    
-
     <string name="action_settings">Settings</string>
     <string name="earnings">收益</string>
     <string name="shop">兑换</string>
     <string name="invitation">邀请</string>
     <string name="more">更多</string>
-     <string name="search">发现</string>
+    <string name="search">发现</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

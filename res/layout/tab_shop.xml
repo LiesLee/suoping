@@ -1,18 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical" >
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:orientation="vertical">
 
-    <include layout="@layout/public_top" />
+    <include layout="@layout/public_top"/>
 
-    <ListView
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/shop_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <com.example.ui.astuetz.PagerSlidingTabStrip
+            android:id="@+id/shop_taps"
+            android:background="@color/earning_gray"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:fillViewport="false"/>
+    </RelativeLayout>
+
+
+    <!--<ListView
         android:id="@+id/lv_shop_body"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:cacheColorHint="@null"
         android:divider="@null" >
-    </ListView>
+    </ListView>-->
 
 </LinearLayout>

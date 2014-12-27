@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
 import com.android.volley.VolleyError;
 import com.example.http.ConnectorManage;
@@ -16,7 +17,7 @@ import com.example.util.PublicUtil;
  * @Description 基础activity
  * @author Created by qinxianyuzou on 2014-12-23.
  */
-public abstract class BaseActivity extends Activity implements HttpCallBack {
+public abstract class BaseActivity extends FragmentActivity implements HttpCallBack {
 	protected ConnectorManage connectorManage;
 	protected String Tag = "";
 	protected BaseActivity activity;
