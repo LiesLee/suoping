@@ -2,16 +2,14 @@
 <resources>
 
     <string name="app_name">keyguard</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="earnings">收益</string>
     <string name="shop">兑换</string>
     <string name="invitation">邀请</string>
     <string name="more">更多</string>
     <string name="search">发现</string>
-    <string name="virtual_goods">虚拟物品</string>
-    <string name="entity_goods">实物物品</string>
-    <string name="withdraw_cash">提现充值</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="virtual_goods">虚拟商品</string>
+    <string name="entity_goods">实物商品</string>
+    <string name="withdraw_cash">提取现金</string>
 
 </resources>

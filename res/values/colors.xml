@@ -17,5 +17,7 @@
     <!--PagerSlidingTabStrip配置颜色-->
     <color name="background_tab_pressed">#6633B5E5</color>
     <color name="text_tab">#5E5E5E</color>
+    <color name="btn_login">#F53B39</color>
+    <color name="text_reg">#FF9933</color>
 
 </resources>

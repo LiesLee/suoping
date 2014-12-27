@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:background="@color/white"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/view_head"
+        layout="@layout/public_head_reg"/>
+
+    <TextView
+        android:id="@+id/tv_input_tips"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="33dp"
+        android:textColor="@color/black"
+        android:layout_below="@id/view_head"
+        android:text="填写手机号码："
+        android:textSize="11sp"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"/>
+
+    <EditText
+        android:id="@+id/et_reg_cellphone"
+        android:layout_marginLeft="5dp"
+        android:hint="+86"
+        android:paddingLeft="4dp"
+        android:textSize="16sp"
+        android:inputType="number"
+        android:singleLine="true"
+        android:maxLength="11"
+        android:background="@color/earning_gray"
+        android:layout_alignBottom="@+id/tv_input_tips"
+        android:layout_toRightOf="@id/tv_input_tips"
+        android:layout_width="210dp"
+        android:layout_height="40dp"/>
+    
+    <Button
+        android:id="@+id/btn_cellphone_next"
+        android:text="下一步"
+        android:textColor="@color/white"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/selector_btn_login"
+        android:layout_alignLeft="@id/et_reg_cellphone"
+        android:layout_below="@id/et_reg_cellphone"
+        android:layout_width="170dp"
+        android:layout_height="40dp"/>
+
+
+
+
+
+
+</RelativeLayout>

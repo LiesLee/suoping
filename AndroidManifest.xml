@@ -56,8 +56,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.activity.reg.LoginActivity"
-            android:label="@string/title_activity_login" >
+            android:name="com.example.activity.reg.LoginActivity" >
         </activity>
     </application>
 
