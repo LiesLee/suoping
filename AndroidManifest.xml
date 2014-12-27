@@ -13,6 +13,10 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:name="com.example.activity.common.KeyGuardApplication"
         android:allowBackup="true"
@@ -25,12 +29,12 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
 
-        <service android:name="com.example.keyguard.LockService" >
+        <service android:name=".LockService" >
         </service>
         <!-- 申明activity -->
-        <activity android:name="com.example.keyguard.LockActivity" >
+        <activity android:name=".LockActivity" >
         </activity>
-        <activity android:name="com.example.keyguard.DownLoadWebActivity" >
+        <activity android:name=".DownLoadWebActivity" >
         </activity>
         <activity android:name="com.example.activity.earnings.Activity_earnings" >
         </activity>
@@ -50,6 +54,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.activity.reg.LoginActivity"
+            android:label="@string/title_activity_login" >
         </activity>
     </application>
 

@@ -89,9 +89,4 @@ public class Activity_Launch extends BaseActivity implements AnimationListener {
 		// TODO Auto-generated method stub
 
 	}
-
-	
-
-
-	
 }

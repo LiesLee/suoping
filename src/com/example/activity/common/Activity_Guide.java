@@ -86,7 +86,7 @@ public class Activity_Guide extends BaseActivity implements OnClickListener {
 		case R.id.but_guide_goto:
 			if (SharedPreferenceUtil.getInstance(activity).getString(SharedPreferenceUtil.USERINFO).equals("")) {
 				startActivity(new Intent(this, MainActivity.class));
-			} else {
+            } else {
 				startActivity(new Intent(this, MainActivity.class));
 			}
 			finish();
