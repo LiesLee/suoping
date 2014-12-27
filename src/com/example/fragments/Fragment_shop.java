@@ -8,10 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.activity.common.ShopInterface;
+import com.example.activity.shop.Shop_Adapter;
 import com.example.keyguard.R;
+import com.example.ui.astuetz.PagerSlidingTabStrip;
 import com.example.ui.pull.RefleshListView;
+import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.bitmap.PauseOnScrollListener;
 import com.lidroid.xutils.view.annotation.ViewInject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,14 +29,18 @@ import com.lidroid.xutils.view.annotation.ViewInject;
  * Use the {@link Fragment_shop#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Fragment_shop extends Fragment {
+public class Fragment_shop extends BaseFragment {
     private static final String SHOP_TYPE = "shop_type";
 
     private String shop_type;
     @ViewInject(R.id.rListView)
     private RefleshListView rListView;
 
-    private OnFragmentInteractionListener mListener;
+    private ShopInterface shopCoordinator;
+    private BitmapUtils bitmapUtils;
+    private Shop_Adapter adapter;
+    /** 保存数据源 */
+    private List<String> dataList = new ArrayList<String>();
 
     /**
      * Use this factory method to create a new instance of
@@ -56,6 +68,8 @@ public class Fragment_shop extends Fragment {
         }
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -65,18 +79,31 @@ public class Fragment_shop extends Fragment {
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    @Override
+    public void initUI() {
+        bitmapUtils = new BitmapUtils(activity);
+        adapter = new Shop_Adapter(activity, bitmapUtils);
+        rListView.setOnScrollListener(new PauseOnScrollListener(bitmapUtils, false, true));
+        rListView.setAdapter(adapter);
     }
 
+    @Override
+    public void initData() {
+        for (int i = 0; i < 20; i++) {
+            dataList.add("");
+        }
+        adapter.setData(dataList);
+    }
+
+    @Override
+    public String setTag() {
+        return null;
+    }
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mListener = (OnFragmentInteractionListener) activity;
+            shopCoordinator = (ShopInterface) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -86,8 +113,9 @@ public class Fragment_shop extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        shopCoordinator = null;
     }
+
 
     /**
      * This interface must be implemented by activities that contain this

@@ -6,23 +6,24 @@
               android:orientation="vertical">
 
     <include layout="@layout/public_top"/>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <com.example.ui.astuetz.PagerSlidingTabStrip
+            android:id="@+id/shop_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:fillViewport="true"
+            android:background="@color/earning_gray"/>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/shop_pager"
+            android:layout_below="@+id/shop_tabs"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+        </RelativeLayout>
 
-        <com.example.ui.astuetz.PagerSlidingTabStrip
-            android:id="@+id/shop_taps"
-            android:background="@color/earning_gray"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:fillViewport="false"/>
-    </RelativeLayout>
+
 
 
     <!--<ListView

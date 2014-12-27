@@ -16,5 +16,6 @@
     <color name="line">#E4E4E4</color>
     <!--PagerSlidingTabStrip配置颜色-->
     <color name="background_tab_pressed">#6633B5E5</color>
+    <color name="text_tab">#5E5E5E</color>
 
 </resources>

@@ -9,6 +9,9 @@
     <string name="invitation">邀请</string>
     <string name="more">更多</string>
     <string name="search">发现</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="virtual_goods">虚拟物品</string>
+    <string name="entity_goods">虚拟物品</string>
+    <string name="withdraw_cash">提现充值</string>
+
 
 </resources>
