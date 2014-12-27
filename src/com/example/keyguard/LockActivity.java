@@ -42,11 +42,15 @@ public class LockActivity extends Activity {
     
     RelativeLayout.LayoutParams image_slide;
     
+	public static LockActivity instance = null;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);		
 		RelativeLayout mRelativeLayout = new RelativeLayout(this);  
 	    setContentView(mRelativeLayout); 	 
+	    
+		instance = this;
+
 	    //ExitApplication.getInstance().addActivity(this);
         /*
         RelativeLayout mParent = new RelativeLayout(this); 
@@ -279,13 +283,27 @@ public class LockActivity extends Activity {
 							     Toast.LENGTH_SHORT).show();
 				        Intent intent = new Intent(LockActivity.this, DownLoadWebActivity.class); 
 				        startActivity(intent);
+				        //finish();
 					}else {
-						//ExitApplication.getInstance().exit(LockActivity.this);
 						
-						Intent mIntent = new Intent("shut_down");                    
-						//鍙戦�骞挎挱  
-						sendBroadcast(mIntent);
-						finish();
+
+						/*
+						Intent intent = new Intent(LockActivity.this, MainActivity.class);  
+						Bundle bundle = new Bundle();  
+						bundle.putString("Name", "test");  
+						bundle.putBoolean("IsClose", true);  
+						intent.putExtras(bundle);  
+						startActivity(intent); 
+						*/
+						if (MainActivity.instance !=null) {
+							MainActivity.instance.finish();
+						}
+						if (DownLoadWebActivity.instance !=null) {
+							DownLoadWebActivity.instance.finish();
+						}
+						if (LockActivity.instance !=null) {
+							LockActivity.instance.finish();
+						}
 					}
 					 
 				}

@@ -1,13 +1,7 @@
 package com.example.activity.earnings;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.json.JSONObject;
 
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,7 +14,7 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 /**
- * @Description
+ * @Description 收益
  * @author Created by qinxianyuzou on 2014-12-26.
  */
 public class Activity_earnings extends BaseActivity implements OnClickListener {

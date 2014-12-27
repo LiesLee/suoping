@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,24 +30,29 @@ public class DownLoadWebActivity extends Activity {
 	
 	 public static final int LL_NAV = 1111111; 
 	 public static final int RL_DOWN = 1111112; 
+	 
+	public static DownLoadWebActivity instance = null;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);	
+		
+		instance = this;
 		
 		//ExitApplication.getInstance().addActivity(this);
 		RelativeLayout mRelativeLayout = new RelativeLayout(this);  
 	    setContentView(mRelativeLayout); 	  
 	    UINavigationView nav = new UINavigationView(this);
-	    nav.setStrTitle("搴旂敤璇︽儏");
+	    nav.setStrTitle("鎼存梻鏁ょ拠锔藉剰");
 	    nav.initContent(mRelativeLayout.getContext());
 	    nav.setId(LL_NAV);
 	    mRelativeLayout.addView(nav);
 	    nav.getBtn_left().setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Toast.makeText(DownLoadWebActivity.this, "杩斿洖涓婚〉!",
+				Toast.makeText(DownLoadWebActivity.this, "鏉╂柨娲栨稉濠氥�!",
 					     Toast.LENGTH_SHORT).show();
 		        Intent intent = new Intent(DownLoadWebActivity.this, MainActivity.class); 
 		        startActivity(intent); 
+		        finish();
 			}  
         });  
 	    
@@ -57,12 +63,12 @@ public class DownLoadWebActivity extends Activity {
         Button mBtnDownloadNow = null; 
         mBtnDownloadNow = new Button(mDownloadLayout.getContext());  
         mBtnDownloadNow.setBackgroundColor(Color.TRANSPARENT);
-        mBtnDownloadNow.setText("绔嬪嵆涓嬭浇");  
+        mBtnDownloadNow.setText("缁斿宓嗘稉瀣祰");  
         mBtnDownloadNow.setTextSize(25);
         mBtnDownloadNow.setTextColor(Color.RED);
         mBtnDownloadNow.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Toast.makeText(DownLoadWebActivity.this, "绔嬪嵆涓嬭浇!",
+				Toast.makeText(DownLoadWebActivity.this, "缁斿宓嗘稉瀣祰!",
 					     Toast.LENGTH_SHORT).show();
 			}  
         });  
@@ -79,15 +85,40 @@ public class DownLoadWebActivity extends Activity {
 	    WebView_rl1.addRule(RelativeLayout.BELOW,LL_NAV); 
 	    WebView_rl1.addRule(RelativeLayout.ABOVE, RL_DOWN);
         mRelativeLayout.addView(mWebView ,WebView_rl1); 
-      //璁剧疆WebView灞炴�锛岃兘澶熸墽琛孞avascript鑴氭湰  
+      //鐠佸墽鐤哤ebView鐏炵偞锟介敍宀冨厴婢剁喐澧界悰瀛瀉vascript閼存碍婀� 
         mWebView.getSettings().setJavaScriptEnabled(true); 
         mWebView.loadUrl("http://www.jd.com/");
         mWebView.setWebViewClient(new WebViewClient(){
-      	  public boolean shouldOverrideUrlLoading(WebView view, String url) {  //閲嶅啓姝ゆ柟娉曡〃鏄庣偣鍑荤綉椤甸噷闈㈢殑閾炬帴杩樻槸鍦ㄥ綋鍓嶇殑webview閲岃烦杞紝涓嶈烦鍒版祻瑙堝櫒閭ｈ竟
+      	  public boolean shouldOverrideUrlLoading(WebView view, String url) {  //闁插秴鍟撳銈嗘煙濞夋洝銆冮弰搴ｅ仯閸戣崵缍夋い鐢稿櫡闂堛垻娈戦柧鐐复鏉╂ɑ妲搁崷銊ョ秼閸撳秶娈憌ebview闁插矁鐑︽潪顒婄礉娑撳秷鐑﹂崚鐗堢セ鐟欏牆娅掗柇锝堢珶
       	       view.loadUrl(url);
       	       return true;
       	  }
         });
 
 	}
+	
+	
+	  @Override
+	    protected void onResume() {
+	        super.onResume();
+
+	       Log.i("hhz", "onResume");
+	    }
+
+	    @Override
+	    protected void onPause() {
+
+		    Log.i("hhz", "onPause");
+			if (MainActivity.instance !=null) {
+				MainActivity.instance.finish();
+			}
+			if (DownLoadWebActivity.instance !=null) {
+				DownLoadWebActivity.instance.finish();
+			}
+			if (LockActivity.instance !=null) {
+				LockActivity.instance.finish();
+			}
+	        super.onPause();
+	        
+	    }
 }
