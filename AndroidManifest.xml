@@ -56,8 +56,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.activity.reg.LoginActivity" >
-        </activity>
+            android:name="com.example.activity.reg.LoginActivity" />
+
+        <activity android:name="com.example.activity.reg.Activity_Reg"/>
+        <activity android:name="com.example.activity.reg.Activity_Reg_Authentication"/>
+        <activity android:name="com.example.activity.reg.Activity_Reg_Password"/>
     </application>
 
 </manifest>

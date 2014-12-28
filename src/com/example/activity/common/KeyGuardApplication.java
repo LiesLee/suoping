@@ -16,4 +16,5 @@ public class KeyGuardApplication extends Application {
 		mInstance = this;
 		UserManager.getInstance();
 	}
+
 }

@@ -2,6 +2,7 @@ package com.example.keyguard;
 
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.KeyguardManager;
 import android.app.TabActivity;
 import android.content.Context;
@@ -18,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.Toast;
 
+import com.example.activity.common.KeyGuardActivityManager;
 import com.example.activity.earnings.Activity_earnings;
 import com.example.activity.invitation.Activity_invitation;
 import com.example.activity.more.Activity_more;
@@ -25,7 +27,10 @@ import com.example.activity.shop.Activity_shop;
 
 public class MainActivity extends TabActivity implements OnCheckedChangeListener{
 
-		private TabHost tabHost;
+    private static final String CELLPHOME_NUMBER = "cellphone_number";
+    private static final String PASSEORD = "password";
+    private static final String REGISTER_LOGIN = "register_login";
+    private TabHost tabHost;
 		private RadioGroup radioderGroup;
 		
 		private static String TAG = "QINZDLOCK";
@@ -39,7 +44,6 @@ public class MainActivity extends TabActivity implements OnCheckedChangeListener
 	    public static int MSG_LOCK_SUCESS = 1;
 	    
 	    public static MainActivity instance = null;
-
 		@SuppressLint("NewApi")
 		protected void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
@@ -116,5 +120,7 @@ public class MainActivity extends TabActivity implements OnCheckedChangeListener
 	        super.onPause();
 	        
 	    }
+
+
 
 }

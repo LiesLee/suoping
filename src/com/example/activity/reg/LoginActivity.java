@@ -3,6 +3,8 @@ package com.example.activity.reg;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -10,7 +12,13 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.example.activity.common.BaseActivity;
+import com.example.entity.respose.Code;
+import com.example.entity.respose.ResponseUserInfo;
+import com.example.http.Protocol;
 import com.example.keyguard.R;
+import com.example.util.LogUtil;
+import com.example.util.StringUtils;
+import com.example.util.UIHelper;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -36,12 +44,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @ViewInject(R.id.tv_reg)
     private TextView tv_reg;
 
+    private String password;
+    private String cellphoneNumber;
+    private long loginFlag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ViewUtils.inject(this);
-
+        initUI();
     }
 
     @Override
@@ -57,7 +69,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 break;
             //登录按钮
             case R.id.btn_lg:
-
+                if(check()){
+                    loginFlag = Protocol.login(this, setTag(), cellphoneNumber, password);
+                    UIHelper.showMsgProgressDialog(this, "正在登录...");
+                }
                 break;
             //注册
             case R.id.tv_reg:
@@ -68,10 +83,43 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
     }
 
+    boolean check() {
+        cellphoneNumber = et_cellphone.getText().toString();
+        password = et_password.getText().toString();
+
+        Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
+        if (StringUtils.isEmpty(cellphoneNumber)) {
+            et_cellphone.startAnimation(shake);
+            et_cellphone.requestFocus();
+            showToast("请输入您的手机号码");
+            return false;
+        } else if (!StringUtils.phoneNumberValid(cellphoneNumber)) {
+            et_cellphone.startAnimation(shake);
+            et_cellphone.requestFocus();
+            showToast("请输入正确手机号码");
+            return false;
+        } else if (StringUtils.isEmpty(password)) {
+            et_password.startAnimation(shake);
+            et_password.requestFocus();
+            showToast("请输入您的密码");
+            return false;
+        }
+        return true;
+    }
+
 
     @Override
     public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
-
+        if (flag == loginFlag){
+            UIHelper.cancelProgressDialog();
+            ResponseUserInfo msg = (ResponseUserInfo) response;
+            if(msg.getCode().equals(Code.CODE_SUCCESS)){
+                LogUtil.i("=====UserInfo====", msg.getMsg().toString());
+            }else {
+                showToast("登录失败");
+                LogUtil.i("=====login erre=====", jsonString.toString());
+            }
+        }
     }
 
     @Override
@@ -94,7 +142,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     public String setTag() {
-        return null;
+        return this.getClass().getSimpleName();
     }
 
 
