@@ -1,8 +1,10 @@
 package com.example.http;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.http.NameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,9 +18,12 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.keyguard.R.id;
 import com.example.util.LogUtil;
+import com.example.util.PublicUtil;
 import com.example.util.StringUtils;
 import com.google.gson.Gson;
+import com.lidroid.xutils.util.LogUtils;
 
 public class BaseRequest<T> implements Listener<String>, ErrorListener {
 	private final String TAG = BaseRequest.class.getSimpleName();
@@ -30,9 +35,18 @@ public class BaseRequest<T> implements Listener<String>, ErrorListener {
 	private long flag;
 
 	public BaseRequest(Context context, int method, long flag, String url, String tag,
-			Map<String, String> requestParam, Class<T> responseClass, HttpCallBack httpCallBack) {
+			ArrayList<NameValuePair> requestParam, Class<T> responseClass, HttpCallBack httpCallBack) {
 		this.method = method;
-		init(context, flag, url, tag, requestParam, responseClass, httpCallBack);
+		Map<String, String> tempMap = new HashMap<String, String>();
+		for (int i = 0; i < requestParam.size(); i++) {
+			if (requestParam.get(i).getValue() == null) {
+				LogUtil.d("BaseRequest", requestParam.get(i).getName() + "参数为空指针，请重新检查参数");
+				return;
+			} else {
+				tempMap.put(requestParam.get(i).getName(), requestParam.get(i).getValue());
+			}
+		}
+		init(context, flag, url, tag, tempMap, responseClass, httpCallBack);
 	}
 
 	private void init(Context context, long flag, String url, String tag, Map<String, String> requestParam,
@@ -68,19 +82,21 @@ public class BaseRequest<T> implements Listener<String>, ErrorListener {
 		switch (method) {
 		case Method.POST:
 		default:
-			return new StringRequest(method, url, this, this) {
+			StringRequest stringRequest = new StringRequest(method, url, this, this) {
 
 				@Override
 				public Map<String, String> getHeaders() throws AuthFailureError {
+					// TODO Auto-generated method stub
 					return getRequestHeader();
 				}
 
 				@Override
-				protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
+				protected Map<String, String> getParams() throws AuthFailureError {
+					// TODO Auto-generated method stub
 					return requestParam;
-				};
-
+				}
 			};
+			return stringRequest;
 		case Method.GET:
 			Uri.Builder uriBuilder = Uri.parse(url).buildUpon();
 			if (requestParam != null) {
@@ -104,7 +120,7 @@ public class BaseRequest<T> implements Listener<String>, ErrorListener {
 	 */
 	protected Map<String, String> getRequestHeader() {
 		Map<String, String> headParams = new HashMap<String, String>();
-		headParams.put("content-type", "application/json");
+		headParams.put("content-type", "application/json; charset=utf-8");
 		headParams.put("charset", "UTF-8");
 		return headParams;
 	}

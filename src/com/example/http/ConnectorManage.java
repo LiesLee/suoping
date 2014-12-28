@@ -6,12 +6,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.apache.http.NameValuePair;
 import org.json.JSONObject;
 
 import android.content.Context;
 
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
+import com.android.volley.Request.Method;
 
 public class ConnectorManage implements HttpCallBack {
 
@@ -22,7 +24,7 @@ public class ConnectorManage implements HttpCallBack {
 	@SuppressWarnings("rawtypes")
 	private HashMap<Long, Request> mapHttp = new HashMap<Long, Request>();
 
-    private List<HttpCallBack> fragmentCallBacks = new ArrayList<HttpCallBack>();
+	private List<HttpCallBack> fragmentCallBacks = new ArrayList<HttpCallBack>();
 
 	/** 页面请求返回 */
 	private HttpCallBack activityCallBack;
@@ -35,17 +37,17 @@ public class ConnectorManage implements HttpCallBack {
 		return core;
 	}
 
-    // 添加一个回调
-    public void addFragmentCallBack(HttpCallBack callBack) {
-        if (!fragmentCallBacks.contains(callBack))
-            fragmentCallBacks.add(callBack);
-    }
+	// 添加一个回调
+	public void addFragmentCallBack(HttpCallBack callBack) {
+		if (!fragmentCallBacks.contains(callBack))
+			fragmentCallBacks.add(callBack);
+	}
 
-    // 取消一个回调
-    public void removeFragmentCallBack(HttpCallBack callBack) {
-        if (fragmentCallBacks.contains(callBack))
-            fragmentCallBacks.remove(callBack);
-    }
+	// 取消一个回调
+	public void removeFragmentCallBack(HttpCallBack callBack) {
+		if (fragmentCallBacks.contains(callBack))
+			fragmentCallBacks.remove(callBack);
+	}
 
 	/**
 	 * @Description
@@ -69,10 +71,9 @@ public class ConnectorManage implements HttpCallBack {
 	}
 
 	/**
-	 * @Description 
-	 * @author Created by qinxianyuzou on 2014-12-24.
+	 * @Description post请求
+	 * @author Created by qinxianyuzou on 2014-12-28.
 	 * @param context
-	 * @param method
 	 * @param url
 	 * @param tag
 	 * @param requestParam
@@ -81,10 +82,31 @@ public class ConnectorManage implements HttpCallBack {
 	 * @return
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public <T> long sentHttpRequest(Context context, int method, String url, String tag,
-			Map<String, String> requestParam, Class<T> responseClass, HttpCallBack httpCallBack) {
+	public <T> long PostHttpRequest(Context context, String url, String tag, ArrayList<NameValuePair> requestParam,
+			Class<T> responseClass, HttpCallBack httpCallBack) {
 		final long flag = httpCount.incrementAndGet();
-		BaseRequest request = new BaseRequest(context, method, flag, url, tag, requestParam, responseClass,
+		BaseRequest request = new BaseRequest(context, Method.POST, flag, url, tag, requestParam, responseClass,
+				httpCallBack);
+		mapHttp.put(flag, request.getRequest());
+		return flag;
+	}
+
+	/**
+	 * @Description get请求
+	 * @author Created by qinxianyuzou on 2014-12-28.
+	 * @param context
+	 * @param url
+	 * @param tag
+	 * @param requestParam
+	 * @param responseClass
+	 * @param httpCallBack
+	 * @return
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public <T> long GetHttpRequest(Context context, String url, String tag, ArrayList<NameValuePair> requestParam,
+			Class<T> responseClass, HttpCallBack httpCallBack) {
+		final long flag = httpCount.incrementAndGet();
+		BaseRequest request = new BaseRequest(context, Method.GET, flag, url, tag, requestParam, responseClass,
 				httpCallBack);
 		mapHttp.put(flag, request.getRequest());
 		return flag;

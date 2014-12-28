@@ -1,13 +1,13 @@
 package com.example.util;
 
-import net.sourceforge.pinyin4j.PinyinHelper;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import net.sourceforge.pinyin4j.PinyinHelper;
 
 /**
  * Various String utility functions. Most of the functions herein are

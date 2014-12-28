@@ -10,7 +10,7 @@ public class Config {
 	/** 是否开发模式 */
 	public static boolean DEBUG = PublicUtil.isApkDebugable();
 	/** 基础地址 */
-	private final static String BASE_URL = "client.duowanka.com/";
+	private final static String BASE_URL = "http://client.duowanka.com/";
 	/** 获取用户物流信息 */
 	public final static String GET_LOGISTICS_LIST = BASE_URL + "get_logistics_list";
 	/** 登录 */
@@ -44,7 +44,7 @@ public class Config {
 	/** 邀请赚积分 */
 	public final static String INVITE = BASE_URL + "invite";
 	/** APP下载 */
-	public final static String DOWNLOADAPP = "static.duowanka.com/downloadApp";
+	public final static String DOWNLOADAPP = "http://static.duowanka.com/downloadApp";
 	/** APP检查更新 */
-	public final static String CHECK_UPDATE = "static.duowanka.com/check_update";
+	public final static String CHECK_UPDATE = "http://static.duowanka.com/check_update";
 }

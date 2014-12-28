@@ -15,6 +15,7 @@ import com.example.entity.respose.Code;
 import com.example.entity.respose.ResponseSendCode;
 import com.example.http.Protocol;
 import com.example.keyguard.R;
+import com.example.util.LogUtil;
 import com.example.util.StringUtils;
 import com.example.util.UIHelper;
 import com.lidroid.xutils.ViewUtils;
@@ -132,6 +133,7 @@ public class Activity_Reg_Password extends BaseActivity implements View.OnClickL
     public void onHttpError(long flag, VolleyError error) {
         if (flag == regFlag){
             UIHelper.cancelProgressDialog();
+            LogUtil.d("onHttpError", error.toString());
             showToast(StringUtils.ERROR_TOAST);
         }
     }
