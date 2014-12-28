@@ -7,4 +7,8 @@
     <dimen name="list_padding">10dp</dimen>
     <dimen name="shadow_width">5dp</dimen>
 
+    <!--Sweet arlet dialog-->
+    <dimen name="alert_width">290dp</dimen>
+    <dimen name="common_circle_width">3dp</dimen>
+    <dimen name="progress_circle_radius">34dp</dimen>
 </resources>

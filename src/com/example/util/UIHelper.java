@@ -66,6 +66,8 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class UIHelper {
 
 	public static final int ACT_TRAN_HEAD = 43;
@@ -516,4 +518,35 @@ public class UIHelper {
         final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
         return (int) (spValue * fontScale + 0.5f);
     }
+
+
+//====================================进度条====================================================
+    public static SweetAlertDialog pDialog;
+
+    /** 显示一个带文字的进度条
+     * @param context
+     * @param msg
+     */
+    public static void showMsgProgressDialog(Context context , String msg){
+        if(pDialog!=null){
+            pDialog.cancel();
+            pDialog = null;
+        }
+        pDialog = new SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText(msg);
+        pDialog.setCancelable(false);
+        pDialog.setCanceledOnTouchOutside(false);
+        pDialog.show();
+    }
+
+    /** 取消进度条 **/
+    public static void cancelProgressDialog() {
+        if (pDialog != null) {
+            pDialog.dismiss();
+            pDialog.cancel();
+        }
+    }
+
+
 }

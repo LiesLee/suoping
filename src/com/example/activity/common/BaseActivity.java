@@ -27,6 +27,8 @@ public abstract class BaseActivity extends FragmentActivity implements HttpCallB
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		activity = this;
+        KeyGuardActivityManager.getInstance().addActivity(this);
+        setTag();
 	}
 
 	@Override

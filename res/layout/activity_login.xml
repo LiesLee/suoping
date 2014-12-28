@@ -24,6 +24,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+
+        <EditText
+            android:id="@+id/et_cellphone"
+            android:inputType="number"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:background="@color/earning_gray"
+            android:hint="手机号"
+            android:paddingLeft="4dp"
+            android:maxLength="11"
+            android:singleLine="true"
+            android:textSize="16sp"/>
+
         <TextView
             android:text="账号："
             android:textColor="@color/black"
@@ -37,16 +52,17 @@
             android:layout_height="wrap_content"/>
 
         <EditText
-            android:id="@+id/et_cellphone"
-            android:inputType="number"
+            android:id="@+id/et_password"
+            android:inputType="textPassword"
+            android:layout_marginTop="30dp"
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_centerHorizontal="true"
+            android:layout_below="@+id/et_cellphone"
             android:background="@color/earning_gray"
-            android:hint="手机号"
-            android:paddingLeft="4dp"
             android:maxLength="11"
             android:singleLine="true"
+            android:paddingLeft="4dp"
             android:textSize="16sp"/>
 
         <TextView
@@ -71,20 +87,6 @@
             android:text="忘记密码？"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-
-        <EditText
-            android:id="@+id/et_password"
-            android:inputType="textPassword"
-            android:layout_marginTop="30dp"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/et_cellphone"
-            android:background="@color/earning_gray"
-            android:maxLength="11"
-            android:singleLine="true"
-            android:paddingLeft="4dp"
-            android:textSize="16sp"/>
 
         <Button
             android:id="@+id/btn_lg"

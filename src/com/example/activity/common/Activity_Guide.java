@@ -14,6 +14,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.android.volley.VolleyError;
+import com.example.activity.reg.LoginActivity;
 import com.example.keyguard.MainActivity;
 import com.example.keyguard.R;
 import com.example.util.SharedPreferenceUtil;
@@ -85,7 +86,7 @@ public class Activity_Guide extends BaseActivity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.but_guide_goto:
 			if (SharedPreferenceUtil.getInstance(activity).getString(SharedPreferenceUtil.USERINFO).equals("")) {
-				startActivity(new Intent(this, MainActivity.class));
+				startActivity(new Intent(this, LoginActivity.class));
             } else {
 				startActivity(new Intent(this, MainActivity.class));
 			}
