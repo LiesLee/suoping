@@ -65,6 +65,9 @@ public class Activity_Reg_Authentication extends BaseActivity implements View.On
         tv_input_tips.setText("出入验证码：");
         et_reg.setHint("");
         cellphoneNumber = getIntent().getStringExtra(CELLPHOME_NUMBER);
+
+        btn_reg_next.setOnClickListener(this);
+        iv_back_left.setOnClickListener(this);
     }
 
     @Override

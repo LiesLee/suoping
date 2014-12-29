@@ -366,9 +366,9 @@ public class LockActivity extends Activity {
 						 * bundle.putBoolean("IsClose", true);
 						 * intent.putExtras(bundle); startActivity(intent);
 						 */
-						if (MainActivity.instance != null) {
+						/*if (MainActivity.instance != null) {
 							MainActivity.instance.finish();
-						}
+						}*/
 						if (DownLoadWebActivity.instance != null) {
 							DownLoadWebActivity.instance.finish();
 						}

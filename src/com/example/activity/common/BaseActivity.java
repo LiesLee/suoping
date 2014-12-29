@@ -12,6 +12,7 @@ import android.view.View.OnClickListener;
 import com.android.volley.VolleyError;
 import com.example.http.ConnectorManage;
 import com.example.http.HttpCallBack;
+import com.example.http.RequestManager;
 import com.example.keyguard.R;
 import com.example.util.PublicUtil;
 import com.lidroid.xutils.ViewUtils;
@@ -78,6 +79,13 @@ public abstract class BaseActivity extends FragmentActivity implements HttpCallB
 	 * @return
 	 */
 	public abstract String setTag();
+
+    @Override
+    public void finish() {
+        super.finish();
+        KeyGuardActivityManager.getInstance().removeActivity(this);
+        RequestManager.getInstance(this).getmRequestQueue().cancelAll(Tag);
+    }
 
 	/**
 	 * @Description 短时间toast
