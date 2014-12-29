@@ -60,7 +60,7 @@ public class DemoActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		// setContentView(R.layout.activity_address);
+		// setContentView(R.layout.activity_myinfo);
 		ViewUtils.inject(activity);
 		initUI();
 		initData();

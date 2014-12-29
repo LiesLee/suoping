@@ -10,6 +10,7 @@ import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
 
 import com.android.volley.VolleyError;
+import com.example.activity.common.Activity_PublicWeb;
 import com.example.activity.common.BaseActivity;
 import com.example.activity.common.KeyGuardActivityManager;
 import com.example.entity.respose.Code;
@@ -127,21 +128,19 @@ public class Activity_earnings extends BaseActivity {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.rl_earnings_earnings:
-
+			Activity_NotActive.luanch(activity);
 			break;
 		case R.id.rl_earnings_action:
-
-            Activity_newcomer.luanch(this);
-
+			Activity_newcomer.luanch(this);
 			break;
 		case R.id.rl_earnings_details:
-
+			Activity_PublicWeb.luanch(activity, "锁屏赚收益明细", "http://www.baidu.com");
 			break;
 		case R.id.rl_earnings_exchange:
-
+			Activity_EarningsShop.luanch(activity);
 			break;
 		case R.id.rl_earnings_announcement:
-
+			Activity_PublicWeb.luanch(activity, "公告", "http://www.baidu.com");
 			break;
 
 		default:

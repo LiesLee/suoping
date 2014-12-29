@@ -45,7 +45,7 @@ public class Activity_PublicWeb extends BaseActivity {
 	public static void luanch(Activity activity, String title, String url) {
 		mTitle = title;
 		mUrl = url;
-		Intent intent = new Intent(activity, Activity_MyInfo.class);
+		Intent intent = new Intent(activity, Activity_PublicWeb.class);
 		KeyGuardActivityManager.getInstance().goFoResult(activity, intent, KeyGuardActivityManager.MAIN_CODE);
 	}
 

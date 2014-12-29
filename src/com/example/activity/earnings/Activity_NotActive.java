@@ -2,6 +2,8 @@ package com.example.activity.earnings;
 
 import org.json.JSONObject;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -10,11 +12,18 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.example.activity.common.BaseActivity;
+import com.example.activity.common.KeyGuardActivityManager;
+import com.example.activity.more.Activity_MyInfo;
 import com.example.keyguard.R;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
+/**
+ * @Description 待激活收益
+ * @author Created by qinxianyuzou on 2014-12-30.
+ */
 public class Activity_NotActive extends BaseActivity {
+
 	/** 标题栏 */
 	@ViewInject(R.id.tv_public_top_title)
 	private TextView tv_public_top_title;
@@ -24,11 +33,36 @@ public class Activity_NotActive extends BaseActivity {
 	/** 列表 */
 	@ViewInject(R.id.lv_shop_body)
 	private ListView lv_shop_body;
+	/** 标题 */
+	private static String mTitle = "待激活收益";
+
+	/**
+	 * @Description 不设置标题
+	 * @author Created by qinxianyuzou on 2014-12-30.
+	 * @param activity
+	 */
+	public static void luanch(Activity activity) {
+		Intent intent = new Intent(activity, Activity_NotActive.class);
+		KeyGuardActivityManager.getInstance().goFoResult(activity, intent, KeyGuardActivityManager.MAIN_CODE);
+	}
+
+	/**
+	 * @Description 设置标题
+	 * @author Created by qinxianyuzou on 2014-12-30.
+	 * @param activity
+	 * @param title
+	 */
+	public static void luanch(Activity activity, String title) {
+		mTitle = title;
+		Intent intent = new Intent(activity, Activity_MyInfo.class);
+		KeyGuardActivityManager.getInstance().goFoResult(activity, intent, KeyGuardActivityManager.MAIN_CODE);
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_myinfo);
 		ViewUtils.inject(activity);
 		initUI();
 		initData();
@@ -37,7 +71,7 @@ public class Activity_NotActive extends BaseActivity {
 	@Override
 	protected void initUI() {
 		// TODO Auto-generated method stub
-		tv_public_top_title.setText("待激活收益");
+		tv_public_top_title.setText(mTitle);
 		rl_public_back.setVisibility(View.VISIBLE);
 		rl_public_back.setOnClickListener(this);
 	}
