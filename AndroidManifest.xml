@@ -21,12 +21,8 @@
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
+        android:theme="@android:style/Theme.Light.NoTitleBar" >
+        <activity  android:name=".MainActivity" />
 
         <service android:name=".LockService" >
         </service>
@@ -46,8 +42,7 @@
         <activity android:name="com.example.activity.common.Activity_Guide" >
         </activity>
         <activity
-            android:name="com.example.activity.common.Activity_Launch"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            android:name="com.example.activity.common.Activity_Launch" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -67,8 +62,7 @@
         <activity android:name="com.example.activity.shop.Activity_ShopInfo" >
         </activity>
         <activity
-            android:name="com.example.activity.earnings.Activity_newcomer"
-            android:label="@string/title_activity_activity_newcomer" >
+            android:name="com.example.activity.earnings.Activity_newcomer">
         </activity>
     </application>
 
