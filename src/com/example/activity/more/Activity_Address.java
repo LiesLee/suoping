@@ -8,6 +8,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 
 import com.android.volley.VolleyError;
@@ -75,6 +76,12 @@ public class Activity_Address extends BaseActivity {
 	public String setTag() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

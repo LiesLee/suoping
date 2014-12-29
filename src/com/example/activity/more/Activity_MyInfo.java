@@ -7,11 +7,17 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.android.volley.VolleyError;
+import com.example.activity.common.Activity_Submit;
 import com.example.activity.common.BaseActivity;
+import com.example.activity.common.KeyGuardActivityManager;
 import com.example.keyguard.R;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.bitmap.PauseOnScrollListener;
@@ -22,6 +28,9 @@ import com.lidroid.xutils.view.annotation.ViewInject;
  * @author Created by qinxianyuzou on 2014-12-29.
  */
 public class Activity_MyInfo extends BaseActivity {
+	/** 标题栏 */
+	@ViewInject(R.id.tv_public_top_title)
+	private TextView tv_public_top_title;
 	/** 列表 */
 	@ViewInject(R.id.lv_shop_body)
 	private ListView lv_shop_body;
@@ -30,6 +39,11 @@ public class Activity_MyInfo extends BaseActivity {
 	private BitmapUtils bitmapUtils;
 	/** 保存数据源 */
 	private List<NameValuePair> dataList = new ArrayList<NameValuePair>();
+
+	public static void luanch(Activity activity) {
+		Intent intent = new Intent(activity, Activity_MyInfo.class);
+		KeyGuardActivityManager.getInstance().goFoResult(activity, intent, KeyGuardActivityManager.MAIN_CODE);
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +55,7 @@ public class Activity_MyInfo extends BaseActivity {
 	@Override
 	protected void initUI() {
 		// TODO Auto-generated method stub
+		tv_public_top_title.setText("我的账号");
 		adapter = new MyInfo_Adapter(activity, bitmapUtils);
 		// 滑动时停止加载图片
 		lv_shop_body.setOnScrollListener(new PauseOnScrollListener(bitmapUtils, false, true));
@@ -79,6 +94,12 @@ public class Activity_MyInfo extends BaseActivity {
 	public String setTag() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

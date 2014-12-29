@@ -25,10 +25,10 @@ import com.lidroid.xutils.view.annotation.ViewInject;
  * @Description 收益
  * @author Created by qinxianyuzou on 2014-12-26.
  */
-public class Activity_earnings extends BaseActivity implements OnClickListener {
-    private static final String CELLPHOME_NUMBER = "cellphone_number";
-    private static final String PASSEORD = "password";
-    private static final String REGISTER_LOGIN = "register_login";
+public class Activity_earnings extends BaseActivity {
+	private static final String CELLPHOME_NUMBER = "cellphone_number";
+	private static final String PASSEORD = "password";
+	private static final String REGISTER_LOGIN = "register_login";
 	/** 收益 */
 	@ViewInject(R.id.rl_earnings_earnings)
 	private RelativeLayout rl_earnings_earnings;
@@ -45,27 +45,26 @@ public class Activity_earnings extends BaseActivity implements OnClickListener {
 	@ViewInject(R.id.rl_earnings_announcement)
 	private RelativeLayout rl_earnings_announcement;
 
-    private String cellphoneNumber;
-    private String password;
-    /** 是否注册登录 **/
-    private boolean registerlogin;
-    private long loginFlag;
+	private String cellphoneNumber;
+	private String password;
+	/** 是否注册登录 **/
+	private boolean registerlogin;
+	private long loginFlag;
 
-    public static void luanch(Activity activity, String cellphoneNumber, String password, boolean registerlogin) {
-        Intent intent = new Intent(activity, Activity_earnings.class);
-        intent.putExtra(CELLPHOME_NUMBER, cellphoneNumber);
-        intent.putExtra(PASSEORD, password);
-        intent.putExtra(REGISTER_LOGIN, registerlogin);
-        KeyGuardActivityManager.getInstance().goTo(activity, intent);
-    }
+	public static void luanch(Activity activity, String cellphoneNumber, String password, boolean registerlogin) {
+		Intent intent = new Intent(activity, Activity_earnings.class);
+		intent.putExtra(CELLPHOME_NUMBER, cellphoneNumber);
+		intent.putExtra(PASSEORD, password);
+		intent.putExtra(REGISTER_LOGIN, registerlogin);
+		KeyGuardActivityManager.getInstance().goTo(activity, intent);
+	}
 
-    public static void luanch(Activity activity) {
-        Intent intent = new Intent(activity, Activity_earnings.class);
-        KeyGuardActivityManager.getInstance().goTo(activity, intent);
-    }
+	public static void luanch(Activity activity) {
+		Intent intent = new Intent(activity, Activity_earnings.class);
+		KeyGuardActivityManager.getInstance().goTo(activity, intent);
+	}
 
-
-    @Override
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tab_earnings);
@@ -77,16 +76,16 @@ public class Activity_earnings extends BaseActivity implements OnClickListener {
 
 	@Override
 	public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
-        if(flag == loginFlag){
-            UIHelper.cancelProgressDialog();
-            ResponseUserInfo msg = (ResponseUserInfo) response;
-            if (msg.getCode() == Code.CODE_SUCCESS) {
-                LogUtil.i("=====UserInfo====", msg.getMsg().toString());
-            } else {
-                showToast("加载失败，请重新登录");
-                LogUtil.i("======加载失败======", jsonString.toString());
-            }
-        }
+		if (flag == loginFlag) {
+			UIHelper.cancelProgressDialog();
+			ResponseUserInfo msg = (ResponseUserInfo) response;
+			if (msg.getCode() == Code.CODE_SUCCESS) {
+				LogUtil.i("=====UserInfo====", msg.getMsg().toString());
+			} else {
+				showToast("加载失败，请重新登录");
+				LogUtil.i("======加载失败======", jsonString.toString());
+			}
+		}
 
 	}
 
@@ -98,9 +97,9 @@ public class Activity_earnings extends BaseActivity implements OnClickListener {
 	@Override
 	protected void initUI() {
 
-        cellphoneNumber = getIntent().getStringExtra(CELLPHOME_NUMBER);
-        password = getIntent().getStringExtra(password);
-        registerlogin = getIntent().getBooleanExtra(REGISTER_LOGIN, false);
+		cellphoneNumber = getIntent().getStringExtra(CELLPHOME_NUMBER);
+		password = getIntent().getStringExtra(password);
+		registerlogin = getIntent().getBooleanExtra(REGISTER_LOGIN, false);
 
 		rl_earnings_earnings.setOnClickListener(this);
 		rl_earnings_action.setOnClickListener(this);
@@ -112,10 +111,10 @@ public class Activity_earnings extends BaseActivity implements OnClickListener {
 
 	@Override
 	protected void initData() {
-		if(registerlogin){
-            loginFlag = Protocol.login(this, setTag(), cellphoneNumber, password);
-            UIHelper.showMsgProgressDialog(this, "加载中...");
-        }
+		if (registerlogin) {
+			loginFlag = Protocol.login(this, setTag(), cellphoneNumber, password);
+			UIHelper.showMsgProgressDialog(this, "加载中...");
+		}
 	}
 
 	@Override
