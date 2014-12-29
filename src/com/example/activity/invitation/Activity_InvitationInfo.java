@@ -42,7 +42,7 @@ public class Activity_InvitationInfo extends BaseActivity {
 	 * @param activity
 	 */
 	public static void luanch(Activity activity) {
-		Intent intent = new Intent(activity, Activity_MyInfo.class);
+		Intent intent = new Intent(activity, Activity_InvitationInfo.class);
 		KeyGuardActivityManager.getInstance().goFoResult(activity, intent, KeyGuardActivityManager.MAIN_CODE);
 	}
 
@@ -54,7 +54,7 @@ public class Activity_InvitationInfo extends BaseActivity {
 	 */
 	public static void luanch(Activity activity, String title) {
 		mTitle = title;
-		Intent intent = new Intent(activity, Activity_MyInfo.class);
+		Intent intent = new Intent(activity, Activity_InvitationInfo.class);
 		KeyGuardActivityManager.getInstance().goFoResult(activity, intent, KeyGuardActivityManager.MAIN_CODE);
 	}
 
@@ -62,7 +62,7 @@ public class Activity_InvitationInfo extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		// setContentView(R.layout.activity_myinfo);
+		setContentView(R.layout.activity_invitationinfo);
 		ViewUtils.inject(activity);
 		initUI();
 		initData();
@@ -85,7 +85,14 @@ public class Activity_InvitationInfo extends BaseActivity {
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
+		switch (v.getId()) {
+		case R.id.rl_public_back:
+			finish();
+			break;
 
+		default:
+			break;
+		}
 	}
 
 	@Override

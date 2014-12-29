@@ -121,16 +121,14 @@ public class MyInfo_Adapter extends BaseAdapter {
 			// TODO Auto-generated method stub
 			switch (type) {
 			case 0:
+			case 3:
 				Activity_Submit.luanch(activity, listData.get(type).getName(), "");
 				break;
 			case 1:
-
+				Activity_AddressList.luanch(activity);
 				break;
 			case 2:
-
-				break;
-			case 3:
-
+				Activity_MyInfoPhone.luanch(activity, listData.get(type).getName(), "");
 				break;
 			case 4:
 
@@ -142,7 +140,7 @@ public class MyInfo_Adapter extends BaseAdapter {
 
 				break;
 			case 7:
-
+				Activity_MyInfoPassWord.luanch(activity, listData.get(type).getName());
 				break;
 			case 8:
 

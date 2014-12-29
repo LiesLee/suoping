@@ -83,7 +83,14 @@ public class DemoActivity extends BaseActivity {
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
+		switch (v.getId()) {
+		case R.id.rl_public_back:
+			finish();
+			break;
 
+		default:
+			break;
+		}
 	}
 
 	@Override

@@ -120,38 +120,39 @@ public class Address_Adapter extends BaseAdapter {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			switch (type) {
-			case 0:
-				Activity_Submit.luanch(activity, listData.get(type).getName(), "");
-				break;
-			case 1:
-
-				break;
-			case 2:
-
-				break;
-			case 3:
-
-				break;
-			case 4:
-
-				break;
-			case 5:
-
-				break;
-			case 6:
-
-				break;
-			case 7:
-
-				break;
-			case 8:
-
-				break;
-
-			default:
-				break;
-			}
+			Activity_Submit.luanch(activity, listData.get(type).getName(), "");
+//			switch (type) {
+//			case 0:
+//				Activity_Submit.luanch(activity, listData.get(type).getName(), "");
+//				break;
+//			case 1:
+//
+//				break;
+//			case 2:
+//
+//				break;
+//			case 3:
+//
+//				break;
+//			case 4:
+//
+//				break;
+//			case 5:
+//
+//				break;
+//			case 6:
+//
+//				break;
+//			case 7:
+//
+//				break;
+//			case 8:
+//
+//				break;
+//
+//			default:
+//				break;
+//			}
 		}
 	}
 
