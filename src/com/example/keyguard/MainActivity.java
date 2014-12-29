@@ -108,9 +108,9 @@ public class MainActivity extends TabActivity implements OnCheckedChangeListener
 	    protected void onPause() {
 
 		    Log.i("hhz", "onPause");
-			if (MainActivity.instance !=null) {
+			/*if (MainActivity.instance !=null) {
 				MainActivity.instance.finish();
-			}
+			}*/
 			if (DownLoadWebActivity.instance !=null) {
 				DownLoadWebActivity.instance.finish();
 			}
