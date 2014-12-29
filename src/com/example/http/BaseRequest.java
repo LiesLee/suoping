@@ -82,7 +82,7 @@ public class BaseRequest<T> implements Listener<String>, ErrorListener {
 		switch (method) {
 		case Method.POST:
 		default:
-			StringRequest stringRequest = new StringRequest(method, url, this, this) {
+			return new StringRequest(method, url, this, this) {
 
 				@Override
 				public Map<String, String> getHeaders() throws AuthFailureError {
@@ -96,7 +96,6 @@ public class BaseRequest<T> implements Listener<String>, ErrorListener {
 					return requestParam;
 				}
 			};
-			return stringRequest;
 		case Method.GET:
 			Uri.Builder uriBuilder = Uri.parse(url).buildUpon();
 			if (requestParam != null) {

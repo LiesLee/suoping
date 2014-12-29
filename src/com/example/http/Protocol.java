@@ -1,19 +1,16 @@
 package com.example.http;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
-import com.android.volley.Request;
-import com.example.activity.reg.Activity_Reg;
+import android.content.Context;
+
 import com.example.entity.Get_logistics_list_entity;
+import com.example.entity.UserInfo;
 import com.example.entity.respose.ResponseSendCode;
 import com.example.entity.respose.ResponseUserInfo;
-
-import android.content.Context;
 
 /**
  * @Description 接口类
@@ -32,6 +29,19 @@ public class Protocol {
 		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
 		return ConnectorManage.getInstance(mContext).PostHttpRequest(mContext, Config.GET_LOGISTICS_LIST, tag,
 				requestParam, Get_logistics_list_entity.class, null);
+	}
+
+	/**
+	 * @Description 获取用户详细信息
+	 * @author Created by qinxianyuzou on 2014-12-29.
+	 * @param mContext
+	 * @param tag
+	 * @return
+	 */
+	public static long get_user_info(Context mContext, String tag) {
+		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
+		return ConnectorManage.getInstance(mContext).PostHttpRequest(mContext, Config.GET_USER_INFO, tag, requestParam,
+				UserInfo.class, null);
 	}
 
 	/**

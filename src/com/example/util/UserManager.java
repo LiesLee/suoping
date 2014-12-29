@@ -1,10 +1,10 @@
 package com.example.util;
 
-import com.example.entity.UserInfo_Entity;
+import com.example.entity.UserInfo;
 
 public class UserManager {
 	/** 系统当前登录用户(仅一个) */
-	private static UserInfo_Entity mLoginUser;
+	private static UserInfo mLoginUser;
 	public boolean mLoginFlag = false; // 账户登陆状态
 	private static String mHash = ""; // API访问安全验证码串
 	// 账户管理器单实例对象
@@ -41,13 +41,13 @@ public class UserManager {
 		}
 	}
 
-	public static UserInfo_Entity GetLoginUserInfo() {
+	public static UserInfo GetLoginUserInfo() {
 		// if (mLoginFlag)
 		return mLoginUser;
 		// return null;
 	}
 
-	public static void SetLoginUserInfo(UserInfo_Entity user_Info) {
+	public static void SetLoginUserInfo(UserInfo user_Info) {
 		mLoginUser = user_Info;
 	}
 

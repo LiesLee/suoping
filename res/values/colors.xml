@@ -12,19 +12,19 @@
     <color name="prevailing_red">#EE1A19</color>
     <color name="tab_red">#DA0E0D</color>
     <color name="black">#000000</color>
-    <!-- 灰色线 -->
-    <color name="line">#E4E4E4</color>
 
     <color name="tran">#00000000</color>
     <color name="h_tran">#20E4E4E4</color>
 
-    <!--PagerSlidingTabStrip配置颜色-->
+    <color name="line">#999999</color>
+    
+    <!-- PagerSlidingTabStrip配置颜色 -->
     <color name="background_tab_pressed">#6633B5E5</color>
     <color name="text_tab">#5E5E5E</color>
     <color name="btn_login">#F53B39</color>
     <color name="text_reg">#FF9933</color>
 
-    <!--Sweet arlet dialog 颜色-->
+    <!-- Sweet arlet dialog 颜色 -->
     <color name="float_transparent">#00000000</color>
     <color name="sweet_dialog_bg_color">#FFFFFF</color>
     <color name="button_text_color">#FFFFFF</color>
@@ -44,5 +44,8 @@
     <color name="material_blue_grey_95">#ff21272b</color>
     <color name="material_deep_teal_20">#ff80cbc4</color>
     <color name="material_deep_teal_50">#ff009688</color>
+    <color name="but_shopinfo">#F2F2F2</color>
+    <color name="but_shopinfo_focus">#E0E0E0</color>
+    <color name="bg_gray">#F2F2F2</color>
 
 </resources>
