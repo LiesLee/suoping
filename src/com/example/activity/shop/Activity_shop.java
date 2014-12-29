@@ -22,6 +22,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -209,5 +210,11 @@ public class Activity_shop extends BaseActivity implements ShopInterface{
         public void onPageScrollStateChanged(int state) {
         }
     };
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

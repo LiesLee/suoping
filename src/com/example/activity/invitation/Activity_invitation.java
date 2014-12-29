@@ -3,6 +3,7 @@ package com.example.activity.invitation;
 import org.json.JSONObject;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.android.volley.VolleyError;
 import com.example.activity.common.BaseActivity;
@@ -47,6 +48,12 @@ public class Activity_invitation extends BaseActivity {
 	public void onHttpError(long flag, VolleyError error) {
 		// TODO 回调错误
 
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

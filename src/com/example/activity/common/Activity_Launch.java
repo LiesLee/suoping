@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
@@ -79,8 +80,8 @@ public class Activity_Launch extends BaseActivity implements AnimationListener {
 		if (SharedPreferenceUtil.getInstance(activity).getInt(SharedPreferenceUtil.ISFIRSTUSED) == 0) {
 			startActivity(new Intent(activity, Activity_Guide.class));
 		} else {
-//			startActivity(new Intent(activity, MainActivity.class));
-			startActivity(new Intent(activity, Activity_Reg.class));
+			startActivity(new Intent(activity, MainActivity.class));
+//			startActivity(new Intent(activity, Activity_Reg.class));
 		}
 		SharedPreferenceUtil.getInstance(activity).putInt(SharedPreferenceUtil.ISFIRSTUSED, 1);
 		animFinish(3);
@@ -90,5 +91,11 @@ public class Activity_Launch extends BaseActivity implements AnimationListener {
 	public void onAnimationRepeat(Animation animation) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		
 	}
 }

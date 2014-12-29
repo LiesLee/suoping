@@ -61,6 +61,10 @@
         <activity android:name="com.example.activity.reg.Activity_Reg"/>
         <activity android:name="com.example.activity.reg.Activity_Reg_Authentication"/>
         <activity android:name="com.example.activity.reg.Activity_Reg_Password"/>
+        <activity android:name="com.example.activity.more.Activity_MyInfo"></activity>
+        <activity android:name="com.example.activity.more.Activity_Address"></activity>
+        <activity android:name="com.example.activity.common.Activity_Submit"></activity>
+        <activity android:name="com.example.activity.shop.Activity_ShopInfo"></activity>
     </application>
 
 </manifest>

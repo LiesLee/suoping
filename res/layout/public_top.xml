@@ -18,13 +18,14 @@
             android:textSize="21sp" />
 
         <RelativeLayout
+            android:id="@+id/rl_public_back"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_centerVertical="true"
             android:visibility="gone" >
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/but_public_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"

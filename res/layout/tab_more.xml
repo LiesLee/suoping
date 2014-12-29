@@ -8,6 +8,7 @@
     <include layout="@layout/public_top" />
 
     <LinearLayout
+        android:id="@+id/ll_more_set"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical" >
@@ -46,6 +47,7 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/ll_more_myinfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical" >
@@ -83,6 +85,7 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/ll_more_down"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical" >
@@ -120,43 +123,7 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical" >
-
-        <ImageView
-            android:id="@+id/ImageView02"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/more_flow_control" />
-
-        <TextView
-            android:id="@+id/TextView01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:text="流量监控"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
-
-        <ImageView
-            android:id="@+id/ImageView01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/icon_enter" />
-
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="#E4E4E4" >
-    </RelativeLayout>
-
-    <LinearLayout
+        android:id="@+id/ll_more_about"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical" >

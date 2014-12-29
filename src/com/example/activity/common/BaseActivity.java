@@ -6,6 +6,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
+import android.view.View.OnClickListener;
 
 import com.android.volley.VolleyError;
 import com.example.http.ConnectorManage;
@@ -17,7 +19,7 @@ import com.example.util.PublicUtil;
  * @Description 基础activity
  * @author Created by qinxianyuzou on 2014-12-23.
  */
-public abstract class BaseActivity extends FragmentActivity implements HttpCallBack {
+public abstract class BaseActivity extends FragmentActivity implements HttpCallBack, OnClickListener {
 	protected ConnectorManage connectorManage;
 	protected String Tag = "";
 	protected BaseActivity activity;
@@ -27,8 +29,8 @@ public abstract class BaseActivity extends FragmentActivity implements HttpCallB
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		activity = this;
-        KeyGuardActivityManager.getInstance().addActivity(this);
-        setTag();
+		KeyGuardActivityManager.getInstance().addActivity(this);
+		setTag();
 	}
 
 	@Override
@@ -48,12 +50,6 @@ public abstract class BaseActivity extends FragmentActivity implements HttpCallB
 		super.onPause();
 	}
 
-	@Override
-	public abstract <T> void onHttpSuccess(long flag, JSONObject jsonString, T response);
-
-	@Override
-	public abstract void onHttpError(long flag, VolleyError error);
-
 	/**
 	 * @Description 初始化ui
 	 * @author Created by qinxianyuzou on 2014-12-24.
@@ -65,6 +61,15 @@ public abstract class BaseActivity extends FragmentActivity implements HttpCallB
 	 * @author Created by qinxianyuzou on 2014-12-24.
 	 */
 	protected abstract void initData();
+
+	@Override
+	public abstract void onClick(View v);
+
+	@Override
+	public abstract <T> void onHttpSuccess(long flag, JSONObject jsonString, T response);
+
+	@Override
+	public abstract void onHttpError(long flag, VolleyError error);
 
 	/**
 	 * @Description 设置tag
