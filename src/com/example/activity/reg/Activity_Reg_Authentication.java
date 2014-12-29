@@ -46,7 +46,7 @@ public class Activity_Reg_Authentication extends BaseActivity implements View.On
     private String cellphoneNumber;
 
     public static void luanch(Activity activity, String cellphoneNumber) {
-        Intent intent = new Intent(activity, Activity_Reg_Password.class);
+        Intent intent = new Intent(activity, Activity_Reg_Authentication.class);
         intent.putExtra(CELLPHOME_NUMBER, cellphoneNumber);
         KeyGuardActivityManager.getInstance().goTo(activity, intent);
     }

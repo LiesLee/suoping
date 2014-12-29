@@ -12,8 +12,12 @@
     <color name="prevailing_red">#EE1A19</color>
     <color name="tab_red">#DA0E0D</color>
     <color name="black">#000000</color>
-    <!-- 灰色线 -->
+
+    <color name="tran">#00000000</color>
+    <color name="h_tran">#20E4E4E4</color>
+
     <color name="line">#999999</color>
+
     <!-- PagerSlidingTabStrip配置颜色 -->
     <color name="background_tab_pressed">#6633B5E5</color>
     <color name="text_tab">#5E5E5E</color>

@@ -131,6 +131,8 @@ public class Activity_earnings extends BaseActivity {
 			break;
 		case R.id.rl_earnings_action:
 
+            Activity_newcomer.luanch(this);
+
 			break;
 		case R.id.rl_earnings_details:
 
