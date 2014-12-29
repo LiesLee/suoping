@@ -132,6 +132,8 @@ public class Activity_earnings extends BaseActivity implements OnClickListener {
 			break;
 		case R.id.rl_earnings_action:
 
+            Activity_newcomer.luanch(this);
+
 			break;
 		case R.id.rl_earnings_details:
 

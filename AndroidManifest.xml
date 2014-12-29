@@ -12,7 +12,6 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -55,12 +54,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.example.activity.reg.LoginActivity" />
+        <activity android:name="com.example.activity.reg.Activity_Reg" />
+        <activity android:name="com.example.activity.reg.Activity_Reg_Authentication" />
+        <activity android:name="com.example.activity.reg.Activity_Reg_Password" />
         <activity
-            android:name="com.example.activity.reg.LoginActivity" />
-
-        <activity android:name="com.example.activity.reg.Activity_Reg"/>
-        <activity android:name="com.example.activity.reg.Activity_Reg_Authentication"/>
-        <activity android:name="com.example.activity.reg.Activity_Reg_Password"/>
+            android:name="com.example.activity.earnings.Activity_newcomer"
+            android:label="@string/title_activity_activity_newcomer" >
+        </activity>
     </application>
 
 </manifest>
