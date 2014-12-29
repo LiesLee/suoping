@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
@@ -20,6 +21,7 @@ import com.example.activity.common.BaseActivity;
 import com.example.activity.common.KeyGuardActivityManager;
 import com.example.keyguard.R;
 import com.lidroid.xutils.BitmapUtils;
+import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.bitmap.PauseOnScrollListener;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -31,6 +33,9 @@ public class Activity_MyInfo extends BaseActivity {
 	/** 标题栏 */
 	@ViewInject(R.id.tv_public_top_title)
 	private TextView tv_public_top_title;
+	/** 返回按钮 */
+	@ViewInject(R.id.rl_public_back)
+	private RelativeLayout rl_public_back;
 	/** 列表 */
 	@ViewInject(R.id.lv_shop_body)
 	private ListView lv_shop_body;
@@ -50,15 +55,18 @@ public class Activity_MyInfo extends BaseActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_myinfo);
+		ViewUtils.inject(activity);
+		initUI();
+		initData();
 	}
 
 	@Override
 	protected void initUI() {
 		// TODO Auto-generated method stub
 		tv_public_top_title.setText("我的账号");
+		rl_public_back.setVisibility(View.VISIBLE);
+		rl_public_back.setOnClickListener(this);
 		adapter = new MyInfo_Adapter(activity, bitmapUtils);
-		// 滑动时停止加载图片
-		lv_shop_body.setOnScrollListener(new PauseOnScrollListener(bitmapUtils, false, true));
 		lv_shop_body.setAdapter(adapter);
 	}
 
@@ -99,7 +107,14 @@ public class Activity_MyInfo extends BaseActivity {
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
+		switch (v.getId()) {
+		case R.id.rl_public_back:
+			finish();
+			break;
 
+		default:
+			break;
+		}
 	}
 
 }

@@ -64,6 +64,10 @@
         <activity
             android:name="com.example.activity.earnings.Activity_newcomer">
         </activity>
+        <activity android:name="com.example.activity.earnings.Activity_EarningsShop"></activity>
+        <activity android:name="com.example.activity.invitation.Activity_InvitationInfo"></activity>
+        <activity android:name="com.example.activity.earnings.Activity_NotActive"></activity>
+        <activity android:name="com.example.activity.common.Activity_PublicWeb"></activity>
     </application>
 
 </manifest>

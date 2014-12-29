@@ -6,30 +6,53 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
+import com.example.activity.more.Activity_MyInfo;
 import com.example.keyguard.R;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 /**
- * @Description 单内容提交
- * @author Created by qinxianyuzou on 2014-12-29.
+ * @Description 页面模板
+ * @author Created by qinxianyuzou on 2014-12-30.
  */
-public class Activity_Submit extends BaseActivity {
+public class DemoActivity extends BaseActivity {
+
 	/** 标题栏 */
 	@ViewInject(R.id.tv_public_top_title)
 	private TextView tv_public_top_title;
 	/** 返回按钮 */
 	@ViewInject(R.id.rl_public_back)
 	private RelativeLayout rl_public_back;
-	private static String title = "";
+	/** 列表 */
+	@ViewInject(R.id.lv_shop_body)
+	private ListView lv_shop_body;
+	/** 标题 */
+	private static String mTitle = "";
 
-	public static void luanch(Activity activity, String title, String hit) {
-		Activity_Submit.title = title;
-		Intent intent = new Intent(activity, Activity_Submit.class);
+	/**
+	 * @Description 不设置标题
+	 * @author Created by qinxianyuzou on 2014-12-30.
+	 * @param activity
+	 */
+	public static void luanch(Activity activity) {
+		Intent intent = new Intent(activity, Activity_MyInfo.class);
+		KeyGuardActivityManager.getInstance().goFoResult(activity, intent, KeyGuardActivityManager.MAIN_CODE);
+	}
+
+	/**
+	 * @Description 设置标题
+	 * @author Created by qinxianyuzou on 2014-12-30.
+	 * @param activity
+	 * @param title
+	 */
+	public static void luanch(Activity activity, String title) {
+		mTitle = title;
+		Intent intent = new Intent(activity, Activity_MyInfo.class);
 		KeyGuardActivityManager.getInstance().goFoResult(activity, intent, KeyGuardActivityManager.MAIN_CODE);
 	}
 
@@ -37,7 +60,7 @@ public class Activity_Submit extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_nickname);
+		// setContentView(R.layout.activity_address);
 		ViewUtils.inject(activity);
 		initUI();
 		initData();
@@ -46,13 +69,19 @@ public class Activity_Submit extends BaseActivity {
 	@Override
 	protected void initUI() {
 		// TODO Auto-generated method stub
-		tv_public_top_title.setText(title);
+		tv_public_top_title.setText(mTitle);
 		rl_public_back.setVisibility(View.VISIBLE);
 		rl_public_back.setOnClickListener(this);
 	}
 
 	@Override
 	protected void initData() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onClick(View v) {
 		// TODO Auto-generated method stub
 
 	}
@@ -72,20 +101,7 @@ public class Activity_Submit extends BaseActivity {
 	@Override
 	public String setTag() {
 		// TODO Auto-generated method stub
-		return Activity_Submit.class.getSimpleName();
-	}
-
-	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		switch (v.getId()) {
-		case R.id.rl_public_back:
-			finish();
-			break;
-
-		default:
-			break;
-		}
+		return null;
 	}
 
 }

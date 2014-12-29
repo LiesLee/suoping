@@ -6,6 +6,8 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
@@ -36,6 +38,25 @@ public class PublicUtil {
 
 		}
 		return false;
+	}
+
+	/**
+	 * @Description 判断是否有网络
+	 * @author Created by qinxianyuzou on 2013-12-1.
+	 * @param mContext
+	 * @return
+	 */
+	public static boolean isNetworkAvailable(Context mContext) {
+		boolean flag = false;
+		ConnectivityManager cm = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+		if (cm != null) {
+			NetworkInfo ni = cm.getActiveNetworkInfo();
+			if (ni != null) {
+				flag = ni.isAvailable();
+			}
+		}
+		return flag;
+
 	}
 
 	/**
