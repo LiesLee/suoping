@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.activity.common.Activity_Submit;
+import com.example.activity.common.DialogClick;
 import com.example.activity.common.DialogSex;
 import com.example.keyguard.R;
 import com.lidroid.xutils.BitmapUtils;
@@ -140,13 +141,41 @@ public class MyInfo_Adapter extends BaseAdapter {
 
 				break;
 			case 6:
+				final DialogClick dialogClick = new DialogClick(activity);
+				dialogClick.requestWindowFeature(Window.FEATURE_NO_TITLE);
+				dialogClick.show();
+				dialogClick.setContent("账户状态", "恭喜您！您的锁屏赚账户很安全，请继续保持！", "我知道了", new OnClickListener() {
 
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						dialogClick.dismiss();
+					}
+				});
 				break;
 			case 7:
 				Activity_MyInfoPassWord.luanch(activity, listData.get(type).getName());
 				break;
 			case 8:
 
+				final DialogClick dialogClick1 = new DialogClick(activity);
+				dialogClick1.requestWindowFeature(Window.FEATURE_NO_TITLE);
+				dialogClick1.show();
+				dialogClick1.setContent("温馨提示", "退出登陆后，您将不能持续获得锁屏收益，确认退出吗？", "退出登陆", "继续赚钱", new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						dialogClick1.dismiss();
+					}
+				}, new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						dialogClick1.dismiss();
+					}
+				});
 				break;
 
 			default:
