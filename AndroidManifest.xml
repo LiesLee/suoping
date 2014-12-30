@@ -72,6 +72,7 @@
         <activity android:name="com.example.activity.more.Activity_AddressList"></activity>
         <activity android:name="com.example.activity.more.Activity_MyInfoPassWord"></activity>
         <activity android:name="com.example.activity.more.Activity_MyInfoPhone"></activity>
+        <activity android:name="com.example.activity.more.Activity_about"></activity>
     </application>
 
 </manifest>

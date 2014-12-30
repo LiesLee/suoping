@@ -13,12 +13,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.activity.common.Activity_Submit;
+import com.example.activity.common.DialogSex;
 import com.example.keyguard.R;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.bitmap.BitmapDisplayConfig;
@@ -131,8 +133,9 @@ public class MyInfo_Adapter extends BaseAdapter {
 				Activity_MyInfoPhone.luanch(activity, listData.get(type).getName(), "");
 				break;
 			case 4:
-
-				break;
+				DialogSex dialogSex = new DialogSex(activity);
+				dialogSex.requestWindowFeature(Window.FEATURE_NO_TITLE);
+				dialogSex.show();
 			case 5:
 
 				break;
