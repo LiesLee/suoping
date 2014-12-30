@@ -22,7 +22,7 @@
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Light.NoTitleBar" >
-        <activity  android:name=".MainActivity" />
+        <activity android:name=".MainActivity" />
 
         <service android:name=".LockService" >
         </service>
@@ -41,8 +41,7 @@
         </activity>
         <activity android:name="com.example.activity.common.Activity_Guide" >
         </activity>
-        <activity
-            android:name="com.example.activity.common.Activity_Launch" >
+        <activity android:name="com.example.activity.common.Activity_Launch" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -61,8 +60,11 @@
         </activity>
         <activity android:name="com.example.activity.shop.Activity_ShopInfo" >
         </activity>
+        <activity android:name="com.example.activity.earnings.Activity_newcomer" >
+        </activity>
         <activity
-            android:name="com.example.activity.earnings.Activity_newcomer">
+            android:name="com.example.activity.more.Activity_MyDownload"
+            android:label="@string/title_activity_activity__my_download" >
         </activity>
     </application>
 

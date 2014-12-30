@@ -1,0 +1,29 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:context="com.example.activity.more.Activity_MyDownload">
+
+    <include layout="@layout/public_top"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <com.example.ui.astuetz.PagerSlidingTabStrip
+            android:id="@+id/my_download_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/earning_gray"
+            android:fillViewport="true" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/my_download_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/my_download_tabs" />
+    </RelativeLayout>
+
+
+</LinearLayout>

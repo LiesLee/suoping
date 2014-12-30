@@ -20,5 +20,6 @@
     <string name="default_progressbar">Default Progressbar:</string>
     <string name="title_activity_activity_newcomer">Activity_newcomer</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_activity__my_download">Activity_MyDownload</string>
 
 </resources>

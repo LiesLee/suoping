@@ -26,6 +26,9 @@ public class Activity_more extends BaseActivity {
 	@ViewInject(R.id.ll_more_myinfo)
 	private LinearLayout ll_more_myinfo;
 
+    @ViewInject(R.id.ll_more_down)
+    private LinearLayout ll_more_down;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,6 +42,7 @@ public class Activity_more extends BaseActivity {
 	protected void initUI() {
 		tv_public_top_title.setText("更多");
 		ll_more_myinfo.setOnClickListener(this);
+        ll_more_down.setOnClickListener(this);
 	}
 
 	@Override
@@ -67,6 +71,10 @@ public class Activity_more extends BaseActivity {
 		switch (v.getId()) {
 		case R.id.ll_more_myinfo:
 			Activity_MyInfo.luanch(activity);
+			break;
+
+        case R.id.ll_more_down:
+			Activity_MyDownload.luanch(activity);
 			break;
 
 		default:
