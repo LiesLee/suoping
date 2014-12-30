@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.http.NameValuePair;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -12,11 +13,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.activity.common.Activity_Submit;
+import com.example.activity.common.DialogSex;
 import com.example.keyguard.R;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.bitmap.BitmapDisplayConfig;
@@ -29,7 +33,7 @@ import com.lidroid.xutils.bitmap.callback.DefaultBitmapLoadCallBack;
  * @author Created by qinxianyuzou on 2014-12-25.
  */
 public class MyInfo_Adapter extends BaseAdapter {
-	private Context mContext;
+	private Activity activity;
 	private LayoutInflater listContainer;
 	/** 数据源 */
 	private List<NameValuePair> listData = new ArrayList<NameValuePair>();
@@ -38,9 +42,9 @@ public class MyInfo_Adapter extends BaseAdapter {
 	/** 图片加载回调 */
 	private BitmapLoadCallBack<ImageView> bitmapLoadCallBack;
 
-	public MyInfo_Adapter(Context context, BitmapUtils bitmapUtils) {
-		mContext = context;
-		listContainer = LayoutInflater.from(mContext);
+	public MyInfo_Adapter(Activity context, BitmapUtils bitmapUtils) {
+		activity = context;
+		listContainer = LayoutInflater.from(activity);
 		this.bitmapUtils = bitmapUtils;
 		bitmapLoadCallBack = new DefaultBitmapLoadCallBack<ImageView>() {
 
@@ -102,6 +106,7 @@ public class MyInfo_Adapter extends BaseAdapter {
 		}
 		listItemView.tv_item_myifno_name.setText(listData.get(position).getName());
 		listItemView.tv_item_myifno_value.setText(listData.get(position).getValue());
+		listItemView.ll_item_myifno_btn.setOnClickListener(new onclick(position));
 		return convertView;
 	}
 
@@ -118,20 +123,19 @@ public class MyInfo_Adapter extends BaseAdapter {
 			// TODO Auto-generated method stub
 			switch (type) {
 			case 0:
-
+			case 3:
+				Activity_Submit.luanch(activity, listData.get(type).getName(), "");
 				break;
 			case 1:
-
+				Activity_AddressList.luanch(activity);
 				break;
 			case 2:
-
-				break;
-			case 3:
-
+				Activity_MyInfoPhone.luanch(activity, listData.get(type).getName(), "");
 				break;
 			case 4:
-
-				break;
+				DialogSex dialogSex = new DialogSex(activity);
+				dialogSex.requestWindowFeature(Window.FEATURE_NO_TITLE);
+				dialogSex.show();
 			case 5:
 
 				break;
@@ -139,7 +143,7 @@ public class MyInfo_Adapter extends BaseAdapter {
 
 				break;
 			case 7:
-
+				Activity_MyInfoPassWord.luanch(activity, listData.get(type).getName());
 				break;
 			case 8:
 

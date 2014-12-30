@@ -1,10 +1,5 @@
-package com.example.activity.more;
+package com.example.activity.invitation;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
 import android.app.Activity;
@@ -18,17 +13,17 @@ import android.widget.TextView;
 import com.android.volley.VolleyError;
 import com.example.activity.common.BaseActivity;
 import com.example.activity.common.KeyGuardActivityManager;
+import com.example.activity.more.Activity_MyInfo;
 import com.example.keyguard.R;
-import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.ViewUtils;
-import com.lidroid.xutils.bitmap.PauseOnScrollListener;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 /**
- * @Description 我的账号
- * @author Created by qinxianyuzou on 2014-12-29.
+ * @Description 已激活邀请人收入
+ * @author Created by qinxianyuzou on 2014-12-30.
  */
-public class Activity_Address extends BaseActivity {
+public class Activity_InvitationInfo extends BaseActivity {
+
 	/** 标题栏 */
 	@ViewInject(R.id.tv_public_top_title)
 	private TextView tv_public_top_title;
@@ -38,14 +33,8 @@ public class Activity_Address extends BaseActivity {
 	/** 列表 */
 	@ViewInject(R.id.lv_shop_body)
 	private ListView lv_shop_body;
-	private Address_Adapter adapter;
-	/** 图片加载工具 */
-	private BitmapUtils bitmapUtils;
-	/** 保存数据源 */
-	private List<NameValuePair> dataList = new ArrayList<NameValuePair>();
-
 	/** 标题 */
-	private static String mTitle = "管理收货地址";
+	private static String mTitle = "已激活邀请人收入";
 
 	/**
 	 * @Description 不设置标题
@@ -53,7 +42,7 @@ public class Activity_Address extends BaseActivity {
 	 * @param activity
 	 */
 	public static void luanch(Activity activity) {
-		Intent intent = new Intent(activity, Activity_Address.class);
+		Intent intent = new Intent(activity, Activity_InvitationInfo.class);
 		KeyGuardActivityManager.getInstance().goFoResult(activity, intent, KeyGuardActivityManager.MAIN_CODE);
 	}
 
@@ -65,7 +54,7 @@ public class Activity_Address extends BaseActivity {
 	 */
 	public static void luanch(Activity activity, String title) {
 		mTitle = title;
-		Intent intent = new Intent(activity, Activity_Address.class);
+		Intent intent = new Intent(activity, Activity_InvitationInfo.class);
 		KeyGuardActivityManager.getInstance().goFoResult(activity, intent, KeyGuardActivityManager.MAIN_CODE);
 	}
 
@@ -73,7 +62,7 @@ public class Activity_Address extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		 setContentView(R.layout.activity_address);
+		setContentView(R.layout.activity_invitationinfo);
 		ViewUtils.inject(activity);
 		initUI();
 		initData();
@@ -85,20 +74,25 @@ public class Activity_Address extends BaseActivity {
 		tv_public_top_title.setText(mTitle);
 		rl_public_back.setVisibility(View.VISIBLE);
 		rl_public_back.setOnClickListener(this);
-		adapter = new Address_Adapter(activity, bitmapUtils);
-		lv_shop_body.setAdapter(adapter);
 	}
 
 	@Override
 	protected void initData() {
 		// TODO Auto-generated method stub
-		dataList.add(new BasicNameValuePair("所在地区", ""));
-		dataList.add(new BasicNameValuePair("街道地址", ""));
-		dataList.add(new BasicNameValuePair("收货人姓名", ""));
-		dataList.add(new BasicNameValuePair("手机号码", ""));
-		dataList.add(new BasicNameValuePair("邮编", ""));
-		adapter.setData(dataList);
 
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		switch (v.getId()) {
+		case R.id.rl_public_back:
+			finish();
+			break;
+
+		default:
+			break;
+		}
 	}
 
 	@Override
@@ -117,19 +111,6 @@ public class Activity_Address extends BaseActivity {
 	public String setTag() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		switch (v.getId()) {
-		case R.id.rl_public_back:
-			finish();
-			break;
-
-		default:
-			break;
-		}
 	}
 
 }

@@ -15,6 +15,7 @@ import com.example.http.HttpCallBack;
 import com.example.http.RequestManager;
 import com.example.keyguard.R;
 import com.example.util.PublicUtil;
+import com.lidroid.xutils.ViewUtils;
 
 /**
  * @Description 基础activity

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.example.keyguard.R;
+import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 /**
@@ -24,10 +25,12 @@ public class Activity_Submit extends BaseActivity {
 	/** 返回按钮 */
 	@ViewInject(R.id.rl_public_back)
 	private RelativeLayout rl_public_back;
+	private static String title = "";
 
 	public static void luanch(Activity activity, String title, String hit) {
+		Activity_Submit.title = title;
 		Intent intent = new Intent(activity, Activity_Submit.class);
-		KeyGuardActivityManager.getInstance().goFoResult(activity, intent, 111111);
+		KeyGuardActivityManager.getInstance().goFoResult(activity, intent, KeyGuardActivityManager.MAIN_CODE);
 	}
 
 	@Override
@@ -35,11 +38,16 @@ public class Activity_Submit extends BaseActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_nickname);
+		ViewUtils.inject(activity);
+		initUI();
+		initData();
 	}
 
 	@Override
 	protected void initUI() {
 		// TODO Auto-generated method stub
+		tv_public_top_title.setText(title);
+		rl_public_back.setVisibility(View.VISIBLE);
 		rl_public_back.setOnClickListener(this);
 	}
 
@@ -70,7 +78,14 @@ public class Activity_Submit extends BaseActivity {
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
+		switch (v.getId()) {
+		case R.id.rl_public_back:
+			finish();
+			break;
 
+		default:
+			break;
+		}
 	}
 
 }

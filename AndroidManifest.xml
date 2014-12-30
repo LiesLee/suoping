@@ -15,6 +15,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name="com.example.activity.common.KeyGuardApplication"
@@ -66,6 +67,14 @@
             android:name="com.example.activity.more.Activity_MyDownload"
             android:label="@string/title_activity_activity__my_download" >
         </activity>
+        <activity android:name="com.example.activity.earnings.Activity_EarningsShop"></activity>
+        <activity android:name="com.example.activity.invitation.Activity_InvitationInfo"></activity>
+        <activity android:name="com.example.activity.earnings.Activity_NotActive"></activity>
+        <activity android:name="com.example.activity.common.Activity_PublicWeb"></activity>
+        <activity android:name="com.example.activity.more.Activity_AddressList"></activity>
+        <activity android:name="com.example.activity.more.Activity_MyInfoPassWord"></activity>
+        <activity android:name="com.example.activity.more.Activity_MyInfoPhone"></activity>
+        <activity android:name="com.example.activity.more.Activity_about"></activity>
     </application>
 
 </manifest>

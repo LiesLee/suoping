@@ -1,51 +1,53 @@
 package com.example.activity.more;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
+import com.example.activity.common.Activity_PublicWeb;
 import com.example.activity.common.BaseActivity;
 import com.example.activity.common.KeyGuardActivityManager;
 import com.example.keyguard.R;
-import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.ViewUtils;
-import com.lidroid.xutils.bitmap.PauseOnScrollListener;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 /**
- * @Description 我的账号
- * @author Created by qinxianyuzou on 2014-12-29.
+ * @Description 关于
+ * @author Created by qinxianyuzou on 2014-12-30.
  */
-public class Activity_Address extends BaseActivity {
+public class Activity_about extends BaseActivity {
+
 	/** 标题栏 */
 	@ViewInject(R.id.tv_public_top_title)
 	private TextView tv_public_top_title;
 	/** 返回按钮 */
 	@ViewInject(R.id.rl_public_back)
 	private RelativeLayout rl_public_back;
-	/** 列表 */
-	@ViewInject(R.id.lv_shop_body)
-	private ListView lv_shop_body;
-	private Address_Adapter adapter;
-	/** 图片加载工具 */
-	private BitmapUtils bitmapUtils;
-	/** 保存数据源 */
-	private List<NameValuePair> dataList = new ArrayList<NameValuePair>();
-
+	/** 创意介绍 */
+	@ViewInject(R.id.ll_about_chuangyi)
+	private LinearLayout ll_about_chuangyi;
+	/** 功能介绍 */
+	@ViewInject(R.id.ll_about_gongneng)
+	private LinearLayout ll_about_gongneng;
+	/** 联系客服 */
+	@ViewInject(R.id.ll_about_kefu)
+	private LinearLayout ll_about_kefu;
+	/** 检查更新 */
+	@ViewInject(R.id.ll_about_update)
+	private LinearLayout ll_about_update;
+	/** 市场合作 */
+	@ViewInject(R.id.ll_about_hezuo)
+	private LinearLayout ll_about_hezuo;
 	/** 标题 */
-	private static String mTitle = "管理收货地址";
+	private static String mTitle = "关于锁屏赚";
 
 	/**
 	 * @Description 不设置标题
@@ -53,7 +55,7 @@ public class Activity_Address extends BaseActivity {
 	 * @param activity
 	 */
 	public static void luanch(Activity activity) {
-		Intent intent = new Intent(activity, Activity_Address.class);
+		Intent intent = new Intent(activity, Activity_about.class);
 		KeyGuardActivityManager.getInstance().goFoResult(activity, intent, KeyGuardActivityManager.MAIN_CODE);
 	}
 
@@ -65,7 +67,7 @@ public class Activity_Address extends BaseActivity {
 	 */
 	public static void luanch(Activity activity, String title) {
 		mTitle = title;
-		Intent intent = new Intent(activity, Activity_Address.class);
+		Intent intent = new Intent(activity, Activity_about.class);
 		KeyGuardActivityManager.getInstance().goFoResult(activity, intent, KeyGuardActivityManager.MAIN_CODE);
 	}
 
@@ -73,7 +75,7 @@ public class Activity_Address extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		 setContentView(R.layout.activity_address);
+		setContentView(R.layout.activity_more_about);
 		ViewUtils.inject(activity);
 		initUI();
 		initData();
@@ -85,20 +87,46 @@ public class Activity_Address extends BaseActivity {
 		tv_public_top_title.setText(mTitle);
 		rl_public_back.setVisibility(View.VISIBLE);
 		rl_public_back.setOnClickListener(this);
-		adapter = new Address_Adapter(activity, bitmapUtils);
-		lv_shop_body.setAdapter(adapter);
+		ll_about_chuangyi.setOnClickListener(this);
+		ll_about_gongneng.setOnClickListener(this);
+		ll_about_kefu.setOnClickListener(this);
+		ll_about_update.setOnClickListener(this);
+		ll_about_hezuo.setOnClickListener(this);
 	}
 
 	@Override
 	protected void initData() {
 		// TODO Auto-generated method stub
-		dataList.add(new BasicNameValuePair("所在地区", ""));
-		dataList.add(new BasicNameValuePair("街道地址", ""));
-		dataList.add(new BasicNameValuePair("收货人姓名", ""));
-		dataList.add(new BasicNameValuePair("手机号码", ""));
-		dataList.add(new BasicNameValuePair("邮编", ""));
-		adapter.setData(dataList);
 
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		switch (v.getId()) {
+		case R.id.rl_public_back:
+			finish();
+			break;
+		case R.id.ll_about_chuangyi:
+			Activity_PublicWeb.luanch(activity, "创意介绍", "http://www.baidu.com");
+			break;
+		case R.id.ll_about_gongneng:
+			Activity_PublicWeb.luanch(activity, "功能介绍", "http://www.baidu.com");
+			break;
+		case R.id.ll_about_kefu:
+			Activity_PublicWeb.luanch(activity, "联系客服", "http://www.baidu.com");
+			break;
+		case R.id.ll_about_update:
+			// Activity_PublicWeb.luanch(activity, "创意介绍",
+			// "http://www.baidu.com");
+			break;
+		case R.id.ll_about_hezuo:
+			Activity_PublicWeb.luanch(activity, "市场合作", "http://www.baidu.com");
+			break;
+
+		default:
+			break;
+		}
 	}
 
 	@Override
@@ -117,19 +145,6 @@ public class Activity_Address extends BaseActivity {
 	public String setTag() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		switch (v.getId()) {
-		case R.id.rl_public_back:
-			finish();
-			break;
-
-		default:
-			break;
-		}
 	}
 
 }

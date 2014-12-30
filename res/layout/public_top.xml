@@ -24,12 +24,30 @@
             android:layout_centerVertical="true"
             android:visibility="gone" >
 
-            <Button
-                android:id="@+id/but_public_back"
+            <ImageView
+                android:id="@+id/iv_public_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:background="@drawable/public_btn_back" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_public_goto"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="+"
+                android:textColor="@color/white"
+                android:textSize="35sp" />
         </RelativeLayout>
     </RelativeLayout>
 

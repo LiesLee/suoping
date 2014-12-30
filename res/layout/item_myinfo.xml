@@ -8,6 +8,7 @@
         android:id="@+id/ll_item_myifno_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/selector_public_btn_white"
         android:gravity="center_vertical"
         android:paddingBottom="10dp"
         android:paddingTop="10dp" >
@@ -21,14 +22,15 @@
             android:layout_weight="1"
             android:text="锁屏设置"
             android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tv_item_myifno_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
         <ImageView
             android:id="@+id/ImageView07"
