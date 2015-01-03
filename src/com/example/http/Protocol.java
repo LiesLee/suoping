@@ -7,8 +7,8 @@ import org.apache.http.message.BasicNameValuePair;
 
 import android.content.Context;
 
-import com.example.entity.Get_logistics_list_entity;
 import com.example.entity.UserInfo;
+import com.example.entity.respose.BaseResponse;
 import com.example.entity.respose.ResponseSendCode;
 import com.example.entity.respose.ResponseUserInfo;
 
@@ -18,18 +18,19 @@ import com.example.entity.respose.ResponseUserInfo;
  */
 public class Protocol {
 
-	/**
-	 * @Description 获取用户物流信息
-	 * @author Created by qinxianyuzou on 2014-12-24.
-	 * @param mContext
-	 * @param tag
-	 * @return
-	 */
-	public static long get_logistics_list(Context mContext, String tag) {
-		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
-		return ConnectorManage.getInstance(mContext).PostHttpRequest(mContext, Config.GET_LOGISTICS_LIST, tag,
-				requestParam, Get_logistics_list_entity.class, null);
-	}
+	// /**
+	// * @Description 获取用户物流信息
+	// * @author Created by qinxianyuzou on 2014-12-24.
+	// * @param mContext
+	// * @param tag
+	// * @return
+	// */
+	// public static long get_logistics_list(Context mContext, String tag) {
+	// ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
+	// return ConnectorManage.getInstance(mContext).PostHttpRequest(mContext,
+	// Config.GET_LOGISTICS_LIST, tag,
+	// requestParam, Get_logistics_list_entity.class, null);
+	// }
 
 	/**
 	 * @Description 获取用户详细信息
@@ -93,5 +94,26 @@ public class Protocol {
 		requestParam.add(new BasicNameValuePair("password", password));
 		return ConnectorManage.getInstance(context).PostHttpRequest(context, Config.REGISTER, tag, requestParam,
 				ResponseUserInfo.class, null);
+	}
+
+	/**
+	 * @Description 注销
+	 * @author Created by qinxianyuzou on 2015-1-1.
+	 * @param context
+	 * @param tag
+	 * @param httpCallBack
+	 * @return
+	 */
+	public static long logout(Context context, String tag, HttpCallBack httpCallBack) {
+		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
+		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.LOGOUT, tag, requestParam,
+				BaseResponse.class, httpCallBack);
+	}
+
+	public static long get_ex_product(Context context, String tag, String ptype) {
+		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
+		requestParam.add(new BasicNameValuePair("ptype", ptype));
+		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.GET_EX_PRODUCT, tag, requestParam,
+				BaseResponse.class, null);
 	}
 }

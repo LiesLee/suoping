@@ -184,11 +184,12 @@
             android:background="#E4E4E4" />
 
         <RelativeLayout
-            android:id="@+id/rl_earnings_details"
+            android:id="@+id/rl_earnings_exchange"
             style="@style/earning_tab_bg"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_weight="1" >
+            android:layout_weight="1"
+            android:orientation="vertical" >
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -200,13 +201,13 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/icon_earning_detail" />
+                    android:src="@drawable/icon_shed_success" />
 
                 <TextView
                     style="@style/earning_tab_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="收益明细" />
+                    android:text="兑换成功" />
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
@@ -219,7 +220,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:visibility="gone" >
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -233,12 +235,11 @@
                 android:orientation="horizontal" >
 
                 <RelativeLayout
-                    android:id="@+id/rl_earnings_exchange"
+                    android:id="@+id/rl_earnings_details"
                     style="@style/earning_tab_bg"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical" >
+                    android:layout_weight="1" >
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -250,13 +251,13 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/icon_shed_success" />
+                            android:src="@drawable/icon_earning_detail" />
 
                         <TextView
                             style="@style/earning_tab_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="兑换成功" />
+                            android:text="收益明细" />
                     </LinearLayout>
                 </RelativeLayout>
 

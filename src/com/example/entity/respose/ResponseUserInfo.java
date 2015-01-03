@@ -3,18 +3,38 @@ package com.example.entity.respose;
 import com.example.entity.UserInfo;
 
 /**
- * Created by LiesLee on 2014/12/28.
- * Email: LiesLee@foxmail.com
+ * Created by LiesLee on 2014/12/28. Email: LiesLee@foxmail.com
  */
 public class ResponseUserInfo extends BaseResponse {
-    /** 用户信息 **/
-    private UserInfo msg;
+	/**  */
+	private static final long serialVersionUID = 8062805673883580062L;
+	/** 用户信息 **/
+	private UserInfo data;
 
-    public UserInfo getMsg() {
-        return msg;
-    }
+	/**
+	 * @Description
+	 * @author Created by qinxianyuzou on 2015-1-2.
+	 * @see #data
+	 * @return the data
+	 */
+	public UserInfo getData() {
+		return data;
+	}
 
-    public void setMsg(UserInfo msg) {
-        this.msg = msg;
-    }
+	/**
+	 * @Description
+	 * @author Created by qinxianyuzou on 2015-1-2.
+	 * @see #data
+	 * @param data
+	 *            the data to set
+	 */
+	public void setData(UserInfo data) {
+		this.data = data;
+	}
+
+	@Override
+	public String toString() {
+		return "ResponseUserInfo [data=" + data + "]";
+	}
+
 }

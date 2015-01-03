@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.example.activity.common.Activity_PublicWeb;
@@ -18,6 +19,8 @@ import com.example.entity.respose.ResponseUserInfo;
 import com.example.http.Protocol;
 import com.example.keyguard.R;
 import com.example.util.LogUtil;
+import com.example.util.PublicUtil;
+import com.example.util.SharedPreferenceUtil;
 import com.example.util.UIHelper;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -45,12 +48,17 @@ public class Activity_earnings extends BaseActivity {
 	/** 公告 */
 	@ViewInject(R.id.rl_earnings_announcement)
 	private RelativeLayout rl_earnings_announcement;
+	/** 当前收益 */
+	@ViewInject(R.id.tv_earning)
+	private TextView tv_earning;
+	/** 今日收益 */
+	@ViewInject(R.id.tv_todayEarning)
+	private TextView tv_todayEarning;
+	/** 累计收益 */
+	@ViewInject(R.id.tv_allEarning)
+	private TextView tv_allEarning;
 
-	private String cellphoneNumber;
-	private String password;
-	/** 是否注册登录 **/
-	private boolean registerlogin;
-	private long loginFlag;
+	private long userinfoFlag;
 
 	public static void luanch(Activity activity, String cellphoneNumber, String password, boolean registerlogin) {
 		Intent intent = new Intent(activity, Activity_earnings.class);
@@ -77,11 +85,16 @@ public class Activity_earnings extends BaseActivity {
 
 	@Override
 	public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
-		if (flag == loginFlag) {
+		if (flag == userinfoFlag) {
 			UIHelper.cancelProgressDialog();
 			ResponseUserInfo msg = (ResponseUserInfo) response;
 			if (msg.getCode() == Code.CODE_SUCCESS) {
 				LogUtil.i("=====UserInfo====", msg.getMsg().toString());
+				SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.USERINFO,
+						msg.getMsg().toString());
+				tv_allEarning.setText("" + PublicUtil.getUserInfo(activity).getSum_earn());
+				tv_todayEarning.setText("" + PublicUtil.getUserInfo(activity).getToday_earn());
+				tv_earning.setText("" + PublicUtil.getUserInfo(activity).getSum_earn());
 			} else {
 				showToast("加载失败，请重新登录");
 				LogUtil.i("======加载失败======", jsonString.toString());
@@ -98,10 +111,6 @@ public class Activity_earnings extends BaseActivity {
 	@Override
 	protected void initUI() {
 
-		cellphoneNumber = getIntent().getStringExtra(CELLPHOME_NUMBER);
-		password = getIntent().getStringExtra(password);
-		registerlogin = getIntent().getBooleanExtra(REGISTER_LOGIN, false);
-
 		rl_earnings_earnings.setOnClickListener(this);
 		rl_earnings_action.setOnClickListener(this);
 		rl_earnings_details.setOnClickListener(this);
@@ -112,10 +121,12 @@ public class Activity_earnings extends BaseActivity {
 
 	@Override
 	protected void initData() {
-		if (registerlogin) {
-			loginFlag = Protocol.login(this, setTag(), cellphoneNumber, password);
-			UIHelper.showMsgProgressDialog(this, "加载中...");
-		}
+		// if
+		// (SharedPreferenceUtil.getInstance(activity).getString(SharedPreferenceUtil.USERINFO).equals(""))
+		// {
+		userinfoFlag = Protocol.get_user_info(this, setTag());
+		UIHelper.showMsgProgressDialog(this, "加载中...");
+		// }
 	}
 
 	@Override

@@ -13,6 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.entity.shop.EXProduct_Entity;
 import com.example.keyguard.R;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.bitmap.BitmapDisplayConfig;
@@ -28,7 +29,7 @@ public class Shop_Adapter extends BaseAdapter {
 	private Context mContext;
 	private LayoutInflater listContainer;
 	/** 数据源 */
-	private List<String> listData = new ArrayList<String>();
+	private List<EXProduct_Entity> listData = new ArrayList<EXProduct_Entity>();
 	/** 图片加载工具 */
 	private BitmapUtils bitmapUtils;
 	/** 图片加载回调 */
@@ -44,7 +45,7 @@ public class Shop_Adapter extends BaseAdapter {
 			public void onLoadFailed(ImageView container, String uri, Drawable drawable) {
 				// TODO Auto-generated method stub
 				super.onLoadFailed(container, uri, drawable);
-				 container.setImageResource(R.drawable.item_icon);
+				container.setImageResource(R.drawable.item_icon);
 			}
 
 			@Override
@@ -57,7 +58,7 @@ public class Shop_Adapter extends BaseAdapter {
 		// ViewUtils.inject((Activity) mContext);
 	}
 
-	public void setData(List<String> data) {
+	public void setData(List<EXProduct_Entity> data) {
 		listData = data;
 		notifyDataSetChanged();
 	}
@@ -96,9 +97,9 @@ public class Shop_Adapter extends BaseAdapter {
 		} else {
 			listItemView = (HolderView) convertView.getTag();
 		}
-		listItemView.tv_item_shop_name.setText("优惠卷");
-		listItemView.tv_item_shop_money.setText("￥0.50");
-		bitmapUtils.display(listItemView.iv_item_shop_icon, "", bitmapLoadCallBack);
+		listItemView.tv_item_shop_name.setText(listData.get(position).getTitle());
+		listItemView.tv_item_shop_money.setText(listData.get(position).getNeed_jifen());
+		bitmapUtils.display(listItemView.iv_item_shop_icon, listData.get(position).getHp_url(), bitmapLoadCallBack);
 		return convertView;
 	}
 

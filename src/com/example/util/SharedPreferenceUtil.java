@@ -13,6 +13,10 @@ public class SharedPreferenceUtil {
 	/** 用户信息 */
 	public final static String USERINFO = "userinfo";
 	public static final String REMIND = "remind";
+	/** 上次登录账号 */
+	public static final String OLD_ACCOUNT = "CurrentUsers";
+	/** 上次登录密码 */
+	public static final String OLD_PASSWORD = "CurrentUsers";
 
 	private SharedPreferenceUtil(Context context) {
 		sharedPreferences = context.getSharedPreferences(KEY, Context.MODE_PRIVATE);

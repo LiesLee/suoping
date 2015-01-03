@@ -13,6 +13,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.activity.common.KeyGuardApplication;
+import com.example.entity.UserInfo;
+import com.google.gson.Gson;
 
 /**
  * @Description 公共工具类
@@ -38,6 +40,18 @@ public class PublicUtil {
 
 		}
 		return false;
+	}
+
+	/**
+	 * @Description 获取用户实体缓存
+	 * @author Created by qinxianyuzou on 2015-1-1.
+	 * @param context
+	 * @return
+	 */
+	public static UserInfo getUserInfo(Context context) {
+		UserInfo userInfo = new Gson().fromJson(
+				SharedPreferenceUtil.getInstance(context).getString(SharedPreferenceUtil.USERINFO), UserInfo.class);
+		return userInfo;
 	}
 
 	/**

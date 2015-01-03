@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -19,10 +21,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
 import com.example.activity.common.Activity_Submit;
 import com.example.activity.common.DialogClick;
 import com.example.activity.common.DialogSex;
+import com.example.activity.reg.LoginActivity;
+import com.example.entity.respose.BaseResponse;
+import com.example.entity.respose.Code;
+import com.example.entity.respose.ResponseUserInfo;
+import com.example.http.HttpCallBack;
+import com.example.http.Protocol;
 import com.example.keyguard.R;
+import com.example.util.LogUtil;
+import com.example.util.PublicUtil;
+import com.example.util.SharedPreferenceUtil;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.bitmap.BitmapDisplayConfig;
 import com.lidroid.xutils.bitmap.callback.BitmapLoadCallBack;
@@ -42,6 +54,8 @@ public class MyInfo_Adapter extends BaseAdapter {
 	private BitmapUtils bitmapUtils;
 	/** 图片加载回调 */
 	private BitmapLoadCallBack<ImageView> bitmapLoadCallBack;
+	/** 退出标记 */
+	private long logout;
 
 	public MyInfo_Adapter(Activity context, BitmapUtils bitmapUtils) {
 		activity = context;
@@ -138,7 +152,9 @@ public class MyInfo_Adapter extends BaseAdapter {
 				dialogSex.requestWindowFeature(Window.FEATURE_NO_TITLE);
 				dialogSex.show();
 			case 5:
-
+				DialogDate dialogDate = new DialogDate(activity);
+				dialogDate.requestWindowFeature(Window.FEATURE_NO_TITLE);
+				dialogDate.show();
 				break;
 			case 6:
 				final DialogClick dialogClick = new DialogClick(activity);
@@ -167,6 +183,7 @@ public class MyInfo_Adapter extends BaseAdapter {
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
 						dialogClick1.dismiss();
+						Protocol.logout(activity, Activity_MyInfo.class.getSimpleName(), new LogoutCallBack());
 					}
 				}, new OnClickListener() {
 
@@ -181,6 +198,43 @@ public class MyInfo_Adapter extends BaseAdapter {
 			default:
 				break;
 			}
+		}
+	}
+
+	class LogoutCallBack implements HttpCallBack {
+
+		@Override
+		public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
+			// TODO Auto-generated method stub
+			BaseResponse msg = (BaseResponse) response;
+			if (msg.getCode() == Code.CODE_SUCCESS) {
+				SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.USERINFO, "");
+				SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.OLD_PASSWORD, "");
+				activity.startActivity(new Intent(activity, LoginActivity.class));
+				activity.finish();
+			} else {
+				new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						try {
+							Thread.sleep(2000);
+							Protocol.logout(activity, Activity_MyInfo.class.getSimpleName(), new LogoutCallBack());
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+					}
+				}).start();
+			}
+		}
+
+		@Override
+		public void onHttpError(long flag, VolleyError error) {
+			// TODO Auto-generated method stub
+
 		}
 	}
 
