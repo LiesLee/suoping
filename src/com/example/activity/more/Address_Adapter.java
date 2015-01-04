@@ -6,7 +6,6 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -19,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.activity.common.Activity_Submit;
-import com.example.activity.more.MyInfo_Adapter.onclick;
 import com.example.keyguard.R;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.bitmap.BitmapDisplayConfig;

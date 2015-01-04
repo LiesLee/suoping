@@ -155,4 +155,19 @@ public class Protocol {
 		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.EXCHANGE_PRODUCT, tag, requestParam,
 				ResponseEPDetail.class, null);
 	}
+
+	/**
+	 * @Description 提交邀请码
+	 * @author Created by qinxianyuzou on 2015-1-4.
+	 * @param context
+	 * @param tag
+	 * @param no
+	 * @return
+	 */
+	public static long invite(Context context, String tag, String no) {
+		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
+		requestParam.add(new BasicNameValuePair("no", no));
+		return ConnectorManage.getInstance(context).PostHttpRequest(context, Config.INVITE, tag, requestParam,
+				ResponseEPDetail.class, null);
+	}
 }
