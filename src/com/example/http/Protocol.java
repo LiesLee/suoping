@@ -7,10 +7,10 @@ import org.apache.http.message.BasicNameValuePair;
 
 import android.content.Context;
 
-import com.example.entity.UserInfo;
 import com.example.entity.respose.BaseResponse;
 import com.example.entity.respose.ResponseEPDetail;
 import com.example.entity.respose.ResponseEXProduct;
+import com.example.entity.respose.ResponseLogistics;
 import com.example.entity.respose.ResponseUserInfo;
 
 /**
@@ -18,20 +18,6 @@ import com.example.entity.respose.ResponseUserInfo;
  * @author Created by qinxianyuzou on 2014-12-24.
  */
 public class Protocol {
-
-	// /**
-	// * @Description 获取用户物流信息
-	// * @author Created by qinxianyuzou on 2014-12-24.
-	// * @param mContext
-	// * @param tag
-	// * @return
-	// */
-	// public static long get_logistics_list(Context mContext, String tag) {
-	// ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
-	// return ConnectorManage.getInstance(mContext).PostHttpRequest(mContext,
-	// Config.GET_LOGISTICS_LIST, tag,
-	// requestParam, Get_logistics_list_entity.class, null);
-	// }
 
 	/**
 	 * @Description 获取用户详细信息
@@ -154,6 +140,19 @@ public class Protocol {
 		requestParam.add(new BasicNameValuePair("epid", epid));
 		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.EXCHANGE_PRODUCT, tag, requestParam,
 				ResponseEPDetail.class, null);
+	}
+
+	/**
+	 * @Description 获取物流信息列表
+	 * @author Created by qinxianyuzou on 2015-1-4.
+	 * @param context
+	 * @param tag
+	 * @return
+	 */
+	public static long get_logistics_list(Context context, String tag) {
+		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
+		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.GET_LOGISTICS_LIST, tag,
+				requestParam, ResponseLogistics.class, null);
 	}
 
 	/**
