@@ -23,7 +23,7 @@
         android:paddingTop="10dp" >
 
         <EditText
-            android:id="@+id/editText1"
+            android:id="@+id/et_nickname_text"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_weight="1"
@@ -35,7 +35,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/but_nickname_submit"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginLeft="12dp"

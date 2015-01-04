@@ -9,7 +9,7 @@ import android.widget.EditText;
 import com.example.keyguard.R;
 
 /**
- * @Description 性别选择框
+ * @Description 日期输入框
  * @author Created by qinxianyuzou on 2014-12-30.
  */
 public class DialogDate extends Dialog implements android.view.View.OnClickListener {

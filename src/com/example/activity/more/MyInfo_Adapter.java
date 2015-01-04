@@ -138,42 +138,14 @@ public class MyInfo_Adapter extends BaseAdapter {
 			// TODO Auto-generated method stub
 			switch (type) {
 			case 0:
-			case 3:
-				Activity_Submit.luanch(activity, listData.get(type).getName(), "");
-				break;
-			case 1:
 				Activity_AddressList.luanch(activity);
 				break;
+			case 1:
+				Activity_Submit.luanch(activity, listData.get(type).getName(), "");
+				break;
 			case 2:
-				Activity_MyInfoPhone.luanch(activity, listData.get(type).getName(), "");
 				break;
-			case 4:
-				DialogSex dialogSex = new DialogSex(activity);
-				dialogSex.requestWindowFeature(Window.FEATURE_NO_TITLE);
-				dialogSex.show();
-			case 5:
-				DialogDate dialogDate = new DialogDate(activity);
-				dialogDate.requestWindowFeature(Window.FEATURE_NO_TITLE);
-				dialogDate.show();
-				break;
-			case 6:
-				final DialogClick dialogClick = new DialogClick(activity);
-				dialogClick.requestWindowFeature(Window.FEATURE_NO_TITLE);
-				dialogClick.show();
-				dialogClick.setContent("账户状态", "恭喜您！您的锁屏赚账户很安全，请继续保持！", "我知道了", new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						// TODO Auto-generated method stub
-						dialogClick.dismiss();
-					}
-				});
-				break;
-			case 7:
-				Activity_MyInfoPassWord.luanch(activity, listData.get(type).getName());
-				break;
-			case 8:
-
+			case 3:
 				final DialogClick dialogClick1 = new DialogClick(activity);
 				dialogClick1.requestWindowFeature(Window.FEATURE_NO_TITLE);
 				dialogClick1.show();
@@ -194,10 +166,76 @@ public class MyInfo_Adapter extends BaseAdapter {
 					}
 				});
 				break;
-
 			default:
 				break;
 			}
+			// switch (type) {
+			// case 0:
+			// case 3:
+			// Activity_Submit.luanch(activity, listData.get(type).getName(),
+			// "");
+			// break;
+			// case 1:
+			// Activity_AddressList.luanch(activity);
+			// break;
+			// case 2:
+			// Activity_MyInfoPhone.luanch(activity,
+			// listData.get(type).getName(), "");
+			// break;
+			// case 4:
+			// DialogSex dialogSex = new DialogSex(activity);
+			// dialogSex.requestWindowFeature(Window.FEATURE_NO_TITLE);
+			// dialogSex.show();
+			// case 5:
+			// DialogDate dialogDate = new DialogDate(activity);
+			// dialogDate.requestWindowFeature(Window.FEATURE_NO_TITLE);
+			// dialogDate.show();
+			// break;
+			// case 6:
+			// final DialogClick dialogClick = new DialogClick(activity);
+			// dialogClick.requestWindowFeature(Window.FEATURE_NO_TITLE);
+			// dialogClick.show();
+			// dialogClick.setContent("账户状态", "恭喜您！您的锁屏赚账户很安全，请继续保持！", "我知道了",
+			// new OnClickListener() {
+			//
+			// @Override
+			// public void onClick(View v) {
+			// // TODO Auto-generated method stub
+			// dialogClick.dismiss();
+			// }
+			// });
+			// break;
+			// case 7:
+			// Activity_MyInfoPassWord.luanch(activity,
+			// listData.get(type).getName());
+			// break;
+			// case 8:
+			// final DialogClick dialogClick1 = new DialogClick(activity);
+			// dialogClick1.requestWindowFeature(Window.FEATURE_NO_TITLE);
+			// dialogClick1.show();
+			// dialogClick1.setContent("温馨提示", "退出登陆后，您将不能持续获得锁屏收益，确认退出吗？",
+			// "退出登陆", "继续赚钱", new OnClickListener() {
+			//
+			// @Override
+			// public void onClick(View v) {
+			// // TODO Auto-generated method stub
+			// dialogClick1.dismiss();
+			// Protocol.logout(activity, Activity_MyInfo.class.getSimpleName(),
+			// new LogoutCallBack());
+			// }
+			// }, new OnClickListener() {
+			//
+			// @Override
+			// public void onClick(View v) {
+			// // TODO Auto-generated method stub
+			// dialogClick1.dismiss();
+			// }
+			// });
+			// break;
+			//
+			// default:
+			// break;
+			// }
 		}
 	}
 

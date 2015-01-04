@@ -109,6 +109,20 @@ public class BaseRequest<T> implements Listener<String>, ErrorListener {
 					return requestParam;
 				}
 
+				@Override
+				protected Response<String> parseNetworkResponse(NetworkResponse response) {
+					// TODO Auto-generated method stub
+					try {
+						Map<String, String> responseHeaders = response.headers;
+						String rawCookies = responseHeaders.get("Set-Cookie");
+						SharedPreferenceUtil.getInstance(mContext).putString(SharedPreferenceUtil.COOKIES, rawCookies);
+						String dataString = new String(response.data, "UTF-8");
+						return Response.success(dataString, HttpHeaderParser.parseCacheHeaders(response));
+					} catch (UnsupportedEncodingException e) {
+						return Response.error(new ParseError(e));
+					}
+				}
+
 			};
 		case Method.GET:
 			if (requestParam.size() < 1) {
@@ -127,7 +141,23 @@ public class BaseRequest<T> implements Listener<String>, ErrorListener {
 				public Map<String, String> getHeaders() throws AuthFailureError {
 					return getRequestHeader();
 				}
+
+				@Override
+				protected Response<String> parseNetworkResponse(NetworkResponse response) {
+					// TODO Auto-generated method stub
+					try {
+						Map<String, String> responseHeaders = response.headers;
+						String rawCookies = responseHeaders.get("Set-Cookie");
+						SharedPreferenceUtil.getInstance(mContext).putString(SharedPreferenceUtil.COOKIES, rawCookies);
+						String dataString = new String(response.data, "UTF-8");
+						return Response.success(dataString, HttpHeaderParser.parseCacheHeaders(response));
+					} catch (UnsupportedEncodingException e) {
+						return Response.error(new ParseError(e));
+					}
+				}
+
 			};
+
 		}
 	}
 

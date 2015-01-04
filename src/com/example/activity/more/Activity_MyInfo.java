@@ -73,14 +73,14 @@ public class Activity_MyInfo extends BaseActivity {
 	@Override
 	protected void initData() {
 		// TODO Auto-generated method stub
-		dataList.add(new BasicNameValuePair("昵称", "花朋友"));
+		// dataList.add(new BasicNameValuePair("昵称", "花朋友"));
 		dataList.add(new BasicNameValuePair("管理收货地址", ""));
-		dataList.add(new BasicNameValuePair("手机号", "159*****320"));
+		// dataList.add(new BasicNameValuePair("手机号", "159*****320"));
 		dataList.add(new BasicNameValuePair("邀请码", "未填写，立奖1元"));
 		dataList.add(new BasicNameValuePair("性别", "男"));
-		dataList.add(new BasicNameValuePair("生日", "1997年12月"));
-		dataList.add(new BasicNameValuePair("账户状态", "正常"));
-		dataList.add(new BasicNameValuePair("修改密码", ""));
+		// dataList.add(new BasicNameValuePair("生日", "1997年12月"));
+		// dataList.add(new BasicNameValuePair("账户状态", "正常"));
+		// dataList.add(new BasicNameValuePair("修改密码", ""));
 		dataList.add(new BasicNameValuePair("退出登录", ""));
 		adapter.setData(dataList);
 

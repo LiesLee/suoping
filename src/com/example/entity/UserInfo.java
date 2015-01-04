@@ -21,7 +21,7 @@ public class UserInfo implements Serializable {
 	/** 性别 0代表男性，1代表女性 **/
 	private int sex;
 	/** 邀请码 **/
-	private int invite_no;
+	private String invite_no;
 	/** 用户昵称 **/
 	private String name;
 
@@ -142,7 +142,7 @@ public class UserInfo implements Serializable {
 	 * @see #invite_no
 	 * @return the invite_no
 	 */
-	public int getInvite_no() {
+	public String getInvite_no() {
 		return invite_no;
 	}
 
@@ -153,7 +153,7 @@ public class UserInfo implements Serializable {
 	 * @see #invite_no
 	 * @param invite_no the invite_no to set
 	 */
-	public void setInvite_no(int invite_no) {
+	public void setInvite_no(String invite_no) {
 		this.invite_no = invite_no;
 	}
 

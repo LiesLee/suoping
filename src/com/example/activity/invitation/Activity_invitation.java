@@ -2,20 +2,28 @@ package com.example.activity.invitation;
 
 import org.json.JSONObject;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.example.activity.common.BaseActivity;
+import com.example.activity.common.DialogClick;
 import com.example.activity.common.KeyGuardActivityManager;
-import com.example.activity.more.Activity_MyInfo;
 import com.example.keyguard.R;
+import com.example.util.PublicUtil;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -34,6 +42,9 @@ public class Activity_invitation extends BaseActivity {
 	/** 已邀请列表 */
 	@ViewInject(R.id.lay_activated)
 	private LinearLayout lay_activated;
+	/** 一键获取邀请码 */
+	@ViewInject(R.id.btn_invitation_number)
+	private Button btn_invitation_number;
 	/** 标题 */
 	private static String mTitle = "";
 
@@ -63,7 +74,7 @@ public class Activity_invitation extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		 setContentView(R.layout.tab_invitation);
+		setContentView(R.layout.tab_invitation);
 		ViewUtils.inject(activity);
 		initUI();
 		initData();
@@ -75,6 +86,7 @@ public class Activity_invitation extends BaseActivity {
 		tv_public_top_title.setText(mTitle);
 		rl_public_back.setVisibility(View.VISIBLE);
 		rl_public_back.setOnClickListener(this);
+		btn_invitation_number.setOnClickListener(this);
 		lay_activated.setOnClickListener(this);
 	}
 
@@ -94,10 +106,43 @@ public class Activity_invitation extends BaseActivity {
 		case R.id.lay_activated:
 			Activity_InvitationInfo.luanch(activity);
 			break;
+		case R.id.btn_invitation_number:
+			final DialogClick dialogClick1 = new DialogClick(activity);
+			dialogClick1.requestWindowFeature(Window.FEATURE_NO_TITLE);
+			dialogClick1.show();
+			dialogClick1.setContent("您的邀请码", "" + PublicUtil.getUserInfo(activity).getInvite_no(), "一键复制",
+					new OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							dialogClick1.dismiss();
+							if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB) {
+								copyInviteNo_8();
+							} else {
+								copyInviteNo_11();
+							}
+							showToast("复制成功！");
+						}
+					});
+			break;
 
 		default:
 			break;
 		}
+	}
+
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	private void copyInviteNo_11() {
+		ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+		ClipData clip = ClipData.newPlainText("simple text", PublicUtil.getUserInfo(activity).getInvite_no());
+		clipboard.setPrimaryClip(clip);
+	}
+
+	@SuppressWarnings("deprecation")
+	private void copyInviteNo_8() {
+		ClipboardManager c = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+		c.setText(PublicUtil.getUserInfo(activity).getInvite_no());
 	}
 
 	@Override
