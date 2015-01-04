@@ -14,9 +14,11 @@ public class SharedPreferenceUtil {
 	public final static String USERINFO = "userinfo";
 	public static final String REMIND = "remind";
 	/** 上次登录账号 */
-	public static final String OLD_ACCOUNT = "CurrentUsers";
+	public static final String OLD_ACCOUNT = "CurrentAccount";
 	/** 上次登录密码 */
-	public static final String OLD_PASSWORD = "CurrentUsers";
+	public static final String OLD_PASSWORD = "CurrentPassword";
+	/** cookies */
+	public static final String COOKIES = "cookies";
 
 	private SharedPreferenceUtil(Context context) {
 		sharedPreferences = context.getSharedPreferences(KEY, Context.MODE_PRIVATE);

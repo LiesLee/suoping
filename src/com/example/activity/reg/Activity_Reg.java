@@ -3,7 +3,6 @@ package com.example.activity.reg;
 import org.json.JSONObject;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -11,8 +10,8 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.example.activity.common.BaseActivity;
+import com.example.entity.respose.BaseResponse;
 import com.example.entity.respose.Code;
-import com.example.entity.respose.ResponseSendCode;
 import com.example.http.Protocol;
 import com.example.keyguard.R;
 import com.example.util.LogUtil;
@@ -42,7 +41,6 @@ public class Activity_Reg extends BaseActivity implements View.OnClickListener {
 	private ImageView iv_back_left;
 	/** 手机号 **/
 	String cellphoneNumber;
-	private long sendCodeFlag;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +56,7 @@ public class Activity_Reg extends BaseActivity implements View.OnClickListener {
 		case R.id.btn_reg_next:
 			cellphoneNumber = et_reg.getText().toString();
 			if (check()) {
-				UIHelper.showMsgProgressDialog(this, "正在提交...");
-				LogUtil.d("setTag", "" + setTag());
-				sendCodeFlag = Protocol.MsgAuthentication(this, cellphoneNumber, setTag());
+				Activity_Reg_Authentication.luanch(this, cellphoneNumber);
 			}
 			break;
 
@@ -90,24 +86,10 @@ public class Activity_Reg extends BaseActivity implements View.OnClickListener {
 
 	@Override
 	public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
-		if (flag == sendCodeFlag) {
-			UIHelper.cancelProgressDialog();
-			ResponseSendCode msg = (ResponseSendCode) response;
-			if (msg.getCode().equals(Code.CODE_SUCCESS)) {
-				showToast(msg.getMsg());
-				Activity_Reg_Authentication.luanch(this, cellphoneNumber);
-			} else {
-				showToast(msg.getMsg());
-			}
-		}
 	}
 
 	@Override
 	public void onHttpError(long flag, VolleyError error) {
-		if (flag == sendCodeFlag) {
-			UIHelper.cancelProgressDialog();
-			showToast(StringUtils.ERROR_TOAST);
-		}
 	}
 
 	@Override

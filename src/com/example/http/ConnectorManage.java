@@ -3,7 +3,6 @@ package com.example.http;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.http.NameValuePair;
@@ -12,8 +11,10 @@ import org.json.JSONObject;
 import android.content.Context;
 
 import com.android.volley.Request;
-import com.android.volley.VolleyError;
 import com.android.volley.Request.Method;
+import com.android.volley.VolleyError;
+import com.example.util.LogUtil;
+import com.example.util.StringUtils;
 
 public class ConnectorManage implements HttpCallBack {
 

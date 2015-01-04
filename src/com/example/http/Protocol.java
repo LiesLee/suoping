@@ -9,7 +9,8 @@ import android.content.Context;
 
 import com.example.entity.UserInfo;
 import com.example.entity.respose.BaseResponse;
-import com.example.entity.respose.ResponseSendCode;
+import com.example.entity.respose.ResponseEPDetail;
+import com.example.entity.respose.ResponseEXProduct;
 import com.example.entity.respose.ResponseUserInfo;
 
 /**
@@ -41,8 +42,8 @@ public class Protocol {
 	 */
 	public static long get_user_info(Context mContext, String tag) {
 		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
-		return ConnectorManage.getInstance(mContext).PostHttpRequest(mContext, Config.GET_USER_INFO, tag, requestParam,
-				UserInfo.class, null);
+		return ConnectorManage.getInstance(mContext).GetHttpRequest(mContext, Config.GET_USER_INFO, tag, requestParam,
+				ResponseUserInfo.class, null);
 	}
 
 	/**
@@ -57,7 +58,7 @@ public class Protocol {
 		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
 		requestParam.add(new BasicNameValuePair("username", send_code));
 		return ConnectorManage.getInstance(context).PostHttpRequest(context, Config.SEND_CODE, tag, requestParam,
-				ResponseSendCode.class, null);
+				BaseResponse.class, null);
 	}
 
 	/**
@@ -76,7 +77,7 @@ public class Protocol {
 		requestParam.add(new BasicNameValuePair("password", password));
 		requestParam.add(new BasicNameValuePair("auth_code", code));
 		return ConnectorManage.getInstance(context).PostHttpRequest(context, Config.REGISTER, tag, requestParam,
-				ResponseSendCode.class, null);
+				BaseResponse.class, null);
 	}
 
 	/**
@@ -92,7 +93,7 @@ public class Protocol {
 		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
 		requestParam.add(new BasicNameValuePair("username", cellphoneNumber));
 		requestParam.add(new BasicNameValuePair("password", password));
-		return ConnectorManage.getInstance(context).PostHttpRequest(context, Config.REGISTER, tag, requestParam,
+		return ConnectorManage.getInstance(context).PostHttpRequest(context, Config.LOGIN, tag, requestParam,
 				ResponseUserInfo.class, null);
 	}
 
@@ -110,10 +111,48 @@ public class Protocol {
 				BaseResponse.class, httpCallBack);
 	}
 
+	/**
+	 * @Description 兑换商品列表
+	 * @author Created by qinxianyuzou on 2015-1-3.
+	 * @param context
+	 * @param tag
+	 * @param ptype
+	 * @return
+	 */
 	public static long get_ex_product(Context context, String tag, String ptype) {
 		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
 		requestParam.add(new BasicNameValuePair("ptype", ptype));
 		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.GET_EX_PRODUCT, tag, requestParam,
-				BaseResponse.class, null);
+				ResponseEXProduct.class, null);
+	}
+
+	/**
+	 * @Description 详情接口
+	 * @author Created by qinxianyuzou on 2015-1-3.
+	 * @param context
+	 * @param tag
+	 * @param epid
+	 * @return
+	 */
+	public static long get_ep_detail(Context context, String tag, String epid) {
+		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
+		requestParam.add(new BasicNameValuePair("epid", epid));
+		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.GET_EP_DETAIL, tag, requestParam,
+				ResponseEPDetail.class, null);
+	}
+
+	/**
+	 * @Description 兑换接口
+	 * @author Created by qinxianyuzou on 2015-1-4.
+	 * @param context
+	 * @param tag
+	 * @param epid
+	 * @return
+	 */
+	public static long exchange_product(Context context, String tag, String epid) {
+		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
+		requestParam.add(new BasicNameValuePair("epid", epid));
+		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.EXCHANGE_PRODUCT, tag, requestParam,
+				ResponseEPDetail.class, null);
 	}
 }

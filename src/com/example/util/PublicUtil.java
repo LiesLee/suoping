@@ -21,6 +21,8 @@ import com.google.gson.Gson;
  * @author Created by qinxianyuzou on 2014-12-24.
  */
 public class PublicUtil {
+	private final static String TAG = PublicUtil.class.getSimpleName();
+
 	/**
 	 * @Description 短时间toast
 	 * @author Created by qinxianyuzou on 2014-12-24.

@@ -1,5 +1,6 @@
 package com.example.http;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,14 +14,19 @@ import android.net.Uri;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkResponse;
+import com.android.volley.ParseError;
 import com.android.volley.Request.Method;
+import com.android.volley.Response;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.example.keyguard.R.id;
 import com.example.util.LogUtil;
 import com.example.util.PublicUtil;
+import com.example.util.SharedPreferenceUtil;
 import com.example.util.StringUtils;
 import com.google.gson.Gson;
 import com.lidroid.xutils.util.LogUtils;
@@ -33,14 +39,16 @@ public class BaseRequest<T> implements Listener<String>, ErrorListener {
 	private HttpCallBack httpCallBack;
 	private StringRequest request;
 	private long flag;
+	private Context mContext;
 
 	public BaseRequest(Context context, int method, long flag, String url, String tag,
 			ArrayList<NameValuePair> requestParam, Class<T> responseClass, HttpCallBack httpCallBack) {
 		this.method = method;
+		mContext = context;
 		Map<String, String> tempMap = new HashMap<String, String>();
 		for (int i = 0; i < requestParam.size(); i++) {
 			if (requestParam.get(i).getValue() == null) {
-				LogUtil.d("BaseRequest", requestParam.get(i).getName() + "参数为空指针，请重新检查参数");
+				LogUtil.d(TAG, "HttpRequest:" + flag + "===>\n" + requestParam.get(i).getName() + "参数为空指针，请重新检查参数");
 				return;
 			} else {
 				tempMap.put(requestParam.get(i).getName(), requestParam.get(i).getValue());
@@ -82,6 +90,11 @@ public class BaseRequest<T> implements Listener<String>, ErrorListener {
 		switch (method) {
 		case Method.POST:
 		default:
+			if (requestParam.size() < 1) {
+				LogUtil.d(TAG, "PostHttpRequest:" + flag + "===>\n" + url + StringUtils.EMPTY);
+			} else {
+				LogUtil.d(TAG, "PostHttpRequest:" + flag + "===>\n" + url + requestParam.toString());
+			}
 			return new StringRequest(method, url, this, this) {
 
 				@Override
@@ -95,8 +108,14 @@ public class BaseRequest<T> implements Listener<String>, ErrorListener {
 					// TODO Auto-generated method stub
 					return requestParam;
 				}
+
 			};
 		case Method.GET:
+			if (requestParam.size() < 1) {
+				LogUtil.d(TAG, "GetHttpRequest:" + flag + "===>\n" + url + StringUtils.EMPTY);
+			} else {
+				LogUtil.d(TAG, "GetHttpRequest:" + flag + "===>\n" + url + requestParam.toString());
+			}
 			Uri.Builder uriBuilder = Uri.parse(url).buildUpon();
 			if (requestParam != null) {
 				for (String key : requestParam.keySet()) {
@@ -121,6 +140,7 @@ public class BaseRequest<T> implements Listener<String>, ErrorListener {
 		Map<String, String> headParams = new HashMap<String, String>();
 		headParams.put("content-type", "application/json; charset=utf-8");
 		headParams.put("charset", "UTF-8");
+		headParams.put("Cookie", SharedPreferenceUtil.getInstance(mContext).getString(SharedPreferenceUtil.COOKIES));
 		return headParams;
 	}
 
@@ -137,8 +157,8 @@ public class BaseRequest<T> implements Listener<String>, ErrorListener {
 		// TODO Auto-generated method stub
 		try {
 			if (!StringUtils.isEmpty(response)) {
-				LogUtil.d(TAG, "onHttpSuccess:" + flag + response.toString());
 				JSONObject json = new JSONObject(response);
+				LogUtil.d(TAG, "onHttpSuccess:" + flag + json.toString());
 				T responseEntity = new Gson().fromJson(response, responseClass);
 				conManager.onHttpSuccess(flag, json, responseEntity);
 				if (httpCallBack != null) {

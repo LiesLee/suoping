@@ -1,5 +1,7 @@
 package com.example.activity.reg;
 
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,11 +13,10 @@ import android.widget.TextView;
 import com.android.volley.VolleyError;
 import com.example.activity.common.BaseActivity;
 import com.example.activity.common.KeyGuardActivityManager;
+import com.example.entity.respose.BaseResponse;
 import com.example.entity.respose.Code;
-import com.example.entity.respose.ResponseSendCode;
 import com.example.entity.respose.ResponseUserInfo;
 import com.example.http.Protocol;
-import com.example.keyguard.MainActivity;
 import com.example.keyguard.R;
 import com.example.util.LogUtil;
 import com.example.util.SharedPreferenceUtil;
@@ -23,8 +24,6 @@ import com.example.util.StringUtils;
 import com.example.util.UIHelper;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
-
-import org.json.JSONObject;
 
 /**
  * Created by LiesLee on 2014/12/28. Email: LiesLee@foxmail.com
@@ -115,13 +114,14 @@ public class Activity_Reg_Password extends BaseActivity implements View.OnClickL
 			UIHelper.showShakeAnim(this, et_reg, "请输入6位以上密码");
 			return false;
 		}
+		password = et_reg.getText().toString();
 		return true;
 	}
 
 	@Override
 	public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
 		if (flag == regFlag) {
-			ResponseSendCode msg = (ResponseSendCode) response;
+			BaseResponse msg = (BaseResponse) response;
 			if (msg.getCode().equals(Code.CODE_SUCCESS)) {
 				showToast(msg.getMsg() + "正在登陆，请稍候...");
 				loginFlag = Protocol.login(this, setTag(), cellphoneNumber, password);

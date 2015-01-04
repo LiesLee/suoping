@@ -9,7 +9,7 @@ public class ResponseUserInfo extends BaseResponse {
 	/**  */
 	private static final long serialVersionUID = 8062805673883580062L;
 	/** 用户信息 **/
-	private UserInfo data;
+	private UserInfo data=new UserInfo();
 
 	/**
 	 * @Description

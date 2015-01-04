@@ -27,7 +27,7 @@ public class Activity_Submit extends BaseActivity {
 	private RelativeLayout rl_public_back;
 	private static String title = "";
 
-	public static void luanch(Activity activity, String title, String hit) {
+	public static void luanch(Activity activity, String title, String id) {
 		Activity_Submit.title = title;
 		Intent intent = new Intent(activity, Activity_Submit.class);
 		KeyGuardActivityManager.getInstance().goFoResult(activity, intent, KeyGuardActivityManager.MAIN_CODE);
@@ -37,7 +37,7 @@ public class Activity_Submit extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_nickname);
+		setContentView(R.layout.activity_submit_order);
 		ViewUtils.inject(activity);
 		initUI();
 		initData();

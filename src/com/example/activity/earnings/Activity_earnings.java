@@ -22,6 +22,7 @@ import com.example.util.LogUtil;
 import com.example.util.PublicUtil;
 import com.example.util.SharedPreferenceUtil;
 import com.example.util.UIHelper;
+import com.google.gson.Gson;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -88,16 +89,14 @@ public class Activity_earnings extends BaseActivity {
 		if (flag == userinfoFlag) {
 			UIHelper.cancelProgressDialog();
 			ResponseUserInfo msg = (ResponseUserInfo) response;
-			if (msg.getCode() == Code.CODE_SUCCESS) {
-				LogUtil.i("=====UserInfo====", msg.getMsg().toString());
+			if (msg.getCode().equals(Code.CODE_SUCCESS)) {
 				SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.USERINFO,
-						msg.getMsg().toString());
+						new Gson().toJson(msg.getData()));
 				tv_allEarning.setText("" + PublicUtil.getUserInfo(activity).getSum_earn());
 				tv_todayEarning.setText("" + PublicUtil.getUserInfo(activity).getToday_earn());
 				tv_earning.setText("" + PublicUtil.getUserInfo(activity).getSum_earn());
 			} else {
-				showToast("加载失败，请重新登录");
-				LogUtil.i("======加载失败======", jsonString.toString());
+				showToast(msg.getMsg());
 			}
 		}
 
@@ -105,7 +104,7 @@ public class Activity_earnings extends BaseActivity {
 
 	@Override
 	public void onHttpError(long flag, VolleyError error) {
-
+		UIHelper.cancelProgressDialog();
 	}
 
 	@Override

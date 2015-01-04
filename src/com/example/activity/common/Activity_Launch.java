@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import com.android.volley.VolleyError;
 import com.example.activity.reg.Activity_Reg;
+import com.example.activity.reg.LoginActivity;
 import com.example.keyguard.MainActivity;
 import com.example.keyguard.R;
 import com.example.util.SharedPreferenceUtil;
@@ -80,9 +81,11 @@ public class Activity_Launch extends BaseActivity implements AnimationListener {
 		if (SharedPreferenceUtil.getInstance(activity).getInt(SharedPreferenceUtil.ISFIRSTUSED) == 0) {
 			startActivity(new Intent(activity, Activity_Guide.class));
 		} else {
-			startActivity(new Intent(activity, MainActivity.class));
-			//startActivity(new Intent(activity, Activity_Reg.class));
-
+			if (SharedPreferenceUtil.getInstance(activity).getString(SharedPreferenceUtil.USERINFO).equals("")) {
+				startActivity(new Intent(activity, LoginActivity.class));
+			} else {
+				startActivity(new Intent(activity, MainActivity.class));
+			}
 		}
 		SharedPreferenceUtil.getInstance(activity).putInt(SharedPreferenceUtil.ISFIRSTUSED, 1);
 		animFinish(3);
@@ -97,6 +100,6 @@ public class Activity_Launch extends BaseActivity implements AnimationListener {
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

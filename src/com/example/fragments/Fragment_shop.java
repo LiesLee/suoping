@@ -7,9 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.android.volley.VolleyError;
 import com.example.activity.common.ShopInterface;
+import com.example.activity.shop.Activity_ShopInfo;
 import com.example.activity.shop.Shop_Adapter;
 import com.example.entity.respose.Code;
 import com.example.entity.respose.ResponseEXProduct;
@@ -95,6 +98,15 @@ public class Fragment_shop extends BaseFragment {
 		adapter = new Shop_Adapter(activity, bitmapUtils);
 		rListView.setOnScrollListener(new PauseOnScrollListener(bitmapUtils, false, true));
 		rListView.setAdapter(adapter);
+		rListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				// TODO Auto-generated method stub
+				Activity_ShopInfo
+						.luanch(activity, dataList.get(position).getTitle(), dataList.get(position).getEp_id());
+			}
+		});
 	}
 
 	@Override
