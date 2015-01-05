@@ -15,7 +15,9 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.example.activity.more.Activity_MyInfo;
+import com.example.http.Protocol;
 import com.example.keyguard.R;
+import com.example.util.StringUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -39,7 +41,7 @@ public class Activity_OnlySubmit extends BaseActivity {
 	private Button but_nickname_submit;
 	/** 标题 */
 	private static String mTitle = "";
-	private static OnClickListener submitOnClickListener = null;
+	private static EnumOnlySubmit mEnumOnlySubmit = null;
 
 	/**
 	 * @Description 不设置标题
@@ -57,9 +59,9 @@ public class Activity_OnlySubmit extends BaseActivity {
 	 * @param activity
 	 * @param title
 	 */
-	public static void luanch(Activity activity, String title, OnClickListener onClickListener) {
+	public static void luanch(Activity activity, String title, EnumOnlySubmit enumOnlySubmit) {
 		mTitle = title;
-		submitOnClickListener = onClickListener;
+		mEnumOnlySubmit = enumOnlySubmit;
 		Intent intent = new Intent(activity, Activity_OnlySubmit.class);
 		KeyGuardActivityManager.getInstance().goFoResult(activity, intent, KeyGuardActivityManager.MAIN_CODE);
 	}
@@ -80,9 +82,7 @@ public class Activity_OnlySubmit extends BaseActivity {
 		tv_public_top_title.setText(mTitle);
 		rl_public_back.setVisibility(View.VISIBLE);
 		rl_public_back.setOnClickListener(this);
-		if (submitOnClickListener != null) {
-			but_nickname_submit.setOnClickListener(submitOnClickListener);
-		}
+		but_nickname_submit.setOnClickListener(this);
 	}
 
 	@Override
@@ -97,6 +97,20 @@ public class Activity_OnlySubmit extends BaseActivity {
 		switch (v.getId()) {
 		case R.id.rl_public_back:
 			finish();
+			break;
+		case R.id.but_nickname_submit:
+			switch (mEnumOnlySubmit) {
+			case INVITE_NO:
+				if (StringUtils.isEmpty(et_nickname_text.getText().toString())) {
+					showToast("请填写邀请码！");
+					return;
+				}
+				Protocol.invite(activity, setTag(), et_nickname_text.getText().toString());
+				break;
+
+			default:
+				break;
+			}
 			break;
 
 		default:
@@ -119,7 +133,7 @@ public class Activity_OnlySubmit extends BaseActivity {
 	@Override
 	public String setTag() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.getClass().getSimpleName();
 	}
 
 }

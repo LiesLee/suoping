@@ -7,7 +7,6 @@ import org.apache.http.NameValuePair;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -22,17 +21,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.example.activity.common.Activity_Submit;
+import com.example.activity.common.Activity_OnlySubmit;
 import com.example.activity.common.DialogClick;
-import com.example.activity.common.DialogSex;
+import com.example.activity.common.EnumOnlySubmit;
 import com.example.activity.reg.LoginActivity;
 import com.example.entity.respose.BaseResponse;
 import com.example.entity.respose.Code;
-import com.example.entity.respose.ResponseUserInfo;
 import com.example.http.HttpCallBack;
 import com.example.http.Protocol;
 import com.example.keyguard.R;
-import com.example.util.LogUtil;
 import com.example.util.PublicUtil;
 import com.example.util.SharedPreferenceUtil;
 import com.lidroid.xutils.BitmapUtils;
@@ -141,7 +138,7 @@ public class MyInfo_Adapter extends BaseAdapter {
 				Activity_AddressList.luanch(activity);
 				break;
 			case 1:
-				Activity_Submit.luanch(activity, listData.get(type).getName(), "");
+				Activity_OnlySubmit.luanch(activity, listData.get(type).getName(), EnumOnlySubmit.INVITE_NO);
 				break;
 			case 2:
 				break;
@@ -245,27 +242,30 @@ public class MyInfo_Adapter extends BaseAdapter {
 		public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
 			// TODO Auto-generated method stub
 			BaseResponse msg = (BaseResponse) response;
-			if (msg.getCode() == Code.CODE_SUCCESS) {
+			if (msg.getCode().equals(Code.CODE_SUCCESS)) {
+				SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.COOKIES, "");
 				SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.USERINFO, "");
 				SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.OLD_PASSWORD, "");
 				activity.startActivity(new Intent(activity, LoginActivity.class));
 				activity.finish();
 			} else {
-				new Thread(new Runnable() {
-
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						try {
-							Thread.sleep(2000);
-							Protocol.logout(activity, Activity_MyInfo.class.getSimpleName(), new LogoutCallBack());
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-
-					}
-				}).start();
+				PublicUtil.showToast(activity, msg.getMsg());
+				// new Thread(new Runnable() {
+				//
+				// @Override
+				// public void run() {
+				// // TODO Auto-generated method stub
+				// try {
+				// Thread.sleep(2000);
+				// Protocol.logout(activity,
+				// Activity_MyInfo.class.getSimpleName(), new LogoutCallBack());
+				// } catch (InterruptedException e) {
+				// // TODO Auto-generated catch block
+				// e.printStackTrace();
+				// }
+				//
+				// }
+				// }).start();
 			}
 		}
 

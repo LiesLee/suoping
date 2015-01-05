@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.android.volley.VolleyError;
 import com.example.activity.common.BaseActivity;
 import com.example.activity.common.KeyGuardActivityManager;
+import com.example.http.Protocol;
 import com.example.keyguard.R;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -37,6 +38,7 @@ public class Activity_AddressList extends BaseActivity {
 	private ListView lv_shop_body;
 	/** 标题 */
 	private static String mTitle = "管理收货地址";
+	private long ogisticsFlag;
 
 	/**
 	 * @Description 不设置标题
@@ -83,7 +85,7 @@ public class Activity_AddressList extends BaseActivity {
 	@Override
 	protected void initData() {
 		// TODO Auto-generated method stub
-
+		ogisticsFlag = Protocol.get_logistics_list(activity, setTag());
 	}
 
 	@Override
@@ -105,7 +107,9 @@ public class Activity_AddressList extends BaseActivity {
 	@Override
 	public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
 		// TODO Auto-generated method stub
+		if (ogisticsFlag == flag) {
 
+		}
 	}
 
 	@Override
