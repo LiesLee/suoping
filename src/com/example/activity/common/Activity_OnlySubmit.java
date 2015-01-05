@@ -14,7 +14,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
+import com.example.activity.more.Activity_Address;
 import com.example.activity.more.Activity_MyInfo;
+import com.example.activity.more.Address_Adapter;
 import com.example.http.Protocol;
 import com.example.keyguard.R;
 import com.example.util.StringUtils;
@@ -41,6 +43,8 @@ public class Activity_OnlySubmit extends BaseActivity {
 	private Button but_nickname_submit;
 	/** 标题 */
 	private static String mTitle = "";
+	/** 地址要编辑的内容类型 */
+	private static int mType;
 	private static EnumOnlySubmit mEnumOnlySubmit = null;
 
 	/**
@@ -62,6 +66,14 @@ public class Activity_OnlySubmit extends BaseActivity {
 	public static void luanch(Activity activity, String title, EnumOnlySubmit enumOnlySubmit) {
 		mTitle = title;
 		mEnumOnlySubmit = enumOnlySubmit;
+		Intent intent = new Intent(activity, Activity_OnlySubmit.class);
+		KeyGuardActivityManager.getInstance().goFoResult(activity, intent, KeyGuardActivityManager.MAIN_CODE);
+	}
+
+	public static void luanch(Activity activity, String title, EnumOnlySubmit enumOnlySubmit, int type) {
+		mTitle = title;
+		mEnumOnlySubmit = enumOnlySubmit;
+		mType = type;
 		Intent intent = new Intent(activity, Activity_OnlySubmit.class);
 		KeyGuardActivityManager.getInstance().goFoResult(activity, intent, KeyGuardActivityManager.MAIN_CODE);
 	}
@@ -106,6 +118,26 @@ public class Activity_OnlySubmit extends BaseActivity {
 					return;
 				}
 				Protocol.invite(activity, setTag(), et_nickname_text.getText().toString());
+				break;
+			case LOGISTICS:
+				switch (mType) {
+				case 0:
+					Activity_Address.logistics_Entity.setTo_where(et_nickname_text.getText().toString());
+					break;
+				case 1:
+					Activity_Address.logistics_Entity.setTo_who(et_nickname_text.getText().toString());
+					break;
+				case 2:
+					// Activity_Address.logistics_Entity.setTo_where(et_nickname_text.getText().toString());
+					break;
+				case 3:
+					Activity_Address.logistics_Entity.setPost_no(et_nickname_text.getText().toString());
+					break;
+
+				default:
+					break;
+				}
+				finish();
 				break;
 
 			default:

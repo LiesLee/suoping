@@ -3,23 +3,18 @@ package com.example.activity.more;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.NameValuePair;
-
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.activity.common.Activity_OnlySubmit;
-import com.example.activity.common.Activity_Submit;
-import com.example.activity.common.EnumOnlySubmit;
+import com.example.entity.more.Logistics_Entity;
 import com.example.keyguard.R;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.bitmap.BitmapDisplayConfig;
@@ -28,20 +23,22 @@ import com.lidroid.xutils.bitmap.callback.BitmapLoadFrom;
 import com.lidroid.xutils.bitmap.callback.DefaultBitmapLoadCallBack;
 
 /**
- * @Description 我的账号的adapter
+ * @Description 地址列表
  * @author Created by qinxianyuzou on 2014-12-25.
  */
-public class Address_Adapter extends BaseAdapter {
+public class Adapter_AddressList extends BaseAdapter {
 	private Activity activity;
 	private LayoutInflater listContainer;
 	/** 数据源 */
-	private List<NameValuePair> listData = new ArrayList<NameValuePair>();
+	private List<Logistics_Entity> listData = new ArrayList<Logistics_Entity>();
 	/** 图片加载工具 */
 	private BitmapUtils bitmapUtils;
 	/** 图片加载回调 */
 	private BitmapLoadCallBack<ImageView> bitmapLoadCallBack;
+	/** 退出标记 */
+	private long logout;
 
-	public Address_Adapter(Activity context, BitmapUtils bitmapUtils) {
+	public Adapter_AddressList(Activity context, BitmapUtils bitmapUtils) {
 		activity = context;
 		listContainer = LayoutInflater.from(activity);
 		this.bitmapUtils = bitmapUtils;
@@ -64,7 +61,7 @@ public class Address_Adapter extends BaseAdapter {
 		// ViewUtils.inject((Activity) mContext);
 	}
 
-	public void setData(List<NameValuePair> data) {
+	public void setData(List<Logistics_Entity> data) {
 		listData = data;
 		notifyDataSetChanged();
 	}
@@ -103,25 +100,9 @@ public class Address_Adapter extends BaseAdapter {
 		} else {
 			listItemView = (HolderView) convertView.getTag();
 		}
-		listItemView.tv_item_myifno_name.setText(listData.get(position).getName());
-		listItemView.tv_item_myifno_value.setText(listData.get(position).getValue());
-		listItemView.ll_item_myifno_btn.setOnClickListener(new onclick(position));
+		listItemView.tv_item_myifno_name.setText(listData.get(position).getTo_where());
+		listItemView.tv_item_myifno_value.setText(listData.get(position).getTo_who());
 		return convertView;
-	}
-
-	class onclick implements OnClickListener {
-		private int type = 1;
-
-		public onclick(int type) {
-			super();
-			this.type = type;
-		}
-
-		@Override
-		public void onClick(View v) {
-			// TODO Auto-generated method stub
-			Activity_OnlySubmit.luanch(activity, listData.get(type).getName(), EnumOnlySubmit.LOGISTICS, type);
-		}
 	}
 
 	private class HolderView {

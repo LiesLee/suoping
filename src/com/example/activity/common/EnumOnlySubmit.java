@@ -6,5 +6,7 @@ package com.example.activity.common;
  */
 public enum EnumOnlySubmit {
 	/** 邀请码 */
-	INVITE_NO;
+	INVITE_NO,
+	/** 地址 */
+	LOGISTICS;
 }

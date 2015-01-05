@@ -34,6 +34,8 @@
 -keep class org.eclipse.paho.**{*;}
 -keep class org.apache.http**{*;}
 -keep class com.lidroid.xutils.*{*;}
+-keep class com.slidingmenu.*{*;}
+-keep class cn.pedant.SweetAlert.*{*;}
 
 -keep public class * extends android.app.Service
 -keep public class * extends android.content.BroadcastReceiver

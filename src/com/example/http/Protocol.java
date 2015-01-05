@@ -169,4 +169,26 @@ public class Protocol {
 		return ConnectorManage.getInstance(context).PostHttpRequest(context, Config.INVITE, tag, requestParam,
 				ResponseEPDetail.class, null);
 	}
+
+	/**
+	 * @Description 添加地址
+	 * @author Created by qinxianyuzou on 2015-1-5.
+	 * @param context
+	 * @param tag
+	 * @param default_addr
+	 * @param to_who
+	 * @param to_where
+	 * @param post_no
+	 * @return
+	 */
+	public static long add_logistics(Context context, String tag, String default_addr, String to_who, String to_where,
+			String post_no) {
+		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
+		requestParam.add(new BasicNameValuePair("default_addr", default_addr));
+		requestParam.add(new BasicNameValuePair("to_who", to_who));
+		requestParam.add(new BasicNameValuePair("to_where", to_where));
+		requestParam.add(new BasicNameValuePair("post_no", post_no));
+		return ConnectorManage.getInstance(context).PostHttpRequest(context, Config.ADD_LOGISTICS, tag, requestParam,
+				ResponseLogistics.class, null);
+	}
 }

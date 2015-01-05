@@ -1,5 +1,7 @@
 package com.example.activity.more;
 
+import java.util.ArrayList;
+
 import org.json.JSONObject;
 
 import android.app.Activity;
@@ -13,8 +15,12 @@ import android.widget.TextView;
 import com.android.volley.VolleyError;
 import com.example.activity.common.BaseActivity;
 import com.example.activity.common.KeyGuardActivityManager;
+import com.example.entity.more.Logistics_Entity;
+import com.example.entity.respose.Code;
+import com.example.entity.respose.ResponseLogistics;
 import com.example.http.Protocol;
 import com.example.keyguard.R;
+import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -39,6 +45,8 @@ public class Activity_AddressList extends BaseActivity {
 	/** 标题 */
 	private static String mTitle = "管理收货地址";
 	private long ogisticsFlag;
+	private ArrayList<Logistics_Entity> dataList = new ArrayList<>();
+	private Adapter_AddressList adapter;
 
 	/**
 	 * @Description 不设置标题
@@ -69,6 +77,12 @@ public class Activity_AddressList extends BaseActivity {
 		setContentView(R.layout.activity_myinfo);
 		ViewUtils.inject(activity);
 		initUI();
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
 		initData();
 	}
 
@@ -86,6 +100,8 @@ public class Activity_AddressList extends BaseActivity {
 	protected void initData() {
 		// TODO Auto-generated method stub
 		ogisticsFlag = Protocol.get_logistics_list(activity, setTag());
+		adapter = new Adapter_AddressList(activity, new BitmapUtils(activity));
+		lv_shop_body.setAdapter(adapter);
 	}
 
 	@Override
@@ -108,7 +124,11 @@ public class Activity_AddressList extends BaseActivity {
 	public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
 		// TODO Auto-generated method stub
 		if (ogisticsFlag == flag) {
-
+			ResponseLogistics responseLogistics = (ResponseLogistics) response;
+			if (responseLogistics.getCode().equals(Code.CODE_SUCCESS)) {
+				dataList = responseLogistics.getData();
+				adapter.setData(dataList);
+			}
 		}
 	}
 
