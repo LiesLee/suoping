@@ -15,7 +15,12 @@ import com.android.volley.VolleyError;
 import com.example.activity.common.Activity_PublicWeb;
 import com.example.activity.common.BaseActivity;
 import com.example.activity.common.KeyGuardActivityManager;
+import com.example.entity.Update_Entity;
+import com.example.entity.respose.Code;
+import com.example.entity.respose.ResponseUpdate;
+import com.example.http.Protocol;
 import com.example.keyguard.R;
+import com.example.util.PublicUtil;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -48,6 +53,7 @@ public class Activity_about extends BaseActivity {
 	private LinearLayout ll_about_hezuo;
 	/** 标题 */
 	private static String mTitle = "关于锁屏赚";
+	private long checkeUpdateFlag;
 
 	/**
 	 * @Description 不设置标题
@@ -117,8 +123,8 @@ public class Activity_about extends BaseActivity {
 			Activity_PublicWeb.luanch(activity, "联系客服", "http://www.baidu.com");
 			break;
 		case R.id.ll_about_update:
-			// Activity_PublicWeb.luanch(activity, "创意介绍",
-			// "http://www.baidu.com");
+//			checkeUpdateFlag = Protocol.check_update(activity, setTag());
+			PublicUtil.downloadAPP(activity, "http://static.huisuoping.com/apk/hsp.apk");
 			break;
 		case R.id.ll_about_hezuo:
 			Activity_PublicWeb.luanch(activity, "市场合作", "http://www.baidu.com");
@@ -132,7 +138,15 @@ public class Activity_about extends BaseActivity {
 	@Override
 	public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
 		// TODO Auto-generated method stub
+		if (checkeUpdateFlag == flag) {
+			ResponseUpdate responseUpdate = (ResponseUpdate) response;
+			if (responseUpdate.getCode().equals(Code.CODE_SUCCESS)) {
+				Update_Entity update_Entity = responseUpdate.getData();
+				if (update_Entity.getApp_version() > PublicUtil.getVersionCode(activity)) {
 
+				}
+			}
+		}
 	}
 
 	@Override

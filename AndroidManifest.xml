@@ -67,15 +67,25 @@
             android:name="com.example.activity.more.Activity_MyDownload"
             android:label="@string/title_activity_activity__my_download" >
         </activity>
-        <activity android:name="com.example.activity.earnings.Activity_EarningsShop"></activity>
-        <activity android:name="com.example.activity.invitation.Activity_InvitationInfo"></activity>
-        <activity android:name="com.example.activity.earnings.Activity_NotActive"></activity>
-        <activity android:name="com.example.activity.common.Activity_PublicWeb"></activity>
-        <activity android:name="com.example.activity.more.Activity_AddressList"></activity>
-        <activity android:name="com.example.activity.more.Activity_MyInfoPassWord"></activity>
-        <activity android:name="com.example.activity.more.Activity_MyInfoPhone"></activity>
-        <activity android:name="com.example.activity.more.Activity_about"></activity>
-        <activity android:name="com.example.activity.common.Activity_OnlySubmit"></activity>
+        <activity android:name="com.example.activity.earnings.Activity_EarningsShop" >
+        </activity>
+        <activity android:name="com.example.activity.invitation.Activity_InvitationInfo" >
+        </activity>
+        <activity android:name="com.example.activity.earnings.Activity_NotActive" >
+        </activity>
+        <activity android:name="com.example.activity.common.Activity_PublicWeb" >
+        </activity>
+        <activity android:name="com.example.activity.more.Activity_AddressList" >
+        </activity>
+        <activity android:name="com.example.activity.more.Activity_MyInfoPassWord" >
+        </activity>
+        <activity android:name="com.example.activity.more.Activity_MyInfoPhone" >
+        </activity>
+        <activity android:name="com.example.activity.more.Activity_about" >
+        </activity>
+        <activity android:name="com.example.activity.common.Activity_OnlySubmit" >
+        </activity>
+
     </application>
 
 </manifest>

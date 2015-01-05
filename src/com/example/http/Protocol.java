@@ -11,6 +11,7 @@ import com.example.entity.respose.BaseResponse;
 import com.example.entity.respose.ResponseEPDetail;
 import com.example.entity.respose.ResponseEXProduct;
 import com.example.entity.respose.ResponseLogistics;
+import com.example.entity.respose.ResponseUpdate;
 import com.example.entity.respose.ResponseUserInfo;
 
 /**
@@ -153,6 +154,19 @@ public class Protocol {
 		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
 		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.GET_LOGISTICS_LIST, tag,
 				requestParam, ResponseLogistics.class, null);
+	}
+
+	/**
+	 * @Description 更新实体
+	 * @author Created by qinxianyuzou on 2015-1-5.
+	 * @param context
+	 * @param tag
+	 * @return
+	 */
+	public static long check_update(Context context, String tag) {
+		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
+		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.GET_LOGISTICS_LIST, tag,
+				requestParam, ResponseUpdate.class, null);
 	}
 
 	/**
