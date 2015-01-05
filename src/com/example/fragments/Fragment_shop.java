@@ -22,6 +22,7 @@ import com.example.http.Protocol;
 import com.example.keyguard.R;
 import com.example.ui.astuetz.PagerSlidingTabStrip;
 import com.example.ui.pull.RefleshListView;
+import com.example.util.LogUtil;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.bitmap.PauseOnScrollListener;
@@ -126,6 +127,7 @@ public class Fragment_shop extends BaseFragment {
 		if (flag == exproductFlag) {
 			ResponseEXProduct responseEXProduct = (ResponseEXProduct) response;
 			if (responseEXProduct.getCode() == Code.CODE_SUCCESS) {
+                LogUtil.i("========responseEXProduct============",json.toString());
 				dataList = responseEXProduct.getData();
 				adapter.setData(dataList);
 			}

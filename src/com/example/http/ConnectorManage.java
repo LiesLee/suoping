@@ -123,6 +123,12 @@ public class ConnectorManage implements HttpCallBack {
 		if (activityCallBack != null) {
 			activityCallBack.onHttpSuccess(flag, jsonString, response);
 		}
+
+        if (fragmentCallBacks.size() > 0) {
+            for (HttpCallBack callBack : fragmentCallBacks) {
+                callBack.onHttpSuccess(flag, jsonString, response);
+            }
+        }
 	}
 
 	@Override
@@ -134,5 +140,10 @@ public class ConnectorManage implements HttpCallBack {
 		if (activityCallBack != null) {
 			activityCallBack.onHttpError(flag, error);
 		}
+        if (fragmentCallBacks.size() > 0) {
+            for (HttpCallBack callBack : fragmentCallBacks) {
+                callBack.onHttpError(flag, error);
+            }
+        }
 	}
 }

@@ -129,6 +129,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 				SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.USERINFO,
 						msg.getMsg().toString());
 				startActivity(new Intent(activity, MainActivity.class));
+                this.finish();
 			} else {
 				showToast("登录失败");
 				LogUtil.i("=====login erre=====", jsonString.toString());
