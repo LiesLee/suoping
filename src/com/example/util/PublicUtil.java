@@ -246,7 +246,7 @@ public class PublicUtil {
 	}
 
 	@SuppressWarnings({ "deprecation", "rawtypes" })
-	public static void downloadAPP(final Activity activity, String url) {
+	public static void updateAPP(final Activity activity, String url) {
 		String sdDir = "";
 		boolean sdCardExist = Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED); // 判断sd卡是否存在
 		if (sdCardExist) {

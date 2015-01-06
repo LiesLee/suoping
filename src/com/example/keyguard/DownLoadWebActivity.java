@@ -34,7 +34,7 @@ public class DownLoadWebActivity extends Activity {
 		RelativeLayout mRelativeLayout = new RelativeLayout(this);
 		setContentView(mRelativeLayout);
 		UINavigationView nav = new UINavigationView(this);
-		nav.setStrTitle("鎼存梻鏁ょ拠锔藉剰");
+		nav.setStrTitle("应用详情");
 		nav.initContent(mRelativeLayout.getContext());
 		nav.setId(LL_NAV);
 		mRelativeLayout.addView(nav);

@@ -91,9 +91,9 @@ public class BaseRequest<T> implements Listener<String>, ErrorListener {
 		case Method.POST:
 		default:
 			if (requestParam.size() < 1) {
-				LogUtil.d(TAG, "PostHttpRequest:" + flag + "===>\n" + url + StringUtils.EMPTY);
+				LogUtil.d(TAG, "PostHttpRequest:" + flag + "===>" + url + StringUtils.EMPTY);
 			} else {
-				LogUtil.d(TAG, "PostHttpRequest:" + flag + "===>\n" + url + requestParam.toString());
+				LogUtil.d(TAG, "PostHttpRequest:" + flag + "===>" + url + requestParam.toString());
 			}
 			return new StringRequest(method, url, this, this) {
 
@@ -126,9 +126,9 @@ public class BaseRequest<T> implements Listener<String>, ErrorListener {
 			};
 		case Method.GET:
 			if (requestParam.size() < 1) {
-				LogUtil.d(TAG, "GetHttpRequest:" + flag + "===>\n" + url + StringUtils.EMPTY);
+				LogUtil.d(TAG, "GetHttpRequest:" + flag + "===>" + url + StringUtils.EMPTY);
 			} else {
-				LogUtil.d(TAG, "GetHttpRequest:" + flag + "===>\n" + url + requestParam.toString());
+				LogUtil.d(TAG, "GetHttpRequest:" + flag + "===>" + url + requestParam.toString());
 			}
 			Uri.Builder uriBuilder = Uri.parse(url).buildUpon();
 			if (requestParam != null) {

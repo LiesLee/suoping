@@ -165,7 +165,7 @@ public class Protocol {
 	 */
 	public static long check_update(Context context, String tag) {
 		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
-		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.GET_LOGISTICS_LIST, tag,
+		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.CHECK_UPDATE, tag,
 				requestParam, ResponseUpdate.class, null);
 	}
 
