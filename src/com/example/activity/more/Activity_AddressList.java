@@ -141,7 +141,7 @@ public class Activity_AddressList extends BaseActivity {
 	@Override
 	public String setTag() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.getClass().getSimpleName();
 	}
 
 }
