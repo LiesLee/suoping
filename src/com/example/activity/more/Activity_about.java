@@ -123,7 +123,7 @@ public class Activity_about extends BaseActivity {
 			Activity_PublicWeb.luanch(activity, "联系客服", "http://www.baidu.com");
 			break;
 		case R.id.ll_about_update:
-			 checkeUpdateFlag = Protocol.check_update(activity, setTag());
+			checkeUpdateFlag = Protocol.check_update(activity, setTag());
 			break;
 		case R.id.ll_about_hezuo:
 			Activity_PublicWeb.luanch(activity, "市场合作", "http://www.baidu.com");
@@ -142,7 +142,7 @@ public class Activity_about extends BaseActivity {
 			if (responseUpdate.getCode().equals(Code.CODE_SUCCESS)) {
 				Update_Entity update_Entity = responseUpdate.getData();
 				if (update_Entity.getApp_version() > PublicUtil.getVersionCode(activity)) {
-					PublicUtil.downloadAPP(activity, update_Entity.getDownload_url());
+					PublicUtil.updateAPP(activity, update_Entity.getDownload_url());
 				}
 			}
 		}
@@ -157,7 +157,7 @@ public class Activity_about extends BaseActivity {
 	@Override
 	public String setTag() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.getClass().getSimpleName();
 	}
 
 }
