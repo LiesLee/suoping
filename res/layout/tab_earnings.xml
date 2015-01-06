@@ -39,7 +39,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_toRightOf="@+id/iv_rmb"
-            android:text="5.44"
+            android:text="...."
             android:textColor="#FFFFFF"
             android:textSize="50sp" />
     </RelativeLayout>
@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
-                android:text="0.44"
+                android:text="...."
                 android:textColor="#000000"
                 android:textSize="23sp" />
 
@@ -93,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
-                android:text="5.44"
+                android:text="...."
                 android:textColor="#000000"
                 android:textSize="23sp" />
 

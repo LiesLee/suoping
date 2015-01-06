@@ -17,15 +17,21 @@ import com.android.volley.VolleyError;
 import com.example.activity.common.BaseActivity;
 import com.example.activity.common.KeyGuardActivityManager;
 import com.example.activity.common.ShopInterface;
+import com.example.entity.Download_APK_Install;
+import com.example.entity.ListApks;
 import com.example.fragments.Fragment_MyDownload;
 import com.example.fragments.Fragment_shop;
 import com.example.keyguard.R;
 import com.example.ui.astuetz.PagerSlidingTabStrip;
+import com.example.util.PublicUtil;
 import com.example.util.UIHelper;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Activity_MyDownload extends BaseActivity implements ShopInterface {
 
@@ -42,6 +48,10 @@ public class Activity_MyDownload extends BaseActivity implements ShopInterface {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private LinearLayout mTabsLinearLayout;
+
+    private List<Download_APK_Install> dataList = new ArrayList<Download_APK_Install>();
+
+    ListApks apks;
 
     public static void luanch(Activity act){
         Intent intent = new Intent(act, Activity_MyDownload.class);
@@ -102,7 +112,9 @@ public class Activity_MyDownload extends BaseActivity implements ShopInterface {
 
     @Override
     protected void initData() {
-
+        dataList = PublicUtil.getDownloadAppsEntity();
+        apks = new ListApks();
+        apks.setApks(dataList);
     }
 
     @Override
@@ -140,13 +152,13 @@ public class Activity_MyDownload extends BaseActivity implements ShopInterface {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return Fragment_MyDownload.newInstance("1");
+                    return Fragment_MyDownload.newInstance("1", apks);
                 case 1:
-                    return Fragment_MyDownload.newInstance("2");
+                    return Fragment_MyDownload.newInstance("2", apks);
                 case 2:
-                    return Fragment_MyDownload.newInstance("3");
+                    return Fragment_MyDownload.newInstance("3", apks);
                 default:
-                    return Fragment_MyDownload.newInstance("1");
+                    return Fragment_MyDownload.newInstance("1", apks);
             }
         }
 

@@ -9,12 +9,19 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.example.activity.common.KeyGuardApplication;
+import com.example.entity.Download_APK_Install;
 import com.example.entity.UserInfo;
 import com.google.gson.Gson;
+
+import java.io.File;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Description 公共工具类
@@ -22,6 +29,8 @@ import com.google.gson.Gson;
  */
 public class PublicUtil {
 	private final static String TAG = PublicUtil.class.getSimpleName();
+    /** 下载目录 **/
+    public final static String DOWNLOAD_APP_PATH = Environment.getExternalStorageDirectory() + File.separator + "SuoPingZhuan";
 
 	/**
 	 * @Description 短时间toast
@@ -152,7 +161,7 @@ public class PublicUtil {
 	 *            包名
 	 * @return
 	 */
-	private boolean isApkInstalled(Context context, String packagename) {
+	public static boolean isApkInstalled(Context context, String packagename) {
 		PackageManager localPackageManager = context.getPackageManager();
 		try {
 			PackageInfo localPackageInfo = localPackageManager.getPackageInfo(packagename,
@@ -170,7 +179,7 @@ public class PublicUtil {
 	 * @param context
 	 * @param apkPath
 	 */
-	private void installAPK(Context context, String apkPath) {
+	public static void installAPK(Context context, String apkPath) {
 		Intent intent = new Intent();
 		intent.setAction(Intent.ACTION_VIEW);
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -185,11 +194,86 @@ public class PublicUtil {
 	 * @param packagename
 	 *            包名
 	 */
-	private void openAPK(Context context, String packagename) {
+	public static void openAPK(Context context, String packagename) {
 		PackageManager packageManager = context.getPackageManager();
 		Intent intent = new Intent();
 		intent = packageManager.getLaunchIntentForPackage(packagename);
 		context.startActivity(intent);
 	}
+    /** 遍历文件，路径结果 List */
+    public static List<String> listFile = new ArrayList<String>();
 
+    /**
+     * 遍历文件夹搜索文件
+     * @param Path 搜索的目录
+     * @param Extension 扩展名
+     * @param IsIterative 是否进入子文件夹
+     */
+    public static void getFiles(String Path, String Extension, boolean IsIterative){
+        listFile.clear();
+        File[] files = new File(Path).listFiles();
+        if(files != null && files.length != 0){
+            for (int i = 0; i < files.length; i++) {
+                File f = files[i];
+                if (f.isFile()) {
+                    if (f.getPath().substring(f.getPath().length() - Extension.length()).equals(Extension)) //判断扩展名
+                        listFile.add(f.getPath());
+                    if (!IsIterative) break;
+                    //忽略点文件（隐藏文件/文件夹）
+                } else if (f.isDirectory() && f.getPath().indexOf("/.") == -1){
+                    getFiles(f.getPath(), Extension, IsIterative);
+                }
+            }
+        }
+    }
+
+    /**
+     * 获取所有已下载的应用并返回集合
+     * @return List<Download_APK_Install>
+     */
+    public static List<Download_APK_Install> getDownloadAppsEntity() {
+        Context ctx;
+        List<Download_APK_Install> apps = new ArrayList<>();
+        getFiles(DOWNLOAD_APP_PATH, "apk", false);
+        if (listFile.size() != 0) {
+            ctx = KeyGuardApplication.getInstance().getApplicationContext();
+            for (String path : listFile) {
+                Download_APK_Install apk = new Download_APK_Install();
+                apk.setAppIcon(getApkIcon(ctx, path));
+                apk.setAppName(getAPPName(ctx, path));
+                apk.setAppPath(path);
+                apk.setInstalled(isApkInstalled(ctx, getPackageName(ctx, path)));
+                apk.setFileSize(formatSizeM(getFileSize(path)));
+                apps.add(apk);
+            }
+            return apps;
+        } else {
+            return apps;
+        }
+    }
+
+    /**
+     * 根据路径获取文件大小
+     * @param path
+     * @return 大小 单位m
+     */
+    public static double getFileSize(String path) {
+        File f = new File(path);
+        if (f.exists() && f.isFile()) {
+            double size = f.length();
+            return size / 1024 / 1024;
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * 格式化文件大小保留两位小数并且后面带m
+     * @param size
+     * @return 字符串size 后面带 m
+     */
+    public static String formatSizeM(double size) {
+        DecimalFormat df = new DecimalFormat("#.00");
+        return String.valueOf(df.format(size)) + "m";
+    }
 }

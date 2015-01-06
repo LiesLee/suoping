@@ -1,13 +1,25 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
+             android:orientation="vertical"
              tools:context="com.example.fragments.Fragment_shop">
 
     <com.example.ui.pull.RefleshListView
         android:id="@+id/rListView"
+        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+    <Button
+        android:id="@+id/btn_clear_apk_package"
+        android:textSize="17sp"
+        android:textColor="@color/prevailing_red"
+        android:text="清理选中"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"/>
 
-</FrameLayout>
+
+
+
+</LinearLayout>

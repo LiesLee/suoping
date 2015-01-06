@@ -10,7 +10,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.entity.Download_APK_Install;
 import com.example.keyguard.R;
+import com.example.util.PublicUtil;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.bitmap.BitmapDisplayConfig;
 import com.lidroid.xutils.bitmap.callback.BitmapLoadCallBack;
@@ -24,18 +26,20 @@ import java.util.List;
  * @author Created by qinxianyuzou on 2014-12-25.
  */
 public class My_Download_Adapter extends BaseAdapter {
-	private Context mContext;
+    private String shop_type;
+    private Context mContext;
 	private LayoutInflater listContainer;
 	/** 数据源 */
-	private List<String> listData = new ArrayList<String>();
+	private List<Download_APK_Install> listData = new ArrayList<Download_APK_Install>();
 	/** 图片加载工具 */
 	private BitmapUtils bitmapUtils;
 	/** 图片加载回调 */
 	private BitmapLoadCallBack<ImageView> bitmapLoadCallBack;
 
-	public My_Download_Adapter(Context context, BitmapUtils bitmapUtils) {
+    public My_Download_Adapter(Context context, BitmapUtils bitmapUtils, String shop_type) {
 		mContext = context;
 		listContainer = LayoutInflater.from(mContext);
+        this.shop_type = shop_type;
 		this.bitmapUtils = bitmapUtils;
 		bitmapLoadCallBack = new DefaultBitmapLoadCallBack<ImageView>() {
 
@@ -56,10 +60,14 @@ public class My_Download_Adapter extends BaseAdapter {
 		// ViewUtils.inject((Activity) mContext);
 	}
 
-	public void setData(List<String> data) {
+	public void setData(List<Download_APK_Install> data) {
 		listData = data;
 		notifyDataSetChanged();
 	}
+
+    public List<Download_APK_Install> getData() {
+        return listData;
+    }
 
 	@Override
 	public int getCount() {
@@ -78,33 +86,75 @@ public class My_Download_Adapter extends BaseAdapter {
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
 		// 实例化viewholader
 		final HolderView listItemView;
 
 		if (convertView == null) {
 			listItemView = new HolderView();
-			//
 			convertView = listContainer.inflate(R.layout.item_my_download, null);
-			listItemView.iv_item_shop_icon = (ImageView) convertView.findViewById(R.id.iv_item_shop_icon);
-			listItemView.tv_item_shop_name = (TextView) convertView.findViewById(R.id.tv_item_shop_name);
-			listItemView.tv_item_shop_money = (TextView) convertView.findViewById(R.id.tv_item_shop_money);
-			//
+            listItemView.download_app_icon = (ImageView) convertView.findViewById(R.id.download_app_icon);
+            listItemView.download_app_name = (TextView) convertView.findViewById(R.id.download_app_name);
+            listItemView.download_app_info = (TextView) convertView.findViewById(R.id.download_app_info);
+            listItemView.tv_install_status = (TextView) convertView.findViewById(R.id.tv_install_status);
+            listItemView.btn_install_app = (ImageView) convertView.findViewById(R.id.btn_install_app);
+            listItemView.btn_choose_app = (ImageView) convertView.findViewById(R.id.btn_choose_app);
 			// 设置标记
 			convertView.setTag(listItemView);
 		} else {
 			listItemView = (HolderView) convertView.getTag();
 		}
-		listItemView.tv_item_shop_name.setText("xxxxx");
-		//listItemView.tv_item_shop_money.setText("￥0.50");
-		bitmapUtils.display(listItemView.iv_item_shop_icon, "", bitmapLoadCallBack);
-		return convertView;
-	}
+
+        if (listData != null && listData.size() != 0) {
+            final Download_APK_Install apk = listData.get(position);
+            listItemView.download_app_icon.setImageDrawable(apk.getAppIcon());
+            listItemView.download_app_name.setText(apk.getAppName());
+            //下载管理
+            if(shop_type.equals("2")){
+                listItemView.download_app_info.setText("安装");
+                listItemView.tv_install_status.setVisibility(View.GONE);
+                listItemView.btn_install_app.setVisibility(View.VISIBLE);
+                listItemView.btn_choose_app.setVisibility(View.GONE);
+                listItemView.btn_install_app.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        PublicUtil.installAPK(mContext, apk.getAppPath());
+                    }
+                });
+            //安装包管理
+            }else if(shop_type.equals("3")){
+                listItemView.download_app_info.setText(apk.getFileSize());
+                listItemView.tv_install_status.setVisibility(View.VISIBLE);
+                if(apk.isInstalled()){
+                    listItemView.tv_install_status.setText("已安装");
+                }else{
+                    listItemView.tv_install_status.setText("未安装");
+                }
+
+                listItemView.btn_choose_app.setVisibility(View.VISIBLE);
+                listItemView.btn_install_app.setVisibility(View.GONE);
+
+                listItemView.btn_choose_app.setOnClickListener(new View.OnClickListener() {
+                    boolean isChoose = false;
+                    @Override
+                    public void onClick(View v) {
+                        isChoose = !isChoose;
+                        ((ImageView)v).setImageResource(isChoose ? R.drawable.apk_choose_ative : R.drawable.apk_choose_nomal);
+                        listData.get(position).setChoose(isChoose);
+                    }
+                });
+            }
+        }
+        return convertView;
+    }
 
 	private class HolderView {
-		private ImageView iv_item_shop_icon;
-		private TextView tv_item_shop_name;
-		private TextView tv_item_shop_money;
+		private ImageView download_app_icon;
+		private TextView download_app_name;
+		private TextView download_app_info;
+		private TextView tv_install_status;
+        private ImageView btn_install_app;
+        private ImageView btn_choose_app;
 	}
 
 }
