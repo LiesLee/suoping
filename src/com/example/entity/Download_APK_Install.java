@@ -9,7 +9,9 @@ import java.io.Serializable;
  * Email: LiesLee@foxmail.com
  */
 public class Download_APK_Install implements Serializable{
-    /** app名字 **/
+    /**  */
+	private static final long serialVersionUID = 3923460763119137073L;
+	/** app名字 **/
     private String appName;
     /** app图标 **/
     private Drawable appIcon;

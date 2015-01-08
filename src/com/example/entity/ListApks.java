@@ -8,7 +8,9 @@ import java.util.List;
  * Email: LiesLee@foxmail.com
  */
 public class ListApks implements Serializable {
-    private List<Download_APK_Install> apks;
+    /**  */
+	private static final long serialVersionUID = 8181217091431470209L;
+	private List<Download_APK_Install> apks;
 
     public List<Download_APK_Install> getApks() {
         return apks;

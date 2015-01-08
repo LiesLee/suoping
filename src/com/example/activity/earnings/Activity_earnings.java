@@ -79,6 +79,7 @@ public class Activity_earnings extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tab_earnings);
 		ViewUtils.inject(activity);
+		LogUtil.d("onCreate", "onCreate");
 		initUI();
 		initData();
 
