@@ -12,7 +12,7 @@ public class Download_APK_Install implements Serializable{
     /** app名字 **/
     private String appName;
     /** app图标 **/
-    private Drawable appIcon;
+    //private Drawable appIcon;
     /** 是否已安装 **/
     private boolean isInstalled;
     /** 是否选中（用于删除） **/
@@ -40,14 +40,14 @@ public class Download_APK_Install implements Serializable{
         this.appName = appName;
     }
 
-    public Drawable getAppIcon() {
+    /*public Drawable getAppIcon() {
         return appIcon;
     }
 
     public void setAppIcon(Drawable appIcon) {
         this.appIcon = appIcon;
     }
-
+*/
     public boolean isInstalled() {
         return isInstalled;
     }
@@ -84,7 +84,7 @@ public class Download_APK_Install implements Serializable{
     public String toString() {
         return "Download_APK_Install{" +
                 "appName='" + appName + '\'' +
-                ", appIcon=" + appIcon +
+               /* ", appIcon=" + appIcon +*/
                 ", isInstalled=" + isInstalled +
                 ", isChoose=" + isChoose +
                 ", appInfo='" + appInfo + '\'' +

@@ -107,7 +107,7 @@ public class My_Download_Adapter extends BaseAdapter {
 
         if (listData != null && listData.size() != 0) {
             final Download_APK_Install apk = listData.get(position);
-            listItemView.download_app_icon.setImageDrawable(apk.getAppIcon());
+            listItemView.download_app_icon.setImageDrawable(PublicUtil.getApkIcon(mContext, apk.getAppPath()));
             listItemView.download_app_name.setText(apk.getAppName());
             //下载管理
             if(shop_type.equals("2")){

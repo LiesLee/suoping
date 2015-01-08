@@ -409,7 +409,7 @@ public class PublicUtil {
 			ctx = KeyGuardApplication.getInstance().getApplicationContext();
 			for (String path : listFile) {
 				Download_APK_Install apk = new Download_APK_Install();
-				apk.setAppIcon(getApkIcon(ctx, path));
+//				apk.setAppIcon(getApkIcon(ctx, path));
 				apk.setAppName(getAPPName(ctx, path));
 				apk.setAppPath(path);
 				apk.setInstalled(isApkInstalled(ctx, getPackageName(ctx, path)));
