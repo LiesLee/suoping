@@ -34,12 +34,13 @@
             android:textColor="#000000" />
     </LinearLayout>
 
-    <ProgressBar
+    <com.daimajia.numberprogressbar.NumberProgressBar
         android:id="@+id/content_view_progress"
-        style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:max="100" />
+
+
 
 </LinearLayout>
