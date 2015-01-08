@@ -151,30 +151,30 @@ public class Activity_MyDownload extends BaseActivity implements ShopInterface {
         @Override
         public Fragment getItem(int position) {
             switch (position) {
+                /*case 0:
+                    return Fragment_MyDownload.newInstance("1", apks);*/
                 case 0:
-                    return Fragment_MyDownload.newInstance("1", apks);
-                case 1:
                     return Fragment_MyDownload.newInstance("2", apks);
-                case 2:
+                case 1:
                     return Fragment_MyDownload.newInstance("3", apks);
                 default:
-                    return Fragment_MyDownload.newInstance("1", apks);
+                    return Fragment_MyDownload.newInstance("2", apks);
             }
         }
 
         @Override
         public int getCount() {
-            return 3;
+            return 2;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
+/*                case 0:
+                    return "下载";*/
                 case 0:
-                    return "下载";
-                case 1:
                     return "下载管理";
-                case 2:
+                case 1:
                     return "安装包管理";
             }
             return null;
