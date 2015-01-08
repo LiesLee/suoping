@@ -13,6 +13,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import com.android.volley.VolleyError;
 import com.example.activity.common.ShopInterface;
 import com.example.activity.shop.Activity_ShopInfo;
+import com.example.activity.shop.Activity_ShopInfoWeb;
 import com.example.activity.shop.Shop_Adapter;
 import com.example.entity.respose.Code;
 import com.example.entity.respose.ResponseEXProduct;
@@ -104,7 +105,7 @@ public class Fragment_shop extends BaseFragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				// TODO Auto-generated method stub
-				Activity_ShopInfo
+				Activity_ShopInfoWeb
 						.luanch(activity, dataList.get(position).getTitle(), dataList.get(position).getEp_id());
 			}
 		});

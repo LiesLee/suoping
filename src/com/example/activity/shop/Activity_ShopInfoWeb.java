@@ -1,4 +1,4 @@
-package com.example.activity.common;
+package com.example.activity.shop;
 
 import org.json.JSONObject;
 
@@ -19,10 +19,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.example.activity.more.Activity_MyInfo;
-import com.example.activity.shop.Activity_ShopInfoWeb;
+import com.example.activity.common.BaseActivity;
+import com.example.activity.common.KeyGuardActivityManager;
+import com.example.entity.respose.BaseResponse;
 import com.example.entity.respose.Code;
-import com.example.entity.respose.ResponseDownAPP;
 import com.example.http.Protocol;
 import com.example.keyguard.R;
 import com.example.util.PublicUtil;
@@ -34,7 +34,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
  * @Description 下载web页
  * @author Created by qinxianyuzou on 2014-12-30.
  */
-public class Activity_DownloadWeb extends BaseActivity {
+public class Activity_ShopInfoWeb extends BaseActivity {
 
 	/** 标题栏 */
 	@ViewInject(R.id.tv_public_top_title)
@@ -50,8 +50,7 @@ public class Activity_DownloadWeb extends BaseActivity {
 	private WebView wv_public_web;
 	private static String mTitle = "";
 	private static String mId = "";
-
-	private long downFlag;
+	private long exchange_productFalg;
 
 	public static void luanch(Activity activity, String title, String id) {
 		mTitle = title;
@@ -76,28 +75,27 @@ public class Activity_DownloadWeb extends BaseActivity {
 		tv_public_top_title.setText(mTitle);
 		rl_public_back.setVisibility(View.VISIBLE);
 		rl_public_back.setOnClickListener(this);
-		but_down_web.setText("立即下载");
+		but_down_web.setText("立即兑换");
 	}
 
 	@Override
 	protected void initData() {
 		// TODO Auto-generated method stub
 		setWebView();
-		String urlString = "http://client.duowanka.com/wget_earn_detail{eaid=" + mId + "}";
+		String urlString = "http://client.duowanka.com/wget_ep_detail{eaid=" + mId + "}";
 		wv_public_web.loadUrl(urlString);
 	}
 
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-
 		switch (v.getId()) {
 		case R.id.rl_public_back:
 			finish();
 			break;
 		case R.id.but_down_web:
 			UIHelper.showMsgProgressDialog(activity, "正在加载...");
-			Protocol.get_earn_downloadurl(activity, setTag(), mId);
+			exchange_productFalg = Protocol.exchange_product(activity, setTag(), mId);
 			break;
 
 		default:
@@ -108,11 +106,13 @@ public class Activity_DownloadWeb extends BaseActivity {
 	@Override
 	public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
 		// TODO Auto-generated method stub
-		if (flag == downFlag) {
-			UIHelper.cancelProgressDialog();
-			ResponseDownAPP responseDownAPP = (ResponseDownAPP) response;
-			if (responseDownAPP.getCode().equals(Code.CODE_SUCCESS)) {
-				PublicUtil.downloadAPP(activity, responseDownAPP.getData().getDownload_url());
+		if (flag == exchange_productFalg) {
+			BaseResponse baseResponse = (BaseResponse) response;
+			if (baseResponse.getCode() == Code.CODE_SUCCESS) {
+				showToast(baseResponse.getMsg());
+				finish();
+			} else {
+				showToast(baseResponse.getMsg());
 			}
 		}
 	}
@@ -126,7 +126,7 @@ public class Activity_DownloadWeb extends BaseActivity {
 	@Override
 	public String setTag() {
 		// TODO Auto-generated method stub
-		return this.getClass().getSimpleName();
+		return null;
 	}
 
 	/**

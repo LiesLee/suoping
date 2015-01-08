@@ -8,6 +8,7 @@ import org.apache.http.message.BasicNameValuePair;
 import android.content.Context;
 
 import com.example.entity.respose.BaseResponse;
+import com.example.entity.respose.ResponseDownAPP;
 import com.example.entity.respose.ResponseEPDetail;
 import com.example.entity.respose.ResponseEXProduct;
 import com.example.entity.respose.ResponseLogistics;
@@ -165,8 +166,8 @@ public class Protocol {
 	 */
 	public static long check_update(Context context, String tag) {
 		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
-		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.CHECK_UPDATE, tag,
-				requestParam, ResponseUpdate.class, null);
+		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.CHECK_UPDATE, tag, requestParam,
+				ResponseUpdate.class, null);
 	}
 
 	/**
@@ -204,5 +205,35 @@ public class Protocol {
 		requestParam.add(new BasicNameValuePair("post_no", post_no));
 		return ConnectorManage.getInstance(context).PostHttpRequest(context, Config.ADD_LOGISTICS, tag, requestParam,
 				ResponseLogistics.class, null);
+	}
+
+	/**
+	 * @Description 下载APP
+	 * @author Created by qinxianyuzou on 2015-1-8.
+	 * @param context
+	 * @param tag
+	 * @param eaid
+	 * @return
+	 */
+	public static long get_earn_downloadurl(Context context, String tag, String eaid) {
+		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
+		requestParam.add(new BasicNameValuePair("eaid", eaid));
+		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.GET_EARN_DOWNLOADURL, tag,
+				requestParam, ResponseDownAPP.class, null);
+	}
+
+	/**
+	 * @Description
+	 * @author Created by qinxianyuzou on 2015-1-8.
+	 * @param context
+	 * @param tag
+	 * @param eaid
+	 * @return
+	 */
+	public static long lock_earn(Context context, String tag, String code, String data) {
+		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
+		requestParam.add(new BasicNameValuePair("code", code));
+		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.LOCK_EARN, tag, requestParam,
+				ResponseDownAPP.class, null);
 	}
 }
