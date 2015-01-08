@@ -76,7 +76,7 @@ public class Activity_MyInfo extends BaseActivity {
 		// dataList.add(new BasicNameValuePair("手机号", "159*****320"));
 		dataList.add(new BasicNameValuePair("邀请码", "未填写，立奖1元"));
 		dataList.add(new BasicNameValuePair("性别", "男"));
-		// dataList.add(new BasicNameValuePair("生日", "1997年12月"));
+		dataList.add(new BasicNameValuePair("生日", "1997年12月"));
 		// dataList.add(new BasicNameValuePair("账户状态", "正常"));
 		// dataList.add(new BasicNameValuePair("修改密码", ""));
 		dataList.add(new BasicNameValuePair("退出登录", ""));

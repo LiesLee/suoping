@@ -225,6 +225,7 @@ public class PublicUtil {
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		intent.setDataAndType(Uri.parse("file://" + apkPath), "application/vnd.android.package-archive");
 		context.startActivity(intent);
+//		PackageManager pManager=context.getPackageManager();
 	}
 
 	/**

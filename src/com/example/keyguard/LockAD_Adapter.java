@@ -59,24 +59,22 @@ public class LockAD_Adapter extends BaseAdapter {
 		activity = context;
 		listContainer = LayoutInflater.from(activity);
 		this.bitmapUtils = bitmapUtils;
-		// bitmapLoadCallBack = new DefaultBitmapLoadCallBack<ImageView>() {
-		//
-		// @Override
-		// public void onLoadFailed(ImageView container, String uri, Drawable
-		// drawable) {
-		// // TODO Auto-generated method stub
-		// super.onLoadFailed(container, uri, drawable);
-		// container.setImageResource(R.drawable.item_icon);
-		// }
-		//
-		// @Override
-		// public void onLoadCompleted(ImageView container, String uri, Bitmap
-		// bitmap, BitmapDisplayConfig config,
-		// BitmapLoadFrom from) {
-		// // TODO Auto-generated method stub
-		// super.onLoadCompleted(container, uri, bitmap, config, from);
-		// }
-		// };
+		bitmapLoadCallBack = new DefaultBitmapLoadCallBack<ImageView>() {
+
+			@Override
+			public void onLoadFailed(ImageView container, String uri, Drawable drawable) {
+				// TODO Auto-generated method stub
+				super.onLoadFailed(container, uri, drawable);
+				container.setImageResource(R.drawable.launch_bg);
+			}
+
+			@Override
+			public void onLoadCompleted(ImageView container, String uri, Bitmap bitmap, BitmapDisplayConfig config,
+					BitmapLoadFrom from) {
+				// TODO Auto-generated method stub
+				super.onLoadCompleted(container, uri, bitmap, config, from);
+			}
+		};
 		// ViewUtils.inject((Activity) mContext);
 	}
 
@@ -117,7 +115,7 @@ public class LockAD_Adapter extends BaseAdapter {
 		} else {
 			listItemView = (HolderView) convertView.getTag();
 		}
-		bitmapUtils.display(listItemView.iv_lock_img, listData.get(position).getHp_url());
+		bitmapUtils.display(listItemView.iv_lock_img, listData.get(position).getHp_url(), bitmapLoadCallBack);
 		return convertView;
 	}
 

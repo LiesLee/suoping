@@ -1,12 +1,18 @@
 package com.example.activity.more;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.http.Protocol;
 import com.example.keyguard.R;
+import com.example.util.PublicUtil;
 
 /**
  * @Description 日期输入框
@@ -16,6 +22,7 @@ public class DialogDate extends Dialog implements android.view.View.OnClickListe
 	private Context mContext;
 	private EditText et_dialog_date_year;
 	private EditText et_dialog_date_month;
+	private EditText et_dialog_date_day;
 
 	public DialogDate(Context context) {
 		super(context);
@@ -36,8 +43,9 @@ public class DialogDate extends Dialog implements android.view.View.OnClickListe
 		setContentView(R.layout.dialog_date);
 		findViewById(R.id.but__dialog_date_submit).setOnClickListener(this);
 		findViewById(R.id.but__dialog_date_cancel).setOnClickListener(this);
-		et_dialog_date_year=(EditText) findViewById(R.id.et_dialog_date_year);
-		et_dialog_date_month=(EditText) findViewById(R.id.et_dialog_date_month);
+		et_dialog_date_year = (EditText) findViewById(R.id.et_dialog_date_year);
+		et_dialog_date_month = (EditText) findViewById(R.id.et_dialog_date_month);
+		et_dialog_date_day = (EditText) findViewById(R.id.et_dialog_date_day);
 	}
 
 	@Override
@@ -45,8 +53,25 @@ public class DialogDate extends Dialog implements android.view.View.OnClickListe
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.but__dialog_date_submit:
-			et_dialog_date_year.getText().toString();
-			et_dialog_date_month.getText().toString();
+			int year = Integer.parseInt(et_dialog_date_year.getText().toString());
+			int month = Integer.parseInt(et_dialog_date_month.getText().toString());
+			int day = Integer.parseInt(et_dialog_date_day.getText().toString());
+			if (1900 > year || year > Calendar.getInstance().get(Calendar.YEAR)) {
+				PublicUtil.showToast(mContext, "请输入正确年份");
+				return;
+			}
+			if (1 > month || month > 12) {
+				PublicUtil.showToast(mContext, "请输入正确月份");
+				return;
+			}
+			if (1 > day || month == 2 ? (((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) ? (day > 29)
+					: (day > 28))
+					: (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) ? (day > 31)
+							: (day > 30)) {
+				PublicUtil.showToast(mContext, "请输入正确日期");
+				return;
+			}
+			Protocol.edit_birthday(mContext, mContext.getClass().getSimpleName(), year + "/" + month + "/" + day);
 			dismiss();
 			break;
 		case R.id.but__dialog_date_cancel:
@@ -57,5 +82,4 @@ public class DialogDate extends Dialog implements android.view.View.OnClickListe
 			break;
 		}
 	}
-
 }

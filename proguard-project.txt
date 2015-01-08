@@ -37,6 +37,11 @@
 -keep class com.slidingmenu.*{*;}
 -keep class cn.pedant.SweetAlert.*{*;}
 
+-dontwarn net.youmi.android.**
+-keep class net.youmi.android.** {
+    *;
+}
+
 -keep public class * extends android.app.Service
 -keep public class * extends android.content.BroadcastReceiver
 -keep class com.tencent.android.tpush.**  {* ;}

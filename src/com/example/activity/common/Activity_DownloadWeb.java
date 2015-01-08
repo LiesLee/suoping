@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings;
+import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
@@ -19,12 +20,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.example.activity.more.Activity_MyInfo;
-import com.example.activity.shop.Activity_ShopInfoWeb;
 import com.example.entity.respose.Code;
 import com.example.entity.respose.ResponseDownAPP;
 import com.example.http.Protocol;
 import com.example.keyguard.R;
+import com.example.util.LogUtil;
 import com.example.util.PublicUtil;
 import com.example.util.UIHelper;
 import com.lidroid.xutils.ViewUtils;
@@ -48,15 +48,21 @@ public class Activity_DownloadWeb extends BaseActivity {
 	/** web控件 */
 	@ViewInject(R.id.wv_public_web)
 	private WebView wv_public_web;
-	private static String mTitle = "";
+	private static String mTitle = "应用详情";
 	private static String mId = "";
 
 	private long downFlag;
 
+	public static void luanch(Activity activity, String id) {
+		mId = id;
+		Intent intent = new Intent(activity, Activity_DownloadWeb.class);
+		KeyGuardActivityManager.getInstance().goFoResult(activity, intent, KeyGuardActivityManager.MAIN_CODE);
+	}
+
 	public static void luanch(Activity activity, String title, String id) {
 		mTitle = title;
 		mId = id;
-		Intent intent = new Intent(activity, Activity_ShopInfoWeb.class);
+		Intent intent = new Intent(activity, Activity_DownloadWeb.class);
 		KeyGuardActivityManager.getInstance().goFoResult(activity, intent, KeyGuardActivityManager.MAIN_CODE);
 	}
 
@@ -76,6 +82,7 @@ public class Activity_DownloadWeb extends BaseActivity {
 		tv_public_top_title.setText(mTitle);
 		rl_public_back.setVisibility(View.VISIBLE);
 		rl_public_back.setOnClickListener(this);
+		but_down_web.setOnClickListener(this);
 		but_down_web.setText("立即下载");
 	}
 
@@ -83,7 +90,8 @@ public class Activity_DownloadWeb extends BaseActivity {
 	protected void initData() {
 		// TODO Auto-generated method stub
 		setWebView();
-		String urlString = "http://client.duowanka.com/wget_earn_detail{eaid=" + mId + "}";
+		String urlString = "http://client.duowanka.com/wget_earn_detail?eaid=" + mId;
+		LogUtil.d(setTag(), urlString);
 		wv_public_web.loadUrl(urlString);
 	}
 
@@ -154,6 +162,9 @@ public class Activity_DownloadWeb extends BaseActivity {
 		settings.setCacheMode(WebSettings.LOAD_DEFAULT); // 默认使用缓存
 		settings.setAppCacheMaxSize(8 * 1024 * 1024); // 缓存最多可以有8M
 		settings.setAllowFileAccess(true); // 可以读取文件缓存(manifest生效)
+		//
+		settings.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
+		settings.setLoadWithOverviewMode(true);
 	}
 
 	/**
@@ -165,6 +176,7 @@ public class Activity_DownloadWeb extends BaseActivity {
 		public boolean shouldOverrideUrlLoading(WebView view, String url) {
 			Log.d("shouldOverrideUrlLoading", url);
 			if (PublicUtil.isNetworkAvailable(activity)) {
+				UIHelper.showMsgProgressDialog(activity, "");
 				view.loadUrl(url);
 				return true;
 			} else {
@@ -186,6 +198,7 @@ public class Activity_DownloadWeb extends BaseActivity {
 
 		@Override
 		public void onPageFinished(WebView view, String url) {
+			UIHelper.cancelProgressDialog();
 			super.onPageFinished(view, url);
 		}
 
