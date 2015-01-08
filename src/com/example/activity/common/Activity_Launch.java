@@ -1,5 +1,8 @@
 package com.example.activity.common;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONObject;
 
 import android.content.Intent;
@@ -13,6 +16,10 @@ import android.widget.ImageView;
 import com.android.volley.VolleyError;
 import com.example.activity.reg.Activity_Reg;
 import com.example.activity.reg.LoginActivity;
+import com.example.entity.LockADList_Entity;
+import com.example.entity.respose.Code;
+import com.example.entity.respose.ResponseLockADList;
+import com.example.http.Protocol;
 import com.example.keyguard.MainActivity;
 import com.example.keyguard.R;
 import com.example.util.SharedPreferenceUtil;
@@ -26,6 +33,8 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 public class Activity_Launch extends BaseActivity implements AnimationListener {
 	@ViewInject(R.id.iv_launch_ad)
 	private ImageView iv_launch_ad;
+	private long getearnlistFlag;
+	public static ArrayList<LockADList_Entity> lockADList_Entities = new ArrayList<>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +49,12 @@ public class Activity_Launch extends BaseActivity implements AnimationListener {
 	@Override
 	public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
 		// TODO Auto-generated method stub
-
+		if (getearnlistFlag == flag) {
+			ResponseLockADList msgInfo = (ResponseLockADList) response;
+			if (msgInfo.getCode().equals(Code.CODE_SUCCESS)) {
+				lockADList_Entities = msgInfo.getData();
+			}
+		}
 	}
 
 	@Override
@@ -61,12 +75,13 @@ public class Activity_Launch extends BaseActivity implements AnimationListener {
 	@Override
 	protected void initData() {
 		// TODO Auto-generated method stub
+		getearnlistFlag = Protocol.get_earn_list(activity, setTag());
 	}
 
 	@Override
 	public String setTag() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.getClass().getSimpleName();
 	}
 
 	@Override

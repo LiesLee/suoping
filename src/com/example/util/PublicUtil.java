@@ -8,6 +8,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -112,6 +113,9 @@ public class PublicUtil {
 		PackageInfo info = pm.getPackageArchiveInfo(apkPath, PackageManager.GET_ACTIVITIES);
 		if (info != null) {
 			ApplicationInfo appInfo = info.applicationInfo;
+			appInfo.sourceDir = apkPath;
+			appInfo.publicSourceDir = apkPath;
+			// ActivityInfo appInfo = info.activities[0];
 			// 软件名
 			String label = appInfo.loadLabel(pm).toString();
 			try {
@@ -288,7 +292,8 @@ public class PublicUtil {
 
 	@SuppressWarnings({ "deprecation", "rawtypes" })
 	public static void updateAPP(final Activity activity, String url) {
-		final String downFile = DOWNLOAD_APP_PATH;
+		String apkName[] = url.split("/");
+		final String downFile = DOWNLOAD_APP_PATH + "/" + apkName[apkName.length - 1];
 		HttpUtils http = new HttpUtils();
 		final Notification mNotification;
 		final NotificationManager mNotificationManager;
@@ -343,7 +348,8 @@ public class PublicUtil {
 
 	@SuppressWarnings({ "deprecation", "rawtypes" })
 	public static void downloadAPP(final Activity activity, String url) {
-		final String downFile = DOWNLOAD_APP_PATH;
+		String apkName[] = url.split("\\");
+		final String downFile = DOWNLOAD_APP_PATH + "/" + apkName[apkName.length - 1];
 		HttpUtils http = new HttpUtils();
 		final Notification mNotification;
 		final NotificationManager mNotificationManager;
@@ -404,7 +410,7 @@ public class PublicUtil {
 	public static List<Download_APK_Install> getDownloadAppsEntity() {
 		Context ctx;
 		List<Download_APK_Install> apps = new ArrayList<>();
-		getFiles(DOWNLOAD_APP_PATH, "apk", false);
+		getFiles(DOWNLOAD_APP_PATH, "apk", true);
 		if (listFile.size() != 0) {
 			ctx = KeyGuardApplication.getInstance().getApplicationContext();
 			for (String path : listFile) {

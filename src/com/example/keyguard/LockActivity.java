@@ -23,7 +23,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.activity.common.Activity_Launch;
+import com.example.http.Protocol;
 import com.example.keyguard.CoverPlateView.Listener;
+import com.lidroid.xutils.BitmapUtils;
 
 @SuppressLint("ClickableViewAccessibility")
 public class LockActivity extends Activity {
@@ -85,10 +88,15 @@ public class LockActivity extends Activity {
 		listCount = 10;
 		currentRow = 0;
 		mListView.setVerticalScrollBarEnabled(false);
-		IMGAdapter adapter = new IMGAdapter(this, getMap(), R.layout.scroll_item, new String[] { "Image" },
-				new int[] { R.id.id_title });
-		adapter.setlineWidth(screenWidth - image_slide_rightMargin - image_slide_leftMargin);
-		adapter.setlineHeight((screenHeight - (image_slide_bottomMargin - image_slide_width) * 2) * 1);
+		// IMGAdapter adapter = new IMGAdapter(this, getMap(),
+		// R.layout.scroll_item, new String[] { "Image" },
+		// new int[] { R.id.id_title });
+		// adapter.setlineWidth(screenWidth - image_slide_rightMargin -
+		// image_slide_leftMargin);
+		// adapter.setlineHeight((screenHeight - (image_slide_bottomMargin -
+		// image_slide_width) * 2) * 1);
+		LockAD_Adapter adapter = new LockAD_Adapter(this, new BitmapUtils(this));
+		adapter.setData(Activity_Launch.lockADList_Entities);
 		mListView.setSmoothScrollbarEnabled(true);
 		mListView.setAdapter(adapter);
 		mRelativeLayout.addView(mListView, image_Vertical);
@@ -116,22 +124,23 @@ public class LockActivity extends Activity {
 			}
 		});
 
-//		Button mBtnMsgEvent2 = null;
-//		mBtnMsgEvent2 = new Button(this);
-//		mBtnMsgEvent2.setText("LockActivity");
-//		mBtnMsgEvent2.setOnClickListener(new OnClickListener() {
-//			public void onClick(View v) {
-//				// TODO Auto-generated method stub
-//				// loginQQ("1103513011");
-//				Toast.makeText(LockActivity.this, "GO to LockActivity!", Toast.LENGTH_SHORT).show();
-//				// Intent intent = new Intent(LockScreen.this,
-//				// MainActivity.class);
-//				// startActivity(intent);
-//
-//				imageView_slide.setImageResource(R.drawable.lock_slide_icon_normal_no_quick_launcher);
-//			}
-//		});
-//		mRelativeLayout.addView(mBtnMsgEvent2);
+		// Button mBtnMsgEvent2 = null;
+		// mBtnMsgEvent2 = new Button(this);
+		// mBtnMsgEvent2.setText("LockActivity");
+		// mBtnMsgEvent2.setOnClickListener(new OnClickListener() {
+		// public void onClick(View v) {
+		// // TODO Auto-generated method stub
+		// // loginQQ("1103513011");
+		// Toast.makeText(LockActivity.this, "GO to LockActivity!",
+		// Toast.LENGTH_SHORT).show();
+		// // Intent intent = new Intent(LockScreen.this,
+		// // MainActivity.class);
+		// // startActivity(intent);
+		//
+		// imageView_slide.setImageResource(R.drawable.lock_slide_icon_normal_no_quick_launcher);
+		// }
+		// });
+		// mRelativeLayout.addView(mBtnMsgEvent2);
 
 		ImageView imageView_download;
 		imageView_download = new ImageView(this);
@@ -366,14 +375,16 @@ public class LockActivity extends Activity {
 						 * bundle.putBoolean("IsClose", true);
 						 * intent.putExtras(bundle); startActivity(intent);
 						 */
-						/*if (MainActivity.instance != null) {
-							MainActivity.instance.finish();
-						}*/
+						/*
+						 * if (MainActivity.instance != null) {
+						 * MainActivity.instance.finish(); }
+						 */
 						if (DownLoadWebActivity.instance != null) {
 							DownLoadWebActivity.instance.finish();
 						}
 						if (LockActivity.instance != null) {
 							LockActivity.instance.finish();
+							Protocol.lock_earn(LockActivity.this, this.getClass().getSimpleName());
 						}
 					}
 

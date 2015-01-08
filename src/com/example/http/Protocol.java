@@ -11,9 +11,11 @@ import com.example.entity.respose.BaseResponse;
 import com.example.entity.respose.ResponseDownAPP;
 import com.example.entity.respose.ResponseEPDetail;
 import com.example.entity.respose.ResponseEXProduct;
+import com.example.entity.respose.ResponseLockADList;
 import com.example.entity.respose.ResponseLogistics;
 import com.example.entity.respose.ResponseUpdate;
 import com.example.entity.respose.ResponseUserInfo;
+import com.example.util.StringUtils;
 
 /**
  * @Description 接口类
@@ -223,17 +225,69 @@ public class Protocol {
 	}
 
 	/**
+	 * @Description 解锁
+	 * @author Created by qinxianyuzou on 2015-1-8.
+	 * @param context
+	 * @param tag
+	 * @param code
+	 *            000000
+	 * @param data
+	 *            编辑性别传0或1，编辑生日传日期2015/01/008
+	 * @return
+	 */
+	public static long lock_earn(Context context, String tag) {
+		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
+		requestParam.add(new BasicNameValuePair("code", "000000"));
+		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.LOCK_EARN, tag, requestParam,
+				ResponseDownAPP.class, null);
+	}
+
+	/**
 	 * @Description
 	 * @author Created by qinxianyuzou on 2015-1-8.
 	 * @param context
 	 * @param tag
-	 * @param eaid
+	 * @param data
+	 *            编辑性别传0或1
 	 * @return
 	 */
-	public static long lock_earn(Context context, String tag, String code, String data) {
+	public static long edit_sex(Context context, String tag, int data) {
 		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
-		requestParam.add(new BasicNameValuePair("code", code));
+		requestParam.add(new BasicNameValuePair("code", "000001"));
+		requestParam.add(new BasicNameValuePair("data", data + ""));
 		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.LOCK_EARN, tag, requestParam,
 				ResponseDownAPP.class, null);
+	}
+
+	/**
+	 * @Description
+	 * @author Created by qinxianyuzou on 2015-1-8.
+	 * @param context
+	 * @param tag
+	 * @param data
+	 *            编辑生日传日期2015/01/008
+	 * @return
+	 */
+	public static long edit_birthday(Context context, String tag, String data) {
+		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
+		requestParam.add(new BasicNameValuePair("code", "000002"));
+		if (!StringUtils.isEmpty(data)) {
+			requestParam.add(new BasicNameValuePair("data", data));
+		}
+		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.LOCK_EARN, tag, requestParam,
+				ResponseDownAPP.class, null);
+	}
+
+	/**
+	 * @Description 获取积分广告列表
+	 * @author Created by qinxianyuzou on 2015-1-8.
+	 * @param context
+	 * @param tag
+	 * @return
+	 */
+	public static long get_earn_list(Context context, String tag) {
+		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
+		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.GET_EARN_LIST, tag, requestParam,
+				ResponseLockADList.class, null);
 	}
 }
