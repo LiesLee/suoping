@@ -44,8 +44,9 @@ import java.util.List;
  */
 public class PublicUtil {
 	private final static String TAG = PublicUtil.class.getSimpleName();
-    /** 下载目录 **/
-    public final static String DOWNLOAD_APP_PATH = Environment.getExternalStorageDirectory() + File.separator + "SuoPingZhuan";
+	/** 下载目录 **/
+	public final static String DOWNLOAD_APP_PATH = Environment.getExternalStorageDirectory() + File.separator
+			+ "SuoPingZhuan";
 
 	/**
 	 * @Description 短时间toast
@@ -235,167 +236,216 @@ public class PublicUtil {
 		intent = packageManager.getLaunchIntentForPackage(packagename);
 		context.startActivity(intent);
 	}
-    /**
-     * @Description 获取版本号
-     * @author Created by qinxianyuzou on 2015-1-5.
-     * @param context
-     * @return
-     */
-    public static int getVersionCode(Context context) {
-        try {
-            PackageInfo pi = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
-            return pi.versionCode;
-        } catch (NameNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return 0;
-        }
-    }
-    
-    /** 遍历文件，路径结果 List */
-    public static List<String> listFile = new ArrayList<String>();
 
-    /**
-     * 遍历文件夹搜索文件
-     * @param Path 搜索的目录
-     * @param Extension 扩展名
-     * @param IsIterative 是否进入子文件夹
-     */
-    public static void getFiles(String Path, String Extension, boolean IsIterative){
-        listFile.clear();
-        File[] files = new File(Path).listFiles();
-        if(files != null && files.length != 0){
-            for (int i = 0; i < files.length; i++) {
-                File f = files[i];
-                if (f.isFile()) {
-                    if (f.getPath().substring(f.getPath().length() - Extension.length()).equals(Extension)) //判断扩展名
-                        listFile.add(f.getPath());
-                    if (!IsIterative) break;
-                    //忽略点文件（隐藏文件/文件夹）
-                } else if (f.isDirectory() && f.getPath().indexOf("/.") == -1){
-                    getFiles(f.getPath(), Extension, IsIterative);
-                }
-            }
-        }
-    }
+	/**
+	 * @Description 获取版本号
+	 * @author Created by qinxianyuzou on 2015-1-5.
+	 * @param context
+	 * @return
+	 */
+	public static int getVersionCode(Context context) {
+		try {
+			PackageInfo pi = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+			return pi.versionCode;
+		} catch (NameNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+	}
 
-    @SuppressWarnings({ "deprecation", "rawtypes" })
-    public static void updateAPP(final Activity activity, String url) {
-        String sdDir = "";
-        boolean sdCardExist = Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED); // 判断sd卡是否存在
-        if (sdCardExist) {
-            sdDir = Environment.getExternalStorageDirectory().toString();// 获取跟目录
-        }
-        final String downFile = sdDir + "/suopingzhuan/app.apk";
-        // File file = new File(downFile);
-        // if (file.exists()) {
-        // if (getApkVersionCode(activity, downFile) > getVersionCode(activity))
-        // {
-        // installAPK(activity, downFile);
-        // return;
-        // } else {
-        // file.delete();
-        // }
-        // }
-        HttpUtils http = new HttpUtils();
-        final Notification mNotification;
-        final NotificationManager mNotificationManager;
-        mNotificationManager = (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotification = new Notification(R.drawable.logo, "正在下载...", System.currentTimeMillis());
-        mNotification.contentView = new RemoteViews(activity.getPackageName(), R.layout.download);
-        mNotification.flags = Notification.FLAG_INSISTENT;
-        mNotification.sound = null;
-        HttpHandler handler = http.download(url, downFile, true, true, new RequestCallBack<File>() { 
+	/** 遍历文件，路径结果 List */
+	public static List<String> listFile = new ArrayList<String>();
 
-            @Override
-            public void onStart() {
-                // tv_info.setText("conn...");
-                PublicUtil.showToast(activity, "正在下载...");
-            }
+	/**
+	 * 遍历文件夹搜索文件
+	 * 
+	 * @param Path
+	 *            搜索的目录
+	 * @param Extension
+	 *            扩展名
+	 * @param IsIterative
+	 *            是否进入子文件夹
+	 */
+	public static void getFiles(String Path, String Extension, boolean IsIterative) {
+		listFile.clear();
+		File[] files = new File(Path).listFiles();
+		if (files != null && files.length != 0) {
+			for (int i = 0; i < files.length; i++) {
+				File f = files[i];
+				if (f.isFile()) {
+					if (f.getPath().substring(f.getPath().length() - Extension.length()).equals(Extension)) // 判断扩展名
+						listFile.add(f.getPath());
+					if (!IsIterative)
+						break;
+					// 忽略点文件（隐藏文件/文件夹）
+				} else if (f.isDirectory() && f.getPath().indexOf("/.") == -1) {
+					getFiles(f.getPath(), Extension, IsIterative);
+				}
+			}
+		}
+	}
 
-            @Override
-            public void onLoading(long total, long current, boolean isUploading) {
-                // tv_info.setText(current + "/" + total);
-                LogUtil.d("handler", "<==========handler");
-                DecimalFormat decimalFormat = new DecimalFormat("0%");
-                LogUtil.d("handler", "total:" + total);
-                LogUtil.d("handler", "current:" + current);
-                LogUtil.d("handler", "(float) current / (float) total:" + (float) current / (float) total);
-                LogUtil.d("handler", "decimalFormat:" + decimalFormat.format((float) current / (float) total));
-                LogUtil.d("handler", "handler==========>");
-                mNotification.contentView.setTextViewText(R.id.content_view_text1,
-                        decimalFormat.format((float) current / (float) total));
-                mNotification.contentView.setProgressBar(R.id.content_view_progress, (int) total, (int) current, false);
-                mNotificationManager.notify(3566, mNotification);
-            }
+	@SuppressWarnings({ "deprecation", "rawtypes" })
+	public static void updateAPP(final Activity activity, String url) {
+		final String downFile = DOWNLOAD_APP_PATH;
+		HttpUtils http = new HttpUtils();
+		final Notification mNotification;
+		final NotificationManager mNotificationManager;
+		mNotificationManager = (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
+		mNotification = new Notification(R.drawable.logo, "正在下载...", System.currentTimeMillis());
+		mNotification.contentView = new RemoteViews(activity.getPackageName(), R.layout.download);
+		mNotification.flags = Notification.FLAG_INSISTENT;
+		mNotification.sound = null;
+		HttpHandler handler = http.download(url, downFile, true, true, new RequestCallBack<File>() {
 
-            @Override
-            public void onSuccess(ResponseInfo<File> responseInfo) {
-                mNotificationManager.cancel(3566);
-                PublicUtil.showToast(activity, "下载完成...");
-                PublicUtil.installAPK(activity, downFile);
-            }
+			@Override
+			public void onStart() {
+				// tv_info.setText("conn...");
+				PublicUtil.showToast(activity, "正在下载...");
+			}
 
-            @Override
-            public void onFailure(HttpException error, String msg) {
-                // tv_info.setText(msg);
-                LogUtil.d("handler", msg);
-                if (msg.equals("maybe the file has downloaded completely")) {
-                    showToast(activity, "文件已经下载完成");
-                    installAPK(activity, downFile);
-                }
-            }
+			@Override
+			public void onLoading(long total, long current, boolean isUploading) {
+				// tv_info.setText(current + "/" + total);
+				LogUtil.d("updateAPP", "<==========handler");
+				DecimalFormat decimalFormat = new DecimalFormat("0%");
+				LogUtil.d("updateAPP", "total:" + total);
+				LogUtil.d("updateAPP", "current:" + current);
+				LogUtil.d("updateAPP", "(float) current / (float) total:" + (float) current / (float) total);
+				LogUtil.d("updateAPP", "decimalFormat:" + decimalFormat.format((float) current / (float) total));
+				LogUtil.d("updateAPP", "handler==========>");
+				mNotification.contentView.setTextViewText(R.id.content_view_text1,
+						decimalFormat.format((float) current / (float) total));
+				mNotification.contentView.setProgressBar(R.id.content_view_progress, (int) total, (int) current, false);
+				mNotificationManager.notify(3566, mNotification);
+			}
 
-        });
-    }
+			@Override
+			public void onSuccess(ResponseInfo<File> responseInfo) {
+				mNotificationManager.cancel(3566);
+				PublicUtil.showToast(activity, "下载完成...");
+				PublicUtil.installAPK(activity, downFile);
+			}
 
-    /**
-     * 获取所有已下载的应用并返回集合
-     * @return List<Download_APK_Install>
-     */
-    public static List<Download_APK_Install> getDownloadAppsEntity() {
-        Context ctx;
-        List<Download_APK_Install> apps = new ArrayList<>();
-        getFiles(DOWNLOAD_APP_PATH, "apk", false);
-        if (listFile.size() != 0) {
-            ctx = KeyGuardApplication.getInstance().getApplicationContext();
-            for (String path : listFile) {
-                Download_APK_Install apk = new Download_APK_Install();
-                apk.setAppIcon(getApkIcon(ctx, path));
-                apk.setAppName(getAPPName(ctx, path));
-                apk.setAppPath(path);
-                apk.setInstalled(isApkInstalled(ctx, getPackageName(ctx, path)));
-                apk.setFileSize(formatSizeM(getFileSize(path)));
-                apps.add(apk);
-            }
-            return apps;
-        } else {
-            return apps;
-        }
-    }
+			@Override
+			public void onFailure(HttpException error, String msg) {
+				// tv_info.setText(msg);
+				LogUtil.d("handler", msg);
+				if (msg.equals("maybe the file has downloaded completely")) {
+					showToast(activity, "文件已经下载完成");
+					installAPK(activity, downFile);
+				}
+			}
 
-    /**
-     * 根据路径获取文件大小
-     * @param path
-     * @return 大小 单位m
-     */
-    public static double getFileSize(String path) {
-        File f = new File(path);
-        if (f.exists() && f.isFile()) {
-            double size = f.length();
-            return size / 1024 / 1024;
-        } else {
-            return 0;
-        }
-    }
-    
-    /**
-     * 格式化文件大小保留两位小数并且后面带m
-     * @param size
-     * @return 字符串size 后面带 m
-     */
-    public static String formatSizeM(double size) {
-        DecimalFormat df = new DecimalFormat("#.00");
-        return String.valueOf(df.format(size)) + "m";
-    }
+		});
+	}
+
+	@SuppressWarnings({ "deprecation", "rawtypes" })
+	public static void downloadAPP(final Activity activity, String url) {
+		final String downFile = DOWNLOAD_APP_PATH;
+		HttpUtils http = new HttpUtils();
+		final Notification mNotification;
+		final NotificationManager mNotificationManager;
+		mNotificationManager = (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
+		mNotification = new Notification(R.drawable.logo, "正在下载...", System.currentTimeMillis());
+		mNotification.contentView = new RemoteViews(activity.getPackageName(), R.layout.download);
+		mNotification.flags = Notification.FLAG_INSISTENT;
+		mNotification.sound = null;
+		HttpHandler handler = http.download(url, downFile, true, true, new RequestCallBack<File>() {
+
+			@Override
+			public void onStart() {
+				// tv_info.setText("conn...");
+				PublicUtil.showToast(activity, "正在下载...");
+			}
+
+			@Override
+			public void onLoading(long total, long current, boolean isUploading) {
+				// tv_info.setText(current + "/" + total);
+				LogUtil.d("downloadAPP", "<==========handler");
+				DecimalFormat decimalFormat = new DecimalFormat("0%");
+				LogUtil.d("downloadAPP", "total:" + total);
+				LogUtil.d("downloadAPP", "current:" + current);
+				LogUtil.d("downloadAPP", "(float) current / (float) total:" + (float) current / (float) total);
+				LogUtil.d("downloadAPP", "decimalFormat:" + decimalFormat.format((float) current / (float) total));
+				LogUtil.d("downloadAPP", "handler==========>");
+				mNotification.contentView.setTextViewText(R.id.content_view_text1,
+						decimalFormat.format((float) current / (float) total));
+				mNotification.contentView.setProgressBar(R.id.content_view_progress, (int) total, (int) current, false);
+				mNotificationManager.notify(3566, mNotification);
+			}
+
+			@Override
+			public void onSuccess(ResponseInfo<File> responseInfo) {
+				mNotificationManager.cancel(3566);
+				PublicUtil.showToast(activity, "下载完成...");
+				PublicUtil.installAPK(activity, downFile);
+			}
+
+			@Override
+			public void onFailure(HttpException error, String msg) {
+				// tv_info.setText(msg);
+				LogUtil.d("handler", msg);
+				if (msg.equals("maybe the file has downloaded completely")) {
+					showToast(activity, "文件已经下载完成");
+					installAPK(activity, downFile);
+				}
+			}
+
+		});
+	}
+
+	/**
+	 * 获取所有已下载的应用并返回集合
+	 * 
+	 * @return List<Download_APK_Install>
+	 */
+	public static List<Download_APK_Install> getDownloadAppsEntity() {
+		Context ctx;
+		List<Download_APK_Install> apps = new ArrayList<>();
+		getFiles(DOWNLOAD_APP_PATH, "apk", false);
+		if (listFile.size() != 0) {
+			ctx = KeyGuardApplication.getInstance().getApplicationContext();
+			for (String path : listFile) {
+				Download_APK_Install apk = new Download_APK_Install();
+				apk.setAppIcon(getApkIcon(ctx, path));
+				apk.setAppName(getAPPName(ctx, path));
+				apk.setAppPath(path);
+				apk.setInstalled(isApkInstalled(ctx, getPackageName(ctx, path)));
+				apk.setFileSize(formatSizeM(getFileSize(path)));
+				apps.add(apk);
+			}
+			return apps;
+		} else {
+			return apps;
+		}
+	}
+
+	/**
+	 * 根据路径获取文件大小
+	 * 
+	 * @param path
+	 * @return 大小 单位m
+	 */
+	public static double getFileSize(String path) {
+		File f = new File(path);
+		if (f.exists() && f.isFile()) {
+			double size = f.length();
+			return size / 1024 / 1024;
+		} else {
+			return 0;
+		}
+	}
+
+	/**
+	 * 格式化文件大小保留两位小数并且后面带m
+	 * 
+	 * @param size
+	 * @return 字符串size 后面带 m
+	 */
+	public static String formatSizeM(double size) {
+		DecimalFormat df = new DecimalFormat("#.00");
+		return String.valueOf(df.format(size)) + "m";
+	}
 }

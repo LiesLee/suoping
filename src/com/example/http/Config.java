@@ -41,6 +41,8 @@ public class Config {
 	public final static String GET_EARN_DETAIL = BASE_URL + "get_earn_detail";
 	/** 获取APP的下载地址 */
 	public final static String GET_EARN_DOWNLOADURL = BASE_URL + "get_earn_downloadurl";
+	/** 解锁获积分接口 */
+	public final static String LOCK_EARN = BASE_URL + "lock_earn";
 	/** 邀请赚积分 */
 	public final static String INVITE = BASE_URL + "invite";
 	/** APP下载 */
