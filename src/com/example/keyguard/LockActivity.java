@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import net.youmi.android.offers.OffersManager;
-import net.youmi.android.offers.PointsManager;
 
 import org.json.JSONObject;
 
@@ -25,8 +24,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
+import com.example.activity.common.Activity_DownloadWeb;
 import com.example.activity.common.Activity_Launch;
 import com.example.activity.common.BaseActivity;
+import com.example.http.Protocol;
 import com.example.keyguard.CoverPlateView.Listener;
 import com.example.util.LogUtil;
 import com.lidroid.xutils.BitmapUtils;
@@ -381,13 +382,14 @@ public class LockActivity extends BaseActivity {
 						// startActivity(intent);
 						// finish();
 						//
-						// Activity_DownloadWeb.luanch(LockActivity.this,
-						// Activity_Launch.lockADList_Entities.get(currentRow).getId());
-						// Activity_YouMi.luanch(LockActivity.this);
-						OffersManager.getInstance(LockActivity.this).showOffersWall();
+						Activity_DownloadWeb.luanch(LockActivity.this,
+								Activity_Launch.lockADList_Entities.get(currentRow).getId());
+						Activity_YouMi.luanch(LockActivity.this);
+						// OffersManager.getInstance(LockActivity.this).showOffersWall();
 						// 积分墙配置检查（没有使用“通过 Receiver来获取积分订单”功能）：
-						boolean isSuccess = OffersManager.getInstance(LockActivity.this).checkOffersAdConfig();
-						LogUtil.d(setTag(), "" + isSuccess);
+						// boolean isSuccess =
+						// OffersManager.getInstance(LockActivity.this).checkOffersAdConfig();
+						// LogUtil.d(setTag(), "" + isSuccess);
 						if (LockActivity.instance != null) {
 							LockActivity.instance.finish();
 						}
@@ -410,10 +412,10 @@ public class LockActivity extends BaseActivity {
 						if (LockActivity.instance != null) {
 							LockActivity.instance.finish();
 							int amount = 10; // 示例增加100积分
-							boolean isSuccess = PointsManager.getInstance(activity).awardPoints(amount);
-							LogUtil.d(setTag(), "" + isSuccess);
-							// Protocol.lock_earn(LockActivity.this,
-							// this.getClass().getSimpleName());
+							// boolean isSuccess =
+							// PointsManager.getInstance(activity).awardPoints(amount);
+							// LogUtil.d(setTag(), "" + isSuccess);
+							Protocol.lock_earn(LockActivity.this, this.getClass().getSimpleName());
 						}
 					}
 
