@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.activity.more.Activity_MyInfo;
 import com.example.http.Protocol;
 import com.example.keyguard.R;
 
@@ -41,11 +42,11 @@ public class DialogSex extends Dialog implements android.view.View.OnClickListen
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.ll_sex_man:
-			Protocol.edit_sex(mContext, mContext.getClass().getSimpleName(), 0);
+			Activity_MyInfo.sexFlag = Protocol.edit_sex(mContext, mContext.getClass().getSimpleName(), 0);
 			dismiss();
 			break;
 		case R.id.ll_sex_woman:
-			Protocol.edit_sex(mContext, mContext.getClass().getSimpleName(), 1);
+			Activity_MyInfo.sexFlag = Protocol.edit_sex(mContext, mContext.getClass().getSimpleName(), 1);
 			dismiss();
 			break;
 

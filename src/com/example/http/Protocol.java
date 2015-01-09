@@ -240,7 +240,7 @@ public class Protocol {
 		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
 		requestParam.add(new BasicNameValuePair("code", "000000"));
 		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.LOCK_EARN, tag, requestParam,
-				ResponseDownAPP.class, null);
+				BaseResponse.class, null);
 	}
 
 	/**
@@ -257,7 +257,7 @@ public class Protocol {
 		requestParam.add(new BasicNameValuePair("code", "000001"));
 		requestParam.add(new BasicNameValuePair("data", data + ""));
 		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.LOCK_EARN, tag, requestParam,
-				ResponseDownAPP.class, null);
+				BaseResponse.class, null);
 	}
 
 	/**
@@ -276,7 +276,7 @@ public class Protocol {
 			requestParam.add(new BasicNameValuePair("data", data));
 		}
 		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.LOCK_EARN, tag, requestParam,
-				ResponseDownAPP.class, null);
+				BaseResponse.class, null);
 	}
 
 	/**

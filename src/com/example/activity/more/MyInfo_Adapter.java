@@ -251,31 +251,15 @@ public class MyInfo_Adapter extends BaseAdapter {
 		public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
 			// TODO Auto-generated method stub
 			BaseResponse msg = (BaseResponse) response;
-			if (msg.getCode().equals(Code.CODE_SUCCESS)) {
-				SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.COOKIES, "");
-				SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.USERINFO, "");
-				SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.OLD_PASSWORD, "");
-				activity.startActivity(new Intent(activity, LoginActivity.class));
-				activity.finish();
-			} else {
-				PublicUtil.showToast(activity, msg.getMsg());
-				// new Thread(new Runnable() {
-				//
-				// @Override
-				// public void run() {
-				// // TODO Auto-generated method stub
-				// try {
-				// Thread.sleep(2000);
-				// Protocol.logout(activity,
-				// Activity_MyInfo.class.getSimpleName(), new LogoutCallBack());
-				// } catch (InterruptedException e) {
-				// // TODO Auto-generated catch block
-				// e.printStackTrace();
-				// }
-				//
-				// }
-				// }).start();
-			}
+			// if (msg.getCode().equals(Code.CODE_SUCCESS)) {
+			// } else {
+			// PublicUtil.showToast(activity, msg.getMsg());
+			// }
+			SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.COOKIES, "");
+			SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.USERINFO, "");
+			SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.OLD_PASSWORD, "");
+			activity.startActivity(new Intent(activity, LoginActivity.class));
+			activity.finish();
 		}
 
 		@Override
