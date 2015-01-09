@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -82,6 +83,7 @@ public class Activity_Reg_Password extends BaseActivity implements View.OnClickL
 		et_reg.setHint("");
 		iv_back_left.setOnClickListener(this);
 		btn_reg_next.setOnClickListener(this);
+		et_reg.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
 	}
 
 	@Override

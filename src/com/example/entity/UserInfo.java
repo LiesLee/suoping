@@ -25,9 +25,8 @@ public class UserInfo implements Serializable {
 	/** 用户昵称 **/
 	private String name;
 
-
 	/**
-	 * @Description 
+	 * @Description
 	 * @author Created by qinxianyuzou on 2015-1-2.
 	 * @see #id
 	 * @return the id
@@ -36,20 +35,19 @@ public class UserInfo implements Serializable {
 		return id;
 	}
 
-
 	/**
-	 * @Description 
+	 * @Description
 	 * @author Created by qinxianyuzou on 2015-1-2.
 	 * @see #id
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(String id) {
 		this.id = id;
 	}
 
-
 	/**
-	 * @Description 
+	 * @Description
 	 * @author Created by qinxianyuzou on 2015-1-2.
 	 * @see #username
 	 * @return the username
@@ -58,20 +56,19 @@ public class UserInfo implements Serializable {
 		return username;
 	}
 
-
 	/**
-	 * @Description 
+	 * @Description
 	 * @author Created by qinxianyuzou on 2015-1-2.
 	 * @see #username
-	 * @param username the username to set
+	 * @param username
+	 *            the username to set
 	 */
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
-
 	/**
-	 * @Description 
+	 * @Description
 	 * @author Created by qinxianyuzou on 2015-1-2.
 	 * @see #sum_earn
 	 * @return the sum_earn
@@ -80,20 +77,19 @@ public class UserInfo implements Serializable {
 		return sum_earn;
 	}
 
-
 	/**
-	 * @Description 
+	 * @Description
 	 * @author Created by qinxianyuzou on 2015-1-2.
 	 * @see #sum_earn
-	 * @param sum_earn the sum_earn to set
+	 * @param sum_earn
+	 *            the sum_earn to set
 	 */
 	public void setSum_earn(float sum_earn) {
 		this.sum_earn = sum_earn;
 	}
 
-
 	/**
-	 * @Description 
+	 * @Description
 	 * @author Created by qinxianyuzou on 2015-1-2.
 	 * @see #today_earn
 	 * @return the today_earn
@@ -102,42 +98,43 @@ public class UserInfo implements Serializable {
 		return today_earn;
 	}
 
-
 	/**
-	 * @Description 
+	 * @Description
 	 * @author Created by qinxianyuzou on 2015-1-2.
 	 * @see #today_earn
-	 * @param today_earn the today_earn to set
+	 * @param today_earn
+	 *            the today_earn to set
 	 */
 	public void setToday_earn(float today_earn) {
 		this.today_earn = today_earn;
 	}
 
-
 	/**
-	 * @Description 
+	 * @Description
 	 * @author Created by qinxianyuzou on 2015-1-2.
 	 * @see #sex
 	 * @return the sex
 	 */
-	public int getSex() {
-		return sex;
+	public String getSex() {
+		if (sex == 0) {
+			return "男";
+		}
+		return "女";
 	}
 
-
 	/**
-	 * @Description 
+	 * @Description
 	 * @author Created by qinxianyuzou on 2015-1-2.
 	 * @see #sex
-	 * @param sex the sex to set
+	 * @param sex
+	 *            the sex to set
 	 */
 	public void setSex(int sex) {
 		this.sex = sex;
 	}
 
-
 	/**
-	 * @Description 
+	 * @Description
 	 * @author Created by qinxianyuzou on 2015-1-2.
 	 * @see #invite_no
 	 * @return the invite_no
@@ -146,20 +143,19 @@ public class UserInfo implements Serializable {
 		return invite_no;
 	}
 
-
 	/**
-	 * @Description 
+	 * @Description
 	 * @author Created by qinxianyuzou on 2015-1-2.
 	 * @see #invite_no
-	 * @param invite_no the invite_no to set
+	 * @param invite_no
+	 *            the invite_no to set
 	 */
 	public void setInvite_no(String invite_no) {
 		this.invite_no = invite_no;
 	}
 
-
 	/**
-	 * @Description 
+	 * @Description
 	 * @author Created by qinxianyuzou on 2015-1-2.
 	 * @see #name
 	 * @return the name
@@ -168,17 +164,16 @@ public class UserInfo implements Serializable {
 		return name;
 	}
 
-
 	/**
-	 * @Description 
+	 * @Description
 	 * @author Created by qinxianyuzou on 2015-1-2.
 	 * @see #name
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	@Override
 	public String toString() {

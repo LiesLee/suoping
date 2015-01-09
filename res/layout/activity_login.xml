@@ -79,14 +79,15 @@
 
         <TextView
             android:id="@+id/tv_forgot_password"
-            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignRight="@+id/et_password"
             android:layout_below="@+id/et_password"
-            android:textSize="16sp"
-            android:textColor="@color/black"
+            android:layout_marginTop="15dp"
             android:text="忘记密码？"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/btn_lg"
