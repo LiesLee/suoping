@@ -18,6 +18,9 @@ import android.widget.TextView;
 import com.android.volley.VolleyError;
 import com.example.activity.common.BaseActivity;
 import com.example.activity.common.KeyGuardActivityManager;
+import com.example.entity.respose.BaseResponse;
+import com.example.entity.respose.Code;
+import com.example.http.Protocol;
 import com.example.keyguard.R;
 import com.example.util.PublicUtil;
 import com.lidroid.xutils.BitmapUtils;
@@ -43,6 +46,8 @@ public class Activity_MyInfo extends BaseActivity {
 	private BitmapUtils bitmapUtils;
 	/** 保存数据源 */
 	private List<NameValuePair> dataList = new ArrayList<NameValuePair>();
+	public static long sexFlag;
+	public static long dateFlag;
 
 	public static void luanch(Activity activity) {
 		Intent intent = new Intent(activity, Activity_MyInfo.class);
@@ -88,7 +93,20 @@ public class Activity_MyInfo extends BaseActivity {
 	@Override
 	public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
 		// TODO Auto-generated method stub
-
+		if (sexFlag == flag) {
+			BaseResponse msgInfo = (BaseResponse) response;
+			if (msgInfo.getCode().equals(Code.CODE_SUCCESS)) {
+				Protocol.get_user_info(activity, setTag());
+			}
+			showToast(msgInfo.getMsg());
+		}
+		if (dateFlag == flag) {
+			BaseResponse msgInfo = (BaseResponse) response;
+			if (msgInfo.getCode().equals(Code.CODE_SUCCESS)) {
+				Protocol.get_user_info(activity, setTag());
+			}
+			showToast(msgInfo.getMsg());
+		}
 	}
 
 	@Override
@@ -100,7 +118,7 @@ public class Activity_MyInfo extends BaseActivity {
 	@Override
 	public String setTag() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.getClass().getSimpleName();
 	}
 
 	@Override

@@ -1,8 +1,6 @@
 package com.example.activity.more;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -71,7 +69,8 @@ public class DialogDate extends Dialog implements android.view.View.OnClickListe
 				PublicUtil.showToast(mContext, "请输入正确日期");
 				return;
 			}
-			Protocol.edit_birthday(mContext, mContext.getClass().getSimpleName(), year + "/" + month + "/" + day);
+			Activity_MyInfo.dateFlag = Protocol.edit_birthday(mContext, mContext.getClass().getSimpleName(), year + "/"
+					+ month + "/" + day);
 			dismiss();
 			break;
 		case R.id.but__dialog_date_cancel:
