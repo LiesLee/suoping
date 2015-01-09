@@ -88,7 +88,7 @@ public class Fragment_MyDownload extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_shop, container, false);
+        View view = inflater.inflate(R.layout.fragment_download, container, false);
         ViewUtils.inject(this, view);
         return view;
     }
