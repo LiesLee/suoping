@@ -109,7 +109,7 @@ public class Activity_EarningsShop extends BaseActivity {
         if (flag == exFlag) {
             UIHelper.cancelProgressDialog();
             ResponseExchangeDetail msg = (ResponseExchangeDetail) response;
-            if(msg.getCode() == Code.CODE_SUCCESS){
+            if(msg.getCode().equals(Code.CODE_SUCCESS)){
                 LogUtil.i("======ear======", jsonString.toString());
                 adapter.setData(msg.getData());
             }
