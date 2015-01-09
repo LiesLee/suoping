@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.entity.Download_APK_Install;
 import com.example.keyguard.R;
@@ -19,6 +20,7 @@ import com.lidroid.xutils.bitmap.callback.BitmapLoadCallBack;
 import com.lidroid.xutils.bitmap.callback.BitmapLoadFrom;
 import com.lidroid.xutils.bitmap.callback.DefaultBitmapLoadCallBack;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -119,7 +121,12 @@ public class My_Download_Adapter extends BaseAdapter {
                 listItemView.btn_install_app.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        PublicUtil.installAPK(mContext, apk.getAppPath());
+                        if(new File(apk.getAppPath()).exists()){
+                            PublicUtil.installAPK(mContext, apk.getAppPath());
+                        }else{
+                            Toast.makeText(mContext, "安装包已被删除", Toast.LENGTH_SHORT).show();
+                        }
+
                     }
                 });
             //安装包管理

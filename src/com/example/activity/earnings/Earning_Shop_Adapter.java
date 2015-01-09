@@ -72,9 +72,9 @@ public class Earning_Shop_Adapter extends BaseAdapter {
 			listItemView = (HolderView) convertView.getTag();
 		}
 
-        AQuery aq_ = aq.recycle(convertView);
+        /*AQuery aq_ = aq.recycle(convertView);*/
 		listItemView.tv_item_shop_name.setText(listData.get(position).getEp_name());
-		listItemView.tv_item_shop_money.setText(listData.get(position).getEp_jifen());
+		listItemView.tv_item_shop_money.setText(listData.get(position).getEp_jifen()+"");
         //aq_.id(listItemView.iv_item_shop_icon).image(listData.get(position).getHp_url());
 
         convertView.setOnClickListener(new View.OnClickListener() {
