@@ -5,53 +5,65 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.youmi.android.offers.OffersManager;
+
+import org.json.JSONObject;
+
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.android.volley.VolleyError;
+import com.example.activity.common.Activity_DownloadWeb;
 import com.example.activity.common.Activity_Launch;
+import com.example.activity.common.BaseActivity;
 import com.example.http.Protocol;
 import com.example.keyguard.CoverPlateView.Listener;
+import com.example.util.LogUtil;
 import com.lidroid.xutils.BitmapUtils;
 
 @SuppressLint("ClickableViewAccessibility")
-public class LockActivity extends Activity {
+public class LockActivity extends BaseActivity {
 
-	int screenWidth;
-	int screenHeight;
-	int lastX;
-	int lastY;
-	int image_slide_width;
-	int image_slide_rightMargin;
-	int image_slide_leftMargin;
-	int image_slide_bottomMargin;
+	private int screenWidth;
+	private int screenHeight;
+	private int lastX;
+	private int lastY;
+	private int image_slide_width;
+	private int image_slide_rightMargin;
+	private int image_slide_leftMargin;
+	private int image_slide_bottomMargin;
 
-	int listCount;
-	int currentRow;
-	ImageView imageView_slide;
+	/** 数据大小 */
+	private int listCount;
+	/** 当前item */
+	private int currentRow;
+	private ImageView imageView_slide;
 
-	RelativeLayout.LayoutParams image_slide;
+	private RelativeLayout.LayoutParams image_slide;
 
 	public static LockActivity instance = null;
+	/** 广告图 */
+	private UnRollListView mListView;
+	private LockAD_Adapter adapter;
+	/** 积分获得的积分数 */
+	private TextView tv_appJiFen;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		RelativeLayout mRelativeLayout = new RelativeLayout(this);
 		setContentView(mRelativeLayout);
+		OffersManager.getInstance(this).onAppLaunch();
 
 		instance = this;
 
@@ -82,10 +94,10 @@ public class LockActivity extends Activity {
 		image_Vertical.bottomMargin = image_slide_bottomMargin - image_slide_width;
 		image_Vertical.topMargin = image_slide_bottomMargin - image_slide_width;
 
-		final UnRollListView mListView = new UnRollListView(this, null);
+		mListView = new UnRollListView(this, null);
 		// 去掉分割黑线
 		// mListView.setDivider(null);
-		listCount = 10;
+		listCount = Activity_Launch.lockADList_Entities.size();
 		currentRow = 0;
 		mListView.setVerticalScrollBarEnabled(false);
 		// IMGAdapter adapter = new IMGAdapter(this, getMap(),
@@ -95,7 +107,7 @@ public class LockActivity extends Activity {
 		// image_slide_leftMargin);
 		// adapter.setlineHeight((screenHeight - (image_slide_bottomMargin -
 		// image_slide_width) * 2) * 1);
-		LockAD_Adapter adapter = new LockAD_Adapter(this, new BitmapUtils(this));
+		adapter = new LockAD_Adapter(this, new BitmapUtils(this));
 		adapter.setData(Activity_Launch.lockADList_Entities);
 		mListView.setSmoothScrollbarEnabled(true);
 		mListView.setAdapter(adapter);
@@ -110,16 +122,16 @@ public class LockActivity extends Activity {
 					if (currentRow > 0) {
 						currentRow--;
 					}
-					mListView.setSelection(currentRow);
 				} else if (string == "GESTURE_UP") {
-					if (currentRow <= listCount - 1) {
+					if (currentRow < listCount - 1) {
 						currentRow++;
 					}
-					mListView.setSelection(currentRow);
 					// mListView.smoothScrollByOffset(-(screenHeight-(
 					// image_slide_bottomMargin-image_slide_width)));
 					// mListView.smoothScrollToPosition(currentRow);
 				}
+				mListView.setSelection(currentRow);
+				tv_appJiFen.setText(Activity_Launch.lockADList_Entities.get(currentRow).getEarn_jifen());
 				Log.d("监听器:", string + "   " + currentRow);
 			}
 		});
@@ -169,21 +181,21 @@ public class LockActivity extends Activity {
 		image_rl2.rightMargin = image_slide_rightMargin;
 		mRelativeLayout.addView(imageView_normal, image_rl2);
 
-		TextView tv1 = new TextView(this);
-		tv1.setText("+60");
-		tv1.setTextSize(30);
-		tv1.setTextColor(Color.WHITE);
+		tv_appJiFen = new TextView(this);
+		tv_appJiFen.setText(Activity_Launch.lockADList_Entities.get(currentRow).getEarn_jifen());
+		tv_appJiFen.setTextSize(30);
+		tv_appJiFen.setTextColor(Color.WHITE);
 		// tv1.setBackgroundColor(Color.RED);
-		tv1.setGravity(Gravity.CENTER);
+		tv_appJiFen.setGravity(Gravity.CENTER);
 		RelativeLayout.LayoutParams image_rl3 = new RelativeLayout.LayoutParams(image_slide_width, image_slide_width);
 		image_rl3.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 		image_rl3.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
 		image_rl3.bottomMargin = image_slide_bottomMargin - image_slide_width;
 		image_rl3.leftMargin = image_slide_leftMargin;
-		mRelativeLayout.addView(tv1, image_rl3);
+		mRelativeLayout.addView(tv_appJiFen, image_rl3);
 
 		TextView tv2 = new TextView(this);
-		tv2.setText("+2");
+		tv2.setText("+10");
 		tv2.setTextSize(30);
 		tv2.setTextColor(Color.WHITE);
 		// tv2.setBackgroundColor(Color.RED);
@@ -362,10 +374,25 @@ public class LockActivity extends Activity {
 				} else {
 					// finish();
 					if ((int) event.getRawX() < (image_slide_leftMargin + 100)) {
-						Toast.makeText(LockActivity.this, "GO to DownLoadWebActivity!", Toast.LENGTH_SHORT).show();
-						Intent intent = new Intent(LockActivity.this, DownLoadWebActivity.class);
-						startActivity(intent);
+						// Toast.makeText(LockActivity.this,
+						// "GO to DownLoadWebActivity!",
+						// Toast.LENGTH_SHORT).show();
+						// Intent intent = new Intent(LockActivity.this,
+						// DownLoadWebActivity.class);
+						// startActivity(intent);
 						// finish();
+						//
+						Activity_DownloadWeb.luanch(LockActivity.this,
+								Activity_Launch.lockADList_Entities.get(currentRow).getId());
+						Activity_YouMi.luanch(LockActivity.this);
+						// OffersManager.getInstance(LockActivity.this).showOffersWall();
+						// 积分墙配置检查（没有使用“通过 Receiver来获取积分订单”功能）：
+						// boolean isSuccess =
+						// OffersManager.getInstance(LockActivity.this).checkOffersAdConfig();
+						// LogUtil.d(setTag(), "" + isSuccess);
+						if (LockActivity.instance != null) {
+							LockActivity.instance.finish();
+						}
 					} else {
 
 						/*
@@ -379,11 +406,15 @@ public class LockActivity extends Activity {
 						 * if (MainActivity.instance != null) {
 						 * MainActivity.instance.finish(); }
 						 */
-						if (DownLoadWebActivity.instance != null) {
-							DownLoadWebActivity.instance.finish();
-						}
+						// if (DownLoadWebActivity.instance != null) {
+						// DownLoadWebActivity.instance.finish();
+						// }
 						if (LockActivity.instance != null) {
 							LockActivity.instance.finish();
+							int amount = 10; // 示例增加100积分
+							// boolean isSuccess =
+							// PointsManager.getInstance(activity).awardPoints(amount);
+							// LogUtil.d(setTag(), "" + isSuccess);
 							Protocol.lock_earn(LockActivity.this, this.getClass().getSimpleName());
 						}
 					}
@@ -394,4 +425,56 @@ public class LockActivity extends Activity {
 			return true;
 		}
 	};
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_HOME) {
+			return true;
+		}
+
+		return super.onKeyDown(keyCode, event);
+	}
+
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		OffersManager.getInstance(this).onAppExit();
+	}
+
+	@Override
+	protected void initUI() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void initData() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onHttpError(long flag, VolleyError error) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public String setTag() {
+		// TODO Auto-generated method stub
+		return this.getClass().getSimpleName();
+	}
 }

@@ -14,6 +14,7 @@ import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.webkit.WebSettings.LayoutAlgorithm;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -75,6 +76,7 @@ public class Activity_ShopInfoWeb extends BaseActivity {
 		tv_public_top_title.setText(mTitle);
 		rl_public_back.setVisibility(View.VISIBLE);
 		rl_public_back.setOnClickListener(this);
+		but_down_web.setOnClickListener(this);
 		but_down_web.setText("立即兑换");
 	}
 
@@ -82,7 +84,7 @@ public class Activity_ShopInfoWeb extends BaseActivity {
 	protected void initData() {
 		// TODO Auto-generated method stub
 		setWebView();
-		String urlString = "http://client.duowanka.com/wget_ep_detail{eaid=" + mId + "}";
+		String urlString = "http://client.duowanka.com/wget_ep_detail?epid=" + mId;
 		wv_public_web.loadUrl(urlString);
 	}
 
@@ -154,6 +156,9 @@ public class Activity_ShopInfoWeb extends BaseActivity {
 		settings.setCacheMode(WebSettings.LOAD_DEFAULT); // 默认使用缓存
 		settings.setAppCacheMaxSize(8 * 1024 * 1024); // 缓存最多可以有8M
 		settings.setAllowFileAccess(true); // 可以读取文件缓存(manifest生效)
+		//
+		settings.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
+		settings.setLoadWithOverviewMode(true);
 	}
 
 	/**
@@ -165,6 +170,7 @@ public class Activity_ShopInfoWeb extends BaseActivity {
 		public boolean shouldOverrideUrlLoading(WebView view, String url) {
 			Log.d("shouldOverrideUrlLoading", url);
 			if (PublicUtil.isNetworkAvailable(activity)) {
+				UIHelper.showMsgProgressDialog(activity, "");
 				view.loadUrl(url);
 				return true;
 			} else {
@@ -186,6 +192,7 @@ public class Activity_ShopInfoWeb extends BaseActivity {
 
 		@Override
 		public void onPageFinished(WebView view, String url) {
+			UIHelper.cancelProgressDialog();
 			super.onPageFinished(view, url);
 		}
 

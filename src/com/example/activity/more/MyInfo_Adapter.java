@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.android.volley.VolleyError;
 import com.example.activity.common.Activity_OnlySubmit;
 import com.example.activity.common.DialogClick;
+import com.example.activity.common.DialogSex;
 import com.example.activity.common.EnumOnlySubmit;
 import com.example.activity.reg.LoginActivity;
 import com.example.entity.respose.BaseResponse;
@@ -141,8 +142,16 @@ public class MyInfo_Adapter extends BaseAdapter {
 				Activity_OnlySubmit.luanch(activity, listData.get(type).getName(), EnumOnlySubmit.INVITE_NO);
 				break;
 			case 2:
+				DialogSex dialogSex = new DialogSex(activity);
+				dialogSex.requestWindowFeature(Window.FEATURE_NO_TITLE);
+				dialogSex.show();
 				break;
 			case 3:
+				DialogDate dialogDate = new DialogDate(activity);
+				dialogDate.requestWindowFeature(Window.FEATURE_NO_TITLE);
+				dialogDate.show();
+				break;
+			case 4:
 				final DialogClick dialogClick1 = new DialogClick(activity);
 				dialogClick1.requestWindowFeature(Window.FEATURE_NO_TITLE);
 				dialogClick1.show();
