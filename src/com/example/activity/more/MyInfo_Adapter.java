@@ -33,6 +33,7 @@ import com.example.http.Protocol;
 import com.example.keyguard.R;
 import com.example.util.PublicUtil;
 import com.example.util.SharedPreferenceUtil;
+import com.example.util.UIHelper;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.bitmap.BitmapDisplayConfig;
 import com.lidroid.xutils.bitmap.callback.BitmapLoadCallBack;
@@ -161,6 +162,7 @@ public class MyInfo_Adapter extends BaseAdapter {
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
 						dialogClick1.dismiss();
+						UIHelper.showMsgProgressDialog(activity, "正在注销，请稍后...");
 						Protocol.logout(activity, Activity_MyInfo.class.getSimpleName(), new LogoutCallBack());
 					}
 				}, new OnClickListener() {
@@ -250,6 +252,7 @@ public class MyInfo_Adapter extends BaseAdapter {
 		@Override
 		public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
 			// TODO Auto-generated method stub
+			UIHelper.cancelProgressDialog();
 			BaseResponse msg = (BaseResponse) response;
 			// if (msg.getCode().equals(Code.CODE_SUCCESS)) {
 			// } else {

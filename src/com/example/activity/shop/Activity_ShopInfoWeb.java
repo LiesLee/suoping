@@ -109,6 +109,7 @@ public class Activity_ShopInfoWeb extends BaseActivity {
 	public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
 		// TODO Auto-generated method stub
 		if (flag == exchange_productFalg) {
+			UIHelper.cancelProgressDialog();
 			BaseResponse baseResponse = (BaseResponse) response;
 			if (baseResponse.getCode() == Code.CODE_SUCCESS) {
 				showToast(baseResponse.getMsg());
