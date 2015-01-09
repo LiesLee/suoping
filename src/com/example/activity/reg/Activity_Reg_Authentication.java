@@ -94,6 +94,7 @@ public class Activity_Reg_Authentication extends BaseActivity implements View.On
 				et_reg.requestFocus();
 			} else {
 				Activity_Reg_Password.luanch(this, cellphoneNumber, et_reg.getText().toString());
+				finish();
 			}
 			break;
 		case R.id.iv_back_left:

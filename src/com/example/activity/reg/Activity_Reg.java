@@ -57,6 +57,7 @@ public class Activity_Reg extends BaseActivity implements View.OnClickListener {
 			cellphoneNumber = et_reg.getText().toString();
 			if (check()) {
 				Activity_Reg_Authentication.luanch(this, cellphoneNumber);
+				finish();
 			}
 			break;
 

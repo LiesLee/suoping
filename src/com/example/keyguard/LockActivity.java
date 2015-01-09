@@ -131,7 +131,9 @@ public class LockActivity extends BaseActivity {
 					// mListView.smoothScrollToPosition(currentRow);
 				}
 				mListView.setSelection(currentRow);
-				tv_appJiFen.setText(Activity_Launch.lockADList_Entities.get(currentRow).getEarn_jifen());
+				if (listCount > 0) {
+					tv_appJiFen.setText(Activity_Launch.lockADList_Entities.get(currentRow).getEarn_jifen());
+				}
 				Log.d("监听器:", string + "   " + currentRow);
 			}
 		});
@@ -182,7 +184,9 @@ public class LockActivity extends BaseActivity {
 		mRelativeLayout.addView(imageView_normal, image_rl2);
 
 		tv_appJiFen = new TextView(this);
-		tv_appJiFen.setText(Activity_Launch.lockADList_Entities.get(currentRow).getEarn_jifen());
+		if (listCount > 0) {
+			tv_appJiFen.setText(Activity_Launch.lockADList_Entities.get(currentRow).getEarn_jifen());
+		}
 		tv_appJiFen.setTextSize(30);
 		tv_appJiFen.setTextColor(Color.WHITE);
 		// tv1.setBackgroundColor(Color.RED);
@@ -305,7 +309,7 @@ public class LockActivity extends BaseActivity {
 			// TODO Auto-generated method stub
 
 			int action = event.getAction();
-			Log.i("@@@@@@", "Touch:" + action);
+			Log.i(setTag(), "Touch:" + action);
 			switch (action) {
 			case MotionEvent.ACTION_DOWN:
 				lastX = (int) event.getRawX();
@@ -352,7 +356,7 @@ public class LockActivity extends BaseActivity {
 				 */
 				// 璁╂寜閽殢鐫�Е鎺х瑪鐨勭Щ鍔ㄤ竴璧风Щ鍔�
 				v.layout(left, v.getTop(), right, v.getBottom());
-				Log.i("@@@@@@", "position锟斤拷" + left + ", " + top + ", " + right + ", " + bottom);
+				Log.i(setTag(), "position" + left + ", " + top + ", " + right + ", " + bottom);
 				lastX = (int) event.getRawX();
 				lastY = (int) event.getRawY();
 				break;
@@ -384,7 +388,6 @@ public class LockActivity extends BaseActivity {
 						//
 						Activity_DownloadWeb.luanch(LockActivity.this,
 								Activity_Launch.lockADList_Entities.get(currentRow).getId());
-						Activity_YouMi.luanch(LockActivity.this);
 						// OffersManager.getInstance(LockActivity.this).showOffersWall();
 						// 积分墙配置检查（没有使用“通过 Receiver来获取积分订单”功能）：
 						// boolean isSuccess =

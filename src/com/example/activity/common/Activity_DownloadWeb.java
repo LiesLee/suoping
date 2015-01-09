@@ -105,7 +105,7 @@ public class Activity_DownloadWeb extends BaseActivity {
 			break;
 		case R.id.but_down_web:
 			UIHelper.showMsgProgressDialog(activity, "正在加载...");
-			Protocol.get_earn_downloadurl(activity, setTag(), mId);
+			downFlag = Protocol.get_earn_downloadurl(activity, setTag(), mId);
 			break;
 
 		default:

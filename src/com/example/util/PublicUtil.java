@@ -2,13 +2,18 @@ package com.example.util;
 
 import java.io.File;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
+import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -25,19 +30,14 @@ import android.widget.Toast;
 import com.example.activity.common.KeyGuardApplication;
 import com.example.entity.Download_APK_Install;
 import com.example.entity.UserInfo;
-import com.example.http.InstallService;
 import com.example.keyguard.R;
+import com.example.keyguard.StartInstalledBroadcast;
 import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.HttpHandler;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
-
-import java.io.File;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @Description 公共工具类
@@ -214,6 +214,23 @@ public class PublicUtil {
 	}
 
 	/**
+	 * @Description 判断apk是否运行
+	 * @author Created by qinxianyuzou on 2015-1-9.
+	 * @param context
+	 * @param packageName
+	 * @return
+	 */
+	public static boolean isRunningAPK(Context context, String packageName) {
+		ActivityManager am = (ActivityManager) context.getSystemService(Activity.ACTIVITY_SERVICE);
+		List<RunningAppProcessInfo> infos = am.getRunningAppProcesses();
+		for (RunningAppProcessInfo rapi : infos) {
+			if (rapi.processName.equals(packageName))
+				return true;
+		}
+		return false;
+	}
+
+	/**
 	 * @Description 安装apk
 	 * @author Created by qinxianyuzou on 2014-12-26.
 	 * @param context
@@ -225,7 +242,19 @@ public class PublicUtil {
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		intent.setDataAndType(Uri.parse("file://" + apkPath), "application/vnd.android.package-archive");
 		context.startActivity(intent);
-//		PackageManager pManager=context.getPackageManager();
+		// PackageManager pManager=context.getPackageManager();
+	}
+
+	/**
+	 * @Description 监听软件安装状态
+	 * @author Created by qinxianyuzou on 2015-1-9.
+	 * @param context
+	 * @param packagename
+	 */
+	public static void startInstalledBroadcast(Context context, String packagename) {
+		IntentFilter intentFilter = new IntentFilter();
+		intentFilter.addAction("startInstalledBroadcast");
+		context.registerReceiver(new StartInstalledBroadcast(packagename), intentFilter);
 	}
 
 	/**
@@ -349,8 +378,8 @@ public class PublicUtil {
 
 	@SuppressWarnings({ "deprecation", "rawtypes" })
 	public static void downloadAPP(final Activity activity, String url) {
-		String apkName[] = url.split("\\");
-		final String downFile = DOWNLOAD_APP_PATH + "/" + apkName[apkName.length - 1];
+		String apkName[] = url.split("/");
+		final String downFile = DOWNLOAD_APP_PATH + "/" + apkName[apkName.length - 1] + ".apk";
 		HttpUtils http = new HttpUtils();
 		final Notification mNotification;
 		final NotificationManager mNotificationManager;
@@ -380,7 +409,7 @@ public class PublicUtil {
 				mNotification.contentView.setTextViewText(R.id.content_view_text1,
 						decimalFormat.format((float) current / (float) total));
 				mNotification.contentView.setProgressBar(R.id.content_view_progress, (int) total, (int) current, false);
-				mNotificationManager.notify(3566, mNotification);
+				mNotificationManager.notify(3567, mNotification);
 			}
 
 			@Override
@@ -416,7 +445,7 @@ public class PublicUtil {
 			ctx = KeyGuardApplication.getInstance().getApplicationContext();
 			for (String path : listFile) {
 				Download_APK_Install apk = new Download_APK_Install();
-//				apk.setAppIcon(getApkIcon(ctx, path));
+				// apk.setAppIcon(getApkIcon(ctx, path));
 				apk.setAppName(getAPPName(ctx, path));
 				apk.setAppPath(path);
 				apk.setInstalled(isApkInstalled(ctx, getPackageName(ctx, path)));

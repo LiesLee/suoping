@@ -46,7 +46,7 @@ public class Activity_invitation extends BaseActivity {
 	@ViewInject(R.id.btn_invitation_number)
 	private Button btn_invitation_number;
 	/** 标题 */
-	private static String mTitle = "";
+	private static String mTitle = "邀请";
 
 	/**
 	 * @Description 不设置标题
@@ -84,7 +84,6 @@ public class Activity_invitation extends BaseActivity {
 	protected void initUI() {
 		// TODO Auto-generated method stub
 		tv_public_top_title.setText(mTitle);
-		rl_public_back.setVisibility(View.VISIBLE);
 		rl_public_back.setOnClickListener(this);
 		btn_invitation_number.setOnClickListener(this);
 		lay_activated.setOnClickListener(this);
@@ -139,6 +138,7 @@ public class Activity_invitation extends BaseActivity {
 		clipboard.setPrimaryClip(clip);
 	}
 
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@SuppressWarnings("deprecation")
 	private void copyInviteNo_8() {
 		ClipboardManager c = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);

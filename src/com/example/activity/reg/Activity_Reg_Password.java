@@ -17,6 +17,7 @@ import com.example.entity.respose.BaseResponse;
 import com.example.entity.respose.Code;
 import com.example.entity.respose.ResponseUserInfo;
 import com.example.http.Protocol;
+import com.example.keyguard.MainActivity;
 import com.example.keyguard.R;
 import com.example.util.LogUtil;
 import com.example.util.SharedPreferenceUtil;
@@ -138,6 +139,7 @@ public class Activity_Reg_Password extends BaseActivity implements View.OnClickL
 				SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.OLD_PASSWORD, password);
 				SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.USERINFO,
 						msg.getMsg().toString());
+				startActivity(new Intent(activity, MainActivity.class));
 			} else {
 				showToast("登陆失败，请稍候再试！");
 				startActivity(new Intent(this, LoginActivity.class));
