@@ -61,7 +61,8 @@ public class My_Download_Adapter extends BaseAdapter {
 	}
 
 	public void setData(List<Download_APK_Install> data) {
-		listData = data;
+        listData.clear();
+		listData.addAll(data);
 		notifyDataSetChanged();
 	}
 
@@ -132,6 +133,7 @@ public class My_Download_Adapter extends BaseAdapter {
                 }
 
                 listItemView.btn_choose_app.setVisibility(View.VISIBLE);
+                listItemView.btn_choose_app.setImageResource(R.drawable.apk_choose_nomal);
                 listItemView.btn_install_app.setVisibility(View.GONE);
 
                 listItemView.btn_choose_app.setOnClickListener(new View.OnClickListener() {

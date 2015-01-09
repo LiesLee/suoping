@@ -15,6 +15,7 @@ import com.example.entity.Download_APK_Install;
 import com.example.entity.ListApks;
 import com.example.keyguard.R;
 import com.example.ui.pull.RefleshListView;
+import com.example.util.PublicUtil;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.bitmap.PauseOnScrollListener;
@@ -105,15 +106,13 @@ public class Fragment_MyDownload extends BaseFragment {
                 @Override
                 public void onClick(View v) {
                     List<Download_APK_Install> data = adapter.getData();
-                    dataList = adapter.getData();
                     for (int i = 0; i < data.size(); i++){
                         if (data.get(i).isChoose()){
                             new File(data.get(i).getAppPath()).delete();
-                            dataList.remove(i);
                         }
                     }
                     //data.clear();
-                    adapter.setData(dataList);
+                    adapter.setData(PublicUtil.getDownloadAppsEntity());
                 }
             });
         }else{
