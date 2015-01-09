@@ -61,18 +61,16 @@ public class Shop_Adapter extends BaseAdapter {
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
 		// 实例化viewholader
 		HolderView listItemView;
 
 		if (convertView == null) {
 			listItemView = new HolderView();
-			//
 			convertView = listContainer.inflate(R.layout.item_shop, null);
 			listItemView.iv_item_shop_icon = (ImageView) convertView.findViewById(R.id.iv_item_shop_icon);
 			listItemView.tv_item_shop_name = (TextView) convertView.findViewById(R.id.tv_item_shop_name);
 			listItemView.tv_item_shop_money = (TextView) convertView.findViewById(R.id.tv_item_shop_money);
-			//
 			// 设置标记
 			convertView.setTag(listItemView);
 		} else {
@@ -82,7 +80,15 @@ public class Shop_Adapter extends BaseAdapter {
         AQuery aq_ = aq.recycle(convertView);
 		listItemView.tv_item_shop_name.setText(listData.get(position).getTitle());
 		listItemView.tv_item_shop_money.setText(listData.get(position).getNeed_jifen());
-        aq.id(listItemView.iv_item_shop_icon).image(listData.get(position).getHp_url());
+        aq_.id(listItemView.iv_item_shop_icon).image(listData.get(position).getHp_url());
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Activity_ShopInfoWeb
+                        .luanch((android.app.Activity) mContext, listData.get(position).getTitle(), listData.get(position).getEp_id());
+            }
+        });
 		return convertView;
 	}
 

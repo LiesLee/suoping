@@ -24,6 +24,7 @@ import com.example.keyguard.R;
 import com.example.ui.astuetz.PagerSlidingTabStrip;
 import com.example.ui.pull.RefleshListView;
 import com.example.util.LogUtil;
+import com.example.util.UIHelper;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.bitmap.PauseOnScrollListener;
@@ -49,27 +50,19 @@ public class Fragment_shop extends BaseFragment {
 	private RefleshListView rListView;
 
 	private ShopInterface shopCoordinator;
-	private BitmapUtils bitmapUtils;
+	//private BitmapUtils bitmapUtils;
 	private Shop_Adapter adapter;
 	/** 保存数据源 */
 	private ArrayList<EXProduct_Entity> dataList = new ArrayList<EXProduct_Entity>();
-	private static String ptype = "";
+	//private static String ptype = "";
 	/** 列表接口标识 */
 	private long exproductFlag;
 
-	/**
-	 * Use this factory method to create a new instance of this fragment using
-	 * the provided parameters.
-	 * 
-	 * @param shop_type
-	 *            Parameter 1.
-	 * @return A new instance of fragment Fragment_shop.
-	 */
 	public static Fragment_shop newInstance(String shop_type) {
 		Fragment_shop fragment = new Fragment_shop();
 		Bundle args = new Bundle();
 		args.putString(SHOP_TYPE, shop_type);
-		ptype = shop_type;
+		//ptype = shop_type;
 		fragment.setArguments(args);
 		return fragment;
 	}
@@ -88,7 +81,6 @@ public class Fragment_shop extends BaseFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		// Inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_shop, container, false);
 		ViewUtils.inject(this, view);
 		return view;
@@ -96,24 +88,13 @@ public class Fragment_shop extends BaseFragment {
 
 	@Override
 	public void initUI() {
-		bitmapUtils = new BitmapUtils(activity);
 		adapter = new Shop_Adapter(activity);
-		rListView.setOnScrollListener(new PauseOnScrollListener(bitmapUtils, false, true));
 		rListView.setAdapter(adapter);
-		rListView.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				// TODO Auto-generated method stub
-				Activity_ShopInfoWeb
-						.luanch(activity, dataList.get(position).getTitle(), dataList.get(position).getEp_id());
-			}
-		});
 	}
 
-	@Override
+    @Override
 	public void initData() {
-		exproductFlag = Protocol.get_ex_product(activity, setTag(), ptype);
+		exproductFlag = Protocol.get_ex_product(activity, setTag(), shop_type);
 	}
 
 	@Override
@@ -123,12 +104,11 @@ public class Fragment_shop extends BaseFragment {
 
 	@Override
 	public <T> void onHttpSuccess(long flag, JSONObject json, T response) {
-		// TODO Auto-generated method stub
 		super.onHttpSuccess(flag, json, response);
 		if (flag == exproductFlag) {
 			ResponseEXProduct responseEXProduct = (ResponseEXProduct) response;
 			if (responseEXProduct.getCode() == Code.CODE_SUCCESS) {
-                LogUtil.i("========responseEXProduct============",json.toString());
+                LogUtil.i("========responseEXProduct======"+shop_type+"======",json.toString());
 				dataList = responseEXProduct.getData();
 				adapter.setData(dataList);
 			}
@@ -137,7 +117,6 @@ public class Fragment_shop extends BaseFragment {
 
 	@Override
 	public void onHttpError(long flag, VolleyError e) {
-		// TODO Auto-generated method stub
 		super.onHttpError(flag, e);
 	}
 
@@ -154,7 +133,7 @@ public class Fragment_shop extends BaseFragment {
 	@Override
 	public void onDetach() {
 		super.onDetach();
-		shopCoordinator = null;
+		//shopCoordinator = null;
 	}
 
 	/**

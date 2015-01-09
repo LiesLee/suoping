@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <RelativeLayout
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/download_app_icon"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+        <TextView
+            android:id="@+id/download_app_name"
+            android:layout_toRightOf="@+id/download_app_icon"
+            android:layout_alignTop="@+id/download_app_icon"
+            android:text="微信"
+            android:textSize="17sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/download_app_info"
+            android:layout_toRightOf="@+id/download_app_icon"
+            android:layout_alignBottom="@+id/download_app_icon"
+            android:text="安装"
+            android:textSize="10sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_install_status"
+            android:text="未安装"
+            android:visibility="gone"
+            android:paddingLeft="7dp"
+            android:layout_alignBottom="@id/download_app_info"
+            android:layout_toRightOf="@id/download_app_info"
+            android:textSize="12sp"
+            android:textColor="@color/prevailing_red"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line" />
+</LinearLayout>
