@@ -38,7 +38,7 @@ public abstract class BaseFragment extends Fragment implements HttpCallBack {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		initUI();
-		initData();
+        initData();
 		isfrist = false;
 	}
 

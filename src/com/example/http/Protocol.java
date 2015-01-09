@@ -11,6 +11,7 @@ import com.example.entity.respose.BaseResponse;
 import com.example.entity.respose.ResponseDownAPP;
 import com.example.entity.respose.ResponseEPDetail;
 import com.example.entity.respose.ResponseEXProduct;
+import com.example.entity.respose.ResponseExchangeDetail;
 import com.example.entity.respose.ResponseInviteDetail;
 import com.example.entity.respose.ResponseLockADList;
 import com.example.entity.respose.ResponseLogistics;
@@ -49,7 +50,7 @@ public class Protocol {
 		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
 		requestParam.add(new BasicNameValuePair("username", send_code));
 		return ConnectorManage.getInstance(context).PostHttpRequest(context, Config.SEND_CODE, tag, requestParam,
-				BaseResponse.class, null);
+                BaseResponse.class, null);
 	}
 
 	/**
@@ -99,7 +100,7 @@ public class Protocol {
 	public static long logout(Context context, String tag, HttpCallBack httpCallBack) {
 		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
 		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.LOGOUT, tag, requestParam,
-				BaseResponse.class, httpCallBack);
+                BaseResponse.class, httpCallBack);
 	}
 
 	/**
@@ -185,7 +186,7 @@ public class Protocol {
 		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
 		requestParam.add(new BasicNameValuePair("no", no));
 		return ConnectorManage.getInstance(context).PostHttpRequest(context, Config.INVITE, tag, requestParam,
-				ResponseEPDetail.class, null);
+                ResponseEPDetail.class, null);
 	}
 
 	/**
@@ -222,7 +223,7 @@ public class Protocol {
 		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
 		requestParam.add(new BasicNameValuePair("eaid", eaid));
 		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.GET_EARN_DOWNLOADURL, tag,
-				requestParam, ResponseDownAPP.class, null);
+                requestParam, ResponseDownAPP.class, null);
 	}
 
 	/**
@@ -291,6 +292,18 @@ public class Protocol {
 		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.GET_EARN_LIST, tag, requestParam,
 				ResponseLockADList.class, null);
 	}
+
+    /**
+     * 用户兑换商品详细信息
+     * @param ctx
+     * @param tag
+     * @return
+     */
+    public static long get_user_ex_detail(Context ctx, String tag){
+        ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
+        return ConnectorManage.getInstance(ctx).GetHttpRequest(ctx, Config.USER_EXCHANG_DETAIL, tag, requestParam,
+                ResponseExchangeDetail.class, null);
+    }
 
 	/**
 	 * @Description 获取邀请详情

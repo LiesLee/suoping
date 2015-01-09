@@ -14,9 +14,17 @@ import com.android.volley.VolleyError;
 import com.example.activity.common.BaseActivity;
 import com.example.activity.common.KeyGuardActivityManager;
 import com.example.activity.more.Activity_MyInfo;
+import com.example.activity.more.My_Download_Adapter;
+import com.example.entity.Download_APK_Install;
 import com.example.keyguard.R;
+import com.example.util.PublicUtil;
+import com.example.util.UIHelper;
+import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.bitmap.PauseOnScrollListener;
 import com.lidroid.xutils.view.annotation.ViewInject;
+
+import java.util.List;
 
 /**
  * @Description 待激活收益
@@ -32,11 +40,14 @@ public class Activity_NotActive extends BaseActivity {
 	private RelativeLayout rl_public_back;
 	/** 列表 */
 	@ViewInject(R.id.lv_shop_body)
-	private ListView lv_shop_body;
+	private ListView rListView;
 	/** 标题 */
 	private static String mTitle = "待激活收益";
+    private BitmapUtils bitmapUtils;
+    private My_Not_Active_Adapter adapter;
+    private List<Download_APK_Install> apps;
 
-	/**
+    /**
 	 * @Description 不设置标题
 	 * @author Created by qinxianyuzou on 2014-12-30.
 	 * @param activity
@@ -74,17 +85,28 @@ public class Activity_NotActive extends BaseActivity {
 		tv_public_top_title.setText(mTitle);
 		rl_public_back.setVisibility(View.VISIBLE);
 		rl_public_back.setOnClickListener(this);
+        bitmapUtils = new BitmapUtils(activity);
+        adapter = new My_Not_Active_Adapter(this, bitmapUtils);
+        rListView.setOnScrollListener(new PauseOnScrollListener(bitmapUtils, false, true));
+        rListView.setAdapter(adapter);
 	}
 
 	@Override
 	protected void initData() {
-		// TODO Auto-generated method stub
-
+        apps = PublicUtil.getDownloadAppsEntityIsInstalled();
+        adapter.setData(apps);
 	}
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
+		switch (v.getId()) {
+		    case R.id.rl_public_back :
+		        this.finish();
+		        break;
+
+		    default:
+		        break;
+		}
 
 	}
 

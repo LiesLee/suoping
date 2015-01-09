@@ -266,8 +266,7 @@ public class PublicUtil {
 	 */
 	public static void openAPK(Context context, String packagename) {
 		PackageManager packageManager = context.getPackageManager();
-		Intent intent = new Intent();
-		intent = packageManager.getLaunchIntentForPackage(packagename);
+		Intent intent = packageManager.getLaunchIntentForPackage(packagename);
 		context.startActivity(intent);
 	}
 
@@ -451,6 +450,34 @@ public class PublicUtil {
 				apk.setInstalled(isApkInstalled(ctx, getPackageName(ctx, path)));
 				apk.setFileSize(formatSizeM(getFileSize(path)));
 				apps.add(apk);
+			}
+			return apps;
+		} else {
+			return apps;
+		}
+	}
+
+    /**
+	 * 获取所有已下载的应用并返回集合
+	 *
+	 * @return List<Download_APK_Install>
+	 */
+	public static List<Download_APK_Install> getDownloadAppsEntityIsInstalled() {
+		Context ctx;
+		List<Download_APK_Install> apps = new ArrayList<>();
+		getFiles(DOWNLOAD_APP_PATH, "apk", true);
+		if (listFile.size() != 0) {
+			ctx = KeyGuardApplication.getInstance().getApplicationContext();
+			for (String path : listFile) {
+				Download_APK_Install apk = new Download_APK_Install();
+				// apk.setAppIcon(getApkIcon(ctx, path));
+				apk.setAppName(getAPPName(ctx, path));
+				apk.setAppPath(path);
+				apk.setInstalled(isApkInstalled(ctx, getPackageName(ctx, path)));
+				apk.setFileSize(formatSizeM(getFileSize(path)));
+                if(apk.isInstalled()){
+                    apps.add(apk);
+                }
 			}
 			return apps;
 		} else {
