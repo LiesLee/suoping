@@ -13,6 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.androidquery.AQuery;
 import com.example.entity.shop.EXProduct_Entity;
 import com.example.keyguard.R;
 import com.lidroid.xutils.BitmapUtils;
@@ -28,34 +29,14 @@ import com.lidroid.xutils.bitmap.callback.DefaultBitmapLoadCallBack;
 public class Shop_Adapter extends BaseAdapter {
 	private Context mContext;
 	private LayoutInflater listContainer;
+    AQuery aq;
 	/** 数据源 */
 	private List<EXProduct_Entity> listData = new ArrayList<EXProduct_Entity>();
-	/** 图片加载工具 */
-	private BitmapUtils bitmapUtils;
-	/** 图片加载回调 */
-	private BitmapLoadCallBack<ImageView> bitmapLoadCallBack;
 
-	public Shop_Adapter(Context context, BitmapUtils bitmapUtils) {
+	public Shop_Adapter(Context context) {
 		mContext = context;
 		listContainer = LayoutInflater.from(mContext);
-		this.bitmapUtils = bitmapUtils;
-		bitmapLoadCallBack = new DefaultBitmapLoadCallBack<ImageView>() {
-
-			@Override
-			public void onLoadFailed(ImageView container, String uri, Drawable drawable) {
-				// TODO Auto-generated method stub
-				super.onLoadFailed(container, uri, drawable);
-				container.setImageResource(R.drawable.item_icon);
-			}
-
-			@Override
-			public void onLoadCompleted(ImageView container, String uri, Bitmap bitmap, BitmapDisplayConfig config,
-					BitmapLoadFrom from) {
-				// TODO Auto-generated method stub
-				super.onLoadCompleted(container, uri, bitmap, config, from);
-			}
-		};
-		// ViewUtils.inject((Activity) mContext);
+        aq = new AQuery(mContext);
 	}
 
 	public void setData(List<EXProduct_Entity> data) {
@@ -82,7 +63,7 @@ public class Shop_Adapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// 实例化viewholader
-		final HolderView listItemView;
+		HolderView listItemView;
 
 		if (convertView == null) {
 			listItemView = new HolderView();
@@ -97,9 +78,11 @@ public class Shop_Adapter extends BaseAdapter {
 		} else {
 			listItemView = (HolderView) convertView.getTag();
 		}
+
+        AQuery aq_ = aq.recycle(convertView);
 		listItemView.tv_item_shop_name.setText(listData.get(position).getTitle());
 		listItemView.tv_item_shop_money.setText(listData.get(position).getNeed_jifen());
-		bitmapUtils.display(listItemView.iv_item_shop_icon, listData.get(position).getHp_url(), bitmapLoadCallBack);
+        aq.id(listItemView.iv_item_shop_icon).image(listData.get(position).getHp_url());
 		return convertView;
 	}
 

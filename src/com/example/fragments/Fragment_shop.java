@@ -97,7 +97,7 @@ public class Fragment_shop extends BaseFragment {
 	@Override
 	public void initUI() {
 		bitmapUtils = new BitmapUtils(activity);
-		adapter = new Shop_Adapter(activity, bitmapUtils);
+		adapter = new Shop_Adapter(activity);
 		rListView.setOnScrollListener(new PauseOnScrollListener(bitmapUtils, false, true));
 		rListView.setAdapter(adapter);
 		rListView.setOnItemClickListener(new OnItemClickListener() {

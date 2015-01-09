@@ -105,13 +105,14 @@ public class Fragment_MyDownload extends BaseFragment {
                 @Override
                 public void onClick(View v) {
                     List<Download_APK_Install> data = adapter.getData();
+                    dataList = adapter.getData();
                     for (int i = 0; i < data.size(); i++){
                         if (data.get(i).isChoose()){
                             new File(data.get(i).getAppPath()).delete();
                             dataList.remove(i);
                         }
                     }
-                    data.clear();
+                    //data.clear();
                     adapter.setData(dataList);
                 }
             });
