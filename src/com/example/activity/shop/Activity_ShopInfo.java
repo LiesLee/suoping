@@ -135,7 +135,7 @@ public class Activity_ShopInfo extends BaseActivity {
 		// TODO Auto-generated method stub
 		if (flag == epdetailFalg) {
 			ResponseEPDetail responseEPDetail = (ResponseEPDetail) response;
-			if (responseEPDetail.getCode() == Code.CODE_SUCCESS) {
+			if (responseEPDetail.getCode().equals(Code.CODE_SUCCESS)) {
 				tv_shopinfo_title.setText(responseEPDetail.getData().getTitle());
 				tv_shopinfo_introduce.setText(responseEPDetail.getData().getIntroduce());
 				tv_shopinfo_need_jifen.setText(responseEPDetail.getData().getNeed_jifen());
@@ -147,7 +147,7 @@ public class Activity_ShopInfo extends BaseActivity {
 		}
 		if (flag == exchange_productFalg) {
 			BaseResponse baseResponse = (BaseResponse) response;
-			if (baseResponse.getCode() == Code.CODE_SUCCESS) {
+			if (baseResponse.getCode().equals(Code.CODE_SUCCESS)) {
 				showToast(baseResponse.getMsg());
 				finish();
 			} else {

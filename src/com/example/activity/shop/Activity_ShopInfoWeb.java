@@ -111,7 +111,7 @@ public class Activity_ShopInfoWeb extends BaseActivity {
 		if (flag == exchange_productFalg) {
 			UIHelper.cancelProgressDialog();
 			BaseResponse baseResponse = (BaseResponse) response;
-			if (baseResponse.getCode() == Code.CODE_SUCCESS) {
+			if (baseResponse.getCode().equals(Code.CODE_SUCCESS)) {
 				showToast(baseResponse.getMsg());
 				finish();
 			} else {
