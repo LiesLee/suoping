@@ -50,11 +50,11 @@ public class Fragment_shop extends BaseFragment {
 	private RefleshListView rListView;
 
 	private ShopInterface shopCoordinator;
-	//private BitmapUtils bitmapUtils;
+	// private BitmapUtils bitmapUtils;
 	private Shop_Adapter adapter;
 	/** 保存数据源 */
 	private ArrayList<EXProduct_Entity> dataList = new ArrayList<EXProduct_Entity>();
-	//private static String ptype = "";
+	// private static String ptype = "";
 	/** 列表接口标识 */
 	private long exproductFlag;
 
@@ -62,7 +62,7 @@ public class Fragment_shop extends BaseFragment {
 		Fragment_shop fragment = new Fragment_shop();
 		Bundle args = new Bundle();
 		args.putString(SHOP_TYPE, shop_type);
-		//ptype = shop_type;
+		// ptype = shop_type;
 		fragment.setArguments(args);
 		return fragment;
 	}
@@ -92,7 +92,7 @@ public class Fragment_shop extends BaseFragment {
 		rListView.setAdapter(adapter);
 	}
 
-    @Override
+	@Override
 	public void initData() {
 		exproductFlag = Protocol.get_ex_product(activity, setTag(), shop_type);
 	}
@@ -107,8 +107,8 @@ public class Fragment_shop extends BaseFragment {
 		super.onHttpSuccess(flag, json, response);
 		if (flag == exproductFlag) {
 			ResponseEXProduct responseEXProduct = (ResponseEXProduct) response;
-			if (responseEXProduct.getCode() == Code.CODE_SUCCESS) {
-                LogUtil.i("========responseEXProduct======"+shop_type+"======",json.toString());
+			if (responseEXProduct.getCode().equals(Code.CODE_SUCCESS)) {
+				LogUtil.i("========responseEXProduct======" + shop_type + "======", json.toString());
 				dataList = responseEXProduct.getData();
 				adapter.setData(dataList);
 			}

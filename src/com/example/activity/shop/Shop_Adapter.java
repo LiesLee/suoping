@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.androidquery.AQuery;
 import com.example.entity.shop.EXProduct_Entity;
 import com.example.keyguard.R;
+import com.example.util.LogUtil;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.bitmap.BitmapDisplayConfig;
 import com.lidroid.xutils.bitmap.callback.BitmapLoadCallBack;
@@ -29,14 +30,14 @@ import com.lidroid.xutils.bitmap.callback.DefaultBitmapLoadCallBack;
 public class Shop_Adapter extends BaseAdapter {
 	private Context mContext;
 	private LayoutInflater listContainer;
-    AQuery aq;
+	AQuery aq;
 	/** 数据源 */
 	private List<EXProduct_Entity> listData = new ArrayList<EXProduct_Entity>();
 
 	public Shop_Adapter(Context context) {
 		mContext = context;
 		listContainer = LayoutInflater.from(mContext);
-        aq = new AQuery(mContext);
+		aq = new AQuery(mContext);
 	}
 
 	public void setData(List<EXProduct_Entity> data) {
@@ -77,18 +78,18 @@ public class Shop_Adapter extends BaseAdapter {
 			listItemView = (HolderView) convertView.getTag();
 		}
 
-        AQuery aq_ = aq.recycle(convertView);
+		AQuery aq_ = aq.recycle(convertView);
 		listItemView.tv_item_shop_name.setText(listData.get(position).getTitle());
-		listItemView.tv_item_shop_money.setText(listData.get(position).getNeed_jifen());
-        aq_.id(listItemView.iv_item_shop_icon).image(listData.get(position).getHp_url());
+		listItemView.tv_item_shop_money.setText("所需积分：" + listData.get(position).getNeed_jifen());
+		aq_.id(listItemView.iv_item_shop_icon).image(listData.get(position).getHp_url());
 
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Activity_ShopInfoWeb
-                        .luanch((android.app.Activity) mContext, listData.get(position).getTitle(), listData.get(position).getEp_id());
-            }
-        });
+		convertView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Activity_ShopInfoWeb.luanch((android.app.Activity) mContext, listData.get(position).getTitle(),
+						listData.get(position).getEp_id());
+			}
+		});
 		return convertView;
 	}
 
