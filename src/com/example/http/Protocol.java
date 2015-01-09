@@ -11,6 +11,7 @@ import com.example.entity.respose.BaseResponse;
 import com.example.entity.respose.ResponseDownAPP;
 import com.example.entity.respose.ResponseEPDetail;
 import com.example.entity.respose.ResponseEXProduct;
+import com.example.entity.respose.ResponseInviteDetail;
 import com.example.entity.respose.ResponseLockADList;
 import com.example.entity.respose.ResponseLogistics;
 import com.example.entity.respose.ResponseUpdate;
@@ -289,5 +290,18 @@ public class Protocol {
 		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
 		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.GET_EARN_LIST, tag, requestParam,
 				ResponseLockADList.class, null);
+	}
+
+	/**
+	 * @Description 获取邀请详情
+	 * @author Created by qinxianyuzou on 2015-1-9.
+	 * @param context
+	 * @param tag
+	 * @return
+	 */
+	public static long get_invite_detail(Context context, String tag) {
+		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
+		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.GET_INVITE_DETAIL, tag,
+				requestParam, ResponseInviteDetail.class, null);
 	}
 }

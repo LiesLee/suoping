@@ -37,6 +37,10 @@ public class Config {
 	public final static String EXCHANGE_PRODUCT = BASE_URL + "exchange_product";
 	/** 获取积分列表 */
 	public final static String GET_EARN_LIST = BASE_URL + "get_earn_list";
+	/** 获取兑换情况 */
+	public final static String USER_EXCHANG_DETAIL = BASE_URL + "user_exchange_detail";
+	/** 获取邀请情况 */
+	public final static String GET_INVITE_DETAIL = BASE_URL + "get_invite_detail";
 	/** 获取APP的详细情况 */
 	public final static String GET_EARN_DETAIL = BASE_URL + "get_earn_detail";
 	/** 获取APP的下载地址 */

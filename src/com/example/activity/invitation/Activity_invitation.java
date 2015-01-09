@@ -22,6 +22,9 @@ import com.android.volley.VolleyError;
 import com.example.activity.common.BaseActivity;
 import com.example.activity.common.DialogClick;
 import com.example.activity.common.KeyGuardActivityManager;
+import com.example.entity.respose.Code;
+import com.example.entity.respose.ResponseInviteDetail;
+import com.example.http.Protocol;
 import com.example.keyguard.R;
 import com.example.util.PublicUtil;
 import com.lidroid.xutils.ViewUtils;
@@ -45,8 +48,18 @@ public class Activity_invitation extends BaseActivity {
 	/** 一键获取邀请码 */
 	@ViewInject(R.id.btn_invitation_number)
 	private Button btn_invitation_number;
+	/** 当天获得价格 */
+	@ViewInject(R.id.tv_invitation_rmb)
+	private TextView tv_invitation_rmb;
+	/** 累计收益 */
+	@ViewInject(R.id.tv_all_invitation_earning)
+	private TextView tv_all_invitation_earning;
+	/** 邀请人数 */
+	@ViewInject(R.id.tv_invited)
+	private TextView tv_invited;
 	/** 标题 */
 	private static String mTitle = "邀请";
+	private long inviteDetailFlag;
 
 	/**
 	 * @Description 不设置标题
@@ -92,7 +105,7 @@ public class Activity_invitation extends BaseActivity {
 	@Override
 	protected void initData() {
 		// TODO Auto-generated method stub
-
+		inviteDetailFlag = Protocol.get_invite_detail(activity, setTag());
 	}
 
 	@Override
@@ -103,7 +116,7 @@ public class Activity_invitation extends BaseActivity {
 			finish();
 			break;
 		case R.id.lay_activated:
-			Activity_InvitationInfo.luanch(activity);
+			// Activity_InvitationInfo.luanch(activity);
 			break;
 		case R.id.btn_invitation_number:
 			final DialogClick dialogClick1 = new DialogClick(activity);
@@ -148,7 +161,14 @@ public class Activity_invitation extends BaseActivity {
 	@Override
 	public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
 		// TODO Auto-generated method stub
-
+		if (inviteDetailFlag == flag) {
+			ResponseInviteDetail msgInfo = (ResponseInviteDetail) response;
+			if (msgInfo.getCode().equals(Code.CODE_SUCCESS)) {
+				tv_all_invitation_earning.setText(msgInfo.getData().getSum_iearn());
+				tv_invited.setText(msgInfo.getData().getSum_num());
+				tv_all_invitation_earning.setText("1");
+			}
+		}
 	}
 
 	@Override
@@ -160,7 +180,7 @@ public class Activity_invitation extends BaseActivity {
 	@Override
 	public String setTag() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.getClass().getSimpleName();
 	}
 
 }
