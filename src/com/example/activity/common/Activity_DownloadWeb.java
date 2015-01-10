@@ -121,6 +121,8 @@ public class Activity_DownloadWeb extends BaseActivity {
 			ResponseDownAPP responseDownAPP = (ResponseDownAPP) response;
 			if (responseDownAPP.getCode().equals(Code.CODE_SUCCESS)) {
 				PublicUtil.downloadAPP(activity, responseDownAPP.getData().getDownload_url());
+			} else {
+				showToast(responseDownAPP.getMsg());
 			}
 		}
 	}
@@ -176,7 +178,6 @@ public class Activity_DownloadWeb extends BaseActivity {
 		public boolean shouldOverrideUrlLoading(WebView view, String url) {
 			Log.d("shouldOverrideUrlLoading", url);
 			if (PublicUtil.isNetworkAvailable(activity)) {
-				UIHelper.showMsgProgressDialog(activity, "");
 				view.loadUrl(url);
 				return true;
 			} else {
@@ -188,11 +189,12 @@ public class Activity_DownloadWeb extends BaseActivity {
 		@Override
 		public void onPageStarted(WebView view, String url, Bitmap favicon) {
 			// System.out.println("onPageStarted");
-			super.onPageStarted(view, url, favicon);
 			if (!PublicUtil.isNetworkAvailable(activity)) {
 				PublicUtil.showToast(activity, "无法与服务器通讯，请连接到移动数据或wifi");
 				return;
 			}
+			UIHelper.showMsgProgressDialog(activity, "");
+			super.onPageStarted(view, url, favicon);
 			// QinXianYuZouTool.LoadPrompt(mContext);
 		}
 

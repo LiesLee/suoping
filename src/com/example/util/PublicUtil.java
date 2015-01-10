@@ -422,9 +422,12 @@ public class PublicUtil {
 			public void onFailure(HttpException error, String msg) {
 				// tv_info.setText(msg);
 				LogUtil.d("handler", msg);
-				if (msg.equals("maybe the file has downloaded completely")) {
+				if (msg.indexOf("maybe the file has downloaded completely") > 0) {
 					showToast(activity, "文件已经下载完成");
 					installAPK(activity, downFile);
+				}
+				if (msg.indexOf("Target host must not be null") > 0) {
+					showToast(activity, "文件下载失败，下载文件不存在");
 				}
 			}
 
@@ -457,9 +460,9 @@ public class PublicUtil {
 		}
 	}
 
-    /**
+	/**
 	 * 获取所有已下载的应用并返回集合
-	 *
+	 * 
 	 * @return List<Download_APK_Install>
 	 */
 	public static List<Download_APK_Install> getDownloadAppsEntityIsInstalled() {
@@ -475,9 +478,9 @@ public class PublicUtil {
 				apk.setAppPath(path);
 				apk.setInstalled(isApkInstalled(ctx, getPackageName(ctx, path)));
 				apk.setFileSize(formatSizeM(getFileSize(path)));
-                if(apk.isInstalled()){
-                    apps.add(apk);
-                }
+				if (apk.isInstalled()) {
+					apps.add(apk);
+				}
 			}
 			return apps;
 		} else {

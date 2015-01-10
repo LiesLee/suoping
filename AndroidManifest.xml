@@ -31,7 +31,9 @@
         <service android:name=".LockService" >
         </service>
         <!-- 申明activity -->
-        <activity android:name=".LockActivity" >
+        <activity
+            android:name=".LockActivity"
+            android:launchMode="singleInstance" >
         </activity>
         <activity android:name=".DownLoadWebActivity" >
         </activity>
