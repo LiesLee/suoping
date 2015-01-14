@@ -1,19 +1,28 @@
 package com.example.activity.earnings;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.example.activity.common.BaseActivity;
+import com.example.activity.common.DialogClick;
 import com.example.activity.common.KeyGuardActivityManager;
 import com.example.activity.more.Activity_MyInfo;
+import com.example.entity.Exchange_detail;
 import com.example.entity.respose.Code;
 import com.example.entity.respose.ResponseExchangeDetail;
 import com.example.http.Protocol;
@@ -40,10 +49,11 @@ public class Activity_EarningsShop extends BaseActivity {
 	private ListView rListView;
 	/** 标题 */
 	private static String mTitle = "已兑换商品";
-    private long exFlag;
-    private Earning_Shop_Adapter adapter;
+	private long exFlag;
+	private Earning_Shop_Adapter adapter;
+	private List<Exchange_detail> data = new ArrayList<>();
 
-    /**
+	/**
 	 * @Description 不设置标题
 	 * @author Created by qinxianyuzou on 2014-12-30.
 	 * @param activity
@@ -82,44 +92,63 @@ public class Activity_EarningsShop extends BaseActivity {
 		rl_public_back.setVisibility(View.VISIBLE);
 		rl_public_back.setOnClickListener(this);
 
-        adapter = new Earning_Shop_Adapter(activity);
-        rListView.setAdapter(adapter);
+		adapter = new Earning_Shop_Adapter(activity);
+		rListView.setAdapter(adapter);
+		rListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				// TODO Auto-generated method stub
+				final DialogClick dialogClick1 = new DialogClick(activity);
+				dialogClick1.requestWindowFeature(Window.FEATURE_NO_TITLE);
+				dialogClick1.show();
+				dialogClick1.setContent("温馨提示", data.get(position).getSend_msg(), data.get(position).getIs_send(),
+						"知道了", new OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								// TODO Auto-generated method stub
+								dialogClick1.dismiss();
+							}
+						});
+			}
+		});
 	}
 
 	@Override
 	protected void initData() {
-        UIHelper.showMsgProgressDialog(this, "加载中...");
-        exFlag = Protocol.get_user_ex_detail(this, setTag());
+		UIHelper.showMsgProgressDialog(this, "加载中...");
+		exFlag = Protocol.get_user_ex_detail(this, setTag());
 	}
 
 	@Override
 	public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.rl_public_back :
-                this.finish();
-                break;
+		switch (v.getId()) {
+		case R.id.rl_public_back:
+			this.finish();
+			break;
 
-            default:
-                break;
-        }
+		default:
+			break;
+		}
 	}
 
 	@Override
 	public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
-        if (flag == exFlag) {
-            UIHelper.cancelProgressDialog();
-            ResponseExchangeDetail msg = (ResponseExchangeDetail) response;
-            if(msg.getCode().equals(Code.CODE_SUCCESS)){
-                LogUtil.i("======ear======", jsonString.toString());
-                adapter.setData(msg.getData());
-            }
-        }
+		if (flag == exFlag) {
+			UIHelper.cancelProgressDialog();
+			ResponseExchangeDetail msg = (ResponseExchangeDetail) response;
+			if (msg.getCode().equals(Code.CODE_SUCCESS)) {
+				LogUtil.i("======ear======", jsonString.toString());
+				data = msg.getData();
+				adapter.setData(msg.getData());
+			}
+		}
 	}
 
 	@Override
 	public void onHttpError(long flag, VolleyError error) {
 		// TODO Auto-generated method stub
-        UIHelper.cancelProgressDialog();
+		UIHelper.cancelProgressDialog();
 	}
 
 	@Override

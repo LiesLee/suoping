@@ -166,7 +166,7 @@ public class Activity_invitation extends BaseActivity {
 			if (msgInfo.getCode().equals(Code.CODE_SUCCESS)) {
 				tv_all_invitation_earning.setText(msgInfo.getData().getSum_iearn());
 				tv_invited.setText(msgInfo.getData().getSum_num());
-				tv_invitation_rmb.setText("1");
+				tv_invitation_rmb.setText(msgInfo.getData().getInvite_jifen());
 			}
 		}
 	}

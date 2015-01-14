@@ -10,21 +10,24 @@ import android.net.http.SslError;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings;
+import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.webkit.WebSettings.LayoutAlgorithm;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
+import com.example.activity.common.Activity_Submit;
 import com.example.activity.common.BaseActivity;
+import com.example.activity.common.DialogClick;
 import com.example.activity.common.KeyGuardActivityManager;
 import com.example.entity.respose.BaseResponse;
 import com.example.entity.respose.Code;
-import com.example.http.Protocol;
 import com.example.keyguard.R;
 import com.example.util.PublicUtil;
 import com.example.util.UIHelper;
@@ -32,7 +35,7 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 /**
- * @Description 下载web页
+ * @Description 商品web页
  * @author Created by qinxianyuzou on 2014-12-30.
  */
 public class Activity_ShopInfoWeb extends BaseActivity {
@@ -43,7 +46,7 @@ public class Activity_ShopInfoWeb extends BaseActivity {
 	/** 返回按钮 */
 	@ViewInject(R.id.rl_public_back)
 	private RelativeLayout rl_public_back;
-	/** 下载按钮 */
+	/** 兑换按钮 */
 	@ViewInject(R.id.but_down_web)
 	private Button but_down_web;
 	/** web控件 */
@@ -51,11 +54,31 @@ public class Activity_ShopInfoWeb extends BaseActivity {
 	private WebView wv_public_web;
 	private static String mTitle = "";
 	private static String mId = "";
+	/** 单价 */
+	private static String mDanJia = "";
+	/** 单价 */
+	private static String mStatus = "";
+	/** 单价 */
+	private static String mSendMsg = "";
+	/** 页面类型 */
+	private static int mType;
 	private long exchange_productFalg;
 
-	public static void luanch(Activity activity, String title, String id) {
+	public static void luanch(Activity activity, String title, String danjia, String id, int type) {
 		mTitle = title;
 		mId = id;
+		mDanJia = danjia;
+		mType = type;
+		Intent intent = new Intent(activity, Activity_ShopInfoWeb.class);
+		KeyGuardActivityManager.getInstance().goFoResult(activity, intent, KeyGuardActivityManager.MAIN_CODE);
+	}
+
+	public static void luanch(Activity activity, String title, String status, String sendMsg, String id, int type) {
+		mTitle = title;
+		mId = id;
+		mStatus = status;
+		mSendMsg = sendMsg;
+		mType = type;
 		Intent intent = new Intent(activity, Activity_ShopInfoWeb.class);
 		KeyGuardActivityManager.getInstance().goFoResult(activity, intent, KeyGuardActivityManager.MAIN_CODE);
 	}
@@ -96,8 +119,24 @@ public class Activity_ShopInfoWeb extends BaseActivity {
 			finish();
 			break;
 		case R.id.but_down_web:
-			UIHelper.showMsgProgressDialog(activity, "正在加载...");
-			exchange_productFalg = Protocol.exchange_product(activity, setTag(), mId);
+			// UIHelper.showMsgProgressDialog(activity, "正在加载...");
+			// exchange_productFalg = Protocol.exchange_product(activity,
+			// setTag(), mId);
+			if (mType == 0) {
+				Activity_Submit.luanch(activity, "订单操作", mDanJia, mId);
+			} else {
+				final DialogClick dialogClick1 = new DialogClick(activity);
+				dialogClick1.requestWindowFeature(Window.FEATURE_NO_TITLE);
+				dialogClick1.show();
+				dialogClick1.setContent("温馨提示", mSendMsg, mStatus, "知道了", new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						dialogClick1.dismiss();
+					}
+				});
+			}
 			break;
 
 		default:

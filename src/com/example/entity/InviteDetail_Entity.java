@@ -13,8 +13,10 @@ public class InviteDetail_Entity implements Serializable {
 	private static final long serialVersionUID = -7648082233300430477L;
 	/** 邀请人数 */
 	private String sum_num = StringUtils.EMPTY;
-	/** 邀请获得收益 */
+	/** 邀请累计获得收益 */
 	private String sum_iearn = StringUtils.EMPTY;
+	/** 当天邀请可获收益 */
+	private String invite_jifen = StringUtils.EMPTY;
 
 	/**
 	 * @Description
@@ -58,9 +60,34 @@ public class InviteDetail_Entity implements Serializable {
 		this.sum_iearn = sum_iearn;
 	}
 
+	/**
+	 * @Description 
+	 * @author Created by qinxianyuzou on 2015-1-14.
+	 * @see #invite_jifen
+	 * @return the invite_jifen
+	 */
+	public String getInvite_jifen() {
+		return invite_jifen;
+	}
+
+	/**
+	 * @Description 
+	 * @author Created by qinxianyuzou on 2015-1-14.
+	 * @see #invite_jifen
+	 * @param invite_jifen the invite_jifen to set
+	 */
+	public void setInvite_jifen(String invite_jifen) {
+		this.invite_jifen = invite_jifen;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return "InviteDetail_Entity [sum_num=" + sum_num + ", sum_iearn=" + sum_iearn + "]";
+		return "InviteDetail_Entity [sum_num=" + sum_num + ", sum_iearn=" + sum_iearn + ", invite_jifen="
+				+ invite_jifen + "]";
 	}
+
 
 }
