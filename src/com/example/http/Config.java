@@ -49,6 +49,8 @@ public class Config {
 	public final static String LOCK_EARN = BASE_URL + "lock_earn";
 	/** 邀请赚积分 */
 	public final static String INVITE = BASE_URL + "invite";
+	/** 分享信息 */
+	public final static String FSHARE = BASE_URL + "fshare";
 	/** APP下载 */
 	public final static String DOWNLOADAPP = "http://static.duowanka.com/downloadApp";
 	/** APP检查更新 */

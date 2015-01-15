@@ -166,8 +166,7 @@
                 android:layout_height="40dp"
                 android:background="@drawable/bg_invitation_btn"
                 android:text="立即邀请"
-                android:textColor="@color/white"
-                android:visibility="gone" />
+                android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/btn_invitation_number"
