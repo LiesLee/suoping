@@ -40,7 +40,7 @@ public class Activity_Reg extends BaseActivity implements View.OnClickListener {
 	/** 返回按钮 **/
 	@ViewInject(R.id.iv_back_left)
 	private ImageView iv_back_left;
-	/** 登陆按钮 **/
+	/** 登录按钮 **/
 	@ViewInject(R.id.but_reg_login)
 	private Button but_reg_login;
 	/** 手机号 **/

@@ -74,6 +74,8 @@
         </activity>
         <activity
             android:name="com.example.activity.reg.LoginActivity"
+            android:configChanges="orientation|keyboardHidden|locale"
+            android:windowSoftInputMode="adjustResize|stateHidden"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.example.activity.reg.Activity_Reg"
@@ -153,10 +155,10 @@
             android:name="com.example.activity.shop.Activity_ShopInfoWeb"
             android:screenOrientation="portrait" >
         </activity>
-        <activity
+        <!--<activity
             android:name="com.example.keyguard.Activity_YouMi"
             android:screenOrientation="portrait" >
-        </activity>
+        </activity>-->
         <!-- 有米广告 -->
         <activity
             android:name="net.youmi.android.AdBrowser"
