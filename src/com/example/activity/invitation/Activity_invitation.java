@@ -152,7 +152,8 @@ public class Activity_invitation extends BaseActivity {
 		// mController.setShareMedia(new UMImage(activity,
 		// "http://www.umeng.com/images/pic/banner_module_social.png"));
 		// 设置分享图片，参数2为本地图片的资源引用
-		mController.setShareMedia(new UMImage(activity, R.drawable.logo));
+//		mController.setShareMedia(new UMImage(activity, R.drawable.logo));
+		mController.setShareMedia(new UMImage(activity, "http://client.duowanka.com/share"));
 	}
 
 	@Override

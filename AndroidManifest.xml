@@ -28,7 +28,9 @@
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Light.NoTitleBar" >
-        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
 
         <service android:name=".LockService" >
         </service>
@@ -37,66 +39,123 @@
             android:name=".LockActivity"
             android:launchMode="singleInstance" >
         </activity>
-        <activity android:name=".DownLoadWebActivity" >
+        <activity
+            android:name=".DownLoadWebActivity"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.example.activity.earnings.Activity_earnings" >
+        <activity
+            android:name="com.example.activity.earnings.Activity_earnings"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.example.activity.invitation.Activity_invitation" >
+        <activity
+            android:name="com.example.activity.invitation.Activity_invitation"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.example.activity.more.Activity_more" >
+        <activity
+            android:name="com.example.activity.more.Activity_more"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.example.activity.shop.Activity_shop" >
+        <activity
+            android:name="com.example.activity.shop.Activity_shop"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.example.activity.common.Activity_Guide" >
+        <activity
+            android:name="com.example.activity.common.Activity_Guide"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.example.activity.common.Activity_Launch" >
+        <activity
+            android:name="com.example.activity.common.Activity_Launch"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.activity.reg.LoginActivity" />
-        <activity android:name="com.example.activity.reg.Activity_Reg" />
-        <activity android:name="com.example.activity.reg.Activity_Reg_Authentication" />
-        <activity android:name="com.example.activity.reg.Activity_Reg_Password" />
-        <activity android:name="com.example.activity.more.Activity_MyInfo" >
+        <activity
+            android:name="com.example.activity.reg.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.activity.reg.Activity_Reg"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.activity.reg.Activity_Reg_Authentication"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.activity.reg.Activity_Reg_Password"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.activity.more.Activity_MyInfo"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.example.activity.more.Activity_Address" >
+        <activity
+            android:name="com.example.activity.more.Activity_Address"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.example.activity.common.Activity_Submit" >
+        <activity
+            android:name="com.example.activity.common.Activity_Submit"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.example.activity.shop.Activity_ShopInfo" >
+        <activity
+            android:name="com.example.activity.shop.Activity_ShopInfo"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.example.activity.earnings.Activity_newcomer" >
+        <activity
+            android:name="com.example.activity.earnings.Activity_newcomer"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.activity.more.Activity_MyDownload"
-            android:label="@string/title_activity_activity__my_download" >
+            android:label="@string/title_activity_activity__my_download"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.example.activity.earnings.Activity_EarningsShop" >
+        <activity
+            android:name="com.example.activity.earnings.Activity_EarningsShop"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.example.activity.invitation.Activity_InvitationInfo" >
+        <activity
+            android:name="com.example.activity.invitation.Activity_InvitationInfo"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.example.activity.earnings.Activity_NotActive" >
+        <activity
+            android:name="com.example.activity.earnings.Activity_NotActive"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.example.activity.common.Activity_PublicWeb" >
+        <activity
+            android:name="com.example.activity.common.Activity_PublicWeb"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.example.activity.more.Activity_AddressList" >
+        <activity
+            android:name="com.example.activity.more.Activity_AddressList"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.example.activity.more.Activity_MyInfoPassWord" >
+        <activity
+            android:name="com.example.activity.more.Activity_MyInfoPassWord"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.example.activity.more.Activity_MyInfoPhone" >
+        <activity
+            android:name="com.example.activity.more.Activity_MyInfoPhone"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.example.activity.more.Activity_about" >
+        <activity
+            android:name="com.example.activity.more.Activity_about"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.example.activity.common.Activity_OnlySubmit" >
+        <activity
+            android:name="com.example.activity.common.Activity_OnlySubmit"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.example.activity.common.Activity_DownloadWeb" >
+        <activity
+            android:name="com.example.activity.common.Activity_DownloadWeb"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.example.activity.shop.Activity_ShopInfoWeb" >
+        <activity
+            android:name="com.example.activity.shop.Activity_ShopInfoWeb"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.example.keyguard.Activity_YouMi" >
+        <activity
+            android:name="com.example.keyguard.Activity_YouMi"
+            android:screenOrientation="portrait" >
         </activity>
         <!-- 有米广告 -->
         <activity
@@ -131,6 +190,7 @@
             android:configChanges="orientation|keyboard"
             android:launchMode="singleTask"
             android:noHistory="true"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.UMDialog"
             android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
@@ -143,7 +203,8 @@
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
-            android:noHistory="true" >
+            android:noHistory="true"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 

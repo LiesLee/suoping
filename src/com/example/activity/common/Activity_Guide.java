@@ -11,15 +11,13 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 
 import com.android.volley.VolleyError;
-import com.example.activity.reg.LoginActivity;
+import com.example.activity.reg.Activity_Reg;
 import com.example.keyguard.MainActivity;
 import com.example.keyguard.R;
 import com.example.util.SharedPreferenceUtil;
 import com.lidroid.xutils.ViewUtils;
-import com.lidroid.xutils.view.ViewInjectInfo;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 /**
@@ -86,8 +84,9 @@ public class Activity_Guide extends BaseActivity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.but_guide_goto:
 			if (SharedPreferenceUtil.getInstance(activity).getString(SharedPreferenceUtil.USERINFO).equals("")) {
-				startActivity(new Intent(this, LoginActivity.class));
-            } else {
+				// startActivity(new Intent(this, LoginActivity.class));
+				startActivity(new Intent(this, Activity_Reg.class));
+			} else {
 				startActivity(new Intent(this, MainActivity.class));
 			}
 			finish();
