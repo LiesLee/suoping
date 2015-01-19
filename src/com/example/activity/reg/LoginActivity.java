@@ -131,7 +131,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 				startActivity(new Intent(activity, MainActivity.class));
                 this.finish();
 			} else {
-				showToast("登录失败");
+				showToast(msg.getMsg());
 				LogUtil.i("=====login erre=====", jsonString.toString());
 			}
 		}
