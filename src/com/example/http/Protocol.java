@@ -331,6 +331,6 @@ public class Protocol {
 	public static long fshare(Context context, String tag) {
 		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
 		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.FSHARE, tag, requestParam,
-				BaseResponse.class, null);
+				ResponseShare.class, null);
 	}
 }

@@ -122,9 +122,10 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -158,6 +159,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
             android:orientation="vertical" >
 
             <Button
@@ -177,6 +180,6 @@
                 android:text="一键获取邀请码"
                 android:textColor="@color/white" />
         </LinearLayout>
-    </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>

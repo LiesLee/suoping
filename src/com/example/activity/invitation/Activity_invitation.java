@@ -26,6 +26,7 @@ import com.example.activity.common.KeyGuardActivityManager;
 import com.example.entity.respose.BaseResponse;
 import com.example.entity.respose.Code;
 import com.example.entity.respose.ResponseInviteDetail;
+import com.example.entity.respose.ResponseShare;
 import com.example.http.Protocol;
 import com.example.keyguard.MainActivity;
 import com.example.keyguard.R;
@@ -77,6 +78,7 @@ public class Activity_invitation extends BaseActivity {
 	private long inviteDetailFlag;
 	private long fshareFlag;
 	private String fshareMSG = "";
+	private String fshareURL = "";
 	// 首先在您的Activity中添加如下成员变量
 	final UMSocialService mController = UMServiceFactory.getUMSocialService("com.umeng.share");
 
@@ -152,8 +154,8 @@ public class Activity_invitation extends BaseActivity {
 		// mController.setShareMedia(new UMImage(activity,
 		// "http://www.umeng.com/images/pic/banner_module_social.png"));
 		// 设置分享图片，参数2为本地图片的资源引用
-//		mController.setShareMedia(new UMImage(activity, R.drawable.logo));
-		mController.setShareMedia(new UMImage(activity, "http://client.duowanka.com/share"));
+		// mController.setShareMedia(new UMImage(activity, R.drawable.logo));
+		mController.setShareMedia(new UMImage(activity, fshareURL));
 	}
 
 	@Override
@@ -170,24 +172,26 @@ public class Activity_invitation extends BaseActivity {
 			// 是否只有已登录用户才能打开分享选择页
 			share();
 			mController.openShare(activity, false);
-//			mController.openShare(activity, new SnsPostListener() {
-//
-//				@Override
-//				public void onStart() {
-//					// TODO Auto-generated method stub
-//
-//				}
-//
-//				@Override
-//				public void onComplete(SHARE_MEDIA platform, int stCode, SocializeEntity entity) {
-//					// TODO Auto-generated method stub
-//					if (stCode == 200) {
-//						Toast.makeText(activity, "分享成功", Toast.LENGTH_SHORT).show();
-//					} else {
-//						Toast.makeText(activity, "分享失败 : error code : " + stCode, Toast.LENGTH_SHORT).show();
-//					}
-//				}
-//			});
+			// mController.openShare(activity, new SnsPostListener() {
+			//
+			// @Override
+			// public void onStart() {
+			// // TODO Auto-generated method stub
+			//
+			// }
+			//
+			// @Override
+			// public void onComplete(SHARE_MEDIA platform, int stCode,
+			// SocializeEntity entity) {
+			// // TODO Auto-generated method stub
+			// if (stCode == 200) {
+			// Toast.makeText(activity, "分享成功", Toast.LENGTH_SHORT).show();
+			// } else {
+			// Toast.makeText(activity, "分享失败 : error code : " + stCode,
+			// Toast.LENGTH_SHORT).show();
+			// }
+			// }
+			// });
 			break;
 		case R.id.btn_invitation_number:
 			final DialogClick dialogClick1 = new DialogClick(activity);
@@ -241,9 +245,10 @@ public class Activity_invitation extends BaseActivity {
 			}
 		}
 		if (fshareFlag == flag) {
-			BaseResponse msgInfo = (BaseResponse) response;
+			ResponseShare msgInfo = (ResponseShare) response;
 			if (msgInfo.isSuccess()) {
-				fshareMSG = msgInfo.getMsg();
+				fshareMSG = msgInfo.getData().getShare_msg();
+				fshareURL = msgInfo.getData().getShare_url();
 			}
 		}
 	}
