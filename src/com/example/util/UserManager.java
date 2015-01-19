@@ -5,7 +5,7 @@ import com.example.entity.UserInfo;
 public class UserManager {
 	/** 系统当前登录用户(仅一个) */
 	private static UserInfo mLoginUser;
-	public boolean mLoginFlag = false; // 账户登陆状态
+	public boolean mLoginFlag = false; // 账户登录状态
 	private static String mHash = ""; // API访问安全验证码串
 	// 账户管理器单实例对象
 	private static UserManager mInstance = null;

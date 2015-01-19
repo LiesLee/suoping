@@ -156,7 +156,7 @@ public class MyInfo_Adapter extends BaseAdapter {
 				final DialogClick dialogClick1 = new DialogClick(activity);
 				dialogClick1.requestWindowFeature(Window.FEATURE_NO_TITLE);
 				dialogClick1.show();
-				dialogClick1.setContent("温馨提示", "退出登陆后，您将不能持续获得锁屏收益，确认退出吗？", "退出登陆", "继续赚钱", new OnClickListener() {
+				dialogClick1.setContent("温馨提示", "退出登录后，您将不能持续获得锁屏收益，确认退出吗？", "退出登录", "继续赚钱", new OnClickListener() {
 
 					@Override
 					public void onClick(View v) {
@@ -221,8 +221,8 @@ public class MyInfo_Adapter extends BaseAdapter {
 			// final DialogClick dialogClick1 = new DialogClick(activity);
 			// dialogClick1.requestWindowFeature(Window.FEATURE_NO_TITLE);
 			// dialogClick1.show();
-			// dialogClick1.setContent("温馨提示", "退出登陆后，您将不能持续获得锁屏收益，确认退出吗？",
-			// "退出登陆", "继续赚钱", new OnClickListener() {
+			// dialogClick1.setContent("温馨提示", "退出登录后，您将不能持续获得锁屏收益，确认退出吗？",
+			// "退出登录", "继续赚钱", new OnClickListener() {
 			//
 			// @Override
 			// public void onClick(View v) {

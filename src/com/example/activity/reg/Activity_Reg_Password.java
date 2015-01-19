@@ -126,7 +126,7 @@ public class Activity_Reg_Password extends BaseActivity implements View.OnClickL
 		if (flag == regFlag) {
 			BaseResponse msg = (BaseResponse) response;
 			if (msg.getCode().equals(Code.CODE_SUCCESS)) {
-				showToast(msg.getMsg() + "正在登陆，请稍候...");
+				showToast(msg.getMsg() + "正在登录，请稍候...");
 				loginFlag = Protocol.login(this, setTag(), cellphoneNumber, password);
 			} else {
 				showToast(msg.getMsg());
@@ -143,7 +143,7 @@ public class Activity_Reg_Password extends BaseActivity implements View.OnClickL
 						msg.getMsg().toString());
 				startActivity(new Intent(activity, MainActivity.class));
 			} else {
-				showToast("登陆失败，请稍候再试！");
+				showToast("登录失败，请稍候再试！");
 				startActivity(new Intent(this, LoginActivity.class));
 			}
 			finish();
