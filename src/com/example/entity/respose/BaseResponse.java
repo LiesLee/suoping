@@ -57,6 +57,18 @@ public class BaseResponse implements Serializable {
 		this.msg = msg;
 	}
 
+	/**
+	 * @Description 请求成功
+	 * @author Created by qinxianyuzou on 2015-1-15.
+	 * @return
+	 */
+	public boolean isSuccess() {
+		if (getCode().equals(Code.CODE_SUCCESS)) {
+			return true;
+		}
+		return false;
+	}
+
 	@Override
 	public String toString() {
 		return "BaseResponse [code=" + code + ", msg=" + msg + "]";

@@ -28,7 +28,7 @@ public class LockService extends Service {
 		
 		zdLockIntent = new Intent(LockService.this , LockActivity.class);
 		//zdLockIntent = new Intent(ZdLockService.this , MainActivity.class);
-
+//		zdLockIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT); 
 		zdLockIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		
 		/**/

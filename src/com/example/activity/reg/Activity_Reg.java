@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,6 +40,9 @@ public class Activity_Reg extends BaseActivity implements View.OnClickListener {
 	/** 返回按钮 **/
 	@ViewInject(R.id.iv_back_left)
 	private ImageView iv_back_left;
+	/** 登陆按钮 **/
+	@ViewInject(R.id.but_reg_login)
+	private Button but_reg_login;
 	/** 手机号 **/
 	String cellphoneNumber;
 
@@ -60,9 +64,11 @@ public class Activity_Reg extends BaseActivity implements View.OnClickListener {
 				finish();
 			}
 			break;
-
 		case R.id.iv_back_left:
 			this.finish();
+		case R.id.but_reg_login:
+			LoginActivity.luanch(activity);
+			finish();
 		default:
 			break;
 		}
@@ -96,6 +102,7 @@ public class Activity_Reg extends BaseActivity implements View.OnClickListener {
 	@Override
 	protected void initUI() {
 		btn_reg_next.setOnClickListener(this);
+		but_reg_login.setOnClickListener(this);
 	}
 
 	@Override

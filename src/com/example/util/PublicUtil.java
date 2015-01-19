@@ -10,7 +10,6 @@ import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.Notification;
 import android.app.NotificationManager;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -38,6 +37,10 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.HttpHandler;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.umeng.socialize.sso.QZoneSsoHandler;
+import com.umeng.socialize.sso.SmsHandler;
+import com.umeng.socialize.sso.UMQQSsoHandler;
+import com.umeng.socialize.weixin.controller.UMWXHandler;
 
 /**
  * @Description 公共工具类
@@ -319,6 +322,47 @@ public class PublicUtil {
 		}
 	}
 
+	/**
+	 * @Description 分享微信
+	 * @author Created by qinxianyuzou on 2015-1-14.
+	 * @param activity
+	 */
+	public static void shareWX(Activity activity) {
+		String appID = "wx2f8d9e440cb2d07d";
+		String appSecret = "c4efeef102f7df2c59e12a71b2f2c59a";
+		// 添加微信平台
+		UMWXHandler wxHandler = new UMWXHandler(activity, appID, appSecret);
+		wxHandler.addToSocialSDK();
+		// 添加微信朋友圈
+		UMWXHandler wxCircleHandler = new UMWXHandler(activity, appID, appSecret);
+		wxCircleHandler.setToCircle(true);
+		wxCircleHandler.addToSocialSDK();
+	}
+
+	/**
+	 * @Description 分享qq和qq空间
+	 * @author Created by qinxianyuzou on 2015-1-14.
+	 * @param activity
+	 */
+	public static void shareQQ(Activity activity) {
+		// 参数1为当前Activity，参数2为开发者在QQ互联申请的APP ID，参数3为开发者在QQ互联申请的APP kEY.
+		UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler(activity, "100424468", "c7394704798a158208a74ab60104f0ba");
+		qqSsoHandler.addToSocialSDK();
+		QZoneSsoHandler qZoneSsoHandler = new QZoneSsoHandler(activity, "100424468", "c7394704798a158208a74ab60104f0ba");
+		qZoneSsoHandler.addToSocialSDK();
+	}
+
+	/**
+	 * @Description 分享短信
+	 * @author Created by qinxianyuzou on 2015-1-14.
+	 * @param activity
+	 */
+	public static void shareSMS(Activity activity) {
+		// 添加短信
+		SmsHandler smsHandler = new SmsHandler();
+		smsHandler.addToSocialSDK();
+	}
+
 	@SuppressWarnings({ "deprecation", "rawtypes" })
 	public static void updateAPP(final Activity activity, String url) {
 		String apkName[] = url.split("/");
@@ -422,9 +466,12 @@ public class PublicUtil {
 			public void onFailure(HttpException error, String msg) {
 				// tv_info.setText(msg);
 				LogUtil.d("handler", msg);
-				if (msg.equals("maybe the file has downloaded completely")) {
+				if (msg.indexOf("maybe the file has downloaded completely") > 0) {
 					showToast(activity, "文件已经下载完成");
 					installAPK(activity, downFile);
+				}
+				if (msg.indexOf("Target host must not be null") > 0) {
+					showToast(activity, "文件下载失败，下载文件不存在");
 				}
 			}
 
@@ -457,9 +504,9 @@ public class PublicUtil {
 		}
 	}
 
-    /**
+	/**
 	 * 获取所有已下载的应用并返回集合
-	 *
+	 * 
 	 * @return List<Download_APK_Install>
 	 */
 	public static List<Download_APK_Install> getDownloadAppsEntityIsInstalled() {
@@ -475,9 +522,9 @@ public class PublicUtil {
 				apk.setAppPath(path);
 				apk.setInstalled(isApkInstalled(ctx, getPackageName(ctx, path)));
 				apk.setFileSize(formatSizeM(getFileSize(path)));
-                if(apk.isInstalled()){
-                    apps.add(apk);
-                }
+				if (apk.isInstalled()) {
+					apps.add(apk);
+				}
 			}
 			return apps;
 		} else {

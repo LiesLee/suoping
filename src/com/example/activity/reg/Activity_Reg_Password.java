@@ -136,14 +136,14 @@ public class Activity_Reg_Password extends BaseActivity implements View.OnClickL
 			UIHelper.cancelProgressDialog();
 			ResponseUserInfo msg = (ResponseUserInfo) response;
 			if (msg.getCode().equals(Code.CODE_SUCCESS)) {
-				showToast("登录成功");
+				showToast(msg.getMsg());
 				SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.OLD_ACCOUNT, cellphoneNumber);
 				SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.OLD_PASSWORD, password);
 				SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.USERINFO,
 						msg.getMsg().toString());
 				startActivity(new Intent(activity, MainActivity.class));
 			} else {
-				showToast("登录失败，请稍候再试！");
+				showToast(msg.getMsg());
 				startActivity(new Intent(this, LoginActivity.class));
 			}
 			finish();

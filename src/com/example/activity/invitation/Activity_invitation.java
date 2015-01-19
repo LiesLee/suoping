@@ -17,18 +17,31 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.activity.common.BaseActivity;
 import com.example.activity.common.DialogClick;
 import com.example.activity.common.KeyGuardActivityManager;
+import com.example.entity.respose.BaseResponse;
 import com.example.entity.respose.Code;
 import com.example.entity.respose.ResponseInviteDetail;
+import com.example.entity.respose.ResponseShare;
 import com.example.http.Protocol;
+import com.example.keyguard.MainActivity;
 import com.example.keyguard.R;
 import com.example.util.PublicUtil;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.bean.SocializeEntity;
+import com.umeng.socialize.controller.UMServiceFactory;
+import com.umeng.socialize.controller.UMSocialService;
+import com.umeng.socialize.controller.listener.SocializeListeners.SnsPostListener;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.sso.SinaSsoHandler;
+import com.umeng.socialize.sso.TencentWBSsoHandler;
+import com.umeng.socialize.sso.UMSsoHandler;
 
 /**
  * @Description 页面模板
@@ -45,6 +58,9 @@ public class Activity_invitation extends BaseActivity {
 	/** 已邀请列表 */
 	@ViewInject(R.id.lay_activated)
 	private LinearLayout lay_activated;
+	/** 分享邀请码 */
+	@ViewInject(R.id.btn_invitation)
+	private Button btn_invitation;
 	/** 一键获取邀请码 */
 	@ViewInject(R.id.btn_invitation_number)
 	private Button btn_invitation_number;
@@ -60,6 +76,11 @@ public class Activity_invitation extends BaseActivity {
 	/** 标题 */
 	private static String mTitle = "邀请";
 	private long inviteDetailFlag;
+	private long fshareFlag;
+	private String fshareMSG = "";
+	private String fshareURL = "";
+	// 首先在您的Activity中添加如下成员变量
+	final UMSocialService mController = UMServiceFactory.getUMSocialService("com.umeng.share");
 
 	/**
 	 * @Description 不设置标题
@@ -100,12 +121,41 @@ public class Activity_invitation extends BaseActivity {
 		rl_public_back.setOnClickListener(this);
 		btn_invitation_number.setOnClickListener(this);
 		lay_activated.setOnClickListener(this);
+		btn_invitation.setOnClickListener(this);
+		mController.getConfig().removePlatform(SHARE_MEDIA.RENREN, SHARE_MEDIA.DOUBAN);
 	}
 
 	@Override
 	protected void initData() {
 		// TODO Auto-generated method stub
 		inviteDetailFlag = Protocol.get_invite_detail(activity, setTag());
+		fshareFlag = Protocol.fshare(activity, setTag());
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		/** 使用SSO授权必须添加如下代码 */
+		UMSsoHandler ssoHandler = mController.getConfig().getSsoHandler(requestCode);
+		if (ssoHandler != null) {
+			ssoHandler.authorizeCallBack(requestCode, resultCode, data);
+		}
+	}
+
+	private void share() {
+		PublicUtil.shareWX(activity);
+		PublicUtil.shareQQ(activity);
+		PublicUtil.shareSMS(activity);
+		mController.getConfig().setSsoHandler(new SinaSsoHandler());
+		mController.getConfig().setSsoHandler(new TencentWBSsoHandler());
+		// 设置分享内容
+		mController.setShareContent(fshareMSG);
+		// 设置分享图片, 参数2为图片的url地址
+		// mController.setShareMedia(new UMImage(activity,
+		// "http://www.umeng.com/images/pic/banner_module_social.png"));
+		// 设置分享图片，参数2为本地图片的资源引用
+		// mController.setShareMedia(new UMImage(activity, R.drawable.logo));
+		mController.setShareMedia(new UMImage(activity, fshareURL));
 	}
 
 	@Override
@@ -117,6 +167,31 @@ public class Activity_invitation extends BaseActivity {
 			break;
 		case R.id.lay_activated:
 			// Activity_InvitationInfo.luanch(activity);
+			break;
+		case R.id.btn_invitation:
+			// 是否只有已登录用户才能打开分享选择页
+			share();
+			mController.openShare(activity, false);
+			// mController.openShare(activity, new SnsPostListener() {
+			//
+			// @Override
+			// public void onStart() {
+			// // TODO Auto-generated method stub
+			//
+			// }
+			//
+			// @Override
+			// public void onComplete(SHARE_MEDIA platform, int stCode,
+			// SocializeEntity entity) {
+			// // TODO Auto-generated method stub
+			// if (stCode == 200) {
+			// Toast.makeText(activity, "分享成功", Toast.LENGTH_SHORT).show();
+			// } else {
+			// Toast.makeText(activity, "分享失败 : error code : " + stCode,
+			// Toast.LENGTH_SHORT).show();
+			// }
+			// }
+			// });
 			break;
 		case R.id.btn_invitation_number:
 			final DialogClick dialogClick1 = new DialogClick(activity);
@@ -166,7 +241,14 @@ public class Activity_invitation extends BaseActivity {
 			if (msgInfo.getCode().equals(Code.CODE_SUCCESS)) {
 				tv_all_invitation_earning.setText(msgInfo.getData().getSum_iearn());
 				tv_invited.setText(msgInfo.getData().getSum_num());
-				tv_invitation_rmb.setText("1");
+				tv_invitation_rmb.setText(msgInfo.getData().getInvite_jifen());
+			}
+		}
+		if (fshareFlag == flag) {
+			ResponseShare msgInfo = (ResponseShare) response;
+			if (msgInfo.isSuccess()) {
+				fshareMSG = msgInfo.getData().getShare_msg();
+				fshareURL = msgInfo.getData().getShare_url();
 			}
 		}
 	}

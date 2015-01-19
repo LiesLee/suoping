@@ -36,8 +36,8 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 public class Activity_Launch extends BaseActivity implements AnimationListener {
 	@ViewInject(R.id.iv_launch_ad)
 	private ImageView iv_launch_ad;
-	private long getearnlistFlag;
-	public static ArrayList<LockADList_Entity> lockADList_Entities = new ArrayList<>();
+//	private long getearnlistFlag;
+//	public static ArrayList<LockADList_Entity> lockADList_Entities = new ArrayList<>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +52,12 @@ public class Activity_Launch extends BaseActivity implements AnimationListener {
 	@Override
 	public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
 		// TODO Auto-generated method stub
-		if (getearnlistFlag == flag) {
-			ResponseLockADList msgInfo = (ResponseLockADList) response;
-			if (msgInfo.getCode().equals(Code.CODE_SUCCESS)) {
-				lockADList_Entities = msgInfo.getData();
-			}
-		}
+//		if (getearnlistFlag == flag) {
+//			ResponseLockADList msgInfo = (ResponseLockADList) response;
+//			if (msgInfo.getCode().equals(Code.CODE_SUCCESS)) {
+//				lockADList_Entities = msgInfo.getData();
+//			}
+//		}
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class Activity_Launch extends BaseActivity implements AnimationListener {
 	protected void initData() {
 		// TODO Auto-generated method stub
 		AdManager.getInstance(activity).init("6fbcdb4b187d81a3", "6f23d0fa8b79cf6c", false);
-		getearnlistFlag = Protocol.get_earn_list(activity, setTag());
+//		getearnlistFlag = Protocol.get_earn_list(activity, setTag());
 	}
 
 	@Override
@@ -101,7 +101,7 @@ public class Activity_Launch extends BaseActivity implements AnimationListener {
 			startActivity(new Intent(activity, Activity_Guide.class));
 		} else {
 			if (SharedPreferenceUtil.getInstance(activity).getString(SharedPreferenceUtil.COOKIES).equals("")) {
-				startActivity(new Intent(activity, LoginActivity.class));
+				startActivity(new Intent(activity, Activity_Reg.class));
 			} else {
 				startActivity(new Intent(activity, MainActivity.class));
 			}

@@ -87,7 +87,7 @@ public class Shop_Adapter extends BaseAdapter {
 			@Override
 			public void onClick(View v) {
 				Activity_ShopInfoWeb.luanch((android.app.Activity) mContext, listData.get(position).getTitle(),
-						listData.get(position).getEp_id());
+						listData.get(position).getNeed_jifen(), listData.get(position).getEp_id(), 0);
 			}
 		});
 		return convertView;

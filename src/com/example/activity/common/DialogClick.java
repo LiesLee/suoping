@@ -19,6 +19,8 @@ public class DialogClick extends Dialog implements android.view.View.OnClickList
 	private TextView tv_prompt_title;
 	/** 内容 */
 	private TextView tv_prompt_content;
+	/** 发货状态 */
+	private TextView tv_prompt_status;
 	/** 确认 */
 	private Button but_prompt_red;
 	/** 取消 */
@@ -54,6 +56,31 @@ public class DialogClick extends Dialog implements android.view.View.OnClickList
 	}
 
 	/**
+	 * @Description 已兑换商品展示
+	 * @author Created by qinxianyuzou on 2015-1-14.
+	 * @param title
+	 *            标题
+	 * @param content
+	 *            正文
+	 * @param status
+	 *            发货状态
+	 * @param buttonText
+	 *            按钮文本
+	 * @param cancelListener
+	 *            监听事件
+	 */
+	public void setContent(String title, String content, String status, String buttonText,
+			android.view.View.OnClickListener cancelListener) {
+		tv_prompt_title.setText(title);
+		tv_prompt_content.setText(content);
+		but_prompt_gray.setOnClickListener(cancelListener);
+		but_prompt_gray.setText(buttonText);
+		but_prompt_red.setVisibility(View.GONE);
+		tv_prompt_status.setVisibility(View.VISIBLE);
+		tv_prompt_status.setText(status);
+	}
+
+	/**
 	 * @Description
 	 * @author Created by qinxianyuzou on 2014-12-30.
 	 * @param title
@@ -82,6 +109,7 @@ public class DialogClick extends Dialog implements android.view.View.OnClickList
 		setContentView(R.layout.dialog_prompt);
 		tv_prompt_content = (TextView) findViewById(R.id.tv_prompt_content);
 		tv_prompt_title = (TextView) findViewById(R.id.tv_prompt_title);
+		tv_prompt_status = (TextView) findViewById(R.id.tv_prompt_status);
 		but_prompt_red = (Button) findViewById(R.id.but_prompt_red);
 		but_prompt_gray = (Button) findViewById(R.id.but_prompt_gray);
 	}

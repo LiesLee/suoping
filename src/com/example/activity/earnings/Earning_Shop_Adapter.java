@@ -24,14 +24,14 @@ import java.util.List;
 public class Earning_Shop_Adapter extends BaseAdapter {
 	private Context mContext;
 	private LayoutInflater listContainer;
-    AQuery aq;
+	AQuery aq;
 	/** 数据源 */
 	private List<Exchange_detail> listData = new ArrayList<Exchange_detail>();
 
 	public Earning_Shop_Adapter(Context context) {
 		mContext = context;
 		listContainer = LayoutInflater.from(mContext);
-        aq = new AQuery(mContext);
+		aq = new AQuery(mContext);
 	}
 
 	public void setData(List<Exchange_detail> data) {
@@ -62,8 +62,8 @@ public class Earning_Shop_Adapter extends BaseAdapter {
 
 		if (convertView == null) {
 			listItemView = new HolderView();
-			convertView = listContainer.inflate(R.layout.item_earning_shop, null);
-			//listItemView.iv_item_shop_icon = (ImageView) convertView.findViewById(R.id.iv_item_shop_icon);
+			convertView = listContainer.inflate(R.layout.item_shop, null);
+			listItemView.iv_item_shop_icon = (ImageView) convertView.findViewById(R.id.iv_item_shop_icon);
 			listItemView.tv_item_shop_name = (TextView) convertView.findViewById(R.id.tv_item_shop_name);
 			listItemView.tv_item_shop_money = (TextView) convertView.findViewById(R.id.tv_item_shop_money);
 			// 设置标记
@@ -72,23 +72,23 @@ public class Earning_Shop_Adapter extends BaseAdapter {
 			listItemView = (HolderView) convertView.getTag();
 		}
 
-        /*AQuery aq_ = aq.recycle(convertView);*/
+		AQuery aq_ = aq.recycle(convertView);
 		listItemView.tv_item_shop_name.setText(listData.get(position).getEp_name());
-		listItemView.tv_item_shop_money.setText(listData.get(position).getEp_jifen()+"");
-        //aq_.id(listItemView.iv_item_shop_icon).image(listData.get(position).getHp_url());
+		listItemView.tv_item_shop_money.setText(listData.get(position).getEp_jifen() + "");
+		aq_.id(listItemView.iv_item_shop_icon).image(listData.get(position).getHp_url());
 
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Activity_ShopInfoWeb
-                        .luanch((android.app.Activity) mContext, listData.get(position).getEp_name(), listData.get(position).getEpid());
-            }
-        });
+//		convertView.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				Activity_ShopInfoWeb.luanch((android.app.Activity) mContext, listData.get(position).getEp_name(), ""
+//						+ listData.get(position).getEp_jifen(), listData.get(position).getEpid(), 1);
+//			}
+//		});
 		return convertView;
 	}
 
 	private class HolderView {
-		//private ImageView iv_item_shop_icon;
+		private ImageView iv_item_shop_icon;
 		private TextView tv_item_shop_name;
 		private TextView tv_item_shop_money;
 	}
