@@ -75,8 +75,8 @@
         <activity
             android:name="com.example.activity.reg.LoginActivity"
             android:configChanges="orientation|keyboardHidden|locale"
-            android:windowSoftInputMode="adjustResize|stateHidden"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name="com.example.activity.reg.Activity_Reg"
             android:screenOrientation="portrait" />
@@ -155,10 +155,12 @@
             android:name="com.example.activity.shop.Activity_ShopInfoWeb"
             android:screenOrientation="portrait" >
         </activity>
-        <!--<activity
+        <!--
+        <activity
             android:name="com.example.keyguard.Activity_YouMi"
             android:screenOrientation="portrait" >
-        </activity>-->
+        </activity>
+        -->
         <!-- 有米广告 -->
         <activity
             android:name="net.youmi.android.AdBrowser"
@@ -183,9 +185,8 @@
             </intent-filter>
         </receiver>
 
-        <meta-data
-            android:name="UMENG_APPKEY"
-            android:value="54b71edafd98c5332c000469" />
+        <meta-data            android:name="UMENG_APPKEY"            android:value="54b71edafd98c5332c000469" />
+        <meta-data            android:name="UMENG_CHANNEL"            android:value="" />
 
         <activity
             android:name="com.umeng.socialize.view.ShareActivity"
