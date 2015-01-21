@@ -37,10 +37,21 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.HttpHandler;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.bean.SocializeEntity;
+import com.umeng.socialize.controller.UMSocialService;
+import com.umeng.socialize.controller.listener.SocializeListeners.SnsPostListener;
+import com.umeng.socialize.media.QQShareContent;
+import com.umeng.socialize.media.SinaShareContent;
+import com.umeng.socialize.media.SmsShareContent;
+import com.umeng.socialize.media.TencentWbShareContent;
+import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.sso.QZoneSsoHandler;
 import com.umeng.socialize.sso.SmsHandler;
 import com.umeng.socialize.sso.UMQQSsoHandler;
 import com.umeng.socialize.weixin.controller.UMWXHandler;
+import com.umeng.socialize.weixin.media.CircleShareContent;
+import com.umeng.socialize.weixin.media.WeiXinShareContent;
 
 /**
  * @Description 公共工具类
@@ -323,11 +334,74 @@ public class PublicUtil {
 	}
 
 	/**
+	 * @Description 设置分享平台
+	 * @author Created by qinxianyuzou on 2015-1-20.
+	 * @param activity
+	 * @param mController
+	 * @param title
+	 * @param fshareMSG
+	 * @param url
+	 */
+	public static void setShare(Activity activity, UMSocialService mController, String title, String fshareMSG,
+			String url) {
+		ShareListener shareListener = new ShareListener(activity);
+		// mController.postShare(activity, SHARE_MEDIA.QQ, shareListener);
+		// mController.postShare(activity, SHARE_MEDIA.QZONE, shareListener);
+		// mController.postShare(activity, SHARE_MEDIA.WEIXIN, shareListener);
+		// mController.postShare(activity, SHARE_MEDIA.WEIXIN_CIRCLE,
+		// shareListener);
+		// mController.postShare(activity, SHARE_MEDIA.SINA, shareListener);
+		// mController.postShare(activity, SHARE_MEDIA.SMS, shareListener);
+		// mController.postShare(activity, SHARE_MEDIA.TENCENT, shareListener);
+		shareQQ(activity, mController, title, fshareMSG, url);
+		shareWeibo(activity, mController, title, fshareMSG, url);
+		shareSMS(activity, mController, fshareMSG, url);
+		shareWX(activity, mController, title, fshareMSG, url);
+		shareWXCircle(activity, mController, title, fshareMSG, url);
+		// // 设置分享内容
+		// mController.setShareContent(fshareMSG);
+		// 设置分享图片, 参数2为图片的url地址
+		// mController.setShareMedia(new UMImage(activity,
+		// "http://www.umeng.com/images/pic/banner_module_social.png"));
+		// 设置分享图片，参数2为本地图片的资源引用
+		// mController.setShareMedia(new UMImage(activity, R.drawable.logo));
+		// mController.setShareMedia(new UMImage(activity, url));
+	}
+
+	/**
+	 * @Description 分享微博
+	 * @author Created by qinxianyuzou on 2015-1-14.
+	 * @param activity
+	 */
+	private static void shareWeibo(Activity activity, UMSocialService mController, String title, String fshareMSG,
+			String url) {
+		SinaShareContent sinaShareContent = new SinaShareContent();
+		// 设置朋友圈title
+		sinaShareContent.setTitle(title);
+		sinaShareContent.setShareContent(fshareMSG);
+		sinaShareContent.setShareImage(new UMImage(activity, R.drawable.logo));
+		if (!StringUtils.isEmpty(url)) {
+			sinaShareContent.setTargetUrl(url);
+		}
+		mController.setShareMedia(sinaShareContent);
+		TencentWbShareContent tencentWbShareContent = new TencentWbShareContent();
+		// 设置朋友圈title
+		tencentWbShareContent.setTitle(title);
+		tencentWbShareContent.setShareContent(fshareMSG);
+		tencentWbShareContent.setShareImage(new UMImage(activity, R.drawable.logo));
+		if (!StringUtils.isEmpty(url)) {
+			tencentWbShareContent.setTargetUrl(url);
+		}
+		mController.setShareMedia(tencentWbShareContent);
+	}
+
+	/**
 	 * @Description 分享微信
 	 * @author Created by qinxianyuzou on 2015-1-14.
 	 * @param activity
 	 */
-	public static void shareWX(Activity activity) {
+	private static void shareWX(Activity activity, UMSocialService mController, String title, String fshareMSG,
+			String url) {
 		String appID = "wx2f8d9e440cb2d07d";
 		String appSecret = "c4efeef102f7df2c59e12a71b2f2c59a";
 		// 添加微信平台
@@ -337,6 +411,38 @@ public class PublicUtil {
 		UMWXHandler wxCircleHandler = new UMWXHandler(activity, appID, appSecret);
 		wxCircleHandler.setToCircle(true);
 		wxCircleHandler.addToSocialSDK();
+		//
+		WeiXinShareContent shareContent = new WeiXinShareContent();
+		// 设置朋友圈title
+		shareContent.setTitle(title);
+		shareContent.setShareContent(fshareMSG);
+		shareContent.setShareImage(new UMImage(activity, R.drawable.logo));
+		if (!StringUtils.isEmpty(url)) {
+			shareContent.setTargetUrl(url);
+		}
+		mController.setShareMedia(shareContent);
+	}
+
+	/**
+	 * @Description 分享朋友圈
+	 * @author Created by qinxianyuzou on 2015-1-20.
+	 * @param activity
+	 * @param mController
+	 * @param title
+	 * @param fshareMSG
+	 * @param url
+	 */
+	private static void shareWXCircle(Activity activity, UMSocialService mController, String title, String fshareMSG,
+			String url) {
+		CircleShareContent shareContent = new CircleShareContent();
+		// 设置朋友圈title
+		shareContent.setTitle(title);
+		shareContent.setShareContent(fshareMSG);
+		shareContent.setShareImage(new UMImage(activity, R.drawable.logo));
+		if (!StringUtils.isEmpty(url)) {
+			shareContent.setTargetUrl(url);
+		}
+		mController.setShareMedia(shareContent);
 	}
 
 	/**
@@ -344,12 +450,22 @@ public class PublicUtil {
 	 * @author Created by qinxianyuzou on 2015-1-14.
 	 * @param activity
 	 */
-	public static void shareQQ(Activity activity) {
+	private static void shareQQ(Activity activity, UMSocialService mController, String title, String fshareMSG,
+			String url) {
 		// 参数1为当前Activity，参数2为开发者在QQ互联申请的APP ID，参数3为开发者在QQ互联申请的APP kEY.
 		UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler(activity, "100424468", "c7394704798a158208a74ab60104f0ba");
 		qqSsoHandler.addToSocialSDK();
 		QZoneSsoHandler qZoneSsoHandler = new QZoneSsoHandler(activity, "100424468", "c7394704798a158208a74ab60104f0ba");
 		qZoneSsoHandler.addToSocialSDK();
+		//
+		QQShareContent shareContent = new QQShareContent();
+		shareContent.setTitle(title);
+		shareContent.setShareImage(new UMImage(activity, R.drawable.logo));
+		shareContent.setShareContent(fshareMSG);
+		if (!StringUtils.isEmpty(url)) {
+			shareContent.setTargetUrl(url);
+		}
+		mController.setShareMedia(shareContent);
 	}
 
 	/**
@@ -357,10 +473,13 @@ public class PublicUtil {
 	 * @author Created by qinxianyuzou on 2015-1-14.
 	 * @param activity
 	 */
-	public static void shareSMS(Activity activity) {
+	private static void shareSMS(Activity activity, UMSocialService mController, String fshareMSG, String url) {
 		// 添加短信
 		SmsHandler smsHandler = new SmsHandler();
 		smsHandler.addToSocialSDK();
+		SmsShareContent shareContent = new SmsShareContent();
+		shareContent.setShareContent(fshareMSG + ":" + url);
+		mController.setShareMedia(shareContent);
 	}
 
 	@SuppressWarnings({ "deprecation", "rawtypes" })

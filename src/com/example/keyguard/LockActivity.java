@@ -29,12 +29,17 @@ import com.example.activity.common.Activity_DownloadWeb;
 import com.example.activity.common.Activity_Launch;
 import com.example.activity.common.BaseActivity;
 import com.example.entity.LockADList_Entity;
+import com.example.entity.UserInfo;
 import com.example.entity.respose.Code;
 import com.example.entity.respose.ResponseLockADList;
 import com.example.http.Protocol;
 import com.example.keyguard.CoverPlateView.Listener;
 import com.example.util.LogUtil;
+import com.example.util.SharedPreferenceUtil;
+import com.example.util.StringUtils;
+import com.google.gson.Gson;
 import com.lidroid.xutils.BitmapUtils;
+import com.tencent.weibo.sdk.android.api.util.SharePersistent;
 
 @SuppressLint("ClickableViewAccessibility")
 public class LockActivity extends BaseActivity {
@@ -73,6 +78,14 @@ public class LockActivity extends BaseActivity {
 		setContentView(mRelativeLayout);
 		OffersManager.getInstance(this).onAppLaunch();
 		instance = this;
+
+		DisplayMetrics dm = getResources().getDisplayMetrics();
+		screenWidth = dm.widthPixels;
+		screenHeight = dm.heightPixels - 50;
+		image_slide_width = 150;
+		image_slide_rightMargin = 80;
+		image_slide_leftMargin = 80;
+		image_slide_bottomMargin = 250;
 		initData();
 	}
 
@@ -262,13 +275,6 @@ public class LockActivity extends BaseActivity {
 		 */
 		mRelativeLayout.setBackgroundColor(Color.GRAY);
 
-		DisplayMetrics dm = getResources().getDisplayMetrics();
-		screenWidth = dm.widthPixels;
-		screenHeight = dm.heightPixels - 50;
-		image_slide_width = 150;
-		image_slide_rightMargin = 80;
-		image_slide_leftMargin = 80;
-		image_slide_bottomMargin = 250;
 
 		RelativeLayout.LayoutParams image_Vertical = new RelativeLayout.LayoutParams(screenWidth
 				- image_slide_rightMargin - image_slide_leftMargin,
@@ -384,7 +390,7 @@ public class LockActivity extends BaseActivity {
 		mRelativeLayout.addView(tv_appJiFen, image_rl3);
 
 		TextView tv2 = new TextView(this);
-		tv2.setText("+10");
+		tv2.setText("+2");
 		tv2.setTextSize(30);
 		tv2.setTextColor(Color.WHITE);
 		// tv2.setBackgroundColor(Color.RED);
@@ -460,6 +466,13 @@ public class LockActivity extends BaseActivity {
 	protected void initData() {
 		// TODO Auto-generated method stub
 		getearnlistFlag = Protocol.get_earn_list(activity, setTag());
+		if (!StringUtils.isEmpty(SharedPreferenceUtil.getInstance(activity).getString(SharedPreferenceUtil.ADCACHE))) {
+			ResponseLockADList msgInfo = new Gson().fromJson(
+					SharedPreferenceUtil.getInstance(activity).getString(SharedPreferenceUtil.ADCACHE),
+					ResponseLockADList.class);
+			lockADList_Entities = msgInfo.getData();
+			initUI();
+		}
 	}
 
 	@Override
@@ -474,8 +487,13 @@ public class LockActivity extends BaseActivity {
 		if (getearnlistFlag == flag) {
 			ResponseLockADList msgInfo = (ResponseLockADList) response;
 			if (msgInfo.getCode().equals(Code.CODE_SUCCESS)) {
-				lockADList_Entities = msgInfo.getData();
-				initUI();
+				SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.ADCACHE,
+						jsonString.toString());
+				LogUtil.d(setTag(), jsonString.toString());
+				if (lockADList_Entities.size() < 1) {
+					lockADList_Entities = msgInfo.getData();
+					adapter.setData(lockADList_Entities);
+				}
 			}
 		}
 	}

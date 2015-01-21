@@ -160,6 +160,7 @@
             android:name="com.example.keyguard.Activity_YouMi"
             android:screenOrientation="portrait" >
         </activity>
+
         -->
         <!-- 有米广告 -->
         <activity

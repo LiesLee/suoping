@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -17,27 +18,28 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.activity.common.BaseActivity;
 import com.example.activity.common.DialogClick;
 import com.example.activity.common.KeyGuardActivityManager;
-import com.example.entity.respose.BaseResponse;
 import com.example.entity.respose.Code;
 import com.example.entity.respose.ResponseInviteDetail;
 import com.example.entity.respose.ResponseShare;
 import com.example.http.Protocol;
-import com.example.keyguard.MainActivity;
 import com.example.keyguard.R;
+import com.example.util.LogUtil;
 import com.example.util.PublicUtil;
+import com.example.util.ShareListener;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.bean.SocializeConfig;
 import com.umeng.socialize.bean.SocializeEntity;
 import com.umeng.socialize.controller.UMServiceFactory;
 import com.umeng.socialize.controller.UMSocialService;
 import com.umeng.socialize.controller.listener.SocializeListeners.SnsPostListener;
+import com.umeng.socialize.media.SinaShareContent;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.sso.SinaSsoHandler;
 import com.umeng.socialize.sso.TencentWBSsoHandler;
@@ -142,22 +144,6 @@ public class Activity_invitation extends BaseActivity {
 		}
 	}
 
-	private void share() {
-		PublicUtil.shareWX(activity);
-		PublicUtil.shareQQ(activity);
-		PublicUtil.shareSMS(activity);
-		mController.getConfig().setSsoHandler(new SinaSsoHandler());
-		mController.getConfig().setSsoHandler(new TencentWBSsoHandler());
-		// 设置分享内容
-		mController.setShareContent(fshareMSG);
-		// 设置分享图片, 参数2为图片的url地址
-		// mController.setShareMedia(new UMImage(activity,
-		// "http://www.umeng.com/images/pic/banner_module_social.png"));
-		// 设置分享图片，参数2为本地图片的资源引用
-		// mController.setShareMedia(new UMImage(activity, R.drawable.logo));
-		mController.setShareMedia(new UMImage(activity, fshareURL));
-	}
-
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -170,28 +156,37 @@ public class Activity_invitation extends BaseActivity {
 			break;
 		case R.id.btn_invitation:
 			// 是否只有已登录用户才能打开分享选择页
-			share();
-			mController.openShare(activity, false);
-			// mController.openShare(activity, new SnsPostListener() {
-			//
-			// @Override
-			// public void onStart() {
-			// // TODO Auto-generated method stub
-			//
-			// }
-			//
-			// @Override
-			// public void onComplete(SHARE_MEDIA platform, int stCode,
-			// SocializeEntity entity) {
-			// // TODO Auto-generated method stub
-			// if (stCode == 200) {
-			// Toast.makeText(activity, "分享成功", Toast.LENGTH_SHORT).show();
-			// } else {
-			// Toast.makeText(activity, "分享失败 : error code : " + stCode,
-			// Toast.LENGTH_SHORT).show();
-			// }
-			// }
-			// });
+			PublicUtil.setShare(activity, mController, "锁屏赚，分享赚好礼！", fshareMSG, fshareURL);
+			mController.getConfig().setSsoHandler(new SinaSsoHandler());
+			mController.getConfig().setSsoHandler(new TencentWBSsoHandler());
+			// mController.openShare(activity, false);
+			// mController.openShare(activity, new ShareListener(activity));
+			mController.openShare(activity, new SnsPostListener() {
+
+				@Override
+				public void onStart() {
+					PublicUtil.showToast(activity, "开始分享.");
+					LogUtil.d("", "");
+				}
+
+				@Override
+				public void onComplete(SHARE_MEDIA platform, int eCode, SocializeEntity entity) {
+					if (eCode == 200) {
+						PublicUtil.showToast(activity, "分享成功.");
+					} else {
+						String eMsg = "";
+						if (eCode == -101) {
+							eMsg = "没有授权";
+						} else if (eCode == 40000) {
+							eMsg = "取消分享";
+						} else {
+							eMsg = "分享失败[" + eCode + "] ";
+						}
+						PublicUtil.showToast(activity, eMsg);
+					}
+					SocializeConfig.getSocializeConfig().cleanListeners();
+				}
+			});
 			break;
 		case R.id.btn_invitation_number:
 			final DialogClick dialogClick1 = new DialogClick(activity);

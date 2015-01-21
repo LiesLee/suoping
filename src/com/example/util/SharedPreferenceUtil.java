@@ -13,6 +13,8 @@ public class SharedPreferenceUtil {
 	/** 用户信息 */
 	public final static String USERINFO = "userinfo";
 	public static final String REMIND = "remind";
+	/** 广告缓存 */
+	public static final String ADCACHE = "ADCache";
 	/** 上次登录账号 */
 	public static final String OLD_ACCOUNT = "CurrentAccount";
 	/** 上次登录密码 */
