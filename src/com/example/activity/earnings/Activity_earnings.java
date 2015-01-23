@@ -60,6 +60,7 @@ public class Activity_earnings extends BaseActivity {
 	private TextView tv_allEarning;
 
 	private long userinfoFlag;
+	public static Activity_earnings activity_earnings;
 
 	public static void luanch(Activity activity, String cellphoneNumber, String password, boolean registerlogin) {
 		Intent intent = new Intent(activity, Activity_earnings.class);
@@ -80,6 +81,7 @@ public class Activity_earnings extends BaseActivity {
 		setContentView(R.layout.tab_earnings);
 		ViewUtils.inject(activity);
 		LogUtil.d("onCreate", "onCreate");
+		activity_earnings = this;
 		initUI();
 		initData();
 
@@ -157,5 +159,9 @@ public class Activity_earnings extends BaseActivity {
 		default:
 			break;
 		}
+	}
+
+	public void reloadData() {
+		userinfoFlag = Protocol.get_user_info(this, setTag());
 	}
 }

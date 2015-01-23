@@ -246,6 +246,24 @@ public class Protocol {
 	}
 
 	/**
+	 * @Description 解锁
+	 * @author Created by qinxianyuzou on 2015-1-8.
+	 * @param context
+	 * @param tag
+	 * @param code
+	 *            000000
+	 * @param data
+	 *            编辑性别传0或1，编辑生日传日期2015/01/008
+	 * @return
+	 */
+	public static long lock_earn(Context context, String tag, HttpCallBack httpCallBack) {
+		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
+		requestParam.add(new BasicNameValuePair("code", "000000"));
+		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.LOCK_EARN, tag, requestParam,
+				BaseResponse.class, httpCallBack);
+	}
+
+	/**
 	 * @Description
 	 * @author Created by qinxianyuzou on 2015-1-8.
 	 * @param context

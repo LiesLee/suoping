@@ -27,9 +27,11 @@ import android.widget.TextView;
 import com.android.volley.VolleyError;
 import com.example.activity.common.Activity_DownloadWeb;
 import com.example.activity.common.BaseActivity;
+import com.example.activity.earnings.Activity_earnings;
 import com.example.entity.LockADList_Entity;
 import com.example.entity.respose.Code;
 import com.example.entity.respose.ResponseLockADList;
+import com.example.http.HttpCallBack;
 import com.example.http.Protocol;
 import com.example.keyguard.CoverPlateView.Listener;
 import com.example.util.LogUtil;
@@ -482,7 +484,21 @@ public class LockActivity extends BaseActivity {
 							// boolean isSuccess =
 							// PointsManager.getInstance(activity).awardPoints(amount);
 							// LogUtil.d(setTag(), "" + isSuccess);
-							Protocol.lock_earn(LockActivity.this, this.getClass().getSimpleName());
+							Activity_earnings.activity_earnings.reloadData();
+							Protocol.lock_earn(LockActivity.this, this.getClass().getSimpleName(), new HttpCallBack() {
+
+								@Override
+								public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
+									// TODO Auto-generated method stub
+									Activity_earnings.activity_earnings.reloadData();
+								}
+
+								@Override
+								public void onHttpError(long flag, VolleyError error) {
+									// TODO Auto-generated method stub
+
+								}
+							});
 						}
 					}
 
