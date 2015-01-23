@@ -3,36 +3,17 @@ package com.example.keyguard;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.NameValuePair;
-import org.json.JSONObject;
-
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import com.android.volley.VolleyError;
-import com.example.activity.common.Activity_OnlySubmit;
-import com.example.activity.common.DialogClick;
-import com.example.activity.common.EnumOnlySubmit;
-import com.example.activity.reg.LoginActivity;
+import com.androidquery.AQuery;
 import com.example.entity.LockADList_Entity;
-import com.example.entity.respose.BaseResponse;
-import com.example.entity.respose.Code;
-import com.example.http.HttpCallBack;
-import com.example.http.Protocol;
-import com.example.keyguard.R;
-import com.example.util.PublicUtil;
-import com.example.util.SharedPreferenceUtil;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.bitmap.BitmapDisplayConfig;
 import com.lidroid.xutils.bitmap.callback.BitmapLoadCallBack;
@@ -52,13 +33,16 @@ public class LockAD_Adapter extends BaseAdapter {
 	private BitmapUtils bitmapUtils;
 	/** 图片加载回调 */
 	private BitmapLoadCallBack<ImageView> bitmapLoadCallBack;
-	/** 退出标记 */
-	private long logout;
+	private AQuery aQuery;
+
+	// /** 退出标记 */
+	// private long logout;
 
 	public LockAD_Adapter(Activity context, BitmapUtils bitmapUtils) {
 		activity = context;
 		listContainer = LayoutInflater.from(activity);
 		this.bitmapUtils = bitmapUtils;
+		aQuery = new AQuery(activity);
 		bitmapLoadCallBack = new DefaultBitmapLoadCallBack<ImageView>() {
 
 			@Override
@@ -116,6 +100,7 @@ public class LockAD_Adapter extends BaseAdapter {
 			listItemView = (HolderView) convertView.getTag();
 		}
 		bitmapUtils.display(listItemView.iv_lock_img, listData.get(position).getHp_url(), bitmapLoadCallBack);
+		// aQuery.id(listItemView.iv_lock_img).image(listData.get(position).getHp_url());
 		return convertView;
 	}
 

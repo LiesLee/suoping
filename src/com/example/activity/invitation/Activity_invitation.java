@@ -156,7 +156,7 @@ public class Activity_invitation extends BaseActivity {
 			break;
 		case R.id.btn_invitation:
 			// 是否只有已登录用户才能打开分享选择页
-			PublicUtil.setShare(activity, mController, "锁屏赚，分享赚好礼！", fshareMSG, fshareURL);
+			PublicUtil.setShare(activity, mController, fshareMSG, fshareMSG, fshareURL);
 			mController.getConfig().setSsoHandler(new SinaSsoHandler());
 			mController.getConfig().setSsoHandler(new TencentWBSsoHandler());
 			// mController.openShare(activity, false);

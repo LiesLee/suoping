@@ -288,8 +288,10 @@ public class Protocol {
 	 * @param tag
 	 * @return
 	 */
-	public static long get_earn_list(Context context, String tag) {
+	public static long get_earn_list(Context context, String tag, String w, String h) {
 		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
+		requestParam.add(new BasicNameValuePair("w", w));
+		requestParam.add(new BasicNameValuePair("h", h));
 		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.GET_EARN_LIST, tag, requestParam,
 				ResponseLockADList.class, null);
 	}
@@ -321,7 +323,7 @@ public class Protocol {
 	}
 
 	/**
-	 * @Description 
+	 * @Description
 	 * @author Created by qinxianyuzou on 2015-1-14.
 	 * @param context
 	 * @param tag

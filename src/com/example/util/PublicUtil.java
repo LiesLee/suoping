@@ -344,7 +344,7 @@ public class PublicUtil {
 	 */
 	public static void setShare(Activity activity, UMSocialService mController, String title, String fshareMSG,
 			String url) {
-		ShareListener shareListener = new ShareListener(activity);
+		// ShareListener shareListener = new ShareListener(activity);
 		// mController.postShare(activity, SHARE_MEDIA.QQ, shareListener);
 		// mController.postShare(activity, SHARE_MEDIA.QZONE, shareListener);
 		// mController.postShare(activity, SHARE_MEDIA.WEIXIN, shareListener);
