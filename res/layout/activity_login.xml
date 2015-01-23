@@ -1,87 +1,85 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white"
-                android:orientation="vertical"
-                tools:context="com.example.activity.reg.LoginActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.example.activity.reg.LoginActivity" >
 
     <LinearLayout
-        android:layout_weight="1"
-        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center" >
 
         <ImageView
             android:id="@+id/iv_login_pic"
-            android:background="@drawable/item_icon"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        </LinearLayout>
-
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo" />
+    </LinearLayout>
 
     <ScrollView
-        android:overScrollMode="never"
-        android:scrollbars="none"
-        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:overScrollMode="never"
+        android:scrollbars="none" >
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-
+            android:layout_height="match_parent" >
 
             <EditText
                 android:id="@+id/et_cellphone"
-                android:inputType="number"
                 android:layout_width="200dp"
                 android:layout_height="40dp"
                 android:layout_centerHorizontal="true"
                 android:background="@color/earning_gray"
                 android:hint="手机号"
-                android:paddingLeft="4dp"
+                android:inputType="number"
                 android:maxLength="11"
+                android:paddingLeft="4dp"
                 android:singleLine="true"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <TextView
-                android:text="账号："
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/et_cellphone"
+                android:layout_alignTop="@+id/et_cellphone"
                 android:layout_marginRight="3dp"
                 android:layout_toLeftOf="@+id/et_cellphone"
-                android:layout_alignTop="@+id/et_cellphone"
-                android:layout_alignBottom="@+id/et_cellphone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:gravity="center"
+                android:text="账号："
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/et_password"
-                android:inputType="textPassword"
-                android:layout_marginTop="30dp"
                 android:layout_width="200dp"
                 android:layout_height="40dp"
-                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/et_cellphone"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
                 android:background="@color/earning_gray"
+                android:inputType="textPassword"
                 android:maxLength="11"
-                android:singleLine="true"
                 android:paddingLeft="4dp"
-                android:textSize="16sp"/>
+                android:singleLine="true"
+                android:textSize="16sp" />
 
             <TextView
-                android:text="密码："
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/et_password"
+                android:layout_alignTop="@+id/et_password"
                 android:layout_marginRight="3dp"
                 android:layout_toLeftOf="@+id/et_password"
-                android:layout_alignTop="@+id/et_password"
-                android:layout_alignBottom="@+id/et_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:gravity="center"
+                android:text="密码："
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tv_forgot_password"
@@ -97,34 +95,26 @@
 
             <Button
                 android:id="@+id/btn_lg"
-                android:text="登录"
-                android:textColor="@color/white"
-                android:layout_marginTop="55dp"
-                android:background="@drawable/selector_btn_login"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
                 android:layout_below="@+id/et_password"
                 android:layout_centerHorizontal="true"
-                android:layout_width="200dp"
-                android:layout_height="40dp"/>
+                android:layout_marginTop="55dp"
+                android:background="@drawable/selector_btn_login"
+                android:text="登录"
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/tv_reg"
-                android:text="新用户注册"
-                android:textSize="16dp"
-                android:layout_marginTop="15dp"
-                android:layout_below="@+id/btn_lg"
-                android:layout_alignRight="@+id/btn_lg"
-                android:textColor="@color/text_reg"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/btn_lg"
+                android:layout_below="@+id/btn_lg"
+                android:layout_marginTop="15dp"
+                android:text="新用户注册"
+                android:textColor="@color/text_reg"
+                android:textSize="16dp" />
         </RelativeLayout>
-
-        </ScrollView>
-
-
-
-
-
+    </ScrollView>
 
 </LinearLayout>
