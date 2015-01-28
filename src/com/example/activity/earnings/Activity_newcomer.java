@@ -116,9 +116,9 @@ public class Activity_newcomer extends BaseActivity {
 			ResponseFreshmanAward msgInfo = (ResponseFreshmanAward) response;
 			if (msgInfo.getCode().equals(Code.CODE_SUCCESS)) {
 				tv_newcomer_rmb.setText("" + msgInfo.getData().getSum());
-				tv_improve_msg.setText("完善信息+" + msgInfo.getData().getSum() + "元");
-				tv_newcomer_invite.setText("填写邀请码+" + msgInfo.getData().getSum() + "元");
-				tv_newcomer_about.setText("了解锁屏赚+" + msgInfo.getData().getSum() + "元");
+				tv_improve_msg.setText("完善信息+" + msgInfo.getData().getInfo() + "元");
+				tv_newcomer_invite.setText("填写邀请码+" + msgInfo.getData().getInvite() + "元");
+				tv_newcomer_about.setText("了解锁屏赚+" + msgInfo.getData().getSoftware() + "元");
 			} else {
 				showToast(msgInfo.getMsg());
 			}

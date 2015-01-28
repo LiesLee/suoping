@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.example.activity.more.Activity_Address;
+import com.example.activity.more.Activity_EditAddress;
 import com.example.activity.more.Activity_MyInfo;
 import com.example.activity.more.Address_Adapter;
 import com.example.http.base.Protocol;
@@ -128,10 +129,30 @@ public class Activity_OnlySubmit extends BaseActivity {
 					Activity_Address.logistics_Entity.setTo_who(et_nickname_text.getText().toString());
 					break;
 				case 2:
-					// Activity_Address.logistics_Entity.setTo_where(et_nickname_text.getText().toString());
+					Activity_Address.logistics_Entity.setPhone(et_nickname_text.getText().toString());
 					break;
 				case 3:
 					Activity_Address.logistics_Entity.setPost_no(et_nickname_text.getText().toString());
+					break;
+
+				default:
+					break;
+				}
+				finish();
+				break;
+			case EDIT_LOGISTICS:
+				switch (mType) {
+				case 0:
+					Activity_EditAddress.logistics_Entity.setTo_where(et_nickname_text.getText().toString());
+					break;
+				case 1:
+					Activity_EditAddress.logistics_Entity.setTo_who(et_nickname_text.getText().toString());
+					break;
+				case 2:
+					Activity_EditAddress.logistics_Entity.setPhone(et_nickname_text.getText().toString());
+					break;
+				case 3:
+					Activity_EditAddress.logistics_Entity.setPost_no(et_nickname_text.getText().toString());
 					break;
 
 				default:

@@ -21,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.example.activity.common.BaseActivity;
 import com.example.activity.common.KeyGuardActivityManager;
 import com.example.entity.more.Logistics_Entity;
+import com.example.http.base.BaseResponse;
 import com.example.http.base.Code;
 import com.example.http.base.Protocol;
 import com.example.http.respose.ResponseLogistics;
@@ -28,12 +29,13 @@ import com.example.keyguard.R;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.lidroid.xutils.view.annotation.event.OnClick;
 
 /**
  * @Description 添加地址
  * @author Created by qinxianyuzou on 2014-12-29.
  */
-public class Activity_Address extends BaseActivity {
+public class Activity_EditAddress extends BaseActivity {
 	/** 标题栏 */
 	@ViewInject(R.id.tv_public_top_title)
 	private TextView tv_public_top_title;
@@ -50,7 +52,7 @@ public class Activity_Address extends BaseActivity {
 	@ViewInject(R.id.but_address_submit)
 	private Button but_address_submit;
 	/**  */
-	private Address_Adapter adapter;
+	private EditAddress_Adapter adapter;
 	/** 图片加载工具 */
 	private BitmapUtils bitmapUtils;
 	/** 保存数据源 */
@@ -69,19 +71,19 @@ public class Activity_Address extends BaseActivity {
 	 * @param activity
 	 */
 	public static void luanch(Activity activity) {
-		Intent intent = new Intent(activity, Activity_Address.class);
+		Intent intent = new Intent(activity, Activity_EditAddress.class);
 		KeyGuardActivityManager.getInstance().goFoResult(activity, intent, KeyGuardActivityManager.MAIN_CODE);
 	}
 
 	/**
-	 * @Description 设置标题
-	 * @author Created by qinxianyuzou on 2014-12-30.
+	 * @Description
+	 * @author Created by qinxianyuzou on 2015-1-28.
 	 * @param activity
-	 * @param title
+	 * @param data
 	 */
-	public static void luanch(Activity activity, String id) {
-		mId = id;
-		Intent intent = new Intent(activity, Activity_Address.class);
+	public static void luanch(Activity activity, Logistics_Entity data) {
+		logistics_Entity = data;
+		Intent intent = new Intent(activity, Activity_EditAddress.class);
 		KeyGuardActivityManager.getInstance().goFoResult(activity, intent, KeyGuardActivityManager.MAIN_CODE);
 	}
 
@@ -106,9 +108,9 @@ public class Activity_Address extends BaseActivity {
 		// TODO Auto-generated method stub
 		tv_public_top_title.setText(mTitle);
 		rl_public_back.setVisibility(View.VISIBLE);
-		rl_public_back.setOnClickListener(this);
-		but_address_submit.setOnClickListener(this);
-		adapter = new Address_Adapter(activity, bitmapUtils);
+		// rl_public_back.setOnClickListener(this);
+		// but_address_submit.setOnClickListener(this);
+		adapter = new EditAddress_Adapter(activity, bitmapUtils);
 		lv_shop_body.setAdapter(adapter);
 	}
 
@@ -121,19 +123,18 @@ public class Activity_Address extends BaseActivity {
 		dataList.add(new BasicNameValuePair("联系号码", logistics_Entity.getPhone()));
 		dataList.add(new BasicNameValuePair("邮编", logistics_Entity.getPost_no()));
 		adapter.setData(dataList);
+		cb_address_default.setChecked(logistics_Entity.getDefault_addr());
 	}
 
 	@Override
 	public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
 		// TODO Auto-generated method stub
 		if (logisticsFlag == flag) {
-			ResponseLogistics responseLogistics = (ResponseLogistics) response;
+			BaseResponse responseLogistics = (BaseResponse) response;
 			if (responseLogistics.getCode().equals(Code.CODE_SUCCESS)) {
-				showToast(responseLogistics.getMsg());
 				finish();
-			} else {
-				showToast(responseLogistics.getMsg());
 			}
+			showToast(responseLogistics.getMsg());
 		}
 	}
 
@@ -150,6 +151,7 @@ public class Activity_Address extends BaseActivity {
 	}
 
 	@Override
+	@OnClick({ R.id.rl_public_back, R.id.but_address_submit })
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
@@ -158,8 +160,9 @@ public class Activity_Address extends BaseActivity {
 			break;
 		case R.id.but_address_submit:
 			int isDefault = cb_address_default.isChecked() ? 1 : 0;
-			logisticsFlag = Protocol.add_logistics(activity, setTag(), "" + isDefault, logistics_Entity.getTo_who(),
-					logistics_Entity.getTo_where(), logistics_Entity.getPost_no(), logistics_Entity.getPhone());
+			logisticsFlag = Protocol.edit_logistics(activity, setTag(), logistics_Entity.getLogistics_id(), ""
+					+ isDefault, logistics_Entity.getTo_who(), logistics_Entity.getTo_where(),
+					logistics_Entity.getPost_no(), logistics_Entity.getPhone());
 			break;
 
 		default:

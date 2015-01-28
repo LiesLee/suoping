@@ -204,14 +204,55 @@ public class Protocol {
 	 * @return
 	 */
 	public static long add_logistics(Context context, String tag, String default_addr, String to_who, String to_where,
-			String post_no) {
+			String post_no, String phone) {
 		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
 		requestParam.add(new BasicNameValuePair("default_addr", default_addr));
 		requestParam.add(new BasicNameValuePair("to_who", to_who));
 		requestParam.add(new BasicNameValuePair("to_where", to_where));
 		requestParam.add(new BasicNameValuePair("post_no", post_no));
+		requestParam.add(new BasicNameValuePair("phone", phone));
 		return ConnectorManage.getInstance(context).PostHttpRequest(context, Config.ADD_LOGISTICS, tag, requestParam,
 				ResponseLogistics.class, null);
+	}
+
+	/**
+	 * @Description 编辑物流地址
+	 * @author Created by qinxianyuzou on 2015-1-28.
+	 * @param context
+	 * @param tag
+	 * @param default_addr
+	 * @param to_who
+	 * @param to_where
+	 * @param post_no
+	 * @param phone
+	 * @return
+	 */
+	public static long edit_logistics(Context context, String tag, String lid, String default_addr, String to_who,
+			String to_where, String post_no, String phone) {
+		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
+		requestParam.add(new BasicNameValuePair("lid", lid));
+		requestParam.add(new BasicNameValuePair("default_addr", default_addr));
+		requestParam.add(new BasicNameValuePair("to_who", to_who));
+		requestParam.add(new BasicNameValuePair("to_where", to_where));
+		requestParam.add(new BasicNameValuePair("post_no", post_no));
+		requestParam.add(new BasicNameValuePair("phone", phone));
+		return ConnectorManage.getInstance(context).PostHttpRequest(context, Config.EDIT_LOGISTICS, tag, requestParam,
+				BaseResponse.class, null);
+	}
+
+	/**
+	 * @Description 删除物流地址
+	 * @author Created by qinxianyuzou on 2015-1-28.
+	 * @param context
+	 * @param tag
+	 * @param lid
+	 * @return
+	 */
+	public static long del_logistics(Context context, String tag, String lid) {
+		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
+		requestParam.add(new BasicNameValuePair("lid", lid));
+		return ConnectorManage.getInstance(context).PostHttpRequest(context, Config.DEL_LOGISTICS, tag, requestParam,
+				BaseResponse.class, null);
 	}
 
 	/**

@@ -225,6 +225,7 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
+        <activity android:name="com.example.activity.more.Activity_EditAddress"></activity>
     </application>
 
 </manifest>

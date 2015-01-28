@@ -8,7 +8,7 @@ public class Logistics_Entity implements Serializable {
 	/**  */
 	private static final long serialVersionUID = -174466486138736107L;
 	/** 地址id */
-	private String ogistics_id = StringUtils.EMPTY;
+	private String logistics_id = StringUtils.EMPTY;
 	/** 是否默认配送 */
 	private int default_addr;
 	/** 收货人 */
@@ -17,26 +17,28 @@ public class Logistics_Entity implements Serializable {
 	private String to_where = StringUtils.EMPTY;
 	/** 邮编 */
 	private String post_no = StringUtils.EMPTY;
+	/** 电话好吗 */
+	private String phone = StringUtils.EMPTY;
 
 	/**
 	 * @Description
-	 * @author Created by qinxianyuzou on 2015-1-4.
-	 * @see #ogistics_id
-	 * @return the ogistics_id
+	 * @author Created by qinxianyuzou on 2015-1-28.
+	 * @see #logistics_id
+	 * @return the logistics_id
 	 */
-	public String getOgistics_id() {
-		return ogistics_id;
+	public String getLogistics_id() {
+		return logistics_id;
 	}
 
 	/**
 	 * @Description
-	 * @author Created by qinxianyuzou on 2015-1-4.
-	 * @see #ogistics_id
-	 * @param ogistics_id
-	 *            the ogistics_id to set
+	 * @author Created by qinxianyuzou on 2015-1-28.
+	 * @see #logistics_id
+	 * @param logistics_id
+	 *            the logistics_id to set
 	 */
-	public void setOgistics_id(String ogistics_id) {
-		this.ogistics_id = ogistics_id;
+	public void setLogistics_id(String logistics_id) {
+		this.logistics_id = logistics_id;
 	}
 
 	/**
@@ -127,14 +129,35 @@ public class Logistics_Entity implements Serializable {
 		this.post_no = post_no;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
+	 * @Description
+	 * @author Created by qinxianyuzou on 2015-1-28.
+	 * @see #phone
+	 * @return the phone
+	 */
+	public String getPhone() {
+		return phone;
+	}
+
+	/**
+	 * @Description
+	 * @author Created by qinxianyuzou on 2015-1-28.
+	 * @see #phone
+	 * @param phone
+	 *            the phone to set
+	 */
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Logistics_Entity [ogistics_id=" + ogistics_id + ", default_addr=" + default_addr + ", to_who=" + to_who
-				+ ", to_where=" + to_where + ", post_no=" + post_no + "]";
+		return "Logistics_Entity [logistics_id=" + logistics_id + ", default_addr=" + default_addr + ", to_who="
+				+ to_who + ", to_where=" + to_where + ", post_no=" + post_no + ", phone=" + phone + "]";
 	}
+
+
 }
