@@ -210,7 +210,7 @@ public class Protocol {
 		requestParam.add(new BasicNameValuePair("to_who", to_who));
 		requestParam.add(new BasicNameValuePair("to_where", to_where));
 		requestParam.add(new BasicNameValuePair("post_no", post_no));
-		requestParam.add(new BasicNameValuePair("phone", phone));
+		requestParam.add(new BasicNameValuePair("to_phone", phone));
 		return ConnectorManage.getInstance(context).PostHttpRequest(context, Config.ADD_LOGISTICS, tag, requestParam,
 				ResponseLogistics.class, null);
 	}
@@ -235,7 +235,7 @@ public class Protocol {
 		requestParam.add(new BasicNameValuePair("to_who", to_who));
 		requestParam.add(new BasicNameValuePair("to_where", to_where));
 		requestParam.add(new BasicNameValuePair("post_no", post_no));
-		requestParam.add(new BasicNameValuePair("phone", phone));
+		requestParam.add(new BasicNameValuePair("to_phone", phone));
 		return ConnectorManage.getInstance(context).PostHttpRequest(context, Config.EDIT_LOGISTICS, tag, requestParam,
 				BaseResponse.class, null);
 	}

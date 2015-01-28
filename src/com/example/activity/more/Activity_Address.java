@@ -118,7 +118,7 @@ public class Activity_Address extends BaseActivity {
 		dataList.clear();
 		dataList.add(new BasicNameValuePair("收货地址", logistics_Entity.getTo_where()));
 		dataList.add(new BasicNameValuePair("收货人姓名", logistics_Entity.getTo_who()));
-		dataList.add(new BasicNameValuePair("联系号码", logistics_Entity.getPhone()));
+		dataList.add(new BasicNameValuePair("联系号码", logistics_Entity.getTo_phone()));
 		dataList.add(new BasicNameValuePair("邮编", logistics_Entity.getPost_no()));
 		adapter.setData(dataList);
 	}
@@ -159,7 +159,7 @@ public class Activity_Address extends BaseActivity {
 		case R.id.but_address_submit:
 			int isDefault = cb_address_default.isChecked() ? 1 : 0;
 			logisticsFlag = Protocol.add_logistics(activity, setTag(), "" + isDefault, logistics_Entity.getTo_who(),
-					logistics_Entity.getTo_where(), logistics_Entity.getPost_no(), logistics_Entity.getPhone());
+					logistics_Entity.getTo_where(), logistics_Entity.getPost_no(), logistics_Entity.getTo_phone());
 			break;
 
 		default:

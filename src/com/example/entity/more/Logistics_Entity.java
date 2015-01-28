@@ -18,7 +18,7 @@ public class Logistics_Entity implements Serializable {
 	/** 邮编 */
 	private String post_no = StringUtils.EMPTY;
 	/** 电话好吗 */
-	private String phone = StringUtils.EMPTY;
+	private String to_phone = StringUtils.EMPTY;
 
 	/**
 	 * @Description
@@ -132,32 +132,33 @@ public class Logistics_Entity implements Serializable {
 	/**
 	 * @Description
 	 * @author Created by qinxianyuzou on 2015-1-28.
-	 * @see #phone
-	 * @return the phone
+	 * @see #to_phone
+	 * @return the to_phone
 	 */
-	public String getPhone() {
-		return phone;
+	public String getTo_phone() {
+		return to_phone;
 	}
 
 	/**
 	 * @Description
 	 * @author Created by qinxianyuzou on 2015-1-28.
-	 * @see #phone
-	 * @param phone
-	 *            the phone to set
+	 * @see #to_phone
+	 * @param to_phone
+	 *            the to_phone to set
 	 */
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setTo_phone(String to_phone) {
+		this.to_phone = to_phone;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		return "Logistics_Entity [logistics_id=" + logistics_id + ", default_addr=" + default_addr + ", to_who="
-				+ to_who + ", to_where=" + to_where + ", post_no=" + post_no + ", phone=" + phone + "]";
+				+ to_who + ", to_where=" + to_where + ", post_no=" + post_no + ", to_phone=" + to_phone + "]";
 	}
-
 
 }
