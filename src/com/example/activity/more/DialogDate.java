@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.http.Protocol;
+import com.example.http.base.Protocol;
 import com.example.keyguard.R;
 import com.example.util.PublicUtil;
 

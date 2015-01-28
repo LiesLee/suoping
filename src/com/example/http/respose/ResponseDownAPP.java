@@ -1,6 +1,7 @@
-package com.example.entity.respose;
+package com.example.http.respose;
 
 import com.example.entity.DownAPP_Entity;
+import com.example.http.base.BaseResponse;
 
 /**
  * @Description 下载APP

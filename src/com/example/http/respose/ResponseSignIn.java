@@ -1,8 +1,9 @@
-package com.example.entity.respose;
+package com.example.http.respose;
 
 import java.util.ArrayList;
 
 import com.example.entity.SignIn_Entity;
+import com.example.http.base.BaseResponse;
 
 /**
  * @Description 签到回调

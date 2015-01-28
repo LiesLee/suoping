@@ -1,6 +1,7 @@
-package com.example.entity.respose;
+package com.example.http.respose;
 
 import com.example.entity.Exchange_detail;
+import com.example.http.base.BaseResponse;
 
 import java.util.ArrayList;
 import java.util.List;

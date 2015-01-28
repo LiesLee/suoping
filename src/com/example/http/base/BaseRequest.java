@@ -1,4 +1,4 @@
-package com.example.http;
+package com.example.http.base;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;

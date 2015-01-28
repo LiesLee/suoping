@@ -17,7 +17,7 @@ import com.android.volley.VolleyError;
 import com.example.activity.more.Activity_Address;
 import com.example.activity.more.Activity_MyInfo;
 import com.example.activity.more.Address_Adapter;
-import com.example.http.Protocol;
+import com.example.http.base.Protocol;
 import com.example.keyguard.R;
 import com.example.util.StringUtils;
 import com.lidroid.xutils.ViewUtils;

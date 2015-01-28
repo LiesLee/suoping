@@ -1,38 +1,38 @@
-package com.example.entity.respose;
+package com.example.http.respose;
 
 import java.util.ArrayList;
 
-import com.example.entity.LockADList_Entity;
 import com.example.entity.more.Logistics_Entity;
+import com.example.http.base.BaseResponse;
 
 /**
- * @Description 锁屏广告列表
+ * @Description 物流地址列表
  * @author Created by qinxianyuzou on 2015-1-4.
  */
-public class ResponseLockADList extends BaseResponse {
+public class ResponseLogistics extends BaseResponse {
 	/**  */
 	private static final long serialVersionUID = 8062805673883580062L;
 	/** 用户信息 **/
-	private ArrayList<LockADList_Entity> data = new ArrayList<>();
+	private ArrayList<Logistics_Entity> data = new ArrayList<>();
 
 	/**
 	 * @Description
-	 * @author Created by qinxianyuzou on 2015-1-8.
+	 * @author Created by qinxianyuzou on 2015-1-4.
 	 * @see #data
 	 * @return the data
 	 */
-	public ArrayList<LockADList_Entity> getData() {
+	public ArrayList<Logistics_Entity> getData() {
 		return data;
 	}
 
 	/**
 	 * @Description
-	 * @author Created by qinxianyuzou on 2015-1-8.
+	 * @author Created by qinxianyuzou on 2015-1-4.
 	 * @see #data
 	 * @param data
 	 *            the data to set
 	 */
-	public void setData(ArrayList<LockADList_Entity> data) {
+	public void setData(ArrayList<Logistics_Entity> data) {
 		this.data = data;
 	}
 

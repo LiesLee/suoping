@@ -1,8 +1,9 @@
-package com.example.entity.respose;
+package com.example.http.respose;
 
 import java.util.ArrayList;
 
 import com.example.entity.shop.EXProduct_Entity;
+import com.example.http.base.BaseResponse;
 
 /**
  * Created by LiesLee on 2014/12/28. Email: LiesLee@foxmail.com

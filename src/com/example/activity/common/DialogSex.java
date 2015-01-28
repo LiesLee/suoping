@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.activity.more.Activity_MyInfo;
-import com.example.http.Protocol;
+import com.example.http.base.Protocol;
 import com.example.keyguard.R;
 
 /**

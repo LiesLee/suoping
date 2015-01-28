@@ -1,4 +1,4 @@
-package com.example.http;
+package com.example.http.base;
 
 import java.util.ArrayList;
 
@@ -7,18 +7,17 @@ import org.apache.http.message.BasicNameValuePair;
 
 import android.content.Context;
 
-import com.example.entity.respose.BaseResponse;
-import com.example.entity.respose.ResponseDownAPP;
-import com.example.entity.respose.ResponseEPDetail;
-import com.example.entity.respose.ResponseEXProduct;
-import com.example.entity.respose.ResponseExchangeDetail;
-import com.example.entity.respose.ResponseInviteDetail;
-import com.example.entity.respose.ResponseLockADList;
-import com.example.entity.respose.ResponseLogistics;
-import com.example.entity.respose.ResponseShare;
-import com.example.entity.respose.ResponseSignIn;
-import com.example.entity.respose.ResponseUpdate;
-import com.example.entity.respose.ResponseUserInfo;
+import com.example.http.respose.ResponseDownAPP;
+import com.example.http.respose.ResponseEPDetail;
+import com.example.http.respose.ResponseEXProduct;
+import com.example.http.respose.ResponseExchangeDetail;
+import com.example.http.respose.ResponseInviteDetail;
+import com.example.http.respose.ResponseLockADList;
+import com.example.http.respose.ResponseLogistics;
+import com.example.http.respose.ResponseShare;
+import com.example.http.respose.ResponseSignIn;
+import com.example.http.respose.ResponseUpdate;
+import com.example.http.respose.ResponseUserInfo;
 import com.example.util.StringUtils;
 
 /**

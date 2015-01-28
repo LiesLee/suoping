@@ -1,4 +1,4 @@
-package com.example.entity.respose;
+package com.example.http.base;
 
 /**
  * Created by LiesLee on 2014/12/28.

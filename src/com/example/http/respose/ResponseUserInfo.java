@@ -1,16 +1,16 @@
-package com.example.entity.respose;
+package com.example.http.respose;
 
-import com.example.entity.InviteDetail_Entity;
+import com.example.entity.UserInfo;
+import com.example.http.base.BaseResponse;
 
 /**
- * @Description 邀请详情回调
- * @author Created by qinxianyuzou on 2015-1-9.
+ * Created by LiesLee on 2014/12/28. Email: LiesLee@foxmail.com
  */
-public class ResponseInviteDetail extends BaseResponse {
+public class ResponseUserInfo extends BaseResponse {
 	/**  */
 	private static final long serialVersionUID = 8062805673883580062L;
 	/** 用户信息 **/
-	private InviteDetail_Entity data = new InviteDetail_Entity();
+	private UserInfo data=new UserInfo();
 
 	/**
 	 * @Description
@@ -18,7 +18,7 @@ public class ResponseInviteDetail extends BaseResponse {
 	 * @see #data
 	 * @return the data
 	 */
-	public InviteDetail_Entity getData() {
+	public UserInfo getData() {
 		return data;
 	}
 
@@ -29,7 +29,7 @@ public class ResponseInviteDetail extends BaseResponse {
 	 * @param data
 	 *            the data to set
 	 */
-	public void setData(InviteDetail_Entity data) {
+	public void setData(UserInfo data) {
 		this.data = data;
 	}
 

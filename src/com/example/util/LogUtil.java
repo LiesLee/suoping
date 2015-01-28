@@ -15,7 +15,7 @@ package com.example.util;
 
 import android.util.Log;
 
-import com.example.http.Config;
+import com.example.http.base.Config;
 /**
  * 全局日志管理类<BR>
  * [功能详细描述]

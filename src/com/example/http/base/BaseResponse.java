@@ -1,4 +1,4 @@
-package com.example.entity.respose;
+package com.example.http.base;
 
 import com.example.util.StringUtils;
 

@@ -11,9 +11,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.example.entity.respose.BaseResponse;
-import com.example.entity.respose.Code;
-import com.example.http.Protocol;
+import com.example.http.base.BaseResponse;
+import com.example.http.base.Code;
+import com.example.http.base.Protocol;
 import com.example.keyguard.R;
 import com.example.util.PublicUtil;
 import com.example.util.SharedPreferenceUtil;

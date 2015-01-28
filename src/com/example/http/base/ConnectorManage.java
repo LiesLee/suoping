@@ -1,4 +1,4 @@
-package com.example.http;
+package com.example.http.base;
 
 import java.util.ArrayList;
 import java.util.HashMap;

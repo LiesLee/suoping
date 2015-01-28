@@ -7,9 +7,9 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.example.activity.common.BaseActivity;
 import com.example.activity.common.KeyGuardApplication;
-import com.example.http.ConnectorManage;
-import com.example.http.HttpCallBack;
-import com.example.http.RequestManager;
+import com.example.http.base.ConnectorManage;
+import com.example.http.base.HttpCallBack;
+import com.example.http.base.RequestManager;
 import com.example.util.StringUtils;
 import com.example.util.UIHelper;
 

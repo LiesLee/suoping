@@ -1,4 +1,4 @@
-package com.example.http;
+package com.example.http.base;
 
 import com.example.util.PublicUtil;
 

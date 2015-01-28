@@ -36,7 +36,7 @@ import android.widget.Toast;
 import com.example.activity.common.KeyGuardApplication;
 import com.example.entity.Download_APK_Install;
 import com.example.entity.UserInfo;
-import com.example.http.Protocol;
+import com.example.http.base.Protocol;
 import com.example.keyguard.R;
 import com.example.keyguard.StartInstalledBroadcast;
 import com.google.gson.Gson;
