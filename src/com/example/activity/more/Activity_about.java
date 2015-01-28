@@ -123,8 +123,9 @@ public class Activity_about extends BaseActivity {
 			Activity_PublicWeb.luanch(activity, "联系客服", "http://www.baidu.com");
 			break;
 		case R.id.ll_about_update:
-//			checkeUpdateFlag = Protocol.check_update(activity, setTag());
-			PublicUtil.updateAPP(activity, "http://static.huisuoping.com/apk/hsp.apk");
+			checkeUpdateFlag = Protocol.check_update(activity, setTag());
+			// PublicUtil.updateAPP(activity,
+			// "http://static.huisuoping.com/apk/hsp.apk");
 			break;
 		case R.id.ll_about_hezuo:
 			Activity_PublicWeb.luanch(activity, "市场合作", "http://www.baidu.com");
