@@ -1,5 +1,9 @@
 package com.example.activity.earnings;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -10,9 +14,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.entity.Download_APK_Install;
+import com.example.entity.SignIn_Entity;
 import com.example.keyguard.R;
-import com.example.util.LogUtil;
 import com.example.util.PublicUtil;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.bitmap.BitmapDisplayConfig;
@@ -20,24 +23,21 @@ import com.lidroid.xutils.bitmap.callback.BitmapLoadCallBack;
 import com.lidroid.xutils.bitmap.callback.BitmapLoadFrom;
 import com.lidroid.xutils.bitmap.callback.DefaultBitmapLoadCallBack;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author Created by qinxianyuzou on 2014-12-25.
  */
 public class My_Not_Active_Adapter extends BaseAdapter {
-    private Context mContext;
+	private Context mContext;
 	private LayoutInflater listContainer;
 
 	/** 数据源 */
-	private List<Download_APK_Install> listData = new ArrayList<Download_APK_Install>();
+	private List<SignIn_Entity> listData = new ArrayList<SignIn_Entity>();
 	/** 图片加载工具 */
 	private BitmapUtils bitmapUtils;
 	/** 图片加载回调 */
 	private BitmapLoadCallBack<ImageView> bitmapLoadCallBack;
 
-    public My_Not_Active_Adapter(Context context, BitmapUtils bitmapUtils) {
+	public My_Not_Active_Adapter(Context context, BitmapUtils bitmapUtils) {
 		mContext = context;
 		listContainer = LayoutInflater.from(mContext);
 		this.bitmapUtils = bitmapUtils;
@@ -47,7 +47,7 @@ public class My_Not_Active_Adapter extends BaseAdapter {
 			public void onLoadFailed(ImageView container, String uri, Drawable drawable) {
 				// TODO Auto-generated method stub
 				super.onLoadFailed(container, uri, drawable);
-				 container.setImageResource(R.drawable.item_icon);
+				container.setImageResource(R.drawable.item_icon);
 			}
 
 			@Override
@@ -60,14 +60,14 @@ public class My_Not_Active_Adapter extends BaseAdapter {
 		// ViewUtils.inject((Activity) mContext);
 	}
 
-	public void setData(List<Download_APK_Install> data) {
+	public void setData(List<SignIn_Entity> data) {
 		listData = data;
 		notifyDataSetChanged();
 	}
 
-    public List<Download_APK_Install> getData() {
-        return listData;
-    }
+	public List<SignIn_Entity> getData() {
+		return listData;
+	}
 
 	@Override
 	public int getCount() {
@@ -92,38 +92,45 @@ public class My_Not_Active_Adapter extends BaseAdapter {
 		if (convertView == null) {
 			listItemView = new HolderView();
 			convertView = listContainer.inflate(R.layout.item_not_active, null);
-            listItemView.download_app_icon = (ImageView) convertView.findViewById(R.id.download_app_icon);
-            listItemView.download_app_name = (TextView) convertView.findViewById(R.id.download_app_name);
-            listItemView.download_app_info = (TextView) convertView.findViewById(R.id.download_app_info);
-            listItemView.tv_install_status = (TextView) convertView.findViewById(R.id.tv_install_status);
+			listItemView.download_app_icon = (ImageView) convertView.findViewById(R.id.download_app_icon);
+			listItemView.download_app_name = (TextView) convertView.findViewById(R.id.download_app_name);
+			listItemView.download_app_info = (TextView) convertView.findViewById(R.id.download_app_info);
+			listItemView.tv_install_status = (TextView) convertView.findViewById(R.id.tv_install_status);
 			convertView.setTag(listItemView);
 		} else {
 			listItemView = (HolderView) convertView.getTag();
 		}
 
-        if (listData != null && listData.size() != 0) {
-            final Download_APK_Install apk = listData.get(position);
-            listItemView.download_app_icon.setImageDrawable(PublicUtil.getApkIcon(mContext, apk.getAppPath()));
-            listItemView.download_app_name.setText(apk.getAppName());
-            listItemView.download_app_info.setText(apk.getFileSize());
-            listItemView.tv_install_status.setVisibility(View.VISIBLE);
-            listItemView.download_app_info.setText(apk.getFileSize());
-            listItemView.tv_install_status.setVisibility(View.VISIBLE);
-            if(apk.isInstalled()){
-                listItemView.tv_install_status.setText("已安装");
-            }else{
-                listItemView.tv_install_status.setText("未安装");
-            }
-            convertView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    LogUtil.i("=====包名=====", PublicUtil.getPackageName(mContext, apk.getAppPath()));
-                    PublicUtil.openAPK(mContext, PublicUtil.getPackageName(mContext, apk.getAppPath()));
-                }
-            });
-        }
-        return convertView;
-    }
+		if (listData != null && listData.size() != 0) {
+			final SignIn_Entity apk = listData.get(position);
+			bitmapUtils.display(listItemView.download_app_icon, apk.getIcon());
+			listItemView.download_app_name.setText(apk.getProcess_name());
+			listItemView.download_app_info.setText(apk.getDesc());
+			listItemView.tv_install_status.setVisibility(View.VISIBLE);
+			if (PublicUtil.isApkInstalled(mContext, apk.getPacket_name())) {
+				listItemView.tv_install_status.setText("已安装");
+			} else {
+				listItemView.tv_install_status.setText("未安装");
+			}
+			// convertView.setOnClickListener(new View.OnClickListener() {
+			// @Override
+			// public void onClick(View v) {
+			// // LogUtil.i("=====包名=====",
+			// // PublicUtil.getPackageName(mContext, apk.getAppPath()));
+			// if (PublicUtil.isApkInstalled(mContext, apk.getPacket_name())) {
+			// PublicUtil.APPTiming(mContext, apk.getPacket_name());
+			// } else {
+			// // PublicUtil.openAPK(mContext,
+			// // PublicUtil.getPackageName(mContext,
+			// // apk.getAppPath()));
+			// PublicUtil.downloadAPP((Activity) mContext,
+			// apk.getPacket_name());
+			// }
+			// }
+			// });
+		}
+		return convertView;
+	}
 
 	private class HolderView {
 		private ImageView download_app_icon;

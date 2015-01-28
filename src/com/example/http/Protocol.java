@@ -16,6 +16,7 @@ import com.example.entity.respose.ResponseInviteDetail;
 import com.example.entity.respose.ResponseLockADList;
 import com.example.entity.respose.ResponseLogistics;
 import com.example.entity.respose.ResponseShare;
+import com.example.entity.respose.ResponseSignIn;
 import com.example.entity.respose.ResponseUpdate;
 import com.example.entity.respose.ResponseUserInfo;
 import com.example.util.StringUtils;
@@ -341,7 +342,7 @@ public class Protocol {
 	}
 
 	/**
-	 * @Description
+	 * @Description 分享信息
 	 * @author Created by qinxianyuzou on 2015-1-14.
 	 * @param context
 	 * @param tag
@@ -352,5 +353,31 @@ public class Protocol {
 		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
 		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.FSHARE, tag, requestParam,
 				ResponseShare.class, null);
+	}
+
+	/**
+	 * @Description 待激活收益列表
+	 * @author Created by qinxianyuzou on 2015-1-26.
+	 * @param context
+	 * @param tag
+	 * @return
+	 */
+	public static long get_jihuo_earn(Context context, String tag) {
+		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
+		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.GET_JIHUO_EARN, tag, requestParam,
+				ResponseSignIn.class, null);
+	}
+
+	/**
+	 * @Description 签到成功接口
+	 * @author Created by qinxianyuzou on 2015-1-26.
+	 * @param context
+	 * @param tag
+	 * @return
+	 */
+	public static long signinSuccess(Context context, String tag, String url) {
+		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
+		return ConnectorManage.getInstance(context).GetHttpRequest(context, url, tag, requestParam, BaseResponse.class,
+				null);
 	}
 }

@@ -1,9 +1,16 @@
 package com.example.util;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -29,6 +36,7 @@ import android.widget.Toast;
 import com.example.activity.common.KeyGuardApplication;
 import com.example.entity.Download_APK_Install;
 import com.example.entity.UserInfo;
+import com.example.http.Protocol;
 import com.example.keyguard.R;
 import com.example.keyguard.StartInstalledBroadcast;
 import com.google.gson.Gson;
@@ -37,11 +45,9 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.HttpHandler;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.bean.SocializeEntity;
 import com.umeng.socialize.controller.UMSocialService;
-import com.umeng.socialize.controller.listener.SocializeListeners.SnsPostListener;
 import com.umeng.socialize.media.QQShareContent;
+import com.umeng.socialize.media.QZoneShareContent;
 import com.umeng.socialize.media.SinaShareContent;
 import com.umeng.socialize.media.SmsShareContent;
 import com.umeng.socialize.media.TencentWbShareContent;
@@ -466,6 +472,14 @@ public class PublicUtil {
 			shareContent.setTargetUrl(url);
 		}
 		mController.setShareMedia(shareContent);
+		QZoneShareContent qZoneShareContent = new QZoneShareContent();
+		qZoneShareContent.setTitle(title);
+		qZoneShareContent.setShareImage(new UMImage(activity, R.drawable.logo));
+		qZoneShareContent.setShareContent(fshareMSG);
+		if (!StringUtils.isEmpty(url)) {
+			shareContent.setTargetUrl(url);
+		}
+		mController.setShareMedia(qZoneShareContent);
 	}
 
 	/**
@@ -485,7 +499,7 @@ public class PublicUtil {
 	@SuppressWarnings({ "deprecation", "rawtypes" })
 	public static void updateAPP(final Activity activity, String url) {
 		String apkName[] = url.split("/");
-		final String downFile = DOWNLOAD_APP_PATH + "/" + apkName[apkName.length - 1];
+		final String downFile = DOWNLOAD_APP_PATH + "/update/" + apkName[apkName.length - 1];
 		HttpUtils http = new HttpUtils();
 		final Notification mNotification;
 		final NotificationManager mNotificationManager;
@@ -539,62 +553,132 @@ public class PublicUtil {
 	}
 
 	@SuppressWarnings({ "deprecation", "rawtypes" })
-	public static void downloadAPP(final Activity activity, String url) {
-		String apkName[] = url.split("/");
-		final String downFile = DOWNLOAD_APP_PATH + "/" + apkName[apkName.length - 1] + ".apk";
-		HttpUtils http = new HttpUtils();
-		final Notification mNotification;
-		final NotificationManager mNotificationManager;
-		mNotificationManager = (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
-		mNotification = new Notification(R.drawable.logo, "正在下载...", System.currentTimeMillis());
-		mNotification.contentView = new RemoteViews(activity.getPackageName(), R.layout.download);
-		mNotification.flags = Notification.FLAG_INSISTENT;
-		mNotification.sound = null;
-		HttpHandler handler = http.download(url, downFile, true, true, new RequestCallBack<File>() {
-
+	public static void downloadAPP(final Activity activity, final String url) {
+		new Thread(new Runnable() {
 			@Override
-			public void onStart() {
-				// tv_info.setText("conn...");
-				PublicUtil.showToast(activity, "正在下载...");
+			public void run() {
+				// TODO Auto-generated method stub
+				String apkName[] = url.split("/");
+				// final String downFile = DOWNLOAD_APP_PATH + "/" +
+				// apkName[apkName.length - 1] + ".apk";
+				final String downFile = DOWNLOAD_APP_PATH + "/" + getFileName(url);
+				HttpUtils http = new HttpUtils();
+				final Notification mNotification;
+				final NotificationManager mNotificationManager;
+				mNotificationManager = (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
+				mNotification = new Notification(R.drawable.logo, "正在下载...", System.currentTimeMillis());
+				mNotification.contentView = new RemoteViews(activity.getPackageName(), R.layout.download);
+				mNotification.flags = Notification.FLAG_INSISTENT;
+				mNotification.sound = null;
+				HttpHandler handler = http.download(url, downFile, true, false, new RequestCallBack<File>() {
+
+					@Override
+					public void onStart() {
+						// tv_info.setText("conn...");
+						PublicUtil.showToast(activity, "正在下载...");
+					}
+
+					@Override
+					public void onLoading(long total, long current, boolean isUploading) {
+						// tv_info.setText(current + "/" + total);
+						LogUtil.d("downloadAPP", "<==========handler");
+						DecimalFormat decimalFormat = new DecimalFormat("0%");
+						LogUtil.d("downloadAPP", "total:" + total);
+						LogUtil.d("downloadAPP", "current:" + current);
+						LogUtil.d("downloadAPP", "(float) current / (float) total:" + (float) current / (float) total);
+						LogUtil.d("downloadAPP",
+								"decimalFormat:" + decimalFormat.format((float) current / (float) total));
+						LogUtil.d("downloadAPP", "handler==========>");
+						mNotification.contentView.setTextViewText(R.id.content_view_text1,
+								decimalFormat.format((float) current / (float) total));
+						mNotification.contentView.setProgressBar(R.id.content_view_progress, (int) total,
+								(int) current, false);
+						mNotificationManager.notify(3567, mNotification);
+					}
+
+					@Override
+					public void onSuccess(ResponseInfo<File> responseInfo) {
+						mNotificationManager.cancel(3567);
+						PublicUtil.showToast(activity, "下载完成...");
+						// PublicUtil.installAPK(activity, downFile);
+						PublicUtil.installAPK(activity, responseInfo.result.toString());
+					}
+
+					@Override
+					public void onFailure(HttpException error, String msg) {
+						// tv_info.setText(msg);
+						LogUtil.d("handler", msg);
+						if (msg.indexOf("maybe the file has downloaded completely") > 0) {
+							showToast(activity, "应用已经下载");
+							installAPK(activity, downFile);
+						}
+						if (msg.indexOf("Target host must not be null") > 0) {
+							showToast(activity, "文件下载失败，下载文件不存在");
+						}
+					}
+
+				});
+			}
+		}).start();
+	}
+
+	/**
+	 * @Description 获取文件名
+	 * @author Created by qinxianyuzou on 2015-1-24.
+	 * @param url
+	 * @return
+	 */
+	public static String getFileName(String url) {
+		String filename = "";
+		boolean isok = false;
+		// 从UrlConnection中获取文件名称
+		try {
+			URL myURL = new URL(url);
+
+			URLConnection conn = myURL.openConnection();
+			if (conn == null) {
+				return null;
+			}
+			Map<String, List<String>> hf = conn.getHeaderFields();
+			if (hf == null) {
+				return null;
+			}
+			Set<String> key = hf.keySet();
+			if (key == null) {
+				return null;
 			}
 
-			@Override
-			public void onLoading(long total, long current, boolean isUploading) {
-				// tv_info.setText(current + "/" + total);
-				LogUtil.d("downloadAPP", "<==========handler");
-				DecimalFormat decimalFormat = new DecimalFormat("0%");
-				LogUtil.d("downloadAPP", "total:" + total);
-				LogUtil.d("downloadAPP", "current:" + current);
-				LogUtil.d("downloadAPP", "(float) current / (float) total:" + (float) current / (float) total);
-				LogUtil.d("downloadAPP", "decimalFormat:" + decimalFormat.format((float) current / (float) total));
-				LogUtil.d("downloadAPP", "handler==========>");
-				mNotification.contentView.setTextViewText(R.id.content_view_text1,
-						decimalFormat.format((float) current / (float) total));
-				mNotification.contentView.setProgressBar(R.id.content_view_progress, (int) total, (int) current, false);
-				mNotificationManager.notify(3567, mNotification);
-			}
-
-			@Override
-			public void onSuccess(ResponseInfo<File> responseInfo) {
-				mNotificationManager.cancel(3566);
-				PublicUtil.showToast(activity, "下载完成...");
-				PublicUtil.installAPK(activity, downFile);
-			}
-
-			@Override
-			public void onFailure(HttpException error, String msg) {
-				// tv_info.setText(msg);
-				LogUtil.d("handler", msg);
-				if (msg.indexOf("maybe the file has downloaded completely") > 0) {
-					showToast(activity, "文件已经下载完成");
-					installAPK(activity, downFile);
+			for (String skey : key) {
+				List<String> values = hf.get(skey);
+				for (String value : values) {
+					String result;
+					try {
+						result = new String(value.getBytes("ISO-8859-1"), "GBK");
+						int location = result.indexOf("filename");
+						if (location >= 0) {
+							result = result.substring(location + "filename".length());
+							filename = result.substring(result.indexOf("=") + 1);
+							isok = true;
+							LogUtil.d(TAG, filename);
+						}
+					} catch (UnsupportedEncodingException e) {
+						e.printStackTrace();
+					}// ISO-8859-1 UTF-8 gb2312
 				}
-				if (msg.indexOf("Target host must not be null") > 0) {
-					showToast(activity, "文件下载失败，下载文件不存在");
+				if (isok) {
+					break;
 				}
 			}
-
-		});
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		// 从路径中获取
+		if (filename == null || "".equals(filename)) {
+			filename = url.substring(url.lastIndexOf("/") + 1);
+		}
+		return filename;
 	}
 
 	/**
@@ -677,4 +761,46 @@ public class PublicUtil {
 		DecimalFormat df = new DecimalFormat("#.00");
 		return String.valueOf(df.format(size)) + "m";
 	}
+
+	/**
+	 * @Description 计算软件打开时间
+	 * @author Created by qinxianyuzou on 2015-1-26.
+	 * @param activity
+	 * @param tag
+	 * @param packagename
+	 * @param howLong
+	 * @param url
+	 */
+	public static void APPTiming(final Context activity, final String tag, final String packagename, final int howLong,
+			final String url) {
+		openAPK(activity, packagename);
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				boolean isRunning = true;
+				int timing = 0;
+				// PublicUtil.showToast(activity, "至少要运行"+howLong+"秒");
+				while (isRunning) {
+					try {
+						Thread.sleep(1000);
+						if (isRunningAPK(activity, packagename)) {
+							timing++;
+							if (timing > howLong) {
+								// 发送接口
+								Protocol.signinSuccess(activity, tag, url);
+								isRunning = false;
+							}
+						} else {
+							isRunning = false;
+						}
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}).start();
+	}
+
 }

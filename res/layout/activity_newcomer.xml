@@ -85,14 +85,14 @@
         android:layout_height="0.5dp"
         android:background="@color/earning_gray"/>
 
-
     <LinearLayout
         android:id="@+id/ly_bind_cellphone"
-        android:background="@drawable/selector_btn_public_click"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@drawable/selector_btn_public_click"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -223,14 +223,15 @@
 
             <TextView
                 android:id="@+id/tv_login"
-                android:background="@drawable/selector_btn_public_click"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textSize="18sp"
-                android:textColor="@color/prevailing_red"
-                android:text="已有账号，请登录"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/selector_btn_public_click"
+                android:gravity="center"
+                android:text="已有账号，请登录"
+                android:textColor="@color/prevailing_red"
+                android:textSize="18sp"
+                android:visibility="gone" />
 
             </LinearLayout>
         <View

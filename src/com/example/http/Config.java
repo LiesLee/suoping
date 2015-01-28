@@ -51,6 +51,10 @@ public class Config {
 	public final static String INVITE = BASE_URL + "invite";
 	/** 分享信息 */
 	public final static String FSHARE = BASE_URL + "fshare";
+	/** 待激活收益列表 */
+	public final static String GET_JIHUO_EARN = BASE_URL + "get_jihuo_earn";
+	/** 新手活动接口 */
+	public final static String FRESHMAN_AWARD = BASE_URL + "freshman_award";
 	/** APP下载 */
 	public final static String DOWNLOADAPP = "http://static.duowanka.com/downloadApp";
 	/** APP检查更新 */

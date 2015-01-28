@@ -104,6 +104,8 @@ public class Activity_DownloadWeb extends BaseActivity {
 			finish();
 			break;
 		case R.id.but_down_web:
+			// PublicUtil.downloadAPP(activity,
+			// "http://static.duowanka.com/downloadApp");
 			UIHelper.showMsgProgressDialog(activity, "正在加载...");
 			downFlag = Protocol.get_earn_downloadurl(activity, setTag(), mId);
 			break;
@@ -118,9 +120,15 @@ public class Activity_DownloadWeb extends BaseActivity {
 		// TODO Auto-generated method stub
 		if (flag == downFlag) {
 			UIHelper.cancelProgressDialog();
-			ResponseDownAPP responseDownAPP = (ResponseDownAPP) response;
+			final ResponseDownAPP responseDownAPP = (ResponseDownAPP) response;
 			if (responseDownAPP.getCode().equals(Code.CODE_SUCCESS)) {
-				PublicUtil.downloadAPP(activity, responseDownAPP.getData().getDownload_url());
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						PublicUtil.downloadAPP(activity, responseDownAPP.getData().getDownload_url());
+					}
+				}).start();
 			} else {
 				showToast(responseDownAPP.getMsg());
 			}

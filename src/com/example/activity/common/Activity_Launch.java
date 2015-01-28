@@ -1,10 +1,6 @@
 package com.example.activity.common;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.youmi.android.AdManager;
-import net.youmi.android.offers.OffersManager;
 
 import org.json.JSONObject;
 
@@ -18,16 +14,12 @@ import android.widget.ImageView;
 
 import com.android.volley.VolleyError;
 import com.example.activity.reg.Activity_Reg;
-import com.example.activity.reg.LoginActivity;
-import com.example.entity.LockADList_Entity;
-import com.example.entity.respose.Code;
-import com.example.entity.respose.ResponseLockADList;
-import com.example.http.Protocol;
 import com.example.keyguard.MainActivity;
 import com.example.keyguard.R;
 import com.example.util.SharedPreferenceUtil;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * @Description 启动页
@@ -36,8 +28,10 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 public class Activity_Launch extends BaseActivity implements AnimationListener {
 	@ViewInject(R.id.iv_launch_ad)
 	private ImageView iv_launch_ad;
-//	private long getearnlistFlag;
-//	public static ArrayList<LockADList_Entity> lockADList_Entities = new ArrayList<>();
+
+	// private long getearnlistFlag;
+	// public static ArrayList<LockADList_Entity> lockADList_Entities = new
+	// ArrayList<>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +46,12 @@ public class Activity_Launch extends BaseActivity implements AnimationListener {
 	@Override
 	public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
 		// TODO Auto-generated method stub
-//		if (getearnlistFlag == flag) {
-//			ResponseLockADList msgInfo = (ResponseLockADList) response;
-//			if (msgInfo.getCode().equals(Code.CODE_SUCCESS)) {
-//				lockADList_Entities = msgInfo.getData();
-//			}
-//		}
+		// if (getearnlistFlag == flag) {
+		// ResponseLockADList msgInfo = (ResponseLockADList) response;
+		// if (msgInfo.getCode().equals(Code.CODE_SUCCESS)) {
+		// lockADList_Entities = msgInfo.getData();
+		// }
+		// }
 	}
 
 	@Override
@@ -79,7 +73,7 @@ public class Activity_Launch extends BaseActivity implements AnimationListener {
 	protected void initData() {
 		// TODO Auto-generated method stub
 		AdManager.getInstance(activity).init("6fbcdb4b187d81a3", "6f23d0fa8b79cf6c", false);
-//		getearnlistFlag = Protocol.get_earn_list(activity, setTag());
+		// getearnlistFlag = Protocol.get_earn_list(activity, setTag());
 	}
 
 	@Override
