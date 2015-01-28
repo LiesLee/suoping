@@ -11,9 +11,11 @@ import com.example.http.respose.ResponseDownAPP;
 import com.example.http.respose.ResponseEPDetail;
 import com.example.http.respose.ResponseEXProduct;
 import com.example.http.respose.ResponseExchangeDetail;
+import com.example.http.respose.ResponseFreshmanAward;
 import com.example.http.respose.ResponseInviteDetail;
 import com.example.http.respose.ResponseLockADList;
 import com.example.http.respose.ResponseLogistics;
+import com.example.http.respose.ResponseNewcomerAbout;
 import com.example.http.respose.ResponseShare;
 import com.example.http.respose.ResponseSignIn;
 import com.example.http.respose.ResponseUpdate;
@@ -228,6 +230,20 @@ public class Protocol {
 	}
 
 	/**
+	 * @Description 了解锁屏赚获得积分
+	 * @author Created by qinxianyuzou on 2015-1-28.
+	 * @param context
+	 * @param tag
+	 * @return
+	 */
+	public static long newcomerAbout(Context context, String tag) {
+		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
+		requestParam.add(new BasicNameValuePair("code", "000004"));
+		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.LOCK_EARN, tag, requestParam,
+				ResponseNewcomerAbout.class, null);
+	}
+
+	/**
 	 * @Description 解锁
 	 * @author Created by qinxianyuzou on 2015-1-8.
 	 * @param context
@@ -378,5 +394,18 @@ public class Protocol {
 		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
 		return ConnectorManage.getInstance(context).GetHttpRequest(context, url, tag, requestParam, BaseResponse.class,
 				null);
+	}
+
+	/**
+	 * @Description 新手活动
+	 * @author Created by qinxianyuzou on 2015-1-28.
+	 * @param context
+	 * @param tag
+	 * @return
+	 */
+	public static long freshmanAward(Context context, String tag) {
+		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
+		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.FRESHMAN_AWARD, tag, requestParam,
+				ResponseFreshmanAward.class, null);
 	}
 }
