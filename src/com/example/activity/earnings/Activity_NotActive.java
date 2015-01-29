@@ -116,8 +116,8 @@ public class Activity_NotActive extends BaseActivity {
 				// TODO Auto-generated method stub
 				if (listData != null && listData.size() != 0) {
 					final SignIn_Entity apk = listData.get(position);
-					if (PublicUtil.isApkInstalled(activity, apk.getPacket_name())) {
-						PublicUtil.APPTiming(activity, setTag(), apk.getPacket_name(), apk.getUse_time(),
+					if (PublicUtil.isApkInstalled(activity, apk.getProcess_name())) {
+						PublicUtil.APPTiming(activity, setTag(), apk.getProcess_name(), apk.getUse_time(),
 								apk.getReturn_url());
 					} else {
 						UIHelper.showMsgProgressDialog(activity, "正在加载...");
@@ -187,7 +187,10 @@ public class Activity_NotActive extends BaseActivity {
 	@Override
 	public void onHttpError(long flag, VolleyError error) {
 		// TODO Auto-generated method stub
-
+		UIHelper.cancelProgressDialog();
+		if (activationFlag == flag) {
+			showToast("获取下载地址错误");
+		}
 	}
 
 	@Override
@@ -211,9 +214,9 @@ public class Activity_NotActive extends BaseActivity {
 				// Toast.makeText(context, "安装成功" + packageName,
 				// Toast.LENGTH_LONG).show();
 				for (int i = 0; i < packageList.size(); i++) {
-					if (packageName.equals(packageList.get(i).getPacket_name())) {
-						PublicUtil.APPTiming(activity, setTag(), packageList.get(i).getPacket_name(), packageList
-								.get(i).getUse_time(), packageList.get(i).getReturn_url());
+					if (packageName.equals(packageList.get(i).getProcess_name())) {
+						PublicUtil.APPTiming(activity, setTag(), packageList.get(i).getProcess_name(),
+								packageList.get(i).getUse_time(), packageList.get(i).getReturn_url());
 						packageList.remove(i);
 					}
 				}

@@ -104,11 +104,11 @@ public class My_Not_Active_Adapter extends BaseAdapter {
 		if (listData != null && listData.size() != 0) {
 			final SignIn_Entity apk = listData.get(position);
 			bitmapUtils.display(listItemView.download_app_icon, apk.getIcon());
-			listItemView.download_app_name.setText(apk.getProcess_name());
+			listItemView.download_app_name.setText(apk.getApp_name());
 			listItemView.download_app_info.setText(apk.getDesc());
 			listItemView.tv_install_status.setVisibility(View.VISIBLE);
-			if (PublicUtil.isApkInstalled(mContext, apk.getPacket_name())) {
-				listItemView.tv_install_status.setText("已安装");
+			if (PublicUtil.isApkInstalled(mContext, apk.getProcess_name())) {
+				listItemView.tv_install_status.setText("已安装" + "，使用" + apk.getUse_time() + "秒签到");
 			} else {
 				listItemView.tv_install_status.setText("未安装");
 			}

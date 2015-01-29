@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
@@ -33,9 +35,13 @@ import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.example.activity.common.KeyGuardApplication;
 import com.example.entity.Download_APK_Install;
 import com.example.entity.UserInfo;
+import com.example.http.base.BaseResponse;
+import com.example.http.base.Code;
+import com.example.http.base.HttpCallBack;
 import com.example.http.base.Protocol;
 import com.example.keyguard.R;
 import com.example.keyguard.StartInstalledBroadcast;
@@ -786,9 +792,26 @@ public class PublicUtil {
 						Thread.sleep(1000);
 						if (isRunningAPK(activity, packagename)) {
 							timing++;
+							LogUtil.d(tag, "使用了" + timing + "秒");
 							if (timing > howLong) {
 								// 发送接口
-								Protocol.signinSuccess(activity, tag, url);
+								Protocol.signinSuccess(activity, tag, url, new HttpCallBack() {
+
+									@Override
+									public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
+										// TODO Auto-generated method stub
+										BaseResponse msginfo = (BaseResponse) response;
+										if (msginfo.getCode().equals(Code.CODE_SUCCESS)) {
+											showToast(activity, msginfo.getMsg());
+										}
+									}
+
+									@Override
+									public void onHttpError(long flag, VolleyError error) {
+										// TODO Auto-generated method stub
+
+									}
+								});
 								isRunning = false;
 							}
 						} else {

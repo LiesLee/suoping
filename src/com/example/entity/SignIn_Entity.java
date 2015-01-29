@@ -11,9 +11,9 @@ public class SignIn_Entity implements Serializable {
 	private static final long serialVersionUID = -8266630775840140113L;
 	/** 应用id */
 	private String eaid = "";
+	/** 应用名 */
+	private String app_name = "";
 	/** 包名 */
-	private String packet_name = "";
-	/** 应用名字 */
 	private String process_name = "";
 	/** 可获积分 */
 	private String earn_jifen = "";
@@ -49,23 +49,23 @@ public class SignIn_Entity implements Serializable {
 
 	/**
 	 * @Description
-	 * @author Created by qinxianyuzou on 2015-1-26.
-	 * @see #packet_name
-	 * @return the packet_name
+	 * @author Created by qinxianyuzou on 2015-1-29.
+	 * @see #app_name
+	 * @return the app_name
 	 */
-	public String getPacket_name() {
-		return packet_name;
+	public String getApp_name() {
+		return app_name;
 	}
 
 	/**
 	 * @Description
-	 * @author Created by qinxianyuzou on 2015-1-26.
-	 * @see #packet_name
-	 * @param packet_name
-	 *            the packet_name to set
+	 * @author Created by qinxianyuzou on 2015-1-29.
+	 * @see #app_name
+	 * @param app_name
+	 *            the app_name to set
 	 */
-	public void setPacket_name(String packet_name) {
-		this.packet_name = packet_name;
+	public void setApp_name(String app_name) {
+		this.app_name = app_name;
 	}
 
 	/**
@@ -194,10 +194,16 @@ public class SignIn_Entity implements Serializable {
 		this.desc = desc;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return "SignIn_Entity [eaid=" + eaid + ", packet_name=" + packet_name + ", process_name=" + process_name
+		return "SignIn_Entity [eaid=" + eaid + ", app_name=" + app_name + ", process_name=" + process_name
 				+ ", earn_jifen=" + earn_jifen + ", icon=" + icon + ", return_url=" + return_url + ", use_time="
 				+ use_time + ", desc=" + desc + "]";
 	}
+
 }
