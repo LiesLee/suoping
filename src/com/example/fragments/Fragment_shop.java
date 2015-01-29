@@ -89,7 +89,7 @@ public class Fragment_shop extends BaseFragment {
 
 	@Override
 	public void initUI() {
-		adapter = new Shop_Adapter(activity);
+		adapter = new Shop_Adapter(activity, shop_type);
 		rListView.setAdapter(adapter);
 	}
 

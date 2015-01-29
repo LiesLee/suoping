@@ -21,8 +21,18 @@ public class EXProduct_Entity implements Serializable {
 	private String hp_url = StringUtils.EMPTY;
 	/** 需要积分 */
 	private String need_jifen = StringUtils.EMPTY;
+    /** 兑换时输入类型 **/
+    private int input_type;
 
-	/**
+    public int getInput_type() {
+        return input_type;
+    }
+
+    public void setInput_type(int input_type) {
+        this.input_type = input_type;
+    }
+
+    /**
 	 * @Description
 	 * @author Created by qinxianyuzou on 2015-1-2.
 	 * @see #ep_id

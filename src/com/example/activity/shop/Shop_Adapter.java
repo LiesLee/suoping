@@ -28,14 +28,16 @@ import com.lidroid.xutils.bitmap.callback.DefaultBitmapLoadCallBack;
  * @author Created by qinxianyuzou on 2014-12-25.
  */
 public class Shop_Adapter extends BaseAdapter {
-	private Context mContext;
+    private final String shopType;
+    private Context mContext;
 	private LayoutInflater listContainer;
 	AQuery aq;
 	/** 数据源 */
 	private List<EXProduct_Entity> listData = new ArrayList<EXProduct_Entity>();
 
-	public Shop_Adapter(Context context) {
+	public Shop_Adapter(Context context, String shopType) {
 		mContext = context;
+        this.shopType = shopType;
 		listContainer = LayoutInflater.from(mContext);
 		aq = new AQuery(mContext);
 	}
@@ -87,7 +89,7 @@ public class Shop_Adapter extends BaseAdapter {
 			@Override
 			public void onClick(View v) {
 				Activity_ShopInfoWeb.luanch((android.app.Activity) mContext, listData.get(position).getTitle(),
-						listData.get(position).getNeed_jifen(), listData.get(position).getEp_id(), 0);
+						listData.get(position).getNeed_jifen(), listData.get(position).getEp_id(), 0, listData.get(position).getInput_type());
 			}
 		});
 		return convertView;

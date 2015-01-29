@@ -59,13 +59,15 @@ public class Activity_ShopInfoWeb extends BaseActivity {
 	/** 单价 */
 	private static String mStatus = "";
 	/** 单价 */
+	private static int mShopType;
 	private static String mSendMsg = "";
 	/** 页面类型 */
 	private static int mType;
 	private long exchange_productFalg;
 
-	public static void luanch(Activity activity, String title, String danjia, String id, int type) {
-		mTitle = title;
+	public static void luanch(Activity activity, String title, String danjia, String id, int type, int shopType) {
+        mShopType = shopType;
+        mTitle = title;
 		mId = id;
 		mDanJia = danjia;
 		mType = type;
@@ -123,7 +125,7 @@ public class Activity_ShopInfoWeb extends BaseActivity {
 			// exchange_productFalg = Protocol.exchange_product(activity,
 			// setTag(), mId);
 			if (mType == 0) {
-				Activity_Submit.luanch(activity, "订单操作", mDanJia, mId);
+				Activity_Submit.luanch(activity, "订单操作", mDanJia, mId, mShopType);
 			} else {
 				final DialogClick dialogClick1 = new DialogClick(activity);
 				dialogClick1.requestWindowFeature(Window.FEATURE_NO_TITLE);
