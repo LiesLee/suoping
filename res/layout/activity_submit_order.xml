@@ -147,16 +147,17 @@
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="填写支付宝号："
+            android:text="填写支付宝账号："
             android:textColor="@color/black"
             android:textSize="18sp" />
 
         <EditText
             android:id="@+id/et_aliplay"
+            android:gravity="right"
             android:background="@null"
             android:singleLine="true"
             android:inputType="text"
-            android:textColor="@color/gray_btn_bg_pressed_color"
+            android:textColor="@color/black"
             android:textSize="18sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -181,7 +182,7 @@
             android:id="@+id/textView62"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="确认支付宝号："
+            android:text="填写支付宝名字："
             android:textColor="@color/black"
             android:textSize="18sp" />
 
@@ -190,7 +191,7 @@
             android:background="@null"
             android:singleLine="true"
             android:inputType="text"
-            android:textColor="@color/gray_btn_bg_pressed_color"
+            android:textColor="@color/black"
             android:textSize="18sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -221,7 +222,7 @@
 
         <TextView
             android:id="@+id/tv_address"
-            android:textColor="@color/gray_btn_bg_pressed_color"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
@@ -255,7 +256,7 @@
             android:singleLine="true"
             android:maxLength="11"
             android:inputType="number"
-            android:textColor="@color/gray_btn_bg_pressed_color"
+            android:textColor="@color/black"
             android:textSize="18sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -289,7 +290,7 @@
             android:singleLine="true"
             android:maxLength="11"
             android:inputType="number"
-            android:textColor="@color/gray_btn_bg_pressed_color"
+            android:textColor="@color/black"
             android:textSize="18sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

@@ -144,11 +144,14 @@ public class Protocol {
 	 * @param epid
 	 * @return
 	 */
-	public static long exchange_product(Context context, String tag, String epid, String alipaly, String phone, String address) {
+	public static long exchange_product(Context context, String tag, String epid, String alipaly, String alipalyName, String phone, String address) {
 		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
 		requestParam.add(new BasicNameValuePair("epid", epid));
         if(!StringUtils.isEmpty(alipaly)){
             requestParam.add(new BasicNameValuePair("ali_acc", alipaly));
+        }
+        if(!StringUtils.isEmpty(alipaly)){
+            requestParam.add(new BasicNameValuePair("ali_name", alipalyName));
         }
         if (!StringUtils.isEmpty(phone)){
             requestParam.add(new BasicNameValuePair("phone", phone));
@@ -157,6 +160,7 @@ public class Protocol {
         if(!StringUtils.isEmpty(address)){
             requestParam.add(new BasicNameValuePair("log_id", address));
         }
+
 		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.EXCHANGE_PRODUCT, tag, requestParam,
 				ResponseEPDetail.class, null);
 	}
