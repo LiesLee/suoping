@@ -59,13 +59,14 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/tv_improve_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:text="完善信息+0.3元"
             android:textColor="@color/black"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <ImageView
             android:id="@+id/iv_red_point_msg"
@@ -95,13 +96,14 @@
         android:visibility="gone" >
 
         <TextView
+            android:id="@+id/tv_bind_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:text="绑定手机号+1元"
             android:textColor="@color/black"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <ImageView
             android:id="@+id/iv_red_point_bind_cellphone"
@@ -131,13 +133,14 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/tv_newcomer_invite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:text="填写邀请码+1元"
             android:textColor="@color/black"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <ImageView
             android:id="@+id/iv_red_point_input_auth"
@@ -167,13 +170,14 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/tv_newcomer_about"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:text="了解锁屏赚+0.1元"
             android:textColor="@color/black"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <ImageView
             android:id="@+id/iv_red_point_input_understand"

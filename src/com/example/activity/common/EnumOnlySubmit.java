@@ -8,5 +8,7 @@ public enum EnumOnlySubmit {
 	/** 邀请码 */
 	INVITE_NO,
 	/** 地址 */
-	LOGISTICS;
+	LOGISTICS,
+	/** 编辑地址 */
+	EDIT_LOGISTICS;
 }
