@@ -32,7 +32,6 @@
             android:layout_height="wrap_content"
             android:text="5.5元"
             android:textColor="@color/gray_btn_bg_pressed_color" />
-
     </LinearLayout>
 
     <View
@@ -63,7 +62,6 @@
             android:layout_height="wrap_content"
             android:text="1"
             android:textColor="@color/gray_btn_bg_pressed_color" />
-
     </LinearLayout>
 
     <View
@@ -94,7 +92,6 @@
             android:layout_height="wrap_content"
             android:text="5.5元"
             android:textColor="@color/gray_btn_bg_pressed_color" />
-
     </LinearLayout>
 
     <View
@@ -125,7 +122,6 @@
             android:layout_height="wrap_content"
             android:text="5.5元"
             android:textColor="@color/gray_btn_bg_pressed_color" />
-
     </LinearLayout>
 
     <View
@@ -153,14 +149,14 @@
 
         <EditText
             android:id="@+id/et_aliplay"
-            android:gravity="right"
-            android:background="@null"
-            android:singleLine="true"
-            android:inputType="text"
-            android:textColor="@color/black"
-            android:textSize="18sp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:gravity="right"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
     </LinearLayout>
 
     <View
@@ -188,13 +184,14 @@
 
         <EditText
             android:id="@+id/et_aliplay2"
-            android:background="@null"
-            android:singleLine="true"
-            android:inputType="text"
-            android:textColor="@color/black"
-            android:textSize="18sp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:gravity="right"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
     </LinearLayout>
 
     <View
@@ -222,9 +219,9 @@
 
         <TextView
             android:id="@+id/tv_address"
-            android:textColor="@color/black"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textColor="@color/black" />
     </LinearLayout>
 
     <View
@@ -252,15 +249,16 @@
 
         <EditText
             android:id="@+id/et_phone"
-            android:background="@null"
-            android:singleLine="true"
-            android:maxLength="11"
-            android:inputType="number"
-            android:textColor="@color/black"
-            android:textSize="18sp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:inputType="number"
+            android:maxLength="11"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
     </LinearLayout>
+
     <View
         android:id="@+id/v_line_phone2"
         android:layout_width="match_parent"
@@ -286,14 +284,14 @@
 
         <EditText
             android:id="@+id/et_phone2"
-            android:background="@null"
-            android:singleLine="true"
-            android:maxLength="11"
-            android:inputType="number"
-            android:textColor="@color/black"
-            android:textSize="18sp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:inputType="number"
+            android:maxLength="11"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
     </LinearLayout>
 
     <Button

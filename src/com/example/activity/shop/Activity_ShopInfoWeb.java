@@ -66,8 +66,8 @@ public class Activity_ShopInfoWeb extends BaseActivity {
 	private long exchange_productFalg;
 
 	public static void luanch(Activity activity, String title, String danjia, String id, int type, int shopType) {
-        mShopType = shopType;
-        mTitle = title;
+		mShopType = shopType;
+		mTitle = title;
 		mId = id;
 		mDanJia = danjia;
 		mType = type;
