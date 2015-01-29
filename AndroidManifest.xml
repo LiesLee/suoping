@@ -95,6 +95,10 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.example.activity.more.Activity_AddressList_Choose"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.example.activity.common.Activity_Submit"
             android:screenOrientation="portrait" >
         </activity>

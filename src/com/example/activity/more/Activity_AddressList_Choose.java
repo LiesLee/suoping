@@ -62,7 +62,7 @@ public class Activity_AddressList_Choose extends BaseActivity {
      * @param activity
      */
     public static void luanch(Activity activity) {
-        Intent intent = new Intent(activity, Activity_AddressList.class);
+        Intent intent = new Intent(activity, Activity_AddressList_Choose.class);
         KeyGuardActivityManager.getInstance().goFoResult(activity, intent, KeyGuardActivityManager.MAIN_CODE);
     }
 
@@ -74,7 +74,7 @@ public class Activity_AddressList_Choose extends BaseActivity {
      */
     public static void luanch(Activity activity, String title) {
         mTitle = title;
-        Intent intent = new Intent(activity, Activity_AddressList.class);
+        Intent intent = new Intent(activity, Activity_AddressList_Choose.class);
         KeyGuardActivityManager.getInstance().goFoResult(activity, intent, KeyGuardActivityManager.MAIN_CODE);
     }
 

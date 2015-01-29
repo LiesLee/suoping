@@ -241,7 +241,6 @@ public class Activity_Submit extends BaseActivity {
 			finish();
 			break;
 		case R.id.but_submit_order_submit:
-			UIHelper.showMsgProgressDialog(activity, "正在加载...");
             submitOrder(mShopType);
 			break;
         //选择地址
@@ -261,6 +260,7 @@ public class Activity_Submit extends BaseActivity {
     public void submitOrder (int type){
         switch (type) {
             case 1 :
+                UIHelper.showMsgProgressDialog(activity, "正在加载...");
                 exchange_productFalg = Protocol.exchange_product(activity, setTag(), mId, null, null, null);
                 break;
             case 2 :
@@ -274,6 +274,7 @@ public class Activity_Submit extends BaseActivity {
                         UIHelper.showShakeAnim(this, et_phone2, "请输入正确手机号码");
                     }else{
                         if(et_phone2.getText().toString().equals(et_phone.getText().toString())){
+                            UIHelper.showMsgProgressDialog(activity, "正在加载...");
                             exchange_productFalg = Protocol.exchange_product(activity, setTag(), mId, null, et_phone2.getText().toString(), null);
                         }else{
                             showToast("确认手机号码不一致");
@@ -287,6 +288,7 @@ public class Activity_Submit extends BaseActivity {
                     UIHelper.showShakeAnim(this, et_aliplay2, "支付宝号不能为空");
                 } else {
                     if (et_aliplay.getText().toString().equals(et_aliplay2.getText().toString())) {
+                        UIHelper.showMsgProgressDialog(activity, "正在加载...");
                         exchange_productFalg = Protocol.exchange_product(activity, setTag(), mId, et_aliplay2.getText().toString(), null, null);
                     } else {
                         showToast("确认支付宝号不一致");
@@ -298,6 +300,7 @@ public class Activity_Submit extends BaseActivity {
                     UIHelper.showShakeAnim(this, tv_address, "请选择收货地址");
                 } else {
                     if(address !=null){
+                        UIHelper.showMsgProgressDialog(activity, "正在加载...");
                         exchange_productFalg = Protocol.exchange_product(activity, setTag(), mId, null, null, address.getLogistics_id());
                     }
                 }
