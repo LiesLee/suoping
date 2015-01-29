@@ -1,4 +1,4 @@
-package com.example.activity.common;
+package com.example.activity.main;
 
 import net.youmi.android.AdManager;
 
@@ -13,6 +13,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.android.volley.VolleyError;
+import com.example.activity.common.Activity_Guide;
+import com.example.activity.common.BaseActivity;
 import com.example.activity.reg.Activity_Reg;
 import com.example.keyguard.R;
 import com.example.util.SharedPreferenceUtil;

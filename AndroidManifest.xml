@@ -29,7 +29,7 @@
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Light.NoTitleBar" >
         <activity
-            android:name="com.example.activity.common.MainActivity"
+            android:name="com.example.activity.main.MainActivity"
             android:screenOrientation="portrait" />
 
         <service android:name=".LockService" >
@@ -64,7 +64,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.example.activity.common.Activity_Launch"
+            android:name="com.example.activity.main.Activity_Launch"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -163,10 +163,7 @@
         <activity
             android:name="com.example.keyguard.Activity_YouMi"
             android:screenOrientation="portrait" >
-        </activity>
-
-
-
+        </activity>
         -->
         <!-- 有米广告 -->
         <activity
@@ -192,8 +189,12 @@
             </intent-filter>
         </receiver>
 
-        <meta-data            android:name="UMENG_APPKEY"            android:value="54b71edafd98c5332c000469" />
-        <meta-data            android:name="UMENG_CHANNEL"            android:value="" />
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="54b71edafd98c5332c000469" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="" />
 
         <activity
             android:name="com.umeng.socialize.view.ShareActivity"
@@ -229,7 +230,8 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
-        <activity android:name="com.example.activity.more.Activity_EditAddress"></activity>
+        <activity android:name="com.example.activity.more.Activity_EditAddress" >
+        </activity>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.example.activity.common;
+package com.example.activity.main;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.Toast;
 
+import com.example.activity.common.KeyGuardActivityManager;
 import com.example.activity.earnings.Activity_earnings;
 import com.example.activity.invitation.Activity_invitation;
 import com.example.activity.more.Activity_more;

@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.example.activity.common.MainActivity;
+import com.example.activity.main.MainActivity;
 import com.example.ui.UINavigationView;
 
 @SuppressLint("SetJavaScriptEnabled")

@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.android.volley.VolleyError;
 import com.example.activity.common.BaseActivity;
 import com.example.activity.common.KeyGuardActivityManager;
-import com.example.activity.common.MainActivity;
+import com.example.activity.main.MainActivity;
 import com.example.http.base.BaseResponse;
 import com.example.http.base.Code;
 import com.example.http.base.Protocol;
