@@ -29,7 +29,7 @@
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Light.NoTitleBar" >
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.activity.common.MainActivity"
             android:screenOrientation="portrait" />
 
         <service android:name=".LockService" >

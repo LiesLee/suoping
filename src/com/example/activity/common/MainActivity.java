@@ -1,4 +1,4 @@
-package com.example.keyguard;
+package com.example.activity.common;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -20,11 +20,16 @@ import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.Toast;
 
-import com.example.activity.common.KeyGuardActivityManager;
 import com.example.activity.earnings.Activity_earnings;
 import com.example.activity.invitation.Activity_invitation;
 import com.example.activity.more.Activity_more;
 import com.example.activity.shop.Activity_shop;
+import com.example.keyguard.DownLoadWebActivity;
+import com.example.keyguard.LockActivity;
+import com.example.keyguard.LockService;
+import com.example.keyguard.R;
+import com.example.keyguard.R.id;
+import com.example.keyguard.R.layout;
 import com.example.util.PublicUtil;
 
 public class MainActivity extends TabActivity implements OnCheckedChangeListener {

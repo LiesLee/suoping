@@ -14,7 +14,6 @@ import android.widget.ImageView;
 
 import com.android.volley.VolleyError;
 import com.example.activity.reg.Activity_Reg;
-import com.example.keyguard.MainActivity;
 import com.example.keyguard.R;
 import com.example.util.SharedPreferenceUtil;
 import com.lidroid.xutils.ViewUtils;
