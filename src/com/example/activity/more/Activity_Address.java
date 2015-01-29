@@ -102,6 +102,13 @@ public class Activity_Address extends BaseActivity {
 	}
 
 	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		// logistics_Entity = new Logistics_Entity();
+	}
+
+	@Override
 	protected void initUI() {
 		// TODO Auto-generated method stub
 		tv_public_top_title.setText(mTitle);

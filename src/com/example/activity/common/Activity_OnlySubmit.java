@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -92,6 +93,11 @@ public class Activity_OnlySubmit extends BaseActivity {
 		rl_public_back.setVisibility(View.VISIBLE);
 		rl_public_back.setOnClickListener(this);
 		but_nickname_submit.setOnClickListener(this);
+		if (mEnumOnlySubmit == EnumOnlySubmit.LOGISTICS) {
+			if (mType == 3 || mType == 2) {
+				et_nickname_text.setInputType(InputType.TYPE_CLASS_NUMBER);
+			}
+		}
 	}
 
 	@Override
