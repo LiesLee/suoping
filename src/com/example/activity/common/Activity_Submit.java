@@ -261,7 +261,7 @@ public class Activity_Submit extends BaseActivity {
         switch (type) {
             case 1 :
                 UIHelper.showMsgProgressDialog(activity, "正在加载...");
-                exchange_productFalg = Protocol.exchange_product(activity, setTag(), mId, null, null, null);
+                exchange_productFalg = Protocol.exchange_product(activity, setTag(), mId, null, null, null, null);
                 break;
             case 2 :
                 if (StringUtils.isEmpty(et_phone.getText().toString()) && StringUtils.isEmpty(et_phone2.getText().toString())) {
@@ -275,7 +275,7 @@ public class Activity_Submit extends BaseActivity {
                     }else{
                         if(et_phone2.getText().toString().equals(et_phone.getText().toString())){
                             UIHelper.showMsgProgressDialog(activity, "正在加载...");
-                            exchange_productFalg = Protocol.exchange_product(activity, setTag(), mId, null, et_phone2.getText().toString(), null);
+                            exchange_productFalg = Protocol.exchange_product(activity, setTag(), mId, null, null, et_phone2.getText().toString(), null);
                         }else{
                             showToast("确认手机号码不一致");
                         }
@@ -284,15 +284,11 @@ public class Activity_Submit extends BaseActivity {
                 break;
             case 3 :
                 if (StringUtils.isEmpty(et_aliplay.getText().toString()) && StringUtils.isEmpty(et_aliplay2.getText().toString())) {
-                    UIHelper.showShakeAnim(this, et_aliplay, "支付宝号不能为空");
-                    UIHelper.showShakeAnim(this, et_aliplay2, "支付宝号不能为空");
+                    UIHelper.showShakeAnim(this, et_aliplay, "支付宝账号不能为空");
+                    UIHelper.showShakeAnim(this, et_aliplay2, "支付宝名字不能为空");
                 } else {
-                    if (et_aliplay.getText().toString().equals(et_aliplay2.getText().toString())) {
-                        UIHelper.showMsgProgressDialog(activity, "正在加载...");
-                        exchange_productFalg = Protocol.exchange_product(activity, setTag(), mId, et_aliplay2.getText().toString(), null, null);
-                    } else {
-                        showToast("确认支付宝号不一致");
-                    }
+                    UIHelper.showMsgProgressDialog(activity, "正在加载...");
+                    exchange_productFalg = Protocol.exchange_product(activity, setTag(), mId, et_aliplay.getText().toString(), et_aliplay2.getText().toString(), null, null);
                 }
                 break;
             case 4 :
@@ -301,7 +297,7 @@ public class Activity_Submit extends BaseActivity {
                 } else {
                     if(address !=null){
                         UIHelper.showMsgProgressDialog(activity, "正在加载...");
-                        exchange_productFalg = Protocol.exchange_product(activity, setTag(), mId, null, null, address.getLogistics_id());
+                        exchange_productFalg = Protocol.exchange_product(activity, setTag(), mId, null, null, null, address.getLogistics_id());
                     }
                 }
                 break;
