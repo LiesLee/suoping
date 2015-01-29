@@ -125,80 +125,80 @@ public class Activity_Submit extends BaseActivity {
 		tv_submit_order_danjia.setText(mDanJia);
 		tv_submit_order_1.setText(mDanJia);
 		tv_submit_order_2.setText("" + PublicUtil.getUserInfo(activity).getSum_earn());
-            switch (mShopType) {
-                case 1: //不显示手机、支付宝、收货地址
-                    v_line_address.setVisibility(View.GONE);
-                    ll_address.setVisibility(View.GONE);
+        switch (mShopType) {
+            case 1: //不显示手机、支付宝、收货地址
+                v_line_address.setVisibility(View.GONE);
+                ll_address.setVisibility(View.GONE);
 
-                    v_line_alipay.setVisibility(View.GONE);
-                    ll_aliplay.setVisibility(View.GONE);
-                    v_line_alipay2.setVisibility(View.GONE);
-                    ll_aliplay2.setVisibility(View.GONE);
+                v_line_alipay.setVisibility(View.GONE);
+                ll_aliplay.setVisibility(View.GONE);
+                v_line_alipay2.setVisibility(View.GONE);
+                ll_aliplay2.setVisibility(View.GONE);
 
-                    v_line_phone.setVisibility(View.GONE);
-                    ll_phone.setVisibility(View.GONE);
-                    v_line_phone2.setVisibility(View.GONE);
-                    ll_phone2.setVisibility(View.GONE);
-
-                    break;
-
-                case 2: //只显示手机号
-                    v_line_address.setVisibility(View.GONE);
-                    ll_address.setVisibility(View.GONE);
-
-                    v_line_alipay.setVisibility(View.GONE);
-                    ll_aliplay.setVisibility(View.GONE);
-                    v_line_alipay2.setVisibility(View.GONE);
-                    ll_aliplay2.setVisibility(View.GONE);
-
-                    v_line_phone.setVisibility(View.VISIBLE);
-                    ll_phone.setVisibility(View.VISIBLE);
-                    v_line_phone2.setVisibility(View.VISIBLE);
-                    ll_phone2.setVisibility(View.VISIBLE);
-
-                    break;
-
-                case 3: //只显示支付宝
-                    v_line_address.setVisibility(View.GONE);
-                    ll_address.setVisibility(View.GONE);
-
-                    v_line_alipay.setVisibility(View.VISIBLE);
-                    ll_aliplay.setVisibility(View.VISIBLE);
-                    v_line_alipay2.setVisibility(View.VISIBLE);
-                    ll_aliplay2.setVisibility(View.VISIBLE);
-
-                    v_line_phone.setVisibility(View.GONE);
-                    ll_phone.setVisibility(View.GONE);
-                    v_line_phone2.setVisibility(View.GONE);
-                    ll_phone2.setVisibility(View.GONE);
-
-                    break;
-
-                case 4: //只显示收货地址
-                    v_line_address.setVisibility(View.VISIBLE);
-                    ll_address.setVisibility(View.VISIBLE);
-
-                    v_line_alipay.setVisibility(View.GONE);
-                    ll_aliplay.setVisibility(View.GONE);
-                    v_line_alipay2.setVisibility(View.GONE);
-                    ll_aliplay2.setVisibility(View.GONE);
-
-                    v_line_phone.setVisibility(View.GONE);
-                    ll_phone.setVisibility(View.GONE);
-                    v_line_phone2.setVisibility(View.GONE);
-                    ll_phone2.setVisibility(View.GONE);
+                v_line_phone.setVisibility(View.GONE);
+                ll_phone.setVisibility(View.GONE);
+                v_line_phone2.setVisibility(View.GONE);
+                ll_phone2.setVisibility(View.GONE);
 
                 break;
 
-                default:
-                    break;
-            }
+            case 2: //只显示手机号
+                v_line_address.setVisibility(View.GONE);
+                ll_address.setVisibility(View.GONE);
+
+                v_line_alipay.setVisibility(View.GONE);
+                ll_aliplay.setVisibility(View.GONE);
+                v_line_alipay2.setVisibility(View.GONE);
+                ll_aliplay2.setVisibility(View.GONE);
+
+                v_line_phone.setVisibility(View.VISIBLE);
+                ll_phone.setVisibility(View.VISIBLE);
+                v_line_phone2.setVisibility(View.VISIBLE);
+                ll_phone2.setVisibility(View.VISIBLE);
+
+                break;
+
+            case 3: //只显示支付宝
+                v_line_address.setVisibility(View.GONE);
+                ll_address.setVisibility(View.GONE);
+
+                v_line_alipay.setVisibility(View.VISIBLE);
+                ll_aliplay.setVisibility(View.VISIBLE);
+                v_line_alipay2.setVisibility(View.VISIBLE);
+                ll_aliplay2.setVisibility(View.VISIBLE);
+
+                v_line_phone.setVisibility(View.GONE);
+                ll_phone.setVisibility(View.GONE);
+                v_line_phone2.setVisibility(View.GONE);
+                ll_phone2.setVisibility(View.GONE);
+
+                break;
+
+            case 4: //只显示收货地址
+                v_line_address.setVisibility(View.VISIBLE);
+                ll_address.setVisibility(View.VISIBLE);
+
+                v_line_alipay.setVisibility(View.GONE);
+                ll_aliplay.setVisibility(View.GONE);
+                v_line_alipay2.setVisibility(View.GONE);
+                ll_aliplay2.setVisibility(View.GONE);
+
+                v_line_phone.setVisibility(View.GONE);
+                ll_phone.setVisibility(View.GONE);
+                v_line_phone2.setVisibility(View.GONE);
+                ll_phone2.setVisibility(View.GONE);
+
+                break;
+
+            default:
+                break;
+        }
 
 
         ll_address.setOnClickListener(this);
 
 
-	}
+    }
 
 	@Override
 	protected void initData() {
@@ -283,8 +283,8 @@ public class Activity_Submit extends BaseActivity {
                 break;
             case 3 :
                 if (StringUtils.isEmpty(et_aliplay.getText().toString()) && StringUtils.isEmpty(et_aliplay2.getText().toString())) {
-                    UIHelper.showShakeAnim(this, et_aliplay, "手机号码不能为空");
-                    UIHelper.showShakeAnim(this, et_aliplay2, "手机号码不能为空");
+                    UIHelper.showShakeAnim(this, et_aliplay, "支付宝号不能为空");
+                    UIHelper.showShakeAnim(this, et_aliplay2, "支付宝号不能为空");
                 } else {
                     if (et_aliplay.getText().toString().equals(et_aliplay2.getText().toString())) {
                         exchange_productFalg = Protocol.exchange_product(activity, setTag(), mId, et_aliplay2.getText().toString(), null, null);
@@ -295,9 +295,11 @@ public class Activity_Submit extends BaseActivity {
                 break;
             case 4 :
                 if (StringUtils.isEmpty(tv_address.getText().toString())) {
-                    UIHelper.showShakeAnim(this, tv_address, "手机号码不能为空");
+                    UIHelper.showShakeAnim(this, tv_address, "请选择收货地址");
                 } else {
-                    exchange_productFalg = Protocol.exchange_product(activity, setTag(), mId, null, null, tv_address.getText().toString());
+                    if(address !=null){
+                        exchange_productFalg = Protocol.exchange_product(activity, setTag(), mId, null, null, address.getLogistics_id());
+                    }
                 }
                 break;
             default:
@@ -312,7 +314,7 @@ public class Activity_Submit extends BaseActivity {
         if(resultCode == Activity_AddressList_Choose.OK){
             address = (Logistics_Entity) data.getSerializableExtra("address");
             if(address != null){
-
+                tv_address.setText(address.getTo_who()+"   "+address.getTo_phone());
             }
         }
     }

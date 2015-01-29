@@ -122,7 +122,7 @@ public class Activity_ShopInfo extends BaseActivity {
 			finish();
 			break;
 		case R.id.but_shopinfo_exchange:
-			exchange_productFalg = Protocol.exchange_product(activity, setTag(), mEpid);
+			//exchange_productFalg = Protocol.exchange_product(activity, setTag(), mEpid);
 			break;
 
 		default:
