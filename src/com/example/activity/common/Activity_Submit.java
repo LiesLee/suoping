@@ -222,7 +222,7 @@ public class Activity_Submit extends BaseActivity {
 	@Override
 	public void onHttpError(long flag, VolleyError error) {
 		// TODO Auto-generated method stub
-
+		UIHelper.cancelProgressDialog();
 	}
 
 	@Override

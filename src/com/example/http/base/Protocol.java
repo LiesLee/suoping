@@ -162,8 +162,8 @@ public class Protocol {
 			requestParam.add(new BasicNameValuePair("log_id", address));
 		}
 
-		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.EXCHANGE_PRODUCT, tag, requestParam,
-				ResponseEPDetail.class, null);
+		return ConnectorManage.getInstance(context).PostHttpRequest(context, Config.EXCHANGE_PRODUCT, tag,
+				requestParam, ResponseEPDetail.class, null);
 	}
 
 	/**
