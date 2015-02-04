@@ -1,5 +1,7 @@
 package com.example.activity.main;
 
+import java.lang.ref.WeakReference;
+
 import android.annotation.SuppressLint;
 import android.app.KeyguardManager;
 import android.app.TabActivity;
@@ -7,6 +9,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -26,7 +30,13 @@ import com.example.activity.shop.Activity_shop;
 import com.example.keyguard.LockActivity;
 import com.example.keyguard.LockService;
 import com.example.keyguard.R;
+import com.example.util.LogUtil;
 import com.example.util.PublicUtil;
+import com.tencent.android.tpush.XGIOperateCallback;
+import com.tencent.android.tpush.XGPushManager;
+import com.tencent.android.tpush.common.Constants;
+import com.tencent.android.tpush.service.XGPushService;
+import com.tencent.android.tpush.service.cache.CacheManager;
 import com.umeng.analytics.MobclickAgent;
 
 public class MainActivity extends TabActivity implements OnCheckedChangeListener {
@@ -48,6 +58,7 @@ public class MainActivity extends TabActivity implements OnCheckedChangeListener
 	public static int MSG_LOCK_SUCESS = 1;
 
 	public static MainActivity instance = null;
+	private Message m = null;
 
 	@SuppressLint("NewApi")
 	protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +98,8 @@ public class MainActivity extends TabActivity implements OnCheckedChangeListener
 		});
 
 		startService(new Intent(MainActivity.this, LockService.class));
+		
+		initXG();
 	}
 
 	@Override
@@ -146,4 +159,69 @@ public class MainActivity extends TabActivity implements OnCheckedChangeListener
 		return super.dispatchKeyEvent(event);
 	}
 
+	/**
+	 * @Description 初始化信鸽
+	 * @author Created by qinxianyuzou on 2014-11-24.
+	 */
+	private void initXG() {
+		// // 0.注册数据更新监听器
+		// updateListViewReceiver = new MsgReceiver();
+		// IntentFilter intentFilter = new IntentFilter();
+		// intentFilter.addAction("com.qq.xgdemo.activity.UPDATE_LISTVIEW");
+		// registerReceiver(updateListViewReceiver, intentFilter);
+		// 1.获取设备Token
+		LogUtil.w(Constants.LogTag, "获取设备Token");
+		Handler handler = new HandlerExtension(MainActivity.this);
+		m = handler.obtainMessage();
+		// 注册接口
+		final String uidString = PublicUtil.getUserInfo(mContext).getId();
+		LogUtil.w(Constants.LogTag, uidString);
+		XGPushManager.registerPush(getApplicationContext(), uidString, new XGIOperateCallback() {
+			@Override
+			public void onSuccess(Object data, int flag) {
+				LogUtil.w(Constants.LogTag, "+++ register push sucess. token:" + data);
+				m.obj = "+++ register push sucess. token:" + data;
+				m.sendToTarget();
+				CacheManager.getRegisterInfo(getApplicationContext());
+			}
+
+			@Override
+			public void onFail(Object data, int errCode, String msg) {
+				LogUtil.w(Constants.LogTag, "+++ register push fail. token:" + data + ", errCode:" + errCode + ",msg:"
+						+ msg);
+				m.obj = "+++ register push fail. token:" + data + ", errCode:" + errCode + ",msg:" + msg;
+				m.sendToTarget();
+			}
+		});
+		Context context = getApplicationContext();
+		Intent service = new Intent(context, XGPushService.class);
+		context.startService(service);
+	}
+
+	private static class HandlerExtension extends Handler {
+		WeakReference<MainActivity> mActivity;
+
+		HandlerExtension(MainActivity activity) {
+			mActivity = new WeakReference<MainActivity>(activity);
+		}
+
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			MainActivity theActivity = mActivity.get();
+			if (theActivity == null) {
+				theActivity = new MainActivity();
+			}
+			if (msg != null) {
+				LogUtil.w(Constants.LogTag, msg.obj.toString());
+				// TextView textView = (TextView)
+				// theActivity.findViewById(R.id.tv_token);
+				// textView.setText(XGPushConfig.getToken(theActivity));
+				// Log.d("token", XGPushConfig.getToken(theActivity));
+
+			}
+			// XGPushManager.registerCustomNotification(theActivity,
+			// "BACKSTREET", "BOYS", System.currentTimeMillis() + 5000, 0);
+		}
+	}
 }

@@ -115,7 +115,7 @@ public class BaseRequest<T> implements Listener<String>, ErrorListener {
 					try {
 						Map<String, String> responseHeaders = response.headers;
 						String rawCookies = responseHeaders.get("Set-Cookie");
-						SharedPreferenceUtil.getInstance(mContext).putString(SharedPreferenceUtil.COOKIES, rawCookies);
+						PublicUtil.setCookies(mContext, rawCookies);
 						String dataString = new String(response.data, "UTF-8");
 						return Response.success(dataString, HttpHeaderParser.parseCacheHeaders(response));
 					} catch (UnsupportedEncodingException e) {
@@ -170,7 +170,7 @@ public class BaseRequest<T> implements Listener<String>, ErrorListener {
 		Map<String, String> headParams = new HashMap<String, String>();
 		headParams.put("content-type", "application/json; charset=utf-8");
 		headParams.put("charset", "UTF-8");
-		headParams.put("Cookie", SharedPreferenceUtil.getInstance(mContext).getString(SharedPreferenceUtil.COOKIES));
+		headParams.put("Cookie", PublicUtil.getCookies(mContext));
 		return headParams;
 	}
 

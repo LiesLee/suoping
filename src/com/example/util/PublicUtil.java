@@ -109,6 +109,26 @@ public class PublicUtil {
 	}
 
 	/**
+	 * @Description 保存cookies
+	 * @author Created by qinxianyuzou on 2015-2-4.
+	 * @param mContext
+	 * @param rawCookies
+	 */
+	public static void setCookies(Context mContext, String rawCookies) {
+		SharedPreferenceUtil.getInstance(mContext).putString(SharedPreferenceUtil.COOKIES, rawCookies);
+	}
+
+	/**
+	 * @Description 获取cookies
+	 * @author Created by qinxianyuzou on 2015-2-4.
+	 * @param mContext
+	 * @return
+	 */
+	public static String getCookies(Context mContext) {
+		return SharedPreferenceUtil.getInstance(mContext).getString(SharedPreferenceUtil.COOKIES);
+	}
+
+	/**
 	 * @Description 判断是否有网络
 	 * @author Created by qinxianyuzou on 2013-12-1.
 	 * @param mContext
