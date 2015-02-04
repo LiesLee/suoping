@@ -103,6 +103,7 @@ public class Activity_Reg extends BaseActivity implements View.OnClickListener {
 	protected void initUI() {
 		btn_reg_next.setOnClickListener(this);
 		but_reg_login.setOnClickListener(this);
+		iv_back_left.setVisibility(View.GONE);
 	}
 
 	@Override

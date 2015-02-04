@@ -17,6 +17,7 @@ import com.androidquery.AQuery;
 import com.example.entity.shop.EXProduct_Entity;
 import com.example.keyguard.R;
 import com.example.util.LogUtil;
+import com.example.util.YouMengUtil;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.bitmap.BitmapDisplayConfig;
 import com.lidroid.xutils.bitmap.callback.BitmapLoadCallBack;
@@ -28,8 +29,8 @@ import com.lidroid.xutils.bitmap.callback.DefaultBitmapLoadCallBack;
  * @author Created by qinxianyuzou on 2014-12-25.
  */
 public class Shop_Adapter extends BaseAdapter {
-    private final String shopType;
-    private Context mContext;
+	private final String shopType;
+	private Context mContext;
 	private LayoutInflater listContainer;
 	AQuery aq;
 	/** 数据源 */
@@ -37,7 +38,7 @@ public class Shop_Adapter extends BaseAdapter {
 
 	public Shop_Adapter(Context context, String shopType) {
 		mContext = context;
-        this.shopType = shopType;
+		this.shopType = shopType;
 		listContainer = LayoutInflater.from(mContext);
 		aq = new AQuery(mContext);
 	}
@@ -88,8 +89,11 @@ public class Shop_Adapter extends BaseAdapter {
 		convertView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				YouMengUtil.onEvent(mContext, YouMengUtil.EXCHANGE_COMMODITY, YouMengUtil.KEY_COMMODITY_NAME, listData
+						.get(position).getTitle());
 				Activity_ShopInfoWeb.luanch((android.app.Activity) mContext, listData.get(position).getTitle(),
-						listData.get(position).getNeed_jifen(), listData.get(position).getEp_id(), 0, listData.get(position).getInput_type());
+						listData.get(position).getNeed_jifen(), listData.get(position).getEp_id(), 0,
+						listData.get(position).getInput_type());
 			}
 		});
 		return convertView;

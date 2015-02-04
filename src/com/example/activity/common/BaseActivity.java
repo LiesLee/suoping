@@ -16,6 +16,7 @@ import com.example.http.base.RequestManager;
 import com.example.keyguard.R;
 import com.example.util.PublicUtil;
 import com.lidroid.xutils.ViewUtils;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * @Description 基础activity
@@ -40,17 +41,19 @@ public abstract class BaseActivity extends FragmentActivity implements HttpCallB
 		super.onDestroy();
 	}
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		setConnectorListener();
-	}
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+        setConnectorListener();
+    }
 
-	@Override
-	protected void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
-	}
+    @Override
+    protected void onPause() {
+        // TODO Auto-generated method stub
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
 
 	/**
 	 * @Description 初始化ui

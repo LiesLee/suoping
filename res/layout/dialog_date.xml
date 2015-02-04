@@ -50,9 +50,7 @@
                 android:layout_weight="1"
                 android:background="@null"
                 android:inputType="number"
-                android:maxEms="4" >
-
-                <requestFocus />
+                android:maxLength="4" >
             </EditText>
         </LinearLayout>
 
@@ -83,7 +81,7 @@
                 android:layout_weight="1"
                 android:background="@null"
                 android:inputType="number"
-                android:maxEms="2" />
+                android:maxLength="2" />
         </LinearLayout>
 
         <TextView
@@ -112,9 +110,8 @@
                 android:layout_height="30dp"
                 android:layout_weight="1"
                 android:background="@null"
-                android:ems="10"
                 android:inputType="number"
-                android:maxEms="2" />
+                android:maxLength="2" />
         </LinearLayout>
 
         <TextView

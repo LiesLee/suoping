@@ -1,5 +1,7 @@
 package com.example.activity.common;
 
+import java.util.HashMap;
+
 import org.json.JSONObject;
 
 import android.app.Activity;
@@ -23,6 +25,7 @@ import com.example.util.PublicUtil;
 import com.example.util.SharedPreferenceUtil;
 import com.example.util.StringUtils;
 import com.example.util.UIHelper;
+import com.example.util.YouMengUtil;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -54,6 +57,8 @@ public class Activity_Submit extends BaseActivity {
 	private static String mId = "";
 	/** 单价 */
 	private static String mDanJia = "";
+	/** 单价 */
+	private static String mCommodityName = "";
 	private long exchange_productFalg;
 	/** 支付宝号 **/
 	@ViewInject(R.id.v_line_alipay)
@@ -96,8 +101,10 @@ public class Activity_Submit extends BaseActivity {
 
 	private Logistics_Entity address;
 
-	public static void luanch(Activity activity, String title, String danjia, String id, int shopType) {
+	public static void luanch(Activity activity, String title, String commodityName, String danjia, String id,
+			int shopType) {
 		Activity_Submit.title = title;
+		mCommodityName = commodityName;
 		mShopType = shopType;
 		mId = id;
 		mDanJia = danjia;
@@ -212,6 +219,11 @@ public class Activity_Submit extends BaseActivity {
 			BaseResponse baseResponse = (BaseResponse) response;
 			if (baseResponse.getCode().equals(Code.CODE_SUCCESS)) {
 				showToast(baseResponse.getMsg());
+				// YouMengUtil.onEventValue(activity,
+				// YouMengUtil.EXCHANGE_MONEY, (int) Float.parseFloat(mDanJia));
+				HashMap<String, String> map = new HashMap<String, String>();
+				map.put(YouMengUtil.KEY_COMMODITY_NAME, mCommodityName + ":" + (int) Float.parseFloat(mDanJia));
+				YouMengUtil.onEventValue(activity, YouMengUtil.EXCHANGE_MONEY, map, (int) Float.parseFloat(mDanJia));
 				finish();
 			} else {
 				showToast(baseResponse.getMsg());

@@ -31,6 +31,7 @@ import com.example.keyguard.R;
 import com.example.util.LogUtil;
 import com.example.util.PublicUtil;
 import com.example.util.ShareListener;
+import com.example.util.YouMengUtil;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -173,6 +174,34 @@ public class Activity_invitation extends BaseActivity {
 				public void onComplete(SHARE_MEDIA platform, int eCode, SocializeEntity entity) {
 					if (eCode == 200) {
 						PublicUtil.showToast(activity, "分享成功.");
+						if (platform == SHARE_MEDIA.QQ) {
+							YouMengUtil.onEvent(activity, YouMengUtil.SHARE_QQ, YouMengUtil.KEY_SHARE,
+									entity.getShareContent());
+						}
+						if (platform == SHARE_MEDIA.QZONE) {
+							YouMengUtil.onEvent(activity, YouMengUtil.SHARE_QZONE, YouMengUtil.KEY_SHARE,
+									entity.getShareContent());
+						}
+						if (platform == SHARE_MEDIA.SINA) {
+							YouMengUtil.onEvent(activity, YouMengUtil.SHARE_SINA, YouMengUtil.KEY_SHARE,
+									entity.getShareContent());
+						}
+						if (platform == SHARE_MEDIA.TENCENT) {
+							YouMengUtil.onEvent(activity, YouMengUtil.SHARE_TENCENTWB, YouMengUtil.KEY_SHARE,
+									entity.getShareContent());
+						}
+						if (platform == SHARE_MEDIA.SMS) {
+							YouMengUtil.onEvent(activity, YouMengUtil.SHARE_SMS, YouMengUtil.KEY_SHARE,
+									entity.getShareContent());
+						}
+						if (platform == SHARE_MEDIA.WEIXIN) {
+							YouMengUtil.onEvent(activity, YouMengUtil.SHARE_WX, YouMengUtil.KEY_SHARE,
+									entity.getShareContent());
+						}
+						if (platform == SHARE_MEDIA.WEIXIN_CIRCLE) {
+							YouMengUtil.onEvent(activity, YouMengUtil.SHARE_WX_FRIEND, YouMengUtil.KEY_SHARE,
+									entity.getShareContent());
+						}
 					} else {
 						String eMsg = "";
 						if (eCode == -101) {

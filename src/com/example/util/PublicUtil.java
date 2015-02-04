@@ -36,7 +36,7 @@ import android.widget.RemoteViews;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.example.activity.common.KeyGuardApplication;
+import com.example.activity.main.KeyGuardApplication;
 import com.example.entity.Download_APK_Install;
 import com.example.entity.UserInfo;
 import com.example.http.base.BaseResponse;
@@ -467,9 +467,6 @@ public class PublicUtil {
 		// 参数1为当前Activity，参数2为开发者在QQ互联申请的APP ID，参数3为开发者在QQ互联申请的APP kEY.
 		UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler(activity, "100424468", "c7394704798a158208a74ab60104f0ba");
 		qqSsoHandler.addToSocialSDK();
-		QZoneSsoHandler qZoneSsoHandler = new QZoneSsoHandler(activity, "100424468", "c7394704798a158208a74ab60104f0ba");
-		qZoneSsoHandler.addToSocialSDK();
-		//
 		QQShareContent shareContent = new QQShareContent();
 		shareContent.setTitle(title);
 		shareContent.setShareImage(new UMImage(activity, R.drawable.logo));
@@ -478,6 +475,9 @@ public class PublicUtil {
 			shareContent.setTargetUrl(url);
 		}
 		mController.setShareMedia(shareContent);
+		//
+		QZoneSsoHandler qZoneSsoHandler = new QZoneSsoHandler(activity, "100424468", "c7394704798a158208a74ab60104f0ba");
+		qZoneSsoHandler.addToSocialSDK();
 		QZoneShareContent qZoneShareContent = new QZoneShareContent();
 		qZoneShareContent.setTitle(title);
 		qZoneShareContent.setShareImage(new UMImage(activity, R.drawable.logo));
@@ -815,6 +815,7 @@ public class PublicUtil {
 								isRunning = false;
 							}
 						} else {
+							YouMengUtil.onEventValue(activity, YouMengUtil.APP_START_TIME_LONG, timing);
 							isRunning = false;
 						}
 					} catch (InterruptedException e) {

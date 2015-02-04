@@ -12,6 +12,9 @@ public class LockADList_Entity implements Serializable {
 	private String title = StringUtils.EMPTY;
 	private String earn_jifen = StringUtils.EMPTY;
 	private String hp_url = StringUtils.EMPTY;
+	private String detail_url = StringUtils.EMPTY;
+	/** 广告类型,0有下载，1没有下载 */
+	private int app_type;
 
 	/**
 	 * @Description
@@ -32,6 +35,27 @@ public class LockADList_Entity implements Serializable {
 	 */
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	/**
+	 * @Description
+	 * @author Created by qinxianyuzou on 2015-2-3.
+	 * @see #app_type
+	 * @return the app_type
+	 */
+	public int getApp_type() {
+		return app_type;
+	}
+
+	/**
+	 * @Description
+	 * @author Created by qinxianyuzou on 2015-2-3.
+	 * @see #app_type
+	 * @param app_type
+	 *            the app_type to set
+	 */
+	public void setApp_type(int app_type) {
+		this.app_type = app_type;
 	}
 
 	/**
@@ -97,10 +121,36 @@ public class LockADList_Entity implements Serializable {
 		this.hp_url = hp_url;
 	}
 
+	/**
+	 * @Description
+	 * @author Created by qinxianyuzou on 2015-2-3.
+	 * @see #detail_url
+	 * @return the detail_url
+	 */
+	public String getDetail_url() {
+		return detail_url;
+	}
+
+	/**
+	 * @Description
+	 * @author Created by qinxianyuzou on 2015-2-3.
+	 * @see #detail_url
+	 * @param detail_url
+	 *            the detail_url to set
+	 */
+	public void setDetail_url(String detail_url) {
+		this.detail_url = detail_url;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "LockADList_Entity [id=" + id + ", title=" + title + ", earn_jifen=" + earn_jifen + ", hp_url=" + hp_url
-				+ "]";
+				+ ", detail_url=" + detail_url + ", app_type=" + app_type + "]";
 	}
 
 }

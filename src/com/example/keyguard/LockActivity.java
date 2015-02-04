@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.youmi.android.offers.OffersManager;
-
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
@@ -26,6 +24,7 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.example.activity.common.Activity_DownloadWeb;
+import com.example.activity.common.Activity_PublicWeb;
 import com.example.activity.common.BaseActivity;
 import com.example.activity.earnings.Activity_earnings;
 import com.example.entity.LockADList_Entity;
@@ -39,6 +38,7 @@ import com.example.util.SharedPreferenceUtil;
 import com.example.util.StringUtils;
 import com.google.gson.Gson;
 import com.lidroid.xutils.BitmapUtils;
+import com.umeng.analytics.MobclickAgent;
 
 @SuppressLint("ClickableViewAccessibility")
 public class LockActivity extends BaseActivity {
@@ -100,7 +100,6 @@ public class LockActivity extends BaseActivity {
 		// mRelativeLayout =
 		// LayoutInflater.from(this).inflate(R.layout.activity_lock, null);
 		setContentView(R.layout.activity_lock);
-		OffersManager.getInstance(this).onAppLaunch();
 		instance = this;
 		initUI();
 		initData();
@@ -116,10 +115,23 @@ public class LockActivity extends BaseActivity {
 	}
 
 	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+
+	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		OffersManager.getInstance(this).onAppExit();
 	}
 
 	@Override
@@ -453,7 +465,12 @@ public class LockActivity extends BaseActivity {
 						// startActivity(intent);
 						// finish();
 						//
-						Activity_DownloadWeb.luanch(LockActivity.this, lockADList_Entities.get(currentRow).getId());
+						if (lockADList_Entities.get(currentRow).getApp_type() == 0) {
+							Activity_DownloadWeb.luanch(LockActivity.this, lockADList_Entities.get(currentRow).getId());
+						} else {
+							Activity_PublicWeb.luanch(activity, lockADList_Entities.get(currentRow).getTitle(),
+									lockADList_Entities.get(currentRow).getDetail_url());
+						}
 						// OffersManager.getInstance(LockActivity.this).showOffersWall();
 						// 积分墙配置检查（没有使用“通过 Receiver来获取积分订单”功能）：
 						// boolean isSuccess =

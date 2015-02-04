@@ -23,7 +23,9 @@ public class UserInfo implements Serializable {
 	/** 邀请码 **/
 	private String invite_no;
 	/** 用户昵称 **/
-	private String name;
+	private String name = "";
+	/** 生日 */
+	private String birthday = "";
 
 	/**
 	 * @Description
@@ -175,10 +177,37 @@ public class UserInfo implements Serializable {
 		this.name = name;
 	}
 
+	/**
+	 * @Description
+	 * @author Created by qinxianyuzou on 2015-2-3.
+	 * @see #birthday
+	 * @return the birthday
+	 */
+	public String getBirthday() {
+		return birthday;
+	}
+
+	/**
+	 * @Description
+	 * @author Created by qinxianyuzou on 2015-2-3.
+	 * @see #birthday
+	 * @param birthday
+	 *            the birthday to set
+	 */
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return "UserInfo{" + "id='" + id + '\'' + ", username='" + username + '\'' + ", sum_earn=" + sum_earn
-				+ ", today_earn=" + today_earn + ", sex=" + sex + ", invite_no=" + invite_no + ", name='" + name + '\''
-				+ '}';
+		return "UserInfo [id=" + id + ", username=" + username + ", sum_earn=" + sum_earn + ", today_earn="
+				+ today_earn + ", sex=" + sex + ", invite_no=" + invite_no + ", name=" + name + ", birthday="
+				+ birthday + "]";
 	}
+
 }

@@ -23,7 +23,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
-        android:name="com.example.activity.common.KeyGuardApplication"
+        android:name="com.example.activity.main.KeyGuardApplication"
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
@@ -163,35 +163,12 @@
         <activity
             android:name="com.example.keyguard.Activity_YouMi"
             android:screenOrientation="portrait" >
-        </activity>
+        </activity>
         -->
-        <!-- 有米广告 -->
-        <activity
-            android:name="net.youmi.android.AdBrowser"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:theme="@android:style/Theme.Light.NoTitleBar" >
-        </activity>
-
-        <service
-            android:name="net.youmi.android.AdService"
-            android:exported="false" >
-        </service>
-        <service
-            android:name="net.youmi.android.ExpService"
-            android:exported="false" >
-        </service>
-
-        <receiver android:name="net.youmi.android.AdReceiver" >
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_ADDED" />
-
-                <data android:scheme="package" />
-            </intent-filter>
-        </receiver>
 
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="54b71edafd98c5332c000469" />
+            android:value="54b60c39fd98c5ac58000103" />
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="" />

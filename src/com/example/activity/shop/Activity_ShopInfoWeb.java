@@ -125,7 +125,7 @@ public class Activity_ShopInfoWeb extends BaseActivity {
 			// exchange_productFalg = Protocol.exchange_product(activity,
 			// setTag(), mId);
 			if (mType == 0) {
-				Activity_Submit.luanch(activity, "订单操作", mDanJia, mId, mShopType);
+				Activity_Submit.luanch(activity, "订单操作", mTitle, mDanJia, mId, mShopType);
 			} else {
 				final DialogClick dialogClick1 = new DialogClick(activity);
 				dialogClick1.requestWindowFeature(Window.FEATURE_NO_TITLE);

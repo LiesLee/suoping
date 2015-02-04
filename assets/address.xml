@@ -1,0 +1,331 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<resources>
+
+    <provinces id="0" name="北京" />
+    <provinces id="1" name="天津" />
+    <provinces id="2" name="上海" />
+    <provinces id="3" name="重庆" />
+    <provinces id="4" name="河北" />
+    <provinces id="5" name="山西" />
+    <provinces id="6" name="内蒙古" />
+    <provinces id="7" name="黑龙江" />
+    <provinces id="8" name="吉林" />
+    <provinces id="9" name="辽宁" />
+    <provinces id="10" name="江苏" />
+    <provinces id="11" name="浙江" />
+    <provinces id="12" name="安徽" />
+    <provinces id="13" name="福建" />
+    <provinces id="14" name="江西" />
+    <provinces id="15" name="山东" />
+    <provinces id="16" name="河南" />
+    <provinces id="17" name="湖北" />
+    <provinces id="18" name="湖南" />
+    <provinces id="19" name="广东" />
+    <provinces id="20" name="广西" />
+    <provinces id="21" name="海南" />
+    <provinces id="22" name="四川" />
+    <provinces id="23" name="贵州" />
+    <provinces id="24" name="云南" />
+    <provinces id="25" name="西藏" />
+    <provinces id="26" name="陕西" />
+    <provinces id="27" name="甘肃" />
+    <provinces id="28" name="青海" />
+    <provinces id="29" name="宁夏" />
+    <provinces id="30" name="新疆" />
+    <provinces id="31" name="台湾" />
+    <provinces id="32" name="香港" />
+    <provinces id="33" name="澳门" />
+
+    <city id="0" name="北京" provinces_id="0" />
+    <city id="1" name="天津" provinces_id="1" />
+    <city id="2" name="上海" provinces_id="2" />
+    <city id="3" name="重庆" provinces_id="3" />
+    <city id="4" name="石家庄" provinces_id="4" />
+    <city id="5" name="张家口" provinces_id="4" />
+    <city id="6" name="承德" provinces_id="4" />
+    <city id="7" name="唐山" provinces_id="4" />
+    <city id="8" name="秦皇岛" provinces_id="4" />
+    <city id="9" name="廊坊" provinces_id="4" />
+    <city id="10" name="保定" provinces_id="4" />
+    <city id="11" name="沧州" provinces_id="4" />
+    <city id="12" name="衡水" provinces_id="4" />
+    <city id="13" name="邢台" provinces_id="4" />
+    <city id="14" name="邯郸" provinces_id="4" />
+    <city id="15" name="太原" provinces_id="5" />
+    <city id="16" name="大同" provinces_id="5" />
+    <city id="17" name="朔州" provinces_id="5" />
+    <city id="18" name="忻州" provinces_id="5" />
+    <city id="19" name="阳泉" provinces_id="5" />
+    <city id="20" name="晋中" provinces_id="5" />
+    <city id="21" name="吕梁" provinces_id="5" />
+    <city id="22" name="长治" provinces_id="5" />
+    <city id="23" name="临汾" provinces_id="5" />
+    <city id="24" name="晋城" provinces_id="5" />
+    <city id="25" name="运城" provinces_id="5" />
+    <city id="26" name="呼和浩特" provinces_id="6" />
+    <city id="27" name="呼伦贝尔" provinces_id="6" />
+    <city id="28" name="通辽" provinces_id="6" />
+    <city id="29" name="赤峰" provinces_id="6" />
+    <city id="30" name="巴彦淖尔" provinces_id="6" />
+    <city id="31" name="乌兰察布" provinces_id="6" />
+    <city id="32" name="包头" provinces_id="6" />
+    <city id="33" name="鄂尔多斯" provinces_id="6" />
+    <city id="34" name="乌海" provinces_id="6" />
+    <city id="35" name="哈尔滨" provinces_id="7" />
+    <city id="36" name="黑河" provinces_id="7" />
+    <city id="37" name="伊春" provinces_id="7" />
+    <city id="38" name="齐齐哈尔" provinces_id="7" />
+    <city id="39" name="鹤岗" provinces_id="7" />
+    <city id="40" name="佳木斯" provinces_id="7" />
+    <city id="41" name="双鸭山" provinces_id="7" />
+    <city id="42" name="绥化" provinces_id="7" />
+    <city id="43" name="大庆" provinces_id="7" />
+    <city id="44" name="七台河" provinces_id="7" />
+    <city id="45" name="鸡西" provinces_id="7" />
+    <city id="46" name="牡丹江" provinces_id="7" />
+    <city id="47" name="长春" provinces_id="8" />
+    <city id="48" name="白城" provinces_id="8" />
+    <city id="49" name="松原" provinces_id="8" />
+    <city id="50" name="吉林" provinces_id="8" />
+    <city id="51" name="四平" provinces_id="8" />
+    <city id="52" name="辽源" provinces_id="8" />
+    <city id="53" name="白山" provinces_id="8" />
+    <city id="54" name="通化" provinces_id="8" />
+    <city id="55" name=" 沈阳" provinces_id="9" />
+    <city id="56" name="铁岭" provinces_id="9" />
+    <city id="57" name="阜新" provinces_id="9" />
+    <city id="58" name="抚顺" provinces_id="9" />
+    <city id="59" name="朝阳" provinces_id="9" />
+    <city id="60" name="本溪" provinces_id="9" />
+    <city id="61" name="辽阳" provinces_id="9" />
+    <city id="62" name="鞍山" provinces_id="9" />
+    <city id="63" name="盘锦" provinces_id="9" />
+    <city id="64" name="锦州" provinces_id="9" />
+    <city id="65" name="葫芦岛" provinces_id="9" />
+    <city id="66" name="营口" provinces_id="9" />
+    <city id="67" name="丹东" provinces_id="9" />
+    <city id="68" name="大连" provinces_id="9" />
+    <city id="69" name="南京" provinces_id="10" />
+    <city id="70" name="连云港" provinces_id="10" />
+    <city id="71" name="徐州" provinces_id="10" />
+    <city id="72" name="宿迁" provinces_id="10" />
+    <city id="73" name="淮安" provinces_id="10" />
+    <city id="74" name="盐城" provinces_id="10" />
+    <city id="75" name="泰州" provinces_id="10" />
+    <city id="76" name="扬州" provinces_id="10" />
+    <city id="77" name="镇江" provinces_id="10" />
+    <city id="78" name="南通" provinces_id="10" />
+    <city id="79" name="常州" provinces_id="10" />
+    <city id="80" name="无锡" provinces_id="10" />
+    <city id="81" name="苏州" provinces_id="10" />
+    <city id="82" name="杭州" provinces_id="11" />
+    <city id="83" name="湖州" provinces_id="11" />
+    <city id="84" name="嘉兴" provinces_id="11" />
+    <city id="85" name="绍兴" provinces_id="11" />
+    <city id="86" name="舟山" provinces_id="11" />
+    <city id="87" name="宁波" provinces_id="11" />
+    <city id="88" name="金华" provinces_id="11" />
+    <city id="89" name="衢州" provinces_id="11" />
+    <city id="90" name="台州" provinces_id="11" />
+    <city id="91" name="丽水" provinces_id="11" />
+    <city id="92" name="温州" provinces_id="11" />
+    <city id="93" name="合肥" provinces_id="12" />
+    <city id="94" name="淮北" provinces_id="12" />
+    <city id="95" name="亳州" provinces_id="12" />
+    <city id="96" name="宿州" provinces_id="12" />
+    <city id="97" name="蚌埠" provinces_id="12" />
+    <city id="98" name="阜阳" provinces_id="12" />
+    <city id="99" name="淮南" provinces_id="12" />
+    <city id="100" name="滁州" provinces_id="12" />
+    <city id="101" name="六安" provinces_id="12" />
+    <city id="102" name="马鞍山" provinces_id="12" />
+    <city id="103" name="巢湖" provinces_id="12" />
+    <city id="104" name="芜湖" provinces_id="12" />
+    <city id="105" name="宣城" provinces_id="12" />
+    <city id="106" name="铜陵" provinces_id="12" />
+    <city id="107" name="池州" provinces_id="12" />
+    <city id="108" name="安庆" provinces_id="12" />
+    <city id="109" name="黄山" provinces_id="12" />
+    <city id="110" name="福州" provinces_id="13" />
+    <city id="111" name="宁德" provinces_id="13" />
+    <city id="112" name="南平" provinces_id="13" />
+    <city id="113" name="三明" provinces_id="13" />
+    <city id="114" name="莆田" provinces_id="13" />
+    <city id="115" name="龙岩" provinces_id="13" />
+    <city id="116" name="泉州" provinces_id="13" />
+    <city id="117" name="漳州" provinces_id="13" />
+    <city id="118" name="厦门 " provinces_id="13" />
+    <city id="119" name="南昌" provinces_id="14" />
+    <city id="120" name="九江" provinces_id="14" />
+    <city id="121" name="景德镇" provinces_id="14" />
+    <city id="122" name="上饶" provinces_id="14" />
+    <city id="123" name="鹰潭" provinces_id="14" />
+    <city id="124" name="抚州" provinces_id="14" />
+    <city id="125" name="新余" provinces_id="14" />
+    <city id="126" name="宜春" provinces_id="14" />
+    <city id="127" name="萍乡" provinces_id="14" />
+    <city id="128" name="吉安" provinces_id="14" />
+    <city id="129" name="赣州" provinces_id="14" />
+    <city id="130" name="济南" provinces_id="15" />
+    <city id="131" name="德州" provinces_id="15" />
+    <city id="132" name="滨州" provinces_id="15" />
+    <city id="133" name="东营" provinces_id="15" />
+    <city id="134" name="烟台" provinces_id="15" />
+    <city id="135" name="威海" provinces_id="15" />
+    <city id="136" name="淄博" provinces_id="15" />
+    <city id="137" name="潍坊" provinces_id="15" />
+    <city id="138" name="聊城" provinces_id="15" />
+    <city id="139" name="泰安" provinces_id="15" />
+    <city id="140" name="莱芜" provinces_id="15" />
+    <city id="141" name="青岛" provinces_id="15" />
+    <city id="142" name="日照" provinces_id="15" />
+    <city id="143" name="济宁" provinces_id="15" />
+    <city id="144" name="菏泽" provinces_id="15" />
+    <city id="145" name="临沂" provinces_id="15" />
+    <city id="146" name="枣庄" provinces_id="15" />
+    <city id="147" name="郑州" provinces_id="16" />
+    <city id="148" name="安阳" provinces_id="16" />
+    <city id="149" name="鹤壁" provinces_id="16" />
+    <city id="150" name="濮阳" provinces_id="16" />
+    <city id="151" name="新乡" provinces_id="16" />
+    <city id="152" name="焦作" provinces_id="16" />
+    <city id="153" name="三门峡" provinces_id="16" />
+    <city id="154" name="开封" provinces_id="16" />
+    <city id="155" name="洛阳" provinces_id="16" />
+    <city id="156" name="商丘" provinces_id="16" />
+    <city id="157" name="许昌" provinces_id="16" />
+    <city id="158" name="平顶山" provinces_id="16" />
+    <city id="159" name="周口" provinces_id="16" />
+    <city id="160" name="漯河" provinces_id="16" />
+    <city id="161" name="南阳" provinces_id="16" />
+    <city id="162" name="驻马店" provinces_id="16" />
+    <city id="163" name="信阳" provinces_id="16" />
+    <city id="164" name="武汉" provinces_id="17" />
+    <city id="165" name="十堰" provinces_id="17" />
+    <city id="166" name="襄樊" provinces_id="17" />
+    <city id="167" name="随州" provinces_id="17" />
+    <city id="168" name="荆门" provinces_id="17" />
+    <city id="169" name="孝感" provinces_id="17" />
+    <city id="170" name="宜昌" provinces_id="17" />
+    <city id="171" name="黄冈" provinces_id="17" />
+    <city id="172" name="鄂州" provinces_id="17" />
+    <city id="173" name="荆州" provinces_id="17" />
+    <city id="174" name="黄石" provinces_id="17" />
+    <city id="175" name="咸宁" provinces_id="17" />
+    <city id="176" name="长沙" provinces_id="18" />
+    <city id="177" name="岳阳" provinces_id="18" />
+    <city id="178" name="张家界" provinces_id="18" />
+    <city id="179" name="常德" provinces_id="18" />
+    <city id="180" name="益阳" provinces_id="18" />
+    <city id="181" name="湘潭" provinces_id="18" />
+    <city id="182" name="株洲" provinces_id="18" />
+    <city id="183" name="娄底" provinces_id="18" />
+    <city id="184" name="怀化" provinces_id="18" />
+    <city id="185" name="邵阳" provinces_id="18" />
+    <city id="186" name="衡阳" provinces_id="18" />
+    <city id="187" name="永州" provinces_id="18" />
+    <city id="188" name="郴州" provinces_id="18" />
+    <city id="189" name="广州" provinces_id="19" />
+    <city id="190" name="韶关" provinces_id="19" />
+    <city id="191" name="梅州" provinces_id="19" />
+    <city id="192" name="河源" provinces_id="19" />
+    <city id="193" name="清远" provinces_id="19" />
+    <city id="194" name="潮州" provinces_id="19" />
+    <city id="195" name="揭阳" provinces_id="19" />
+    <city id="196" name="汕头" provinces_id="19" />
+    <city id="197" name="肇庆" provinces_id="19" />
+    <city id="198" name="惠州" provinces_id="19" />
+    <city id="199" name="佛山" provinces_id="19" />
+    <city id="200" name="东莞" provinces_id="19" />
+    <city id="201" name="云浮" provinces_id="19" />
+    <city id="202" name="汕尾" provinces_id="19" />
+    <city id="203" name="江门" provinces_id="19" />
+    <city id="204" name="中山" provinces_id="19" />
+    <city id="205" name="深圳" provinces_id="19" />
+    <city id="206" name="珠海" provinces_id="19" />
+    <city id="207" name="阳江" provinces_id="19" />
+    <city id="208" name="茂名" provinces_id="19" />
+    <city id="209" name="湛江" provinces_id="19" />
+    <city id="210" name="南宁" provinces_id="20" />
+    <city id="211" name="桂林" provinces_id="20" />
+    <city id="212" name="河池" provinces_id="20" />
+    <city id="213" name="贺州" provinces_id="20" />
+    <city id="214" name="柳州" provinces_id="20" />
+    <city id="215" name="百色" provinces_id="20" />
+    <city id="216" name="来宾" provinces_id="20" />
+    <city id="217" name="梧州" provinces_id="20" />
+    <city id="218" name="贵港" provinces_id="20" />
+    <city id="219" name="玉林" provinces_id="20" />
+    <city id="220" name="崇左" provinces_id="20" />
+    <city id="221" name="钦州" provinces_id="20" />
+    <city id="222" name="防城港" provinces_id="20" />
+    <city id="223" name="北海" provinces_id="20" />
+    <city id="224" name="海口" provinces_id="21" />
+    <city id="225" name="三亚" provinces_id="21" />
+    <city id="226" name="成都" provinces_id="22" />
+    <city id="227" name="广元" provinces_id="22" />
+    <city id="228" name="巴中" provinces_id="22" />
+    <city id="229" name="绵阳" provinces_id="22" />
+    <city id="230" name="德阳" provinces_id="22" />
+    <city id="231" name="达州" provinces_id="22" />
+    <city id="232" name="南充" provinces_id="22" />
+    <city id="233" name="遂宁" provinces_id="22" />
+    <city id="234" name="广安" provinces_id="22" />
+    <city id="235" name="资阳" provinces_id="22" />
+    <city id="236" name="眉山" provinces_id="22" />
+    <city id="237" name="雅安" provinces_id="22" />
+    <city id="238" name="内江" provinces_id="22" />
+    <city id="239" name="乐山" provinces_id="22" />
+    <city id="240" name="自贡" provinces_id="22" />
+    <city id="241" name="泸州" provinces_id="22" />
+    <city id="242" name="宜宾" provinces_id="22" />
+    <city id="243" name="攀枝花" provinces_id="22" />
+    <city id="244" name="贵阳" provinces_id="23" />
+    <city id="245" name="遵义" provinces_id="23" />
+    <city id="246" name="六盘水" provinces_id="23" />
+    <city id="247" name="安顺" provinces_id="23" />
+    <city id="248" name="昆明" provinces_id="24" />
+    <city id="249" name="昭通" provinces_id="24" />
+    <city id="250" name="丽江" provinces_id="24" />
+    <city id="251" name="曲靖" provinces_id="24" />
+    <city id="252" name="保山" provinces_id="24" />
+    <city id="253" name="玉溪" provinces_id="24" />
+    <city id="254" name="临沧" provinces_id="24" />
+    <city id="255" name="普洱 " provinces_id="24" />
+    <city id="256" name="拉萨" provinces_id="25" />
+    <city id="257" name="西安" provinces_id="26" />
+    <city id="258" name="榆林" provinces_id="26" />
+    <city id="259" name="延安" provinces_id="26" />
+    <city id="260" name="铜川" provinces_id="26" />
+    <city id="261" name="渭南" provinces_id="26" />
+    <city id="262" name="宝鸡" provinces_id="26" />
+    <city id="263" name="咸阳" provinces_id="26" />
+    <city id="264" name="商洛" provinces_id="26" />
+    <city id="265" name="汉中" provinces_id="26" />
+    <city id="266" name="安康" provinces_id="26" />
+    <city id="267" name="兰州" provinces_id="27" />
+    <city id="268" name="嘉峪关" provinces_id="27" />
+    <city id="269" name="酒泉" provinces_id="27" />
+    <city id="270" name="张掖" provinces_id="27" />
+    <city id="271" name="金昌" provinces_id="27" />
+    <city id="272" name="武威" provinces_id="27" />
+    <city id="273" name="白银" provinces_id="27" />
+    <city id="274" name="庆阳" provinces_id="27" />
+    <city id="275" name="平凉" provinces_id="27" />
+    <city id="276" name="定西" provinces_id="27" />
+    <city id="277" name="天水" provinces_id="27" />
+    <city id="278" name="陇南" provinces_id="27" />
+    <city id="279" name="西宁" provinces_id="28" />
+    <city id="280" name="银川" provinces_id="29" />
+    <city id="281" name="石嘴山" provinces_id="29" />
+    <city id="282" name="吴忠" provinces_id="29" />
+    <city id="283" name="中卫" provinces_id="29" />
+    <city id="284" name="固原" provinces_id="29" />
+    <city id="285" name="乌鲁木齐" provinces_id="30" />
+    <city id="286" name="克拉玛依" provinces_id="30" />
+    <city id="287" name="台北" provinces_id="31" />
+    <city id="288" name="高雄 " provinces_id="31" />
+    <city id="289" name="香港" provinces_id="32" />
+    <city id="290" name="澳门" provinces_id="33" />
+
+</resources>

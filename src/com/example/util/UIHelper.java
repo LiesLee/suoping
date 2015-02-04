@@ -48,7 +48,7 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.androidquery.AQuery;
 import com.example.activity.common.BaseActivity;
-import com.example.activity.common.KeyGuardApplication;
+import com.example.activity.main.KeyGuardApplication;
 import com.example.keyguard.R;
 import com.example.ui.pull.RefleshListView;
 import com.google.gson.Gson;

@@ -37,10 +37,6 @@
 -keep class com.slidingmenu.*{*;}
 -keep class cn.pedant.SweetAlert.*{*;}
 
--dontwarn net.youmi.android.**
--keep class net.youmi.android.** {
-    *;
-}
 -dontshrink
 -dontoptimize
 -dontwarn com.google.android.maps.**
@@ -105,7 +101,6 @@
     public static **[] values();
     public static ** valueOf(java.lang.String);
 }
-
 -keep class * implements android.os.Parcelable {
   public static final android.os.Parcelable$Creator *;
 }

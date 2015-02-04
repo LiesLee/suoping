@@ -1,7 +1,6 @@
 package com.example.activity.main;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.KeyguardManager;
 import android.app.TabActivity;
 import android.content.Context;
@@ -10,7 +9,6 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -25,13 +23,11 @@ import com.example.activity.earnings.Activity_earnings;
 import com.example.activity.invitation.Activity_invitation;
 import com.example.activity.more.Activity_more;
 import com.example.activity.shop.Activity_shop;
-import com.example.keyguard.DownLoadWebActivity;
 import com.example.keyguard.LockActivity;
 import com.example.keyguard.LockService;
 import com.example.keyguard.R;
-import com.example.keyguard.R.id;
-import com.example.keyguard.R.layout;
 import com.example.util.PublicUtil;
+import com.umeng.analytics.MobclickAgent;
 
 public class MainActivity extends TabActivity implements OnCheckedChangeListener {
 
@@ -113,18 +109,23 @@ public class MainActivity extends TabActivity implements OnCheckedChangeListener
 	}
 
 	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
 	protected void onPause() {
 
 		Log.i("hhz", "onPause");
 		/*
 		 * if (MainActivity.instance !=null) { MainActivity.instance.finish(); }
 		 */
-		if (DownLoadWebActivity.instance != null) {
-			DownLoadWebActivity.instance.finish();
-		}
 		if (LockActivity.instance != null) {
 			LockActivity.instance.finish();
 		}
+		MobclickAgent.onPause(this);
 		super.onPause();
 	}
 

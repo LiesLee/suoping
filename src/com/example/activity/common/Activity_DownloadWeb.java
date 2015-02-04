@@ -29,6 +29,7 @@ import com.example.util.PublicUtil;
 import com.example.util.UIHelper;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * @Description 下载web页
@@ -74,6 +75,20 @@ public class Activity_DownloadWeb extends BaseActivity {
 		ViewUtils.inject(activity);
 		initUI();
 		initData();
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		MobclickAgent.onPause(this);
 	}
 
 	@Override

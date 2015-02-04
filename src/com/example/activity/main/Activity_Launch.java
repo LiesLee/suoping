@@ -1,7 +1,5 @@
 package com.example.activity.main;
 
-import net.youmi.android.AdManager;
-
 import org.json.JSONObject;
 
 import android.content.Intent;
@@ -16,11 +14,11 @@ import com.android.volley.VolleyError;
 import com.example.activity.common.Activity_Guide;
 import com.example.activity.common.BaseActivity;
 import com.example.activity.reg.Activity_Reg;
+import com.example.address.SetAddressData;
 import com.example.keyguard.R;
 import com.example.util.SharedPreferenceUtil;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
-import com.umeng.analytics.MobclickAgent;
 
 /**
  * @Description 启动页
@@ -42,6 +40,16 @@ public class Activity_Launch extends BaseActivity implements AnimationListener {
 		ViewUtils.inject(activity);
 		initUI();
 		initData();
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				SetAddressData setAddressData = new SetAddressData();
+				// setAddressData.setData(activity);
+				// setAddressData.getData(activity);
+			}
+		}).start();
 	}
 
 	@Override
@@ -73,7 +81,6 @@ public class Activity_Launch extends BaseActivity implements AnimationListener {
 	@Override
 	protected void initData() {
 		// TODO Auto-generated method stub
-		AdManager.getInstance(activity).init("6fbcdb4b187d81a3", "6f23d0fa8b79cf6c", false);
 		// getearnlistFlag = Protocol.get_earn_list(activity, setTag());
 	}
 

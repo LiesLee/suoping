@@ -6,7 +6,7 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.activity.common.BaseActivity;
-import com.example.activity.common.KeyGuardApplication;
+import com.example.activity.main.KeyGuardApplication;
 import com.example.http.base.ConnectorManage;
 import com.example.http.base.HttpCallBack;
 import com.example.http.base.RequestManager;

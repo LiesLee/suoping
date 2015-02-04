@@ -138,10 +138,14 @@ public class Protocol {
 
 	/**
 	 * @Description 兑换接口
-	 * @author Created by qinxianyuzou on 2015-1-4.
+	 * @author Created by qinxianyuzou on 2015-2-3.
 	 * @param context
 	 * @param tag
 	 * @param epid
+	 * @param alipaly 
+	 * @param alipalyName
+	 * @param phone
+	 * @param address
 	 * @return
 	 */
 	public static long exchange_product(Context context, String tag, String epid, String alipaly, String alipalyName,

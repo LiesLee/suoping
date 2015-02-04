@@ -6,7 +6,6 @@
 	<classpathentry exported="true" kind="lib" path="libs/slidingmenu.jar"/>
 	<classpathentry kind="lib" path="libs/gson-2.2.4.jar"/>
 	<classpathentry kind="lib" path="libs/volley.jar"/>
-	<classpathentry kind="lib" path="libs/YoumiSdk_v5.00_2015-01-08.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="output" path="bin/classes"/>
