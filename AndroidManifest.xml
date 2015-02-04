@@ -163,15 +163,13 @@
         <activity
             android:name="com.example.keyguard.Activity_YouMi"
             android:screenOrientation="portrait" >
-        </activity>
+        </activity>
+
+
         -->
 
-        <meta-data
-            android:name="UMENG_APPKEY"
-            android:value="54b60c39fd98c5ac58000103" />
-        <meta-data
-            android:name="UMENG_CHANNEL"
-            android:value="" />
+        <meta-data            android:name="UMENG_APPKEY"            android:value="54b60c39fd98c5ac58000103" />
+        <meta-data            android:name="UMENG_CHANNEL"            android:value="" />
 
         <activity
             android:name="com.umeng.socialize.view.ShareActivity"

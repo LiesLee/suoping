@@ -269,6 +269,7 @@ public class PublicUtil {
 		intent.setDataAndType(Uri.parse("file://" + apkPath), "application/vnd.android.package-archive");
 		context.startActivity(intent);
 		// PackageManager pManager=context.getPackageManager();
+		startInstalledBroadcast(context, getPackageName(context, apkPath));
 	}
 
 	/**
@@ -582,6 +583,7 @@ public class PublicUtil {
 					public void onStart() {
 						// tv_info.setText("conn...");
 						PublicUtil.showToast(activity, "正在下载...");
+						YouMengUtil.onEvent(activity, YouMengUtil.START_DOWNLOAD);
 					}
 
 					@Override
@@ -606,6 +608,7 @@ public class PublicUtil {
 					public void onSuccess(ResponseInfo<File> responseInfo) {
 						mNotificationManager.cancel(3567);
 						PublicUtil.showToast(activity, "下载完成...");
+						YouMengUtil.onEvent(activity, YouMengUtil.DOWNLOAD_SUCCESS);
 						// PublicUtil.installAPK(activity, downFile);
 						PublicUtil.installAPK(activity, responseInfo.result.toString());
 					}
@@ -619,6 +622,7 @@ public class PublicUtil {
 							installAPK(activity, downFile);
 						}
 						if (msg.indexOf("Target host must not be null") > 0) {
+							YouMengUtil.onEvent(activity, YouMengUtil.DOWNLOAD_FAILURE);
 							showToast(activity, "文件下载失败，下载文件不存在");
 						}
 					}

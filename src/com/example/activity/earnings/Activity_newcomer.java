@@ -20,6 +20,7 @@ import com.example.http.respose.ResponseFreshmanAward;
 import com.example.http.respose.ResponseNewcomerAbout;
 import com.example.keyguard.R;
 import com.example.util.UIHelper;
+import com.example.util.YouMengUtil;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.ViewInjectInfo;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -128,6 +129,7 @@ public class Activity_newcomer extends BaseActivity {
 			ResponseNewcomerAbout msgInfo = (ResponseNewcomerAbout) response;
 			if (msgInfo.getCode().equals(Code.CODE_SUCCESS)) {
 				Activity_PublicWeb.luanch(activity, "了解锁屏赚", msgInfo.getData().getUrl());
+				YouMengUtil.onEvent(activity, YouMengUtil.GET_REWARD);
 				showToast(msgInfo.getMsg());
 			} else {
 				showToast(msgInfo.getMsg());

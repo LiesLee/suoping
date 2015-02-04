@@ -24,6 +24,7 @@ import com.example.util.LogUtil;
 import com.example.util.SharedPreferenceUtil;
 import com.example.util.StringUtils;
 import com.example.util.UIHelper;
+import com.example.util.YouMengUtil;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -86,6 +87,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 			break;
 		// 注册
 		case R.id.tv_reg:
+			YouMengUtil.onEvent(activity, YouMengUtil.OPEN_REG);
 			startActivity(new Intent(activity, Activity_Reg.class));
 			break;
 		default:
@@ -129,8 +131,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 				SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.USERINFO,
 						msg.getMsg().toString());
 				startActivity(new Intent(activity, MainActivity.class));
-                this.finish();
+				this.finish();
 			} else {
+				YouMengUtil.onEvent(activity, YouMengUtil.LOGIN_FAILURE, YouMengUtil.KEY_REASON, msg.getMsg());
 				showToast(msg.getMsg());
 				LogUtil.i("=====login erre=====", jsonString.toString());
 			}
@@ -139,7 +142,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
 	@Override
 	public void onHttpError(long flag, VolleyError error) {
-
+		if (flag == loginFlag) {
+			UIHelper.cancelProgressDialog();
+			YouMengUtil.onEvent(activity, YouMengUtil.LOGIN_NO_RESPONSE, YouMengUtil.KEY_REASON, error.getMessage());
+		}
 	}
 
 	@Override

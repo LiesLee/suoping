@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONObject;
 
 import android.content.Context;
 
+import com.android.volley.VolleyError;
 import com.example.http.respose.ResponseDownAPP;
 import com.example.http.respose.ResponseEPDetail;
 import com.example.http.respose.ResponseEXProduct;
@@ -21,6 +23,7 @@ import com.example.http.respose.ResponseSignIn;
 import com.example.http.respose.ResponseUpdate;
 import com.example.http.respose.ResponseUserInfo;
 import com.example.util.StringUtils;
+import com.example.util.YouMengUtil;
 
 /**
  * @Description 接口类
@@ -204,11 +207,24 @@ public class Protocol {
 	 * @param no
 	 * @return
 	 */
-	public static long invite(Context context, String tag, String no) {
+	public static long invite(final Context context, String tag, String no) {
 		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
 		requestParam.add(new BasicNameValuePair("no", no));
 		return ConnectorManage.getInstance(context).PostHttpRequest(context, Config.INVITE, tag, requestParam,
-				ResponseEPDetail.class, null);
+				ResponseEPDetail.class, new HttpCallBack() {
+					
+					@Override
+					public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
+						// TODO Auto-generated method stub
+						YouMengUtil.onEvent(context, YouMengUtil.GET_REWARD);
+					}
+					
+					@Override
+					public void onHttpError(long flag, VolleyError error) {
+						// TODO Auto-generated method stub
+						
+					}
+				});
 	}
 
 	/**

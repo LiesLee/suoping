@@ -1,5 +1,7 @@
 package com.example.keyguard;
 
+import com.example.util.YouMengUtil;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -24,7 +26,8 @@ public class StartInstalledBroadcast extends BroadcastReceiver {
 			String packageName = intent.getDataString();
 			Log.i("Test", "---------------" + packageName);
 			if (packageName.equals(mPackageName)) {
-
+				YouMengUtil.onEvent(context, YouMengUtil.INSTALL_SUCCESS);
+				context.unregisterReceiver(this);
 			}
 		}
 

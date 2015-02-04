@@ -23,6 +23,7 @@ import com.example.http.base.Code;
 import com.example.http.base.Protocol;
 import com.example.keyguard.R;
 import com.example.util.PublicUtil;
+import com.example.util.YouMengUtil;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -82,7 +83,7 @@ public class Activity_MyInfo extends BaseActivity {
 		// dataList.add(new BasicNameValuePair("手机号", "159*****320"));
 		dataList.add(new BasicNameValuePair("邀请码", ""));
 		dataList.add(new BasicNameValuePair("性别", PublicUtil.getUserInfo(activity).getSex()));
-		dataList.add(new BasicNameValuePair("生日", ""));
+		dataList.add(new BasicNameValuePair("生日", PublicUtil.getUserInfo(activity).getBirthday()));
 		// dataList.add(new BasicNameValuePair("账户状态", "正常"));
 		// dataList.add(new BasicNameValuePair("修改密码", ""));
 		dataList.add(new BasicNameValuePair("退出登录", ""));

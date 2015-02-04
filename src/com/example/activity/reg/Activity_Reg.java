@@ -18,6 +18,7 @@ import com.example.keyguard.R;
 import com.example.util.LogUtil;
 import com.example.util.StringUtils;
 import com.example.util.UIHelper;
+import com.example.util.YouMengUtil;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -67,6 +68,7 @@ public class Activity_Reg extends BaseActivity implements View.OnClickListener {
 		case R.id.iv_back_left:
 			this.finish();
 		case R.id.but_reg_login:
+			YouMengUtil.onEvent(activity, YouMengUtil.OPEN_LOGIN);
 			LoginActivity.luanch(activity);
 			finish();
 		default:

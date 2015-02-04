@@ -34,6 +34,7 @@ import com.example.keyguard.R;
 import com.example.util.PublicUtil;
 import com.example.util.SharedPreferenceUtil;
 import com.example.util.UIHelper;
+import com.example.util.YouMengUtil;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.bitmap.BitmapDisplayConfig;
 import com.lidroid.xutils.bitmap.callback.BitmapLoadCallBack;
@@ -261,6 +262,7 @@ public class MyInfo_Adapter extends BaseAdapter {
 			SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.COOKIES, "");
 			SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.USERINFO, "");
 			SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.OLD_PASSWORD, "");
+			YouMengUtil.onEvent(activity, YouMengUtil.OPEN_LOGIN);
 			activity.startActivity(new Intent(activity, LoginActivity.class));
 			activity.finish();
 		}

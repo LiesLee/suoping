@@ -17,6 +17,7 @@ import com.example.activity.main.MainActivity;
 import com.example.activity.reg.Activity_Reg;
 import com.example.keyguard.R;
 import com.example.util.SharedPreferenceUtil;
+import com.example.util.YouMengUtil;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.umeng.analytics.MobclickAgent;
@@ -100,6 +101,7 @@ public class Activity_Guide extends BaseActivity implements OnClickListener {
 		case R.id.but_guide_goto:
 			if (SharedPreferenceUtil.getInstance(activity).getString(SharedPreferenceUtil.USERINFO).equals("")) {
 				// startActivity(new Intent(this, LoginActivity.class));
+				YouMengUtil.onEvent(activity, YouMengUtil.OPEN_REG);
 				startActivity(new Intent(this, Activity_Reg.class));
 			} else {
 				startActivity(new Intent(this, MainActivity.class));

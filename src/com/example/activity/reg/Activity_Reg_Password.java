@@ -24,6 +24,7 @@ import com.example.util.LogUtil;
 import com.example.util.SharedPreferenceUtil;
 import com.example.util.StringUtils;
 import com.example.util.UIHelper;
+import com.example.util.YouMengUtil;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -126,9 +127,11 @@ public class Activity_Reg_Password extends BaseActivity implements View.OnClickL
 		if (flag == regFlag) {
 			BaseResponse msg = (BaseResponse) response;
 			if (msg.getCode().equals(Code.CODE_SUCCESS)) {
+				YouMengUtil.onEvent(activity, YouMengUtil.REG_SUCCESS);
 				showToast(msg.getMsg() + "正在登录，请稍候...");
 				loginFlag = Protocol.login(this, setTag(), cellphoneNumber, password);
 			} else {
+				YouMengUtil.onEvent(activity, YouMengUtil.REG_FAILURE, YouMengUtil.KEY_REASON, msg.getMsg());
 				showToast(msg.getMsg());
 			}
 		}
@@ -144,6 +147,7 @@ public class Activity_Reg_Password extends BaseActivity implements View.OnClickL
 				startActivity(new Intent(activity, MainActivity.class));
 			} else {
 				showToast(msg.getMsg());
+				YouMengUtil.onEvent(activity, YouMengUtil.OPEN_LOGIN);
 				startActivity(new Intent(this, LoginActivity.class));
 			}
 			finish();
@@ -155,6 +159,7 @@ public class Activity_Reg_Password extends BaseActivity implements View.OnClickL
 		if (flag == regFlag) {
 			UIHelper.cancelProgressDialog();
 			LogUtil.d("onHttpError", error.toString());
+			YouMengUtil.onEvent(activity, YouMengUtil.REG_NO_RESPONSE, YouMengUtil.KEY_REASON, error.toString());
 			showToast(StringUtils.ERROR_TOAST);
 		}
 	}

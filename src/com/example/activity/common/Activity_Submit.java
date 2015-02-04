@@ -222,10 +222,13 @@ public class Activity_Submit extends BaseActivity {
 				// YouMengUtil.onEventValue(activity,
 				// YouMengUtil.EXCHANGE_MONEY, (int) Float.parseFloat(mDanJia));
 				HashMap<String, String> map = new HashMap<String, String>();
-				map.put(YouMengUtil.KEY_COMMODITY_NAME, mCommodityName + ":" + (int) Float.parseFloat(mDanJia));
-				YouMengUtil.onEventValue(activity, YouMengUtil.EXCHANGE_MONEY, map, (int) Float.parseFloat(mDanJia));
+				map.put(YouMengUtil.KEY_COMMODITY_NAME, mCommodityName);
+				map.put(YouMengUtil.KEY_COMMODITY_MONEY, "" + (int) Float.parseFloat(mDanJia));
+				YouMengUtil.onEventValue(activity, YouMengUtil.EXCHANGE_SUCCESS, map, (int) Float.parseFloat(mDanJia));
 				finish();
 			} else {
+				YouMengUtil.onEvent(activity, YouMengUtil.EXCHANGE_FAILURE, YouMengUtil.KEY_REASON,
+						baseResponse.getMsg());
 				showToast(baseResponse.getMsg());
 			}
 		}

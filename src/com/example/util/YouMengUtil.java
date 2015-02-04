@@ -15,12 +15,14 @@ public class YouMengUtil {
 	public final static String OPEN_LOGIN = "OPEN_LOGIN";
 	/** 打开注册页面 */
 	public final static String OPEN_REG = "OPEN_REG";
+	/** 登陆失败 */
+	public final static String LOGIN_FAILURE = "LOGIN_FAILURE";
 	/** 登陆没有响应 */
 	public final static String LOGIN_NO_RESPONSE = "LOGIN_NO_RESPONSE";
 	/** 注册成功 */
 	public final static String REG_SUCCESS = "REG_SUCCESS";
-	/** 用户名重复 */
-	public final static String REG_REPEAT_NAME = "REG_REPEAT_NAME";
+	/** 注册失败 */
+	public final static String REG_FAILURE = "REG_FAILURE";
 	/** 注册没有响应 */
 	public final static String REG_NO_RESPONSE = "REG_NO_RESPONSE";
 	/** 打开下载页 */
@@ -35,8 +37,6 @@ public class YouMengUtil {
 	public final static String DOWNLOAD_FAILURE = "DOWNLOAD_FAILURE";
 	/** 安装成功 */
 	public final static String INSTALL_SUCCESS = "INSTALL_SUCCESS";
-	/** 启动成功 */
-	public final static String START_SUCCESS = "START_SUCCESS";
 	/** 启动时长 */
 	public final static String APP_START_TIME_LONG = "APP_START_TIME_LONG";
 	/** 获取奖励 */
@@ -45,14 +45,12 @@ public class YouMengUtil {
 	public final static String EXCHANGE_COMMODITY = "EXCHANGE_COMMODITY";
 	/** 兑换成功 */
 	public final static String EXCHANGE_SUCCESS = "EXCHANGE_SUCCESS";
-	/** 消费积分 */
-	public final static String EXCHANGE_MONEY = "EXCHANGE_MONEY";
-	/** 库存不足 */
-	public final static String EXCHANGE_STOCK = "EXCHANGE_STOCK";
-	/** 金额不足 */
-	public final static String EXCHANGE_LACK_OF_BALANCE = "EXCHANGE_LACK_OF_BALANCE";
-	/** 打开锁屏页次数 */
-	public final static String OPEN_LOCK = "OPEN_LOCK";
+	/** 兑换失败 */
+	public final static String EXCHANGE_FAILURE = "EXCHANGE_FAILURE";
+	// /** 消费积分 */
+	// public final static String EXCHANGE_MONEY = "EXCHANGE_MONEY";
+	// /** 打开锁屏页次数 */
+	// public final static String OPEN_LOCK = "OPEN_LOCK";
 	/** 分享新浪 */
 	public final static String SHARE_SINA = "SHARE_SINA";
 	/** 分享腾讯围脖 */
@@ -69,12 +67,16 @@ public class YouMengUtil {
 	public final static String SHARE_SMS = "SHARE_SMS";
 	//
 	// 提交内容的key
+	/** 错误原因 */
+	public final static String KEY_REASON = "KEY_REASON";
 	/** 商品名称 */
-	public final static String KEY_COMMODITY_NAME = "commodity_name";
+	public final static String KEY_COMMODITY_NAME = "KEY_COMMODITY_NAME";
+	/** 商品积分 */
+	public final static String KEY_COMMODITY_MONEY = "KEY_COMMODITY_MONEY";
 	/** 分享标签 */
 	public final static String KEY_SHARE = "KEY_SHARE";
 
-	public static void sendEvent(Context context, String lableID) {
+	public static void onEvent(Context context, String lableID) {
 		MobclickAgent.onEvent(context, lableID);
 	}
 
@@ -91,7 +93,7 @@ public class YouMengUtil {
 	}
 
 	/**
-	 * @Description 
+	 * @Description
 	 * @author Created by qinxianyuzou on 2015-2-4.
 	 * @param context
 	 * @param lableID

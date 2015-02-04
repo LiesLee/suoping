@@ -27,6 +27,7 @@ import com.example.keyguard.R;
 import com.example.util.LogUtil;
 import com.example.util.PublicUtil;
 import com.example.util.UIHelper;
+import com.example.util.YouMengUtil;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.umeng.analytics.MobclickAgent;
@@ -121,6 +122,7 @@ public class Activity_DownloadWeb extends BaseActivity {
 		case R.id.but_down_web:
 			// PublicUtil.downloadAPP(activity,
 			// "http://static.duowanka.com/downloadApp");
+			YouMengUtil.onEvent(activity, YouMengUtil.CLICK_DOWNLOAD);
 			UIHelper.showMsgProgressDialog(activity, "正在加载...");
 			downFlag = Protocol.get_earn_downloadurl(activity, setTag(), mId);
 			break;

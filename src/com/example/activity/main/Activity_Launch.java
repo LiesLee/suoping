@@ -17,6 +17,7 @@ import com.example.activity.reg.Activity_Reg;
 import com.example.address.SetAddressData;
 import com.example.keyguard.R;
 import com.example.util.SharedPreferenceUtil;
+import com.example.util.YouMengUtil;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -103,6 +104,7 @@ public class Activity_Launch extends BaseActivity implements AnimationListener {
 			startActivity(new Intent(activity, Activity_Guide.class));
 		} else {
 			if (SharedPreferenceUtil.getInstance(activity).getString(SharedPreferenceUtil.COOKIES).equals("")) {
+				YouMengUtil.onEvent(activity, YouMengUtil.OPEN_REG);
 				startActivity(new Intent(activity, Activity_Reg.class));
 			} else {
 				startActivity(new Intent(activity, MainActivity.class));

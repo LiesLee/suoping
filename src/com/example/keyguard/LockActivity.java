@@ -36,6 +36,7 @@ import com.example.keyguard.CoverPlateView.Listener;
 import com.example.util.LogUtil;
 import com.example.util.SharedPreferenceUtil;
 import com.example.util.StringUtils;
+import com.example.util.YouMengUtil;
 import com.google.gson.Gson;
 import com.lidroid.xutils.BitmapUtils;
 import com.umeng.analytics.MobclickAgent;
@@ -112,20 +113,6 @@ public class LockActivity extends BaseActivity {
 		}
 
 		return super.onKeyDown(keyCode, event);
-	}
-
-	@Override
-	protected void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
-		MobclickAgent.onResume(this);
-	}
-
-	@Override
-	protected void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
-		MobclickAgent.onPause(this);
 	}
 
 	@Override
@@ -455,52 +442,21 @@ public class LockActivity extends BaseActivity {
 					// (screenWidth+image_slide_width)/2,v.getBottom());
 					imageView_slide.setImageResource(R.drawable.lock_slide_icon_normal_no_quick_launcher);
 				} else {
-					// finish();
 					if ((int) event.getRawX() < (image_slide_leftMargin + 100)) {
-						// Toast.makeText(LockActivity.this,
-						// "GO to DownLoadWebActivity!",
-						// Toast.LENGTH_SHORT).show();
-						// Intent intent = new Intent(LockActivity.this,
-						// DownLoadWebActivity.class);
-						// startActivity(intent);
-						// finish();
-						//
 						if (lockADList_Entities.get(currentRow).getApp_type() == 0) {
+							YouMengUtil.onEvent(activity, YouMengUtil.OPEN_APP_DOWNLOAD);
 							Activity_DownloadWeb.luanch(LockActivity.this, lockADList_Entities.get(currentRow).getId());
 						} else {
 							Activity_PublicWeb.luanch(activity, lockADList_Entities.get(currentRow).getTitle(),
 									lockADList_Entities.get(currentRow).getDetail_url());
 						}
-						// OffersManager.getInstance(LockActivity.this).showOffersWall();
-						// 积分墙配置检查（没有使用“通过 Receiver来获取积分订单”功能）：
-						// boolean isSuccess =
-						// OffersManager.getInstance(LockActivity.this).checkOffersAdConfig();
-						// LogUtil.d(setTag(), "" + isSuccess);
 						if (LockActivity.instance != null) {
 							LockActivity.instance.finish();
 						}
 					} else {
-
-						/*
-						 * Intent intent = new Intent(LockActivity.this,
-						 * MainActivity.class); Bundle bundle = new Bundle();
-						 * bundle.putString("Name", "test");
-						 * bundle.putBoolean("IsClose", true);
-						 * intent.putExtras(bundle); startActivity(intent);
-						 */
-						/*
-						 * if (MainActivity.instance != null) {
-						 * MainActivity.instance.finish(); }
-						 */
-						// if (DownLoadWebActivity.instance != null) {
-						// DownLoadWebActivity.instance.finish();
-						// }
 						if (LockActivity.instance != null) {
 							LockActivity.instance.finish();
 							int amount = 10; // 示例增加100积分
-							// boolean isSuccess =
-							// PointsManager.getInstance(activity).awardPoints(amount);
-							// LogUtil.d(setTag(), "" + isSuccess);
 							Activity_earnings.activity_earnings.reloadData();
 							Protocol.lock_earn(LockActivity.this, this.getClass().getSimpleName(), new HttpCallBack() {
 
@@ -508,6 +464,7 @@ public class LockActivity extends BaseActivity {
 								public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
 									// TODO Auto-generated method stub
 									Activity_earnings.activity_earnings.reloadData();
+									YouMengUtil.onEvent(activity, YouMengUtil.GET_REWARD);
 								}
 
 								@Override
