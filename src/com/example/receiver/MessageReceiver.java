@@ -10,10 +10,12 @@ import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.Notification.Builder;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 
+import com.example.activity.main.Activity_Launch;
 import com.example.http.respose.ResponseXinGe;
 import com.example.keyguard.R;
 import com.example.util.LogUtil;
@@ -198,28 +200,29 @@ public class MessageReceiver extends XGPushBaseReceiver {
 				final NotificationManager nm = (NotificationManager) context
 						.getSystemService(Context.NOTIFICATION_SERVICE);
 				if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-					nf = oldNotification(context, title, content);
+					nf = oldNotification(context, title, content, type);
 				} else {
-					nf = v16Notification(context, title, content);
+					nf = v16Notification(context, title, content, type);
 				}
 				final int noticeId = type;
 				nm.notify(noticeId, nf);
-				if (type == 1) {
-					new Thread(new Runnable() {
-
-						@Override
-						public void run() {
-							// TODO Auto-generated method stub
-							try {
-								Thread.sleep(3000);
-								nm.cancel(noticeId);
-							} catch (InterruptedException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						}
-					}).start();
-				}
+				// }
+				// if (type == 1) {
+				// new Thread(new Runnable() {
+				//
+				// @Override
+				// public void run() {
+				// // TODO Auto-generated method stub
+				// try {
+				// Thread.sleep(3000);
+				// nm.cancel(noticeId);
+				// } catch (InterruptedException e) {
+				// // TODO Auto-generated catch block
+				// e.printStackTrace();
+				// }
+				// }
+				// }).start();
+				// }
 
 			}
 			// APP自主处理消息的过程...
@@ -245,29 +248,23 @@ public class MessageReceiver extends XGPushBaseReceiver {
 	 *            楼层
 	 * @return
 	 */
-	private Notification oldNotification(Context context, String title, String content) {
+	private Notification oldNotification(Context context, String title, String content, int requestCode) {
 		Notification nf;
 		nf = new Notification(R.drawable.ic_launcher, title, System.currentTimeMillis());
 		nf.flags = Notification.FLAG_AUTO_CANCEL;
 		nf.defaults = Notification.DEFAULT_ALL;
 		nf.when = System.currentTimeMillis();
-		// Intent it = new Intent();
-		// Intent it = new Intent(context, MainFramgentActivity.class);
-		// it.putExtra("jump", jump);
-		// int requestCode = jump;
-		// if (!StringUtils.isEmpty(msgId)) {
-		// it.putExtra("msgId", msgId);
-		// }
-		// if (!StringUtils.isEmpty(id)) {
-		// it.putExtra("id", id);
-		// }
-		// if (!StringUtils.isEmpty(remark)) {
-		// it.putExtra("remark", remark);
-		// }
-		// it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);// 这行代码会解决此问题
-		// PendingIntent pi = PendingIntent.getActivity(context, requestCode,
-		// it, PendingIntent.FLAG_UPDATE_CURRENT);
-		// nf.setLatestEventInfo(context, title, content, pi);
+		if (!PublicUtil.isTopActivity(context)) {
+			Intent it = new Intent(context, Activity_Launch.class);
+			it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);// 这行代码会解决此问题
+			PendingIntent pi = PendingIntent.getActivity(context, requestCode, it, PendingIntent.FLAG_UPDATE_CURRENT);
+			nf.setLatestEventInfo(context, title, content, pi);
+		} else {
+			Intent it = new Intent();
+			it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);// 这行代码会解决此问题
+			PendingIntent pi = PendingIntent.getActivity(context, requestCode, it, PendingIntent.FLAG_UPDATE_CURRENT);
+			nf.setLatestEventInfo(context, title, content, pi);
+		}
 		return nf;
 	}
 
@@ -287,28 +284,24 @@ public class MessageReceiver extends XGPushBaseReceiver {
 	 * @return
 	 */
 	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-	private Notification v16Notification(Context context, String title, String content) {
+	private Notification v16Notification(Context context, String title, String content, int requestCode) {
 		Notification nf;
 		Builder builder = new Builder(context);
 		builder.setContentTitle(title);
 		builder.setContentText(content);
 		builder.setSmallIcon(R.drawable.ic_launcher);
 		builder.setWhen(System.currentTimeMillis());
-		// Intent it = new Intent(context, MainFramgentActivity.class);
-		// it.putExtra("jump", jump);
-		// int requestCode = jump;
-		// if (!StringUtils.isEmpty(msgId)) {
-		// it.putExtra("msgId", msgId);
-		// }
-		// if (!StringUtils.isEmpty(id)) {
-		// it.putExtra("id", id);
-		// }
-		// if (!StringUtils.isEmpty(remark)) {
-		// it.putExtra("remark", remark);
-		// }
-		// it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);// 这行代码会解决此问题
-		// builder.setContentIntent(PendingIntent.getActivity(context,
-		// requestCode, it, PendingIntent.FLAG_UPDATE_CURRENT));
+		if (!PublicUtil.isTopActivity(context)) {
+			Intent it = new Intent(context, Activity_Launch.class);
+			it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);// 这行代码会解决此问题
+			builder.setContentIntent(PendingIntent.getActivity(context, requestCode, it,
+					PendingIntent.FLAG_UPDATE_CURRENT));
+		} else {
+			Intent it = new Intent();
+			it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);// 这行代码会解决此问题
+			builder.setContentIntent(PendingIntent.getActivity(context, requestCode, it,
+					PendingIntent.FLAG_UPDATE_CURRENT));
+		}
 		nf = builder.build();
 		nf.flags = Notification.FLAG_AUTO_CANCEL;
 		nf.defaults = Notification.DEFAULT_ALL;

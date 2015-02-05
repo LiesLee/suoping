@@ -17,6 +17,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
+import android.app.ActivityManager.RunningTaskInfo;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -113,7 +114,7 @@ public class PublicUtil {
 	}
 
 	/**
-	 * @Description 
+	 * @Description
 	 * @author Created by qinxianyuzou on 2015-2-5.
 	 * @param userInfo
 	 * @return
@@ -963,4 +964,21 @@ public class PublicUtil {
 		}).start();
 	}
 
+	/**
+	 * 判断程序是否在前台运行
+	 * 
+	 * @param context
+	 * @return
+	 */
+	public static boolean isTopActivity(Context context) {
+		ActivityManager mActivityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+		List<RunningTaskInfo> tasksInfo = mActivityManager.getRunningTasks(1);
+		if (tasksInfo.size() > 0) {
+			// 应用程序位于堆栈的顶层
+			if (context.getPackageName().equals(tasksInfo.get(0).topActivity.getPackageName())) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
