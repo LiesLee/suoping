@@ -27,6 +27,7 @@ import com.example.activity.earnings.Activity_earnings;
 import com.example.activity.invitation.Activity_invitation;
 import com.example.activity.more.Activity_more;
 import com.example.activity.shop.Activity_shop;
+import com.example.http.base.Protocol;
 import com.example.keyguard.LockActivity;
 import com.example.keyguard.LockService;
 import com.example.keyguard.R;
@@ -65,6 +66,7 @@ public class MainActivity extends TabActivity implements OnCheckedChangeListener
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		mContext = this;
 		instance = this;
 		tabHost = this.getTabHost();
 		tabHost.addTab(tabHost.newTabSpec("1").setIndicator("1").setContent(new Intent(this, Activity_earnings.class)));
@@ -98,7 +100,7 @@ public class MainActivity extends TabActivity implements OnCheckedChangeListener
 		});
 
 		startService(new Intent(MainActivity.this, LockService.class));
-		
+
 		initXG();
 	}
 
@@ -174,15 +176,16 @@ public class MainActivity extends TabActivity implements OnCheckedChangeListener
 		Handler handler = new HandlerExtension(MainActivity.this);
 		m = handler.obtainMessage();
 		// 注册接口
-		final String uidString = PublicUtil.getUserInfo(mContext).getId();
+		final String uidString = PublicUtil.getUserInfo(mContext).getUsername();
 		LogUtil.w(Constants.LogTag, uidString);
-		XGPushManager.registerPush(getApplicationContext(), uidString, new XGIOperateCallback() {
+		XGPushManager.registerPush(mContext, uidString, new XGIOperateCallback() {
 			@Override
 			public void onSuccess(Object data, int flag) {
 				LogUtil.w(Constants.LogTag, "+++ register push sucess. token:" + data);
 				m.obj = "+++ register push sucess. token:" + data;
 				m.sendToTarget();
 				CacheManager.getRegisterInfo(getApplicationContext());
+				Protocol.send_utoken(mContext, MainActivity.class.getSimpleName(), data.toString());
 			}
 
 			@Override
@@ -193,9 +196,9 @@ public class MainActivity extends TabActivity implements OnCheckedChangeListener
 				m.sendToTarget();
 			}
 		});
-		Context context = getApplicationContext();
-		Intent service = new Intent(context, XGPushService.class);
-		context.startService(service);
+		// Context context = getApplicationContext();
+		// Intent service = new Intent(mContext, XGPushService.class);
+		// mContext.startService(service);
 	}
 
 	private static class HandlerExtension extends Handler {

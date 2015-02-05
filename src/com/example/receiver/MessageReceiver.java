@@ -10,17 +10,17 @@ import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.Notification.Builder;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 
+import com.example.http.respose.ResponseXinGe;
 import com.example.keyguard.R;
-import com.example.util.JSONUtil;
 import com.example.util.LogUtil;
 import com.example.util.PublicUtil;
 import com.example.xinge.NotificationService;
 import com.example.xinge.XGNotification;
+import com.google.gson.Gson;
 import com.tencent.android.tpush.XGIOperateCallback;
 import com.tencent.android.tpush.XGPushBaseReceiver;
 import com.tencent.android.tpush.XGPushClickedResult;
@@ -162,9 +162,11 @@ public class MessageReceiver extends XGPushBaseReceiver {
 	public void onTextMessage(Context context, XGPushTextMessage message) {
 		// TODO Auto-generated method stub
 		if (message == null) {
+			LogUtil.d(LogTag, "message=null");
 			return;
 		}
 		try {
+			LogUtil.d(LogTag, message.toString());
 			if (PublicUtil.getCookies(context) == null || PublicUtil.getCookies(context).equals("")) {
 				// 如果没有登录就反注册信鸽
 				XGPushManager.unregisterPush(context, new XGIOperateCallback() {
@@ -187,33 +189,38 @@ public class MessageReceiver extends XGPushBaseReceiver {
 			// 获取自定义key-value
 			String customContent = message.getCustomContent();
 			if (customContent != null && customContent.length() != 0) {
-				try {
-					JSONObject obj = new JSONObject(customContent);
-					String id = JSONUtil.getString(obj, "id", "");
-					String msgId = JSONUtil.getString(obj, "msgId", "");
-					int type = JSONUtil.getInt(obj, "type", -1);
-					int jump = getJump(type);
-					String remark = JSONUtil.getString(obj, "remark", "");
-					String title = message.getTitle();
-					String content = message.getContent();
-					LogUtil.d(LogTag, id + "--" + jump + "--" + remark);
-					// 创建通知
-					Notification nf;
-					NotificationManager nm = (NotificationManager) context
-							.getSystemService(Context.NOTIFICATION_SERVICE);
-					LogUtil.d(LogTag, jump + "");
-					if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-						nf = oldNotification(context, title, content, msgId, jump, id, remark);
-					} else {
-						nf = v16Notification(context, title, content, msgId, jump, id, remark);
-					}
-					int noticeId;
-					noticeId = jump * 10000000;
-					noticeId = noticeId + Math.abs(id.hashCode());
-					nm.notify(noticeId, nf);
-				} catch (JSONException e) {
-					e.printStackTrace();
+				ResponseXinGe msg = new Gson().fromJson(customContent, ResponseXinGe.class);
+				String title = message.getTitle();
+				String content = message.getContent();
+				int type = msg.getData().getType();
+				// 创建通知
+				Notification nf;
+				final NotificationManager nm = (NotificationManager) context
+						.getSystemService(Context.NOTIFICATION_SERVICE);
+				if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+					nf = oldNotification(context, title, content);
+				} else {
+					nf = v16Notification(context, title, content);
 				}
+				final int noticeId = type;
+				nm.notify(noticeId, nf);
+				if (type == 1) {
+					new Thread(new Runnable() {
+
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							try {
+								Thread.sleep(3000);
+								nm.cancel(noticeId);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+					}).start();
+				}
+
 			}
 			// APP自主处理消息的过程...
 			LogUtil.d(LogTag, text);
@@ -238,12 +245,12 @@ public class MessageReceiver extends XGPushBaseReceiver {
 	 *            楼层
 	 * @return
 	 */
-	private Notification oldNotification(Context context, String title, String content, String msgId, int jump,
-			String id, String remark) {
+	private Notification oldNotification(Context context, String title, String content) {
 		Notification nf;
 		nf = new Notification(R.drawable.ic_launcher, title, System.currentTimeMillis());
 		nf.flags = Notification.FLAG_AUTO_CANCEL;
 		nf.defaults = Notification.DEFAULT_ALL;
+		nf.when = System.currentTimeMillis();
 		// Intent it = new Intent();
 		// Intent it = new Intent(context, MainFramgentActivity.class);
 		// it.putExtra("jump", jump);
@@ -280,8 +287,7 @@ public class MessageReceiver extends XGPushBaseReceiver {
 	 * @return
 	 */
 	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-	private Notification v16Notification(Context context, String title, String content, String msgId, int jump,
-			String id, String remark) {
+	private Notification v16Notification(Context context, String title, String content) {
 		Notification nf;
 		Builder builder = new Builder(context);
 		builder.setContentTitle(title);
@@ -321,56 +327,4 @@ public class MessageReceiver extends XGPushBaseReceiver {
 		 */
 	}
 
-	/**
-	 * @Description 获取要跳转的页面.
-	 * @author Created by qinxianyuzou on 2014-11-25.
-	 * @param type
-	 *            1私信,2评论话题，3点赞，4解答疑问， 5被转发，6圈子激活成功， 7子激活失败，
-	 *            8系统公告,9圈子激活中，10班级更新提醒，11关注,12申请加入班级审核失败,
-	 *            13评论回复，14回复提问，15发布家长会，16提醒签到，17签到，18;家长会回复， 19发布了分享，20分享回复
-	 *            29赞帖子时，帖子的作者会收到30赞帖子回复时，会收到
-	 * @return
-	 */
-	private int getJump(int type) {
-		switch (type) {
-		case 1:
-		case 2:
-		case 3:
-		case 4:
-		case 5:
-		case 7:
-		case 8:
-		case 9:
-		case 10:
-		case 11:
-		case 12:
-		case 13:
-		case 14:
-		case 29:
-		case 30:
-			return 1;
-		case 6:
-		case 22:
-			return 0;
-		case 15:
-		case 16:
-		case 17:
-		case 18:
-		case 21:
-			return 2;
-		case 19:
-		case 20:
-			return 3;
-		case 23:
-		case 24:
-		case 25:
-		case 26:
-		case 27:
-			return 4;
-		case 28:
-			return 5;
-		default:
-			return 0;
-		}
-	}
 }

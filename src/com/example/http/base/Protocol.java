@@ -145,7 +145,7 @@ public class Protocol {
 	 * @param context
 	 * @param tag
 	 * @param epid
-	 * @param alipaly 
+	 * @param alipaly
 	 * @param alipalyName
 	 * @param phone
 	 * @param address
@@ -212,17 +212,17 @@ public class Protocol {
 		requestParam.add(new BasicNameValuePair("no", no));
 		return ConnectorManage.getInstance(context).PostHttpRequest(context, Config.INVITE, tag, requestParam,
 				ResponseEPDetail.class, new HttpCallBack() {
-					
+
 					@Override
 					public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
 						// TODO Auto-generated method stub
 						YouMengUtil.onEvent(context, YouMengUtil.GET_REWARD);
 					}
-					
+
 					@Override
 					public void onHttpError(long flag, VolleyError error) {
 						// TODO Auto-generated method stub
-						
+
 					}
 				});
 	}
@@ -483,5 +483,20 @@ public class Protocol {
 		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
 		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.FRESHMAN_AWARD, tag, requestParam,
 				ResponseFreshmanAward.class, null);
+	}
+
+	/**
+	 * @Description 提交信鸽token
+	 * @author Created by qinxianyuzou on 2015-2-5.
+	 * @param context
+	 * @param tag
+	 * @param token
+	 * @return
+	 */
+	public static long send_utoken(Context context, String tag, String utoken) {
+		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
+		requestParam.add(new BasicNameValuePair("utoken", utoken));
+		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.SEND_UTOKEN, tag, requestParam,
+				BaseResponse.class, null);
 	}
 }

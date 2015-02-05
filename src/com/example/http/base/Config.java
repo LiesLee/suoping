@@ -55,6 +55,8 @@ public class Config {
 	public final static String GET_JIHUO_EARN = BASE_URL + "get_jihuo_earn";
 	/** 新手活动接口 */
 	public final static String FRESHMAN_AWARD = BASE_URL + "freshman_award";
+	/** 信鸽token接口 */
+	public final static String SEND_UTOKEN = BASE_URL + "send_utoken";
 	/** APP下载 */
 	public final static String DOWNLOADAPP = "http://static.duowanka.com/downloadApp";
 	/** APP检查更新 */

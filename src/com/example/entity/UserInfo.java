@@ -10,8 +10,8 @@ import java.io.Serializable;
 public class UserInfo implements Serializable {
 	/**  */
 	private static final long serialVersionUID = -6905060687749964702L;
-	/** 用户id **/
-	private String id = StringUtils.EMPTY;
+	// /** 用户id **/
+	// private String id = StringUtils.EMPTY;
 	/** 手机号码 **/
 	private String username = StringUtils.EMPTY;
 	/** 总积分 **/
@@ -26,27 +26,6 @@ public class UserInfo implements Serializable {
 	private String name = "";
 	/** 生日 */
 	private String birthday = "";
-
-	/**
-	 * @Description
-	 * @author Created by qinxianyuzou on 2015-1-2.
-	 * @see #id
-	 * @return the id
-	 */
-	public String getId() {
-		return id;
-	}
-
-	/**
-	 * @Description
-	 * @author Created by qinxianyuzou on 2015-1-2.
-	 * @see #id
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	/**
 	 * @Description
@@ -205,9 +184,8 @@ public class UserInfo implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "UserInfo [id=" + id + ", username=" + username + ", sum_earn=" + sum_earn + ", today_earn="
-				+ today_earn + ", sex=" + sex + ", invite_no=" + invite_no + ", name=" + name + ", birthday="
-				+ birthday + "]";
+		return "UserInfo [username=" + username + ", sum_earn=" + sum_earn + ", today_earn=" + today_earn + ", sex="
+				+ sex + ", invite_no=" + invite_no + ", name=" + name + ", birthday=" + birthday + "]";
 	}
 
 }

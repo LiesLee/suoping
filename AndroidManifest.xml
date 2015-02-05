@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.keyguard"
-    android:versionCode="2"
-    android:versionName="1.0.1" >
+    android:versionCode="3"
+    android:versionName="1.0.2" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -176,7 +176,7 @@
         <activity
             android:name="com.example.keyguard.Activity_YouMi"
             android:screenOrientation="portrait" >
-        </activity>
+        </activity>
         -->
 
         <meta-data
@@ -224,11 +224,15 @@
         </activity>
 
         <!-- 【必须】 (2.30及以上版新增)展示通知的activity -->
+        <!-- 【必须】 exported设置为true -->
         <activity
             android:name="com.tencent.android.tpush.XGPushActivity"
+            android:exported="true"
             android:theme="@android:style/Theme.Translucent" >
             <intent-filter>
-                <action android:name="android.intent.action" />
+
+                <!-- 若使用AndroidStudio，请设置android:name="android.intent.action" -->
+                <action android:name="" />
             </intent-filter>
         </activity>
 
@@ -246,7 +250,6 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
 
                 <!-- 【可选】 一些常用的系统广播，增强信鸽service的复活机会，请根据需要选择。当然，你也可以添加APP自定义的一些广播让启动service -->
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
                 <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
@@ -268,15 +271,19 @@
             android:persistent="true"
             android:process=":xg_service_v2" />
 
-        <!-- 【必须】 通知service，此选项有助于提高抵达率 -->
+        <!-- 【必须】 通知service，其中android:name部分要改为当前包名 -->
         <service
             android:name="com.tencent.android.tpush.rpc.XGRemoteService"
             android:exported="true" >
             <intent-filter>
-                <action android:name="com.istudy.school.add.PUSH_ACTION" />
+
+                <!-- 【必须】 请修改为当前APP名包.PUSH_ACTION，如demo的包名为：com.qq.xgdemo -->
+                <action android:name="com.example.keyguard.PUSH_ACTION" />
             </intent-filter>
         </service>
 
+        <!-- 【可选】APP实现的Receiver，用于接收消息透传和操作结果的回调，请根据需要添加 -->
+        <!-- YOUR_PACKAGE_PATH.CustomPushReceiver需要改为自己的Receiver： -->
         <receiver android:name="com.example.receiver.MessageReceiver" >
             <intent-filter>
 
@@ -290,11 +297,11 @@
         <!-- 【必须】 请修改为APP的AccessId，“21”开头的10位数字，中间没空格 -->
         <meta-data
             android:name="XG_V2_ACCESS_ID"
-            android:value="2100086564" />
+            android:value="2100087333" />
         <!-- 【必须】 请修改为APP的AccessKey，“A”开头的12位字符串，中间没空格 -->
         <meta-data
             android:name="XG_V2_ACCESS_KEY"
-            android:value="AWT164X68PBD" />
+            android:value="A162XM4TFT2W" />
     </application>
 
 </manifest>
