@@ -31,11 +31,14 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.example.activity.common.DownloadProgress_Interface;
 import com.example.activity.main.KeyGuardApplication;
 import com.example.entity.Download_APK_Install;
 import com.example.entity.UserInfo;
@@ -640,11 +643,108 @@ public class PublicUtil {
 						if (msg.indexOf("maybe the file has downloaded completely") > 0) {
 							showToast(activity, "应用已经下载");
 							installAPK(activity, downFile);
-						}
-						if (msg.indexOf("Target host must not be null") > 0) {
+						} else {
 							YouMengUtil.onEvent(activity, YouMengUtil.DOWNLOAD_FAILURE);
 							showToast(activity, "文件下载失败，下载文件不存在");
 						}
+						// if (msg.indexOf("Target host must not be null") > 0)
+						// {
+						// YouMengUtil.onEvent(activity,
+						// YouMengUtil.DOWNLOAD_FAILURE);
+						// showToast(activity, "文件下载失败，下载文件不存在");
+						// }
+					}
+
+				});
+			}
+		}).start();
+	}
+
+	@SuppressWarnings({ "deprecation", "rawtypes" })
+	public static void downloadAPP(final Activity activity, final String url, final Handler mHandler) {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				String apkName[] = url.split("/");
+				// final String downFile = DOWNLOAD_APP_PATH + "/" +
+				// apkName[apkName.length - 1] + ".apk";
+				final String downFile = DOWNLOAD_APP_PATH + "/" + getFileName(url);
+				HttpUtils http = new HttpUtils();
+				final Notification mNotification;
+				final NotificationManager mNotificationManager;
+				mNotificationManager = (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
+				mNotification = new Notification(R.drawable.logo, "正在下载...", System.currentTimeMillis());
+				mNotification.contentView = new RemoteViews(activity.getPackageName(), R.layout.download);
+				mNotification.flags = Notification.FLAG_INSISTENT;
+				mNotification.sound = null;
+				HttpHandler handler = http.download(url, downFile, true, false, new RequestCallBack<File>() {
+
+					@Override
+					public void onStart() {
+						// tv_info.setText("conn...");
+						PublicUtil.showToast(activity, "正在下载...");
+						YouMengUtil.onEvent(activity, YouMengUtil.START_DOWNLOAD);
+						Message msg = new Message();
+						msg.what = 0;
+						mHandler.sendMessage(msg);
+					}
+
+					@Override
+					public void onLoading(long total, long current, boolean isUploading) {
+						// tv_info.setText(current + "/" + total);
+						LogUtil.d("downloadAPP", "<==========handler");
+						DecimalFormat decimalFormat = new DecimalFormat("0%");
+						LogUtil.d("downloadAPP", "total:" + total);
+						LogUtil.d("downloadAPP", "current:" + current);
+						LogUtil.d("downloadAPP", "(float) current / (float) total:" + (float) current / (float) total);
+						LogUtil.d("downloadAPP",
+								"decimalFormat:" + decimalFormat.format((float) current / (float) total));
+						LogUtil.d("downloadAPP", "handler==========>");
+						mNotification.contentView.setTextViewText(R.id.content_view_text1,
+								decimalFormat.format((float) current / (float) total));
+						mNotification.contentView.setProgressBar(R.id.content_view_progress, (int) total,
+								(int) current, false);
+						mNotificationManager.notify(3567, mNotification);
+						Message msg = new Message();
+						msg.arg1 = (int) (((float) current / (float) total) * 1000);
+						msg.what = 1;
+						mHandler.sendMessage(msg);
+					}
+
+					@Override
+					public void onSuccess(ResponseInfo<File> responseInfo) {
+						mNotificationManager.cancel(3567);
+						PublicUtil.showToast(activity, "下载完成...");
+						YouMengUtil.onEvent(activity, YouMengUtil.DOWNLOAD_SUCCESS);
+						// PublicUtil.installAPK(activity, downFile);
+						PublicUtil.installAPK(activity, responseInfo.result.toString());
+						Message msg = new Message();
+						msg.what = 2;
+						msg.obj = responseInfo.result.toString();
+						mHandler.sendMessage(msg);
+					}
+
+					@Override
+					public void onFailure(HttpException error, String msg) {
+						// tv_info.setText(msg);
+						LogUtil.d("handler", msg);
+						Message message = new Message();
+						message.what = 3;
+						mHandler.sendMessage(message);
+						if (msg.indexOf("maybe the file has downloaded completely") > 0) {
+							showToast(activity, "应用已经下载");
+							installAPK(activity, downFile);
+						} else {
+							YouMengUtil.onEvent(activity, YouMengUtil.DOWNLOAD_FAILURE);
+							showToast(activity, "文件下载失败，下载文件不存在");
+						}
+						// if (msg.indexOf("Target host must not be null") > 0)
+						// {
+						// YouMengUtil.onEvent(activity,
+						// YouMengUtil.DOWNLOAD_FAILURE);
+						// showToast(activity, "文件下载失败，下载文件不存在");
+						// }
 					}
 
 				});

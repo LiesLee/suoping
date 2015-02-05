@@ -58,6 +58,7 @@ public class LockAD_Adapter extends BaseAdapter {
 				// TODO Auto-generated method stub
 				super.onLoadCompleted(container, uri, bitmap, config, from);
 			}
+			
 		};
 		// ViewUtils.inject((Activity) mContext);
 	}

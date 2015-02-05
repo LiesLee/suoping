@@ -1,5 +1,7 @@
 package com.example.activity.common;
 
+import java.text.DecimalFormat;
+
 import org.json.JSONObject;
 
 import android.app.Activity;
@@ -8,6 +10,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.http.SslError;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.webkit.SslErrorHandler;
@@ -16,6 +20,8 @@ import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -29,6 +35,7 @@ import com.example.util.PublicUtil;
 import com.example.util.UIHelper;
 import com.example.util.YouMengUtil;
 import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.http.callback.RequestCallBackHandler;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.umeng.analytics.MobclickAgent;
 
@@ -36,7 +43,7 @@ import com.umeng.analytics.MobclickAgent;
  * @Description 下载web页
  * @author Created by qinxianyuzou on 2014-12-30.
  */
-public class Activity_DownloadWeb extends BaseActivity {
+public class Activity_DownloadWeb extends BaseActivity implements RequestCallBackHandler {
 
 	/** 标题栏 */
 	@ViewInject(R.id.tv_public_top_title)
@@ -44,6 +51,18 @@ public class Activity_DownloadWeb extends BaseActivity {
 	/** 返回按钮 */
 	@ViewInject(R.id.rl_public_back)
 	private RelativeLayout rl_public_back;
+	/** 下载状态 */
+	@ViewInject(R.id.ll_down_btn)
+	private LinearLayout ll_down_btn;
+	/** 进度条 */
+	@ViewInject(R.id.download_pb)
+	private ProgressBar download_pb;
+	/** 暂停按钮 */
+	@ViewInject(R.id.btn_download_stop)
+	private Button btn_download_stop;
+	/** 取消按钮 */
+	@ViewInject(R.id.btn_download_cancle)
+	private Button btn_download_cancle;
 	/** 下载按钮 */
 	@ViewInject(R.id.but_down_web)
 	private Button but_down_web;
@@ -72,7 +91,7 @@ public class Activity_DownloadWeb extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_down_web);
+		setContentView(R.layout.activity_down_web2);
 		ViewUtils.inject(activity);
 		initUI();
 		initData();
@@ -139,13 +158,8 @@ public class Activity_DownloadWeb extends BaseActivity {
 			UIHelper.cancelProgressDialog();
 			final ResponseDownAPP responseDownAPP = (ResponseDownAPP) response;
 			if (responseDownAPP.getCode().equals(Code.CODE_SUCCESS)) {
-				new Thread(new Runnable() {
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						PublicUtil.downloadAPP(activity, responseDownAPP.getData().getDownload_url());
-					}
-				}).start();
+				but_down_web.setText("正在下载...");
+				PublicUtil.downloadAPP(activity, responseDownAPP.getData().getDownload_url(), updateHandler);
 			} else {
 				showToast(responseDownAPP.getMsg());
 			}
@@ -247,5 +261,49 @@ public class Activity_DownloadWeb extends BaseActivity {
 			super.onReceivedError(view, errorCode, description, failingUrl);
 		}
 
+	};
+
+	@Override
+	public boolean updateProgress(long total, long current, boolean isUploading) {
+		// TODO Auto-generated method stub
+		DecimalFormat decimalFormat = new DecimalFormat("0%");
+		but_down_web.setText("正在下载..." + decimalFormat.format((float) current / (float) total));
+		return false;
+	}
+
+	Handler updateHandler = new Handler() {
+
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			switch (msg.what) {
+			// 开始
+			case 0:
+
+				but_down_web.setText("正在下载...");
+				download_pb.setVisibility(View.VISIBLE);
+				// but_down_web.setVisibility(View.GONE);
+				// ll_down_btn.setVisibility(View.VISIBLE);
+				break;
+			// 下载中
+			case 1:
+				// but_down_web.setText("正在下载..." + msg.obj);
+				download_pb.setProgress(msg.arg1);
+				break;
+			// 下载成功
+			case 2:
+				but_down_web.setText("下载完成");
+				break;
+			// 下载失败
+			case 3:
+				but_down_web.setText("点击下载");
+				download_pb.setVisibility(View.GONE);
+				break;
+
+			default:
+				break;
+			}
+			super.handleMessage(msg);
+		}
 	};
 }

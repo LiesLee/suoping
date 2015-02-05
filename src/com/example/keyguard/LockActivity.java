@@ -18,6 +18,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
@@ -73,8 +74,8 @@ public class LockActivity extends BaseActivity {
 	private RelativeLayout.LayoutParams image_slide;
 
 	public static LockActivity instance = null;
-	// /** 广告图 */
-	// private UnRollListView mListView;
+	/** 广告图 */
+	private UnRollListView mListView;
 	private LockAD_Adapter adapter;
 	/** 积分获得的积分数 */
 	private TextView tv_appJiFen;
@@ -95,6 +96,7 @@ public class LockActivity extends BaseActivity {
 	public ArrayList<LockADList_Entity> lockADList_Entities = new ArrayList<>();
 	/** 布局 */
 	private RelativeLayout mRelativeLayout;
+	private ListView lv_lock_ad;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -127,6 +129,7 @@ public class LockActivity extends BaseActivity {
 		// ExitApplication.getInstance().addActivity(this);
 
 		mRelativeLayout = (RelativeLayout) findViewById(R.id.rl_lock_parent);
+		lv_lock_ad = (ListView) findViewById(R.id.lv_lock_ad);
 		mRelativeLayout.setBackgroundColor(Color.GRAY);
 
 		DisplayMetrics dm = getResources().getDisplayMetrics();
@@ -149,16 +152,31 @@ public class LockActivity extends BaseActivity {
 		// image_Vertical.topMargin = image_slide_bottomMargin -
 		// image_slide_width;
 
-		// mListView = (UnRollListView) findViewById(R.id.unRollListView1);
+		mListView = (UnRollListView) findViewById(R.id.unRollListView1);
 		iv_lock_bg = (ImageView) findViewById(R.id.iv_lock_bg);
 		// 去掉分割黑线
-		// mListView.setDivider(null);
+		mListView.setDivider(null);
 		listCount = lockADList_Entities.size();
 		currentRow = 0;
 		adapter = new LockAD_Adapter(this, bitmapUtils);
 		adapter.setData(lockADList_Entities);
-		// mListView.setVerticalScrollBarEnabled(false);
-		// mListView.setSmoothScrollbarEnabled(true);
+		// lv_lock_ad.setAdapter(adapter);
+		lv_lock_ad.setOnTouchListener(new OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				// TODO Auto-generated method stub
+				switch (event.getAction()) {
+				case MotionEvent.ACTION_MOVE:
+					return true;
+				default:
+					break;
+				}
+				return false;
+			}
+		});
+		mListView.setVerticalScrollBarEnabled(false);
+		mListView.setSmoothScrollbarEnabled(true);
 		// mListView.setAdapter(adapter);
 		// mRelativeLayout.addView(mListView, image_Vertical);
 
@@ -173,6 +191,7 @@ public class LockActivity extends BaseActivity {
 						currentRow--;
 						if (listCount > 0) {
 							bitmapUtils.display(iv_lock_bg, lockADList_Entities.get(currentRow).getHp_url());
+							lv_lock_ad.setSelection(currentRow);
 							tv_appJiFen.setText(lockADList_Entities.get(currentRow).getEarn_jifen());
 						}
 					}
@@ -180,6 +199,7 @@ public class LockActivity extends BaseActivity {
 					if (currentRow < listCount - 1) {
 						currentRow++;
 						if (listCount > 0) {
+							lv_lock_ad.setSelection(currentRow);
 							bitmapUtils.display(iv_lock_bg, lockADList_Entities.get(currentRow).getHp_url());
 							tv_appJiFen.setText(lockADList_Entities.get(currentRow).getEarn_jifen());
 						}
@@ -187,6 +207,21 @@ public class LockActivity extends BaseActivity {
 					// mListView.smoothScrollByOffset(-(screenHeight-(
 					// image_slide_bottomMargin-image_slide_width)));
 					// mListView.smoothScrollToPosition(currentRow);
+				}
+				if (listCount > 1) {
+					if (currentRow == 0) {
+						imageView_up.setVisibility(View.GONE);
+						imageView_down.setVisibility(View.VISIBLE);
+					} else if (currentRow == listCount - 1) {
+						imageView_up.setVisibility(View.VISIBLE);
+						imageView_down.setVisibility(View.GONE);
+					} else {
+						imageView_up.setVisibility(View.VISIBLE);
+						imageView_down.setVisibility(View.VISIBLE);
+					}
+				} else {
+					imageView_up.setVisibility(View.GONE);
+					imageView_down.setVisibility(View.GONE);
 				}
 				// mListView.setSelection(currentRow);
 				// if (listCount > 0) {
@@ -271,6 +306,7 @@ public class LockActivity extends BaseActivity {
 		mRelativeLayout.addView(imageView_slide, image_slide);
 
 		imageView_slide.setOnTouchListener(imageTouchListener);
+
 	}
 
 	/**
@@ -285,6 +321,13 @@ public class LockActivity extends BaseActivity {
 			lockADList_Entities = msgInfo.getData();
 			adapter.setData(lockADList_Entities);
 			listCount = lockADList_Entities.size();
+			if (listCount <= 1) {
+				imageView_up.setVisibility(View.GONE);
+				imageView_down.setVisibility(View.GONE);
+			} else {
+				imageView_up.setVisibility(View.GONE);
+				imageView_down.setVisibility(View.VISIBLE);
+			}
 			// mListView.setAdapter(adapter);
 			// mListView.setSelection(currentRow);
 			adapter.notifyDataSetChanged();

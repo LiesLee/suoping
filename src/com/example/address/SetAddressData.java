@@ -234,6 +234,7 @@ public class SetAddressData {
 				if ("resources".equals(parser.getName())) {
 					// 一个城市的信息 已经处理完毕了
 					// provinces_Entities.add(Info); // 将一个城市的信息加载到总信息中
+					// city_Entities.add(city_Info);
 					Info = null;
 					city_Info = null;
 				}

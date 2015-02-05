@@ -27,6 +27,16 @@
         android:layout_margin="20dp"
         android:scaleType="fitCenter" />
 
+    <ListView
+        android:id="@+id/lv_lock_ad"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:scrollbars="none"
+        android:visibility="gone" >
+
+    </ListView>
+
     <com.example.keyguard.CoverPlateView
         android:id="@+id/coverPlateView1"
         android:layout_width="match_parent"
