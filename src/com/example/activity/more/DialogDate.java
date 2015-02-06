@@ -11,6 +11,7 @@ import android.widget.EditText;
 import com.example.http.base.Protocol;
 import com.example.keyguard.R;
 import com.example.util.PublicUtil;
+import com.example.util.StringUtils;
 
 /**
  * @Description 日期输入框
@@ -51,6 +52,21 @@ public class DialogDate extends Dialog implements android.view.View.OnClickListe
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.but__dialog_date_submit:
+			if (StringUtils.isEmpty(et_dialog_date_year.getText().toString())) {
+
+				PublicUtil.showToast(mContext, "请输入正确年份");
+				return;
+			}
+			if (StringUtils.isEmpty(et_dialog_date_month.getText().toString())) {
+
+				PublicUtil.showToast(mContext, "请输入正确月份");
+				return;
+			}
+			if (StringUtils.isEmpty(et_dialog_date_day.getText().toString())) {
+
+				PublicUtil.showToast(mContext, "请输入正确日期");
+				return;
+			}
 			int year = Integer.parseInt(et_dialog_date_year.getText().toString());
 			int month = Integer.parseInt(et_dialog_date_month.getText().toString());
 			int day = Integer.parseInt(et_dialog_date_day.getText().toString());
