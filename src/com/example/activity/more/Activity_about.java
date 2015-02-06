@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -17,12 +16,12 @@ import com.example.activity.common.BaseActivity;
 import com.example.activity.common.KeyGuardActivityManager;
 import com.example.entity.Update_Entity;
 import com.example.http.base.Code;
-import com.example.http.base.Protocol;
 import com.example.http.respose.ResponseUpdate;
 import com.example.keyguard.R;
 import com.example.util.PublicUtil;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.umeng.update.UmengUpdateAgent;
 
 /**
  * @Description 关于
@@ -123,7 +122,8 @@ public class Activity_about extends BaseActivity {
 			Activity_PublicWeb.luanch(activity, "联系客服", "http://www.baidu.com");
 			break;
 		case R.id.ll_about_update:
-			checkeUpdateFlag = Protocol.check_update(activity, setTag());
+//			checkeUpdateFlag = Protocol.check_update(activity, setTag());
+			UmengUpdateAgent.forceUpdate(activity);
 			// PublicUtil.updateAPP(activity,
 			// "http://static.huisuoping.com/apk/hsp.apk");
 			break;

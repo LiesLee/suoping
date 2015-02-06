@@ -3,6 +3,7 @@ package com.example.activity.main;
 import org.json.JSONObject;
 
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -20,6 +21,7 @@ import com.example.util.SharedPreferenceUtil;
 import com.example.util.YouMengUtil;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.umeng.update.UmengUpdateAgent;
 
 /**
  * @Description 启动页
@@ -41,6 +43,17 @@ public class Activity_Launch extends BaseActivity implements AnimationListener {
 		ViewUtils.inject(activity);
 		initUI();
 		initData();
+//		UmengUpdateAgent.update(this);
+		UmengUpdateAgent.silentUpdate(this);
+		// try {
+		// appInfo = getPackageManager().getApplicationInfo(getPackageName(),
+		// PackageManager.GET_META_DATA);
+		// String dataName = appInfo.metaData.getString("UMENG_CHANNEL");
+		// LogUtil.d(setTag(), "UMENG_CHANNEL:" + dataName);
+		// } catch (NameNotFoundException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
 		new Thread(new Runnable() {
 
 			@Override
@@ -76,7 +89,7 @@ public class Activity_Launch extends BaseActivity implements AnimationListener {
 		Animation at = AnimationUtils.loadAnimation(this, R.anim.launch_ad);
 		at.setAnimationListener(this);
 		iv_launch_ad.startAnimation(at);
-
+		ApplicationInfo appInfo;
 	}
 
 	@Override

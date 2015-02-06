@@ -279,8 +279,8 @@ public class Activity_DownloadWeb extends BaseActivity implements RequestCallBac
 			switch (msg.what) {
 			// 开始
 			case 0:
-
 				but_down_web.setText("正在下载...");
+				but_down_web.setClickable(false);
 				download_pb.setVisibility(View.VISIBLE);
 				// but_down_web.setVisibility(View.GONE);
 				// ll_down_btn.setVisibility(View.VISIBLE);
@@ -298,6 +298,7 @@ public class Activity_DownloadWeb extends BaseActivity implements RequestCallBac
 			case 3:
 				but_down_web.setText("点击下载");
 				download_pb.setVisibility(View.GONE);
+				but_down_web.setClickable(true);
 				break;
 
 			default:
