@@ -58,7 +58,7 @@ public class LockAD_Adapter extends BaseAdapter {
 				// TODO Auto-generated method stub
 				super.onLoadCompleted(container, uri, bitmap, config, from);
 			}
-			
+
 		};
 		// ViewUtils.inject((Activity) mContext);
 	}
@@ -100,8 +100,9 @@ public class LockAD_Adapter extends BaseAdapter {
 		} else {
 			listItemView = (HolderView) convertView.getTag();
 		}
-		bitmapUtils.display(listItemView.iv_lock_img, listData.get(position).getHp_url(), bitmapLoadCallBack);
-		// aQuery.id(listItemView.iv_lock_img).image(listData.get(position).getHp_url());
+		// bitmapUtils.display(listItemView.iv_lock_img,
+		// listData.get(position).getHp_url(), bitmapLoadCallBack);
+		aQuery.id(listItemView.iv_lock_img).image(listData.get(position).getHp_url());
 		return convertView;
 	}
 
