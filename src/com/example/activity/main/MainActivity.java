@@ -39,6 +39,7 @@ import com.tencent.android.tpush.common.Constants;
 import com.tencent.android.tpush.service.XGPushService;
 import com.tencent.android.tpush.service.cache.CacheManager;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.update.UmengUpdateAgent;
 
 public class MainActivity extends TabActivity implements OnCheckedChangeListener {
 
@@ -68,6 +69,10 @@ public class MainActivity extends TabActivity implements OnCheckedChangeListener
 
 		mContext = this;
 		instance = this;
+		UmengUpdateAgent.update(this);
+//		UmengUpdateAgent.silentUpdate(this);
+		
+		
 		tabHost = this.getTabHost();
 		tabHost.addTab(tabHost.newTabSpec("1").setIndicator("1").setContent(new Intent(this, Activity_earnings.class)));
 		tabHost.addTab(tabHost.newTabSpec("2").setIndicator("2").setContent(new Intent(this, Activity_shop.class)));

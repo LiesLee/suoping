@@ -43,8 +43,6 @@ public class Activity_Launch extends BaseActivity implements AnimationListener {
 		ViewUtils.inject(activity);
 		initUI();
 		initData();
-//		UmengUpdateAgent.update(this);
-		UmengUpdateAgent.silentUpdate(this);
 		// try {
 		// appInfo = getPackageManager().getApplicationInfo(getPackageName(),
 		// PackageManager.GET_META_DATA);

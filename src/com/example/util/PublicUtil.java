@@ -36,6 +36,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
@@ -992,6 +993,28 @@ public class PublicUtil {
 	 * @param fallbackId
 	 */
 	public static void loadNetImage(AQuery aQuery, ImageView imageView, String url, int fallbackId) {
-		aQuery.id(imageView).image(url, true, true, 0, fallbackId);
+		boolean memCache = false;
+		boolean fileCache = true;
+		aQuery.id(imageView).image(url, memCache, fileCache, 200, fallbackId);
+	}
+
+	/**
+	 * @Description
+	 * @author Created by qinxianyuzou on 2015-2-6.
+	 * @param aQuery
+	 * @param progressBar
+	 *            进度条
+	 * @param imageView
+	 *            图片
+	 * @param url
+	 *            地址
+	 * @param fallbackId
+	 *            失败默认图
+	 */
+	public static void loadNetImage(AQuery aQuery, ProgressBar progressBar, ImageView imageView, String url,
+			int fallbackId) {
+		boolean memCache = false;
+		boolean fileCache = true;
+		aQuery.id(imageView).progress(progressBar).image(url, memCache, fileCache, 0, fallbackId);
 	}
 }
