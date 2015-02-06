@@ -1,11 +1,14 @@
 package com.example.fragments;
 
+import org.json.JSONObject;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.activity.common.BaseActivity;
+import com.example.activity.common.BaseFragmentActivity;
 import com.example.activity.main.KeyGuardApplication;
 import com.example.http.base.ConnectorManage;
 import com.example.http.base.HttpCallBack;
@@ -13,11 +16,9 @@ import com.example.http.base.RequestManager;
 import com.example.util.StringUtils;
 import com.example.util.UIHelper;
 
-import org.json.JSONObject;
-
 public abstract class BaseFragment extends Fragment implements HttpCallBack {
 	public KeyGuardApplication application;
-	public BaseActivity activity;
+	public BaseFragmentActivity activity;
 	protected ConnectorManage connectorManage;
 	protected String Tag = StringUtils.EMPTY;
 	private Toast toast = null;
@@ -28,7 +29,7 @@ public abstract class BaseFragment extends Fragment implements HttpCallBack {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		activity = (BaseActivity)getActivity();
+		activity = (BaseFragmentActivity)getActivity();
 		application = (KeyGuardApplication) getActivity().getApplication();
 		connectorManage = ConnectorManage.getInstance(activity);
 		setTag();

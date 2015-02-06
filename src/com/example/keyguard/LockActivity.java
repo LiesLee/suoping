@@ -24,6 +24,7 @@ import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
+import com.androidquery.AQuery;
 import com.example.activity.common.Activity_DownloadWeb;
 import com.example.activity.common.Activity_PublicWeb;
 import com.example.activity.common.BaseActivity;
@@ -34,13 +35,15 @@ import com.example.http.base.HttpCallBack;
 import com.example.http.base.Protocol;
 import com.example.http.respose.ResponseLockADList;
 import com.example.keyguard.CoverPlateView.Listener;
+import com.example.ui.VerticalViewPager;
 import com.example.util.LogUtil;
 import com.example.util.SharedPreferenceUtil;
 import com.example.util.StringUtils;
 import com.example.util.YouMengUtil;
 import com.google.gson.Gson;
 import com.lidroid.xutils.BitmapUtils;
-import com.umeng.analytics.MobclickAgent;
+import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.view.annotation.ViewInject;
 
 @SuppressLint("ClickableViewAccessibility")
 public class LockActivity extends BaseActivity {
@@ -89,6 +92,10 @@ public class LockActivity extends BaseActivity {
 	private ImageView imageView_down;
 	/** 向上箭头 */
 	private ImageView imageView_up;
+	/** 广告 */
+	@ViewInject(R.id.verticalViewPager1)
+	private VerticalViewPager verticalViewPager1;
+	private AQuery aQuery;
 	/**  */
 	private ImageView iv_lock_bg;
 	private BitmapUtils bitmapUtils;
@@ -104,6 +111,7 @@ public class LockActivity extends BaseActivity {
 		// LayoutInflater.from(this).inflate(R.layout.activity_lock, null);
 		setContentView(R.layout.activity_lock);
 		instance = this;
+		ViewUtils.inject(this);
 		initUI();
 		initData();
 	}
@@ -127,9 +135,10 @@ public class LockActivity extends BaseActivity {
 	protected void initUI() {
 		// TODO Auto-generated method stub
 		// ExitApplication.getInstance().addActivity(this);
-
+		aQuery = new AQuery(activity);
 		mRelativeLayout = (RelativeLayout) findViewById(R.id.rl_lock_parent);
 		lv_lock_ad = (ListView) findViewById(R.id.lv_lock_ad);
+
 		mRelativeLayout.setBackgroundColor(Color.GRAY);
 
 		DisplayMetrics dm = getResources().getDisplayMetrics();
@@ -154,6 +163,9 @@ public class LockActivity extends BaseActivity {
 
 		mListView = (UnRollListView) findViewById(R.id.unRollListView1);
 		iv_lock_bg = (ImageView) findViewById(R.id.iv_lock_bg);
+
+		// verticalViewPager1.setAdapter(adapter);
+
 		// 去掉分割黑线
 		mListView.setDivider(null);
 		listCount = lockADList_Entities.size();
@@ -180,9 +192,7 @@ public class LockActivity extends BaseActivity {
 		// mListView.setAdapter(adapter);
 		// mRelativeLayout.addView(mListView, image_Vertical);
 
-		// CoverPlateView coverPlate = new CoverPlateView(this);
 		CoverPlateView coverPlate = (CoverPlateView) findViewById(R.id.coverPlateView1);
-		// mRelativeLayout.addView(coverPlate, image_Vertical);
 		coverPlate.setListener(new Listener() {
 			public void update(String string) {
 
@@ -204,9 +214,6 @@ public class LockActivity extends BaseActivity {
 							tv_appJiFen.setText(lockADList_Entities.get(currentRow).getEarn_jifen());
 						}
 					}
-					// mListView.smoothScrollByOffset(-(screenHeight-(
-					// image_slide_bottomMargin-image_slide_width)));
-					// mListView.smoothScrollToPosition(currentRow);
 				}
 				if (listCount > 1) {
 					if (currentRow == 0) {
@@ -223,12 +230,7 @@ public class LockActivity extends BaseActivity {
 					imageView_up.setVisibility(View.GONE);
 					imageView_down.setVisibility(View.GONE);
 				}
-				// mListView.setSelection(currentRow);
-				// if (listCount > 0) {
-				// bitmapUtils.display(iv_lock_bg,
-				// lockADList_Entities.get(currentRow).getHp_url());
-				// tv_appJiFen.setText(lockADList_Entities.get(currentRow).getEarn_jifen());
-				// }
+				tv_appJiFen.setText(lockADList_Entities.get(currentRow).getEarn_jifen());
 				Log.d("监听器:", string + "   " + currentRow);
 			}
 		});
@@ -525,4 +527,5 @@ public class LockActivity extends BaseActivity {
 			return true;
 		}
 	};
+
 }

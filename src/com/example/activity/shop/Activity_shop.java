@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.android.volley.VolleyError;
 import com.example.activity.common.BaseActivity;
+import com.example.activity.common.BaseFragmentActivity;
 import com.example.activity.common.ShopInterface;
 import com.example.fragments.Fragment_shop;
 import com.example.keyguard.R;
@@ -32,7 +33,7 @@ import org.json.JSONObject;
  * @Description 兑换
  * @author Created by qinxianyuzou on 2014-12-25.
  */
-public class Activity_shop extends BaseActivity implements ShopInterface {
+public class Activity_shop extends BaseFragmentActivity implements ShopInterface {
 	/** 标题栏 */
 	@ViewInject(R.id.tv_public_top_title)
 	private TextView tv_public_top_title;

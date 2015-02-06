@@ -16,8 +16,16 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/launch_bg"
         android:visibility="gone" >
-
     </com.example.keyguard.UnRollListView>
+
+    <ListView
+        android:id="@+id/lv_lock_ad"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:scrollbars="none"
+        android:visibility="gone" >
+    </ListView>
 
     <ImageView
         android:id="@+id/iv_lock_bg"
@@ -27,15 +35,12 @@
         android:layout_margin="20dp"
         android:scaleType="fitCenter" />
 
-    <ListView
-        android:id="@+id/lv_lock_ad"
+    <com.example.ui.VerticalViewPager
+        android:id="@+id/verticalViewPager1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="20dp"
-        android:scrollbars="none"
-        android:visibility="gone" >
-
-    </ListView>
+        android:layout_margin="20dp" >
+    </com.example.ui.VerticalViewPager>
 
     <com.example.keyguard.CoverPlateView
         android:id="@+id/coverPlateView1"

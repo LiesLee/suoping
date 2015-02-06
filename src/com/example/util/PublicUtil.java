@@ -35,11 +35,12 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.example.activity.common.DownloadProgress_Interface;
+import com.androidquery.AQuery;
 import com.example.activity.main.KeyGuardApplication;
 import com.example.entity.Download_APK_Install;
 import com.example.entity.UserInfo;
@@ -980,5 +981,17 @@ public class PublicUtil {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * @Description 加载网络图片
+	 * @author Created by qinxianyuzou on 2015-2-6.
+	 * @param aQuery
+	 * @param imageView
+	 * @param url
+	 * @param fallbackId
+	 */
+	public static void loadNetImage(AQuery aQuery, ImageView imageView, String url, int fallbackId) {
+		aQuery.id(imageView).image(url, true, true, 0, fallbackId);
 	}
 }

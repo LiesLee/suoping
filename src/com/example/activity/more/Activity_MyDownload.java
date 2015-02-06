@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.example.activity.common.BaseActivity;
+import com.example.activity.common.BaseFragmentActivity;
 import com.example.activity.common.KeyGuardActivityManager;
 import com.example.activity.common.ShopInterface;
 import com.example.entity.Download_APK_Install;
@@ -33,7 +34,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Activity_MyDownload extends BaseActivity implements ShopInterface {
+public class Activity_MyDownload extends BaseFragmentActivity implements ShopInterface {
 
     /** 标题栏 */
     @ViewInject(R.id.tv_public_top_title)
