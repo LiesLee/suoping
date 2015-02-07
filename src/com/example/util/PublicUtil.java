@@ -109,7 +109,6 @@ public class PublicUtil {
 	 * @return
 	 */
 	public static UserInfo getUserInfo(Context context) {
-		LogUtil.d(TAG, SharedPreferenceUtil.getInstance(context).getString(SharedPreferenceUtil.USERINFO));
 		UserInfo userInfo = new Gson().fromJson(
 				SharedPreferenceUtil.getInstance(context).getString(SharedPreferenceUtil.USERINFO), UserInfo.class);
 		return userInfo;

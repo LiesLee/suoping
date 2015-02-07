@@ -78,6 +78,7 @@ public class Activity_MyInfo extends BaseActivity {
 	@Override
 	protected void initData() {
 		// TODO Auto-generated method stub
+		dataList.clear();
 		// dataList.add(new BasicNameValuePair("昵称", "花朋友"));
 		dataList.add(new BasicNameValuePair("管理收货地址", ""));
 		// dataList.add(new BasicNameValuePair("手机号", "159*****320"));
@@ -98,6 +99,7 @@ public class Activity_MyInfo extends BaseActivity {
 			BaseResponse msgInfo = (BaseResponse) response;
 			if (msgInfo.getCode().equals(Code.CODE_SUCCESS)) {
 				Protocol.get_user_info(activity, setTag());
+				initData();
 			}
 			showToast(msgInfo.getMsg());
 		}
@@ -105,6 +107,7 @@ public class Activity_MyInfo extends BaseActivity {
 			BaseResponse msgInfo = (BaseResponse) response;
 			if (msgInfo.getCode().equals(Code.CODE_SUCCESS)) {
 				Protocol.get_user_info(activity, setTag());
+				initData();
 			}
 			showToast(msgInfo.getMsg());
 		}

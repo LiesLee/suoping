@@ -250,7 +250,7 @@ public class MessageReceiver extends XGPushBaseReceiver {
 	 */
 	private Notification oldNotification(Context context, String title, String content, int requestCode) {
 		Notification nf;
-		nf = new Notification(R.drawable.ic_launcher, title, System.currentTimeMillis());
+		nf = new Notification(R.drawable.logo, title, System.currentTimeMillis());
 		nf.flags = Notification.FLAG_AUTO_CANCEL;
 		nf.defaults = Notification.DEFAULT_ALL;
 		nf.when = System.currentTimeMillis();
@@ -289,7 +289,7 @@ public class MessageReceiver extends XGPushBaseReceiver {
 		Builder builder = new Builder(context);
 		builder.setContentTitle(title);
 		builder.setContentText(content);
-		builder.setSmallIcon(R.drawable.ic_launcher);
+		builder.setSmallIcon(R.drawable.logo);
 		builder.setWhen(System.currentTimeMillis());
 		if (!PublicUtil.isTopActivity(context)) {
 			Intent it = new Intent(context, Activity_Launch.class);
