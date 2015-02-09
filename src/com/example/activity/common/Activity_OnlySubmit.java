@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.android.volley.VolleyError;
 import com.example.activity.more.Activity_Address;
 import com.example.activity.more.Activity_EditAddress;
+import com.example.http.base.BaseResponse;
+import com.example.http.base.Code;
 import com.example.http.base.Protocol;
 import com.example.keyguard.R;
 import com.example.util.StringUtils;
@@ -45,6 +47,7 @@ public class Activity_OnlySubmit extends BaseActivity {
 	/** 地址要编辑的内容类型 */
 	private static int mType;
 	private static EnumOnlySubmit mEnumOnlySubmit = null;
+	private long inviteFlag;
 
 	/**
 	 * @Description 不设置标题
@@ -135,7 +138,7 @@ public class Activity_OnlySubmit extends BaseActivity {
 					showToast("请填写邀请码！");
 					return;
 				}
-				Protocol.invite(activity, setTag(), et_nickname_text.getText().toString());
+				inviteFlag = Protocol.invite(activity, setTag(), et_nickname_text.getText().toString());
 				break;
 			case LOGISTICS:
 				switch (mType) {
@@ -191,7 +194,13 @@ public class Activity_OnlySubmit extends BaseActivity {
 	@Override
 	public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
 		// TODO Auto-generated method stub
-
+		if (inviteFlag == flag) {
+			BaseResponse msg = (BaseResponse) response;
+			showToast(msg.getMsg());
+			if (msg.equals(Code.CODE_SUCCESS)) {
+				finish();
+			}
+		}
 	}
 
 	@Override

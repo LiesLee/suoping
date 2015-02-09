@@ -21,6 +21,7 @@ import com.example.http.base.Protocol;
 import com.example.http.respose.ResponseUserInfo;
 import com.example.keyguard.R;
 import com.example.util.LogUtil;
+import com.example.util.PublicUtil;
 import com.example.util.SharedPreferenceUtil;
 import com.example.util.StringUtils;
 import com.example.util.UIHelper;
@@ -143,7 +144,7 @@ public class Activity_Reg_Password extends BaseActivity implements View.OnClickL
 				SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.OLD_ACCOUNT, cellphoneNumber);
 				SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.OLD_PASSWORD, password);
 				SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.USERINFO,
-						msg.getMsg().toString());
+						PublicUtil.userInfoToString(msg.getData()));
 				startActivity(new Intent(activity, MainActivity.class));
 			} else {
 				showToast(msg.getMsg());

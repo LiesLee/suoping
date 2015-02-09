@@ -428,7 +428,7 @@ public class PublicUtil {
 		SinaShareContent sinaShareContent = new SinaShareContent();
 		// 设置朋友圈title
 		sinaShareContent.setTitle(title);
-		sinaShareContent.setShareContent(fshareMSG);
+		sinaShareContent.setShareContent(fshareMSG + url);
 		sinaShareContent.setShareImage(new UMImage(activity, R.drawable.logo));
 		if (!StringUtils.isEmpty(url)) {
 			sinaShareContent.setTargetUrl(url);
@@ -437,7 +437,7 @@ public class PublicUtil {
 		TencentWbShareContent tencentWbShareContent = new TencentWbShareContent();
 		// 设置朋友圈title
 		tencentWbShareContent.setTitle(title);
-		tencentWbShareContent.setShareContent(fshareMSG);
+		tencentWbShareContent.setShareContent(fshareMSG + url);
 		tencentWbShareContent.setShareImage(new UMImage(activity, R.drawable.logo));
 		if (!StringUtils.isEmpty(url)) {
 			tencentWbShareContent.setTargetUrl(url);
@@ -521,7 +521,7 @@ public class PublicUtil {
 		qZoneShareContent.setShareImage(new UMImage(activity, R.drawable.logo));
 		qZoneShareContent.setShareContent(fshareMSG);
 		if (!StringUtils.isEmpty(url)) {
-			shareContent.setTargetUrl(url);
+			qZoneShareContent.setTargetUrl(url);
 		}
 		mController.setShareMedia(qZoneShareContent);
 	}
