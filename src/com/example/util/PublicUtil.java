@@ -389,20 +389,22 @@ public class PublicUtil {
 		intent.setDataAndType(Uri.parse("file://" + apkPath), "application/vnd.android.package-archive");
 		context.startActivity(intent);
 		// PackageManager pManager=context.getPackageManager();
-		startInstalledBroadcast(context, getPackageName(context, apkPath));
+		// startInstalledBroadcast(context, getPackageName(context, apkPath));
 	}
 
-	/**
-	 * @Description 监听软件安装状态
-	 * @author Created by qinxianyuzou on 2015-1-9.
-	 * @param context
-	 * @param packagename
-	 */
-	public static void startInstalledBroadcast(Context context, String packagename) {
-		IntentFilter intentFilter = new IntentFilter();
-		intentFilter.addAction("startInstalledBroadcast");
-		context.registerReceiver(new StartInstalledBroadcast(packagename), intentFilter);
-	}
+	// /**
+	// * @Description 监听软件安装状态
+	// * @author Created by qinxianyuzou on 2015-1-9.
+	// * @param context
+	// * @param packagename
+	// */
+	// public static void startInstalledBroadcast(Context context, String
+	// packagename) {
+	// IntentFilter intentFilter = new IntentFilter();
+	// intentFilter.addAction("startInstalledBroadcast");
+	// context.registerReceiver(new StartInstalledBroadcast(packagename),
+	// intentFilter);
+	// }
 
 	/**
 	 * @Description 打开apk
@@ -709,14 +711,9 @@ public class PublicUtil {
 					@Override
 					public void onLoading(long total, long current, boolean isUploading) {
 						// tv_info.setText(current + "/" + total);
-						LogUtil.d("downloadAPP", "<==========handler");
 						DecimalFormat decimalFormat = new DecimalFormat("0%");
-						LogUtil.d("downloadAPP", "total:" + total);
-						LogUtil.d("downloadAPP", "current:" + current);
-						LogUtil.d("downloadAPP", "(float) current / (float) total:" + (float) current / (float) total);
 						LogUtil.d("downloadAPP",
 								"decimalFormat:" + decimalFormat.format((float) current / (float) total));
-						LogUtil.d("downloadAPP", "handler==========>");
 						mNotification.contentView.setTextViewText(R.id.content_view_text1,
 								decimalFormat.format((float) current / (float) total));
 						mNotification.contentView.setProgressBar(R.id.content_view_progress, (int) total,
@@ -790,21 +787,17 @@ public class PublicUtil {
 					@Override
 					public void onLoading(long total, long current, boolean isUploading) {
 						// tv_info.setText(current + "/" + total);
-						LogUtil.d("downloadAPP", "<==========handler");
 						DecimalFormat decimalFormat = new DecimalFormat("0%");
-						LogUtil.d("downloadAPP", "total:" + total);
-						LogUtil.d("downloadAPP", "current:" + current);
-						LogUtil.d("downloadAPP", "(float) current / (float) total:" + (float) current / (float) total);
 						LogUtil.d("downloadAPP",
 								"decimalFormat:" + decimalFormat.format((float) current / (float) total));
-						LogUtil.d("downloadAPP", "handler==========>");
 						mNotification.contentView.setTextViewText(R.id.content_view_text1,
 								decimalFormat.format((float) current / (float) total));
 						mNotification.contentView.setProgressBar(R.id.content_view_progress, (int) total,
 								(int) current, false);
 						mNotificationManager.notify(3567, mNotification);
 						Message msg = new Message();
-						msg.arg1 = (int) (((float) current / (float) total) * 1000);
+						msg.arg1 = (int) total;
+						msg.arg2 = (int) current;
 						msg.what = 1;
 						mHandler.sendMessage(msg);
 					}

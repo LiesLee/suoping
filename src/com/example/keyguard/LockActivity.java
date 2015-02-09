@@ -454,7 +454,8 @@ public class LockActivity extends BaseActivity {
 					if ((int) event.getRawX() < (image_slide_leftMargin + 100)) {
 						if (listDataEntities.get(currentRow).getApp_type() == 0) {
 							YouMengUtil.onEvent(activity, YouMengUtil.OPEN_APP_DOWNLOAD);
-							Activity_DownloadWeb.luanch(LockActivity.this, listDataEntities.get(currentRow).getId());
+							Activity_DownloadWeb.luanch(LockActivity.this, listDataEntities.get(currentRow).getId(),
+									listDataEntities.get(currentRow).getExper_time());
 						} else {
 							Activity_PublicWeb.luanch(activity, listDataEntities.get(currentRow).getTitle(),
 									listDataEntities.get(currentRow).getDetail_url());

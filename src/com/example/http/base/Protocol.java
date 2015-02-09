@@ -22,6 +22,7 @@ import com.example.http.respose.ResponseShare;
 import com.example.http.respose.ResponseSignIn;
 import com.example.http.respose.ResponseUpdate;
 import com.example.http.respose.ResponseUserInfo;
+import com.example.util.PublicUtil;
 import com.example.util.StringUtils;
 import com.example.util.YouMengUtil;
 
@@ -470,6 +471,24 @@ public class Protocol {
 		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
 		return ConnectorManage.getInstance(context).GetHttpRequest(context, url, tag, requestParam, BaseResponse.class,
 				httpCallBack);
+	}
+
+	/**
+	 * @Description 锁屏页运行回调
+	 * @author Created by qinxianyuzou on 2015-2-9.
+	 * @param context
+	 * @param tag
+	 * @param eaid
+	 * @param httpCallBack
+	 * @return
+	 */
+	public static long APP_RETURN(Context context, String tag, String eaid, HttpCallBack httpCallBack) {
+		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
+		requestParam.add(new BasicNameValuePair("eaid", eaid));
+		requestParam.add(new BasicNameValuePair("username", PublicUtil.getUserInfo_Entity(context).getUsername()));
+		return ConnectorManage.getInstance(context).GetHttpRequest(context,
+				Config.APP_RETURN + eaid + "/" + PublicUtil.getUserInfo_Entity(context).getUsername() + "/", tag,
+				requestParam, BaseResponse.class, httpCallBack);
 	}
 
 	/**

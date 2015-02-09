@@ -19,7 +19,7 @@
         android:id="@+id/download_pb"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="4dp"
         android:focusable="false"
         android:progressDrawable="@drawable/down_stly"
         android:visibility="gone" />
@@ -40,6 +40,17 @@
         android:layout_height="45dp"
         android:background="@drawable/selector_btn_shopinfo"
         android:text="立即安装"
+        android:textColor="@color/red"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btn_down_open"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/selector_btn_shopinfo"
+        android:text="立即启动"
         android:textColor="@color/red"
         android:textSize="20sp"
         android:textStyle="bold"

@@ -15,6 +15,7 @@ public class LockADList_Entity implements Serializable {
 	private String detail_url = StringUtils.EMPTY;
 	/** 广告类型,0有下载，1没有下载 */
 	private int app_type;
+	private int exper_time;
 
 	/**
 	 * @Description
@@ -142,6 +143,27 @@ public class LockADList_Entity implements Serializable {
 		this.detail_url = detail_url;
 	}
 
+	/**
+	 * @Description
+	 * @author Created by qinxianyuzou on 2015-2-9.
+	 * @see #exper_time
+	 * @return the exper_time
+	 */
+	public int getExper_time() {
+		return exper_time;
+	}
+
+	/**
+	 * @Description
+	 * @author Created by qinxianyuzou on 2015-2-9.
+	 * @see #exper_time
+	 * @param exper_time
+	 *            the exper_time to set
+	 */
+	public void setExper_time(int exper_time) {
+		this.exper_time = exper_time;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -150,7 +172,7 @@ public class LockADList_Entity implements Serializable {
 	@Override
 	public String toString() {
 		return "LockADList_Entity [id=" + id + ", title=" + title + ", earn_jifen=" + earn_jifen + ", hp_url=" + hp_url
-				+ ", detail_url=" + detail_url + ", app_type=" + app_type + "]";
+				+ ", detail_url=" + detail_url + ", app_type=" + app_type + ", exper_time=" + exper_time + "]";
 	}
 
 }

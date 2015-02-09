@@ -57,6 +57,8 @@ public class Config {
 	public final static String FRESHMAN_AWARD = BASE_URL + "freshman_award";
 	/** 信鸽token接口 */
 	public final static String SEND_UTOKEN = BASE_URL + "send_utoken";
+	/** APP下载回调 */
+	public final static String APP_RETURN = BASE_URL + "app_return/download/";
 	/** APP下载 */
 	public final static String DOWNLOADAPP = "http://static.duowanka.com/downloadApp";
 	/** APP检查更新 */

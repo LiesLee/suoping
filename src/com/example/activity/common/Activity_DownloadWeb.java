@@ -1,12 +1,13 @@
 package com.example.activity.common;
 
-import java.text.DecimalFormat;
-
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.http.SslError;
 import android.os.Bundle;
@@ -26,16 +27,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
+import com.example.http.base.BaseResponse;
 import com.example.http.base.Code;
+import com.example.http.base.HttpCallBack;
 import com.example.http.base.Protocol;
 import com.example.http.respose.ResponseDownAPP;
 import com.example.keyguard.R;
 import com.example.util.LogUtil;
 import com.example.util.PublicUtil;
+import com.example.util.StringUtils;
 import com.example.util.UIHelper;
 import com.example.util.YouMengUtil;
 import com.lidroid.xutils.ViewUtils;
-import com.lidroid.xutils.http.callback.RequestCallBackHandler;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.umeng.analytics.MobclickAgent;
 
@@ -43,7 +46,7 @@ import com.umeng.analytics.MobclickAgent;
  * @Description 下载web页
  * @author Created by qinxianyuzou on 2014-12-30.
  */
-public class Activity_DownloadWeb extends BaseActivity implements RequestCallBackHandler {
+public class Activity_DownloadWeb extends BaseActivity implements ADD_APK_Interface {
 
 	/** 标题栏 */
 	@ViewInject(R.id.tv_public_top_title)
@@ -63,6 +66,12 @@ public class Activity_DownloadWeb extends BaseActivity implements RequestCallBac
 	/** 取消按钮 */
 	@ViewInject(R.id.btn_download_cancle)
 	private Button btn_download_cancle;
+	/** 安装按钮 */
+	@ViewInject(R.id.btn_down_install)
+	private Button btn_down_install;
+	/** 启动按钮 */
+	@ViewInject(R.id.btn_down_open)
+	private Button btn_down_open;
 	/** 下载按钮 */
 	@ViewInject(R.id.but_down_web)
 	private Button but_down_web;
@@ -71,11 +80,19 @@ public class Activity_DownloadWeb extends BaseActivity implements RequestCallBac
 	private WebView wv_public_web;
 	private static String mTitle = "应用详情";
 	private static String mId = "";
+	private static int mExper_time;
 
+	private String mPackageName = "";
+	/** 文件地址 */
+	private String mInstallPush = "";
+
+	// private DownAPKInstalledBroadcast receiveBroadCast;
+	public static ADD_APK_Interface add_APK_Interface;
 	private long downFlag;
 
-	public static void luanch(Activity activity, String id) {
+	public static void luanch(Activity activity, String id, int exper_time) {
 		mId = id;
+		mExper_time = exper_time;
 		Intent intent = new Intent(activity, Activity_DownloadWeb.class);
 		KeyGuardActivityManager.getInstance().goFoResult(activity, intent, KeyGuardActivityManager.MAIN_CODE);
 	}
@@ -93,6 +110,7 @@ public class Activity_DownloadWeb extends BaseActivity implements RequestCallBac
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_down_web2);
 		ViewUtils.inject(activity);
+		add_APK_Interface = this;
 		initUI();
 		initData();
 	}
@@ -102,6 +120,20 @@ public class Activity_DownloadWeb extends BaseActivity implements RequestCallBac
 		// TODO Auto-generated method stub
 		super.onResume();
 		MobclickAgent.onResume(this);
+		if (StringUtils.isEmpty(mPackageName)) {
+			btn_down_install.setVisibility(View.GONE);
+			btn_down_open.setVisibility(View.GONE);
+			but_down_web.setVisibility(View.VISIBLE);
+		} else {
+			if (PublicUtil.isApkInstalled(activity, mPackageName)) {
+				btn_down_open.setVisibility(View.VISIBLE);
+				btn_down_install.setVisibility(View.GONE);
+			} else {
+				btn_down_install.setVisibility(View.VISIBLE);
+				btn_down_open.setVisibility(View.GONE);
+			}
+			but_down_web.setVisibility(View.GONE);
+		}
 	}
 
 	@Override
@@ -131,6 +163,18 @@ public class Activity_DownloadWeb extends BaseActivity implements RequestCallBac
 	}
 
 	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		// try {
+		// unregisterReceiver(receiveBroadCast);
+		// } catch (Exception e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+		super.onDestroy();
+	}
+
+	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 
@@ -144,6 +188,13 @@ public class Activity_DownloadWeb extends BaseActivity implements RequestCallBac
 			YouMengUtil.onEvent(activity, YouMengUtil.CLICK_DOWNLOAD);
 			UIHelper.showMsgProgressDialog(activity, "正在加载...");
 			downFlag = Protocol.get_earn_downloadurl(activity, setTag(), mId);
+			break;
+		case R.id.btn_down_install:
+			PublicUtil.installAPK(activity, mInstallPush);
+			break;
+		case R.id.btn_down_open:
+			PublicUtil.openAPK(activity, mPackageName);
+			countTime();
 			break;
 
 		default:
@@ -263,14 +314,6 @@ public class Activity_DownloadWeb extends BaseActivity implements RequestCallBac
 
 	};
 
-	@Override
-	public boolean updateProgress(long total, long current, boolean isUploading) {
-		// TODO Auto-generated method stub
-		DecimalFormat decimalFormat = new DecimalFormat("0%");
-		but_down_web.setText("正在下载..." + decimalFormat.format((float) current / (float) total));
-		return false;
-	}
-
 	Handler updateHandler = new Handler() {
 
 		@Override
@@ -279,6 +322,8 @@ public class Activity_DownloadWeb extends BaseActivity implements RequestCallBac
 			switch (msg.what) {
 			// 开始
 			case 0:
+				mPackageName = "";
+				mInstallPush = "";
 				but_down_web.setText("正在下载...");
 				but_down_web.setClickable(false);
 				download_pb.setVisibility(View.VISIBLE);
@@ -288,11 +333,15 @@ public class Activity_DownloadWeb extends BaseActivity implements RequestCallBac
 			// 下载中
 			case 1:
 				// but_down_web.setText("正在下载..." + msg.obj);
-				download_pb.setProgress(msg.arg1);
+				download_pb.setMax(msg.arg1);
+				download_pb.setProgress(msg.arg2);
 				break;
 			// 下载成功
 			case 2:
 				but_down_web.setText("下载完成");
+				mInstallPush = msg.obj.toString();
+				mPackageName = PublicUtil.getPackageName(activity, mInstallPush);
+				LogUtil.d(setTag(), "mPackageName:" + mPackageName);
 				break;
 			// 下载失败
 			case 3:
@@ -307,4 +356,63 @@ public class Activity_DownloadWeb extends BaseActivity implements RequestCallBac
 			super.handleMessage(msg);
 		}
 	};
+
+	private void countTime() {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				boolean isRunning = true;
+				int timing = 0;
+				// PublicUtil.showToast(activity,
+				// "至少要运行"+howLong+"秒");
+				while (isRunning) {
+					try {
+						Thread.sleep(1000);
+						if (PublicUtil.isRunningAPK(activity, mPackageName)) {
+							timing++;
+							LogUtil.d(setTag(), "使用了" + timing + "秒");
+							if (timing > mExper_time) {
+								// 发送接口
+								Protocol.APP_RETURN(activity, setTag(), mId, new HttpCallBack() {
+
+									@Override
+									public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
+										// TODO Auto-generated
+										// method stub
+										BaseResponse msg = (BaseResponse) response;
+										showToast(msg.getMsg());
+									}
+
+									@Override
+									public void onHttpError(long flag, VolleyError error) {
+										// TODO Auto-generated
+										// method stub
+
+									}
+								});
+								isRunning = false;
+							}
+						} else {
+							YouMengUtil.onEventValue(activity, YouMengUtil.APP_START_TIME_LONG, timing);
+							isRunning = false;
+						}
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}).start();
+	}
+
+	@Override
+	public void addAPK(String packageName) {
+		// TODO Auto-generated method stub
+		if (!StringUtils.isEmpty(mPackageName) && packageName.equals(mPackageName)) {
+			LogUtil.d(setTag(), "openAPK");
+			PublicUtil.openAPK(activity, packageName);
+			countTime();
+		}
+	}
 }

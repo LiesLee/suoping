@@ -93,7 +93,7 @@ public class Activity_NotActive extends BaseActivity {
 		ViewUtils.inject(activity);
 		receiveBroadCast = new APKInstalledBroadcast();
 		IntentFilter filter = new IntentFilter();
-		filter.addAction(""); // 只有持有相同的action的接受者才能接收此广播
+//		filter.addAction("Activity_NotActive"); // 只有持有相同的action的接受者才能接收此广播
 		registerReceiver(receiveBroadCast, filter);
 		initUI();
 		initData();
