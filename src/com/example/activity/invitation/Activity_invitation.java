@@ -146,6 +146,13 @@ public class Activity_invitation extends BaseActivity {
 	}
 
 	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		initData();
+	}
+
+	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {

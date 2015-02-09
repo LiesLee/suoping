@@ -92,6 +92,7 @@ public class Activity_earnings extends BaseActivity {
 		// TODO Auto-generated method stub
 		super.onResume();
 		// MobclickAgent.onPageStart(setTag());
+		initData();
 	}
 
 	@Override

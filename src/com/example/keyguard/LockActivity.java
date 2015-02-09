@@ -466,13 +466,11 @@ public class LockActivity extends BaseActivity {
 						if (LockActivity.instance != null) {
 							LockActivity.instance.finish();
 							int amount = 10; // 示例增加100积分
-							Activity_earnings.activity_earnings.reloadData();
 							Protocol.lock_earn(LockActivity.this, this.getClass().getSimpleName(), new HttpCallBack() {
 
 								@Override
 								public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
 									// TODO Auto-generated method stub
-									Activity_earnings.activity_earnings.reloadData();
 									YouMengUtil.onEvent(activity, YouMengUtil.GET_REWARD);
 								}
 
