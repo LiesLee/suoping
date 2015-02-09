@@ -31,6 +31,7 @@ import com.example.http.base.Code;
 import com.example.http.base.HttpCallBack;
 import com.example.http.base.Protocol;
 import com.example.keyguard.R;
+import com.example.util.LogUtil;
 import com.example.util.PublicUtil;
 import com.example.util.SharedPreferenceUtil;
 import com.example.util.UIHelper;
@@ -255,13 +256,12 @@ public class MyInfo_Adapter extends BaseAdapter {
 			// TODO Auto-generated method stub
 			UIHelper.cancelProgressDialog();
 			BaseResponse msg = (BaseResponse) response;
+			LogUtil.d("logout", msg.getMsg());
 			// if (msg.getCode().equals(Code.CODE_SUCCESS)) {
 			// } else {
 			// PublicUtil.showToast(activity, msg.getMsg());
 			// }
-			SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.COOKIES, "");
-			SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.USERINFO, "");
-			SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.OLD_PASSWORD, "");
+			PublicUtil.clearLoginMsg(activity);
 			YouMengUtil.onEvent(activity, YouMengUtil.OPEN_LOGIN);
 			activity.startActivity(new Intent(activity, LoginActivity.class));
 			activity.finish();

@@ -114,7 +114,8 @@ public class Activity_Launch extends BaseActivity implements AnimationListener {
 		if (SharedPreferenceUtil.getInstance(activity).getInt(SharedPreferenceUtil.ISFIRSTUSED) == 0) {
 			startActivity(new Intent(activity, Activity_Guide.class));
 		} else {
-			if (SharedPreferenceUtil.getInstance(activity).getString(SharedPreferenceUtil.COOKIES).equals("")) {
+			String cookies = SharedPreferenceUtil.getInstance(activity).getString(SharedPreferenceUtil.COOKIES);
+			if (cookies == null || cookies.equals("")) {
 				YouMengUtil.onEvent(activity, YouMengUtil.OPEN_REG);
 				startActivity(new Intent(activity, Activity_Reg.class));
 			} else {

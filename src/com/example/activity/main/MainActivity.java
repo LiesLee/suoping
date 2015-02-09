@@ -181,7 +181,7 @@ public class MainActivity extends TabActivity implements OnCheckedChangeListener
 		Handler handler = new HandlerExtension(MainActivity.this);
 		m = handler.obtainMessage();
 		// 注册接口
-		final String uidString = PublicUtil.getUserInfo(mContext).getUsername();
+		final String uidString = PublicUtil.getUserInfo_Entity(mContext).getUsername();
 		LogUtil.w(Constants.LogTag, uidString);
 		XGPushManager.registerPush(mContext, uidString, new XGIOperateCallback() {
 			@Override

@@ -108,14 +108,13 @@ public class PublicUtil {
 	 * @param context
 	 * @return
 	 */
-	public static UserInfo getUserInfo(Context context) {
-		UserInfo userInfo = new Gson().fromJson(
-				SharedPreferenceUtil.getInstance(context).getString(SharedPreferenceUtil.USERINFO), UserInfo.class);
+	public static UserInfo getUserInfo_Entity(Context context) {
+		UserInfo userInfo = new Gson().fromJson(getUserInfo_String(context), UserInfo.class);
 		return userInfo;
 	}
 
 	/**
-	 * @Description
+	 * @Description 用户实体转字符串
 	 * @author Created by qinxianyuzou on 2015-2-5.
 	 * @param userInfo
 	 * @return
@@ -123,6 +122,26 @@ public class PublicUtil {
 	public static String userInfoToString(UserInfo userInfo) {
 		String userString = new Gson().toJson(userInfo);
 		return userString;
+	}
+
+	/**
+	 * @Description 保存用户信息字符串
+	 * @author Created by qinxianyuzou on 2015-2-9.
+	 * @param mContext
+	 * @param userInfo
+	 */
+	public static void setUserInfo(Context mContext, String userInfo) {
+		SharedPreferenceUtil.getInstance(mContext).putString(SharedPreferenceUtil.USERINFO, userInfo);
+	}
+
+	/**
+	 * @Description 获取用户信息字符串
+	 * @author Created by qinxianyuzou on 2015-2-9.
+	 * @param mContext
+	 * @return
+	 */
+	public static String getUserInfo_String(Context mContext) {
+		return SharedPreferenceUtil.getInstance(mContext).getString(SharedPreferenceUtil.USERINFO);
 	}
 
 	/**
@@ -143,6 +162,70 @@ public class PublicUtil {
 	 */
 	public static String getCookies(Context mContext) {
 		return SharedPreferenceUtil.getInstance(mContext).getString(SharedPreferenceUtil.COOKIES);
+	}
+
+	/**
+	 * @Description 保存上次登录密码
+	 * @author Created by qinxianyuzou on 2015-2-4.
+	 * @param mContext
+	 * @param rawCookies
+	 */
+	public static void setOldPassword(Context mContext, String rawCookies) {
+		SharedPreferenceUtil.getInstance(mContext).putString(SharedPreferenceUtil.OLD_PASSWORD, rawCookies);
+	}
+
+	/**
+	 * @Description 获取上次登录密码
+	 * @author Created by qinxianyuzou on 2015-2-4.
+	 * @param mContext
+	 * @return
+	 */
+	public static String getOldPassword(Context mContext) {
+		return SharedPreferenceUtil.getInstance(mContext).getString(SharedPreferenceUtil.OLD_PASSWORD);
+	}
+
+	/**
+	 * @Description 保存上次登录账号
+	 * @author Created by qinxianyuzou on 2015-2-4.
+	 * @param mContext
+	 * @param rawCookies
+	 */
+	public static void setOldAccount(Context mContext, String rawCookies) {
+		SharedPreferenceUtil.getInstance(mContext).putString(SharedPreferenceUtil.OLD_ACCOUNT, rawCookies);
+	}
+
+	/**
+	 * @Description 获取上次登陆了账号
+	 * @author Created by qinxianyuzou on 2015-2-4.
+	 * @param mContext
+	 * @return
+	 */
+	public static String getOldAccount(Context mContext) {
+		return SharedPreferenceUtil.getInstance(mContext).getString(SharedPreferenceUtil.OLD_PASSWORD);
+	}
+
+	/**
+	 * @Description 保存用户登录信息
+	 * @author Created by qinxianyuzou on 2015-2-9.
+	 * @param mContext
+	 * @param cellphoneNumber
+	 * @param password
+	 * @param userInfo
+	 */
+	public static void saveLoginMsg(Context mContext, String cellphoneNumber, String password, UserInfo userInfo) {
+		PublicUtil.setOldAccount(mContext, cellphoneNumber);
+		PublicUtil.setOldPassword(mContext, password);
+		PublicUtil.setUserInfo(mContext, PublicUtil.userInfoToString(userInfo));
+	}
+
+	/**
+	 * @Description 清空用户登录信息
+	 * @author Created by qinxianyuzou on 2015-2-9.
+	 */
+	public static void clearLoginMsg(Context mContext) {
+		setCookies(mContext, "");
+		setOldPassword(mContext, "");
+		setUserInfo(mContext, "");
 	}
 
 	/**

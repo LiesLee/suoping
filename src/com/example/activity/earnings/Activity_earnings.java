@@ -108,11 +108,10 @@ public class Activity_earnings extends BaseActivity {
 			UIHelper.cancelProgressDialog();
 			ResponseUserInfo msg = (ResponseUserInfo) response;
 			if (msg.getCode().equals(Code.CODE_SUCCESS)) {
-				SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.USERINFO,
-						PublicUtil.userInfoToString(msg.getData()));
-				tv_allEarning.setText("" + PublicUtil.getUserInfo(activity).getSum_earn());
-				tv_todayEarning.setText("" + PublicUtil.getUserInfo(activity).getToday_earn());
-				tv_earning.setText("" + PublicUtil.getUserInfo(activity).getSum_earn());
+				PublicUtil.setUserInfo(activity, PublicUtil.userInfoToString(msg.getData()));
+				tv_allEarning.setText("" + PublicUtil.getUserInfo_Entity(activity).getSum_earn());
+				tv_todayEarning.setText("" + PublicUtil.getUserInfo_Entity(activity).getToday_earn());
+				tv_earning.setText("" + PublicUtil.getUserInfo_Entity(activity).getSum_earn());
 			} else {
 				showToast(msg.getMsg());
 			}

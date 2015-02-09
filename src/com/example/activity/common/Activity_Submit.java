@@ -131,7 +131,7 @@ public class Activity_Submit extends BaseActivity {
 		but_submit_order_submit.setOnClickListener(this);
 		tv_submit_order_danjia.setText(mDanJia);
 		tv_submit_order_1.setText(mDanJia);
-		tv_submit_order_2.setText("" + PublicUtil.getUserInfo(activity).getSum_earn());
+		tv_submit_order_2.setText("" + PublicUtil.getUserInfo_Entity(activity).getSum_earn());
 		switch (mShopType) {
 		case 1: // 不显示手机、支付宝、收货地址
 			v_line_address.setVisibility(View.GONE);

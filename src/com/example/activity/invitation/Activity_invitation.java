@@ -228,7 +228,7 @@ public class Activity_invitation extends BaseActivity {
 			final DialogClick dialogClick1 = new DialogClick(activity);
 			dialogClick1.requestWindowFeature(Window.FEATURE_NO_TITLE);
 			dialogClick1.show();
-			dialogClick1.setContent("您的邀请码", "" + PublicUtil.getUserInfo(activity).getInvite_no(), "一键复制",
+			dialogClick1.setContent("您的邀请码", "" + PublicUtil.getUserInfo_Entity(activity).getInvite_no(), "一键复制",
 					new OnClickListener() {
 
 						@Override
@@ -253,7 +253,7 @@ public class Activity_invitation extends BaseActivity {
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	private void copyInviteNo_11() {
 		ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-		ClipData clip = ClipData.newPlainText("simple text", PublicUtil.getUserInfo(activity).getInvite_no());
+		ClipData clip = ClipData.newPlainText("simple text", PublicUtil.getUserInfo_Entity(activity).getInvite_no());
 		clipboard.setPrimaryClip(clip);
 	}
 
@@ -261,7 +261,7 @@ public class Activity_invitation extends BaseActivity {
 	@SuppressWarnings("deprecation")
 	private void copyInviteNo_8() {
 		ClipboardManager c = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-		c.setText(PublicUtil.getUserInfo(activity).getInvite_no());
+		c.setText(PublicUtil.getUserInfo_Entity(activity).getInvite_no());
 	}
 
 	@Override

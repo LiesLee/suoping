@@ -3,6 +3,7 @@ package com.example.activity.reg;
 import org.json.JSONObject;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,11 +12,13 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.example.activity.common.BaseActivity;
+import com.example.activity.common.KeyGuardActivityManager;
 import com.example.http.base.BaseResponse;
 import com.example.http.base.Code;
 import com.example.http.base.Protocol;
 import com.example.keyguard.R;
 import com.example.util.LogUtil;
+import com.example.util.PublicUtil;
 import com.example.util.StringUtils;
 import com.example.util.UIHelper;
 import com.example.util.YouMengUtil;
@@ -53,6 +56,23 @@ public class Activity_Reg extends BaseActivity implements View.OnClickListener {
 		setContentView(R.layout.activity_reg);
 		ViewUtils.inject(this);
 		initUI();
+	}
+
+	private long mExitTime;
+
+	@Override
+	public boolean dispatchKeyEvent(KeyEvent event) {
+		if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN
+				&& event.getRepeatCount() == 0) {
+			if ((System.currentTimeMillis() - mExitTime) > 2000) {
+				mExitTime = System.currentTimeMillis();
+				PublicUtil.showToast(activity, "再按一次退出");
+			} else {
+				KeyGuardActivityManager.getInstance().cleanActivity();
+			}
+			return true;
+		}
+		return super.dispatchKeyEvent(event);
 	}
 
 	@Override

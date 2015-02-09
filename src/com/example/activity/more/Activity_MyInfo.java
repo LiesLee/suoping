@@ -83,8 +83,8 @@ public class Activity_MyInfo extends BaseActivity {
 		dataList.add(new BasicNameValuePair("管理收货地址", ""));
 		// dataList.add(new BasicNameValuePair("手机号", "159*****320"));
 		dataList.add(new BasicNameValuePair("邀请码", ""));
-		dataList.add(new BasicNameValuePair("性别", PublicUtil.getUserInfo(activity).getSex()));
-		dataList.add(new BasicNameValuePair("生日", PublicUtil.getUserInfo(activity).getBirthday()));
+		dataList.add(new BasicNameValuePair("性别", PublicUtil.getUserInfo_Entity(activity).getSex()));
+		dataList.add(new BasicNameValuePair("生日", PublicUtil.getUserInfo_Entity(activity).getBirthday()));
 		// dataList.add(new BasicNameValuePair("账户状态", "正常"));
 		// dataList.add(new BasicNameValuePair("修改密码", ""));
 		dataList.add(new BasicNameValuePair("退出登录", ""));

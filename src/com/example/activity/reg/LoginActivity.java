@@ -3,6 +3,7 @@ package com.example.activity.reg;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -68,6 +69,23 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 		initUI();
 	}
 
+	private long mExitTime;
+
+	@Override
+	public boolean dispatchKeyEvent(KeyEvent event) {
+		if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN
+				&& event.getRepeatCount() == 0) {
+			if ((System.currentTimeMillis() - mExitTime) > 2000) {
+				mExitTime = System.currentTimeMillis();
+				PublicUtil.showToast(activity, "再按一次退出");
+			} else {
+				KeyGuardActivityManager.getInstance().cleanActivity();
+			}
+			return true;
+		}
+		return super.dispatchKeyEvent(event);
+	}
+
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -127,10 +145,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 			ResponseUserInfo msg = (ResponseUserInfo) response;
 			if (msg.getCode().equals(Code.CODE_SUCCESS)) {
 				LogUtil.i("=====UserInfo====", msg.getMsg().toString());
-				SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.OLD_ACCOUNT, cellphoneNumber);
-				SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.OLD_PASSWORD, password);
-				SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.USERINFO,
-						PublicUtil.userInfoToString(msg.getData()));
+				PublicUtil.saveLoginMsg(activity, cellphoneNumber, password, msg.getData());
 				startActivity(new Intent(activity, MainActivity.class));
 				this.finish();
 			} else {

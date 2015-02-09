@@ -141,10 +141,7 @@ public class Activity_Reg_Password extends BaseActivity implements View.OnClickL
 			ResponseUserInfo msg = (ResponseUserInfo) response;
 			if (msg.getCode().equals(Code.CODE_SUCCESS)) {
 				showToast(msg.getMsg());
-				SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.OLD_ACCOUNT, cellphoneNumber);
-				SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.OLD_PASSWORD, password);
-				SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.USERINFO,
-						PublicUtil.userInfoToString(msg.getData()));
+				PublicUtil.saveLoginMsg(activity, cellphoneNumber, password, msg.getData());
 				startActivity(new Intent(activity, MainActivity.class));
 			} else {
 				showToast(msg.getMsg());
