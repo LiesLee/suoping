@@ -119,7 +119,7 @@ public class Activity_DownloadWeb extends BaseActivity implements ADD_APK_Interf
 		// TODO Auto-generated method stub
 		super.onResume();
 		MobclickAgent.onResume(this);
-		if (StringUtils.isEmpty(mPackageName)) {
+		if (StringUtils.isEmpty(mInstallPush)) {
 			btn_down_install.setVisibility(View.GONE);
 			btn_down_open.setVisibility(View.GONE);
 			but_down_web.setVisibility(View.VISIBLE);

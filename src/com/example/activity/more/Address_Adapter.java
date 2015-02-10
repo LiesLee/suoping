@@ -120,7 +120,26 @@ public class Address_Adapter extends BaseAdapter {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			Activity_OnlySubmit.luanch(activity, listData.get(type).getName(), EnumOnlySubmit.LOGISTICS, type);
+			String mContent = "";
+			switch (type) {
+			case 0:
+				mContent = Activity_Address.logistics_Entity.getTo_where();
+				break;
+			case 1:
+				mContent = Activity_Address.logistics_Entity.getTo_who();
+				break;
+			case 2:
+				mContent = Activity_Address.logistics_Entity.getTo_phone();
+				break;
+			case 3:
+				mContent = Activity_Address.logistics_Entity.getPost_no();
+				break;
+
+			default:
+				break;
+			}
+			Activity_OnlySubmit
+					.luanch(activity, listData.get(type).getName(), EnumOnlySubmit.LOGISTICS, mContent, type);
 		}
 	}
 

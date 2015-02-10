@@ -287,7 +287,7 @@ public class Protocol {
 	public static long del_logistics(Context context, String tag, String lid) {
 		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
 		requestParam.add(new BasicNameValuePair("lid", lid));
-		return ConnectorManage.getInstance(context).PostHttpRequest(context, Config.DEL_LOGISTICS, tag, requestParam,
+		return ConnectorManage.getInstance(context).GetHttpRequest(context, Config.DEL_LOGISTICS, tag, requestParam,
 				BaseResponse.class, null);
 	}
 

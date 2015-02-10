@@ -1,8 +1,10 @@
 package com.example.util;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -22,7 +24,6 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -50,7 +51,6 @@ import com.example.http.base.Code;
 import com.example.http.base.HttpCallBack;
 import com.example.http.base.Protocol;
 import com.example.keyguard.R;
-import com.example.keyguard.StartInstalledBroadcast;
 import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -462,7 +462,7 @@ public class PublicUtil {
 						break;
 					// 忽略点文件（隐藏文件/文件夹）
 				} else if (f.isDirectory() && f.getPath().indexOf("/.") == -1) {
-					getFiles(f.getPath(), Extension, IsIterative);
+					// getFiles(f.getPath(), Extension, IsIterative);
 				}
 			}
 		}
@@ -811,6 +811,7 @@ public class PublicUtil {
 						PublicUtil.installAPK(activity, responseInfo.result.toString());
 						Message msg = new Message();
 						msg.what = 2;
+						LogUtil.d(TAG, "apkPuth:" + responseInfo.result.toString());
 						msg.obj = responseInfo.result.toString();
 						mHandler.sendMessage(msg);
 					}
@@ -859,6 +860,14 @@ public class PublicUtil {
 			if (conn == null) {
 				return null;
 			}
+
+			BufferedInputStream bis = null;
+			HttpURLConnection urlconnection = null;
+			urlconnection = (HttpURLConnection) myURL.openConnection();
+			urlconnection.connect();
+			bis = new BufferedInputStream(urlconnection.getInputStream());
+			LogUtil.d(TAG, "fileType:" + HttpURLConnection.guessContentTypeFromStream(bis));
+
 			Map<String, List<String>> hf = conn.getHeaderFields();
 			if (hf == null) {
 				return null;
@@ -873,11 +882,14 @@ public class PublicUtil {
 				for (String value : values) {
 					String result;
 					try {
+						LogUtil.d(TAG, "value:" + value);
 						result = new String(value.getBytes("ISO-8859-1"), "GBK");
 						int location = result.indexOf("filename");
 						if (location >= 0) {
 							result = result.substring(location + "filename".length());
 							filename = result.substring(result.indexOf("=") + 1);
+							filename = filename.substring(filename.indexOf("\"") + 1);
+							filename = filename.substring(0, filename.indexOf(".apk") + 4);
 							isok = true;
 							LogUtil.d(TAG, filename);
 						}

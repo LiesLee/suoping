@@ -148,7 +148,7 @@ public class BaseRequest<T> implements Listener<String>, ErrorListener {
 					try {
 						Map<String, String> responseHeaders = response.headers;
 						String rawCookies = responseHeaders.get("Set-Cookie");
-						SharedPreferenceUtil.getInstance(mContext).putString(SharedPreferenceUtil.COOKIES, rawCookies);
+						PublicUtil.setCookies(mContext, rawCookies);
 						String dataString = new String(response.data, "UTF-8");
 						return Response.success(dataString, HttpHeaderParser.parseCacheHeaders(response));
 					} catch (UnsupportedEncodingException e) {

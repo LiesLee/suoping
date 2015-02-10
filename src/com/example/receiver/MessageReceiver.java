@@ -169,7 +169,7 @@ public class MessageReceiver extends XGPushBaseReceiver {
 		}
 		try {
 			LogUtil.d(LogTag, message.toString());
-			if (PublicUtil.getCookies(context) == null || PublicUtil.getCookies(context).equals("")) {
+			if (PublicUtil.getUserInfo_String(context) == null || PublicUtil.getUserInfo_String(context).equals("")) {
 				// 如果没有登录就反注册信鸽
 				XGPushManager.unregisterPush(context, new XGIOperateCallback() {
 
@@ -206,23 +206,6 @@ public class MessageReceiver extends XGPushBaseReceiver {
 				}
 				final int noticeId = type;
 				nm.notify(noticeId, nf);
-				// }
-				// if (type == 1) {
-				// new Thread(new Runnable() {
-				//
-				// @Override
-				// public void run() {
-				// // TODO Auto-generated method stub
-				// try {
-				// Thread.sleep(3000);
-				// nm.cancel(noticeId);
-				// } catch (InterruptedException e) {
-				// // TODO Auto-generated catch block
-				// e.printStackTrace();
-				// }
-				// }
-				// }).start();
-				// }
 
 			}
 			// APP自主处理消息的过程...

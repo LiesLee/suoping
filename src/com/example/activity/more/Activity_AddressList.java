@@ -191,7 +191,7 @@ public class Activity_AddressList extends BaseActivity {
 	@Override
 	public void onHttpError(long flag, VolleyError error) {
 		// TODO Auto-generated method stub
-
+		UIHelper.cancelProgressDialog();
 	}
 
 	@Override

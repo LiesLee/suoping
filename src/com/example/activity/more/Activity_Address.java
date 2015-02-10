@@ -25,6 +25,7 @@ import com.example.http.base.Code;
 import com.example.http.base.Protocol;
 import com.example.http.respose.ResponseLogistics;
 import com.example.keyguard.R;
+import com.example.util.StringUtils;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -164,6 +165,22 @@ public class Activity_Address extends BaseActivity {
 			finish();
 			break;
 		case R.id.but_address_submit:
+			if (StringUtils.isEmpty(logistics_Entity.getTo_who())) {
+				showToast("请填写收货人信息");
+				return;
+			}
+			if (StringUtils.isEmpty(logistics_Entity.getTo_where())) {
+				showToast("请填写收货地址");
+				return;
+			}
+			if (StringUtils.isEmpty(logistics_Entity.getPost_no())) {
+				showToast("请填写邮编");
+				return;
+			}
+			if (StringUtils.isEmpty(logistics_Entity.getTo_phone())) {
+				showToast("请填写联系电话");
+				return;
+			}
 			int isDefault = cb_address_default.isChecked() ? 1 : 0;
 			logisticsFlag = Protocol.add_logistics(activity, setTag(), "" + isDefault, logistics_Entity.getTo_who(),
 					logistics_Entity.getTo_where(), logistics_Entity.getPost_no(), logistics_Entity.getTo_phone());
@@ -173,5 +190,4 @@ public class Activity_Address extends BaseActivity {
 			break;
 		}
 	}
-
 }

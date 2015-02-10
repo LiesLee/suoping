@@ -44,6 +44,7 @@ public class Activity_OnlySubmit extends BaseActivity {
 	private Button but_nickname_submit;
 	/** 标题 */
 	private static String mTitle = "";
+	private static String mContent = "";
 	/** 地址要编辑的内容类型 */
 	private static int mType;
 	private static EnumOnlySubmit mEnumOnlySubmit = null;
@@ -76,6 +77,24 @@ public class Activity_OnlySubmit extends BaseActivity {
 		mTitle = title;
 		mEnumOnlySubmit = enumOnlySubmit;
 		mType = type;
+		Intent intent = new Intent(activity, Activity_OnlySubmit.class);
+		KeyGuardActivityManager.getInstance().goFoResult(activity, intent, KeyGuardActivityManager.MAIN_CODE);
+	}
+
+	/**
+	 * @Description 带内容运行
+	 * @author Created by qinxianyuzou on 2015-2-10.
+	 * @param activity
+	 * @param title
+	 * @param enumOnlySubmit
+	 * @param content
+	 * @param type
+	 */
+	public static void luanch(Activity activity, String title, EnumOnlySubmit enumOnlySubmit, String content, int type) {
+		mTitle = title;
+		mEnumOnlySubmit = enumOnlySubmit;
+		mType = type;
+		mContent = content;
 		Intent intent = new Intent(activity, Activity_OnlySubmit.class);
 		KeyGuardActivityManager.getInstance().goFoResult(activity, intent, KeyGuardActivityManager.MAIN_CODE);
 	}
@@ -116,6 +135,7 @@ public class Activity_OnlySubmit extends BaseActivity {
 				et_nickname_text.setInputType(InputType.TYPE_CLASS_NUMBER);
 			}
 		}
+		et_nickname_text.setText(mContent);
 	}
 
 	@Override

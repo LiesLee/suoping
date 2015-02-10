@@ -21,9 +21,9 @@ import com.example.activity.common.KeyGuardActivityManager;
 import com.example.http.base.BaseResponse;
 import com.example.http.base.Code;
 import com.example.http.base.Protocol;
+import com.example.http.respose.ResponseUserInfo;
 import com.example.keyguard.R;
 import com.example.util.PublicUtil;
-import com.example.util.YouMengUtil;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -92,24 +92,31 @@ public class Activity_MyInfo extends BaseActivity {
 
 	}
 
+	private long userFlag;
+
 	@Override
 	public <T> void onHttpSuccess(long flag, JSONObject jsonString, T response) {
 		// TODO Auto-generated method stub
 		if (sexFlag == flag) {
 			BaseResponse msgInfo = (BaseResponse) response;
 			if (msgInfo.getCode().equals(Code.CODE_SUCCESS)) {
-				Protocol.get_user_info(activity, setTag());
-				initData();
+				userFlag = Protocol.get_user_info(activity, setTag());
 			}
 			showToast(msgInfo.getMsg());
 		}
 		if (dateFlag == flag) {
 			BaseResponse msgInfo = (BaseResponse) response;
 			if (msgInfo.getCode().equals(Code.CODE_SUCCESS)) {
-				Protocol.get_user_info(activity, setTag());
-				initData();
+				userFlag = Protocol.get_user_info(activity, setTag());
 			}
 			showToast(msgInfo.getMsg());
+		}
+		if (userFlag == flag) {
+			ResponseUserInfo msg = (ResponseUserInfo) response;
+			if (msg.getCode().equals(Code.CODE_SUCCESS)) {
+				PublicUtil.setUserInfo(activity, PublicUtil.userInfoToString(msg.getData()));
+				initData();
+			}
 		}
 	}
 

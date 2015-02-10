@@ -17,6 +17,7 @@ import com.example.activity.common.BaseActivity;
 import com.example.activity.reg.Activity_Reg;
 import com.example.address.SetAddressData;
 import com.example.keyguard.R;
+import com.example.util.PublicUtil;
 import com.example.util.SharedPreferenceUtil;
 import com.example.util.YouMengUtil;
 import com.lidroid.xutils.ViewUtils;
@@ -114,8 +115,8 @@ public class Activity_Launch extends BaseActivity implements AnimationListener {
 		if (SharedPreferenceUtil.getInstance(activity).getInt(SharedPreferenceUtil.ISFIRSTUSED) == 0) {
 			startActivity(new Intent(activity, Activity_Guide.class));
 		} else {
-			String cookies = SharedPreferenceUtil.getInstance(activity).getString(SharedPreferenceUtil.COOKIES);
-			if (cookies == null || cookies.equals("")) {
+			String userinfoString = PublicUtil.getUserInfo_String(activity);
+			if (userinfoString == null || userinfoString.equals("")) {
 				YouMengUtil.onEvent(activity, YouMengUtil.OPEN_REG);
 				startActivity(new Intent(activity, Activity_Reg.class));
 			} else {
