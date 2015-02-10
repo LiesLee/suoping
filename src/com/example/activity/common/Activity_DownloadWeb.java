@@ -3,11 +3,8 @@ package com.example.activity.common;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.http.SslError;
 import android.os.Bundle;
@@ -40,6 +37,7 @@ import com.example.util.UIHelper;
 import com.example.util.YouMengUtil;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.umeng.analytics.MobclickAgent;
 
 /**
@@ -82,7 +80,7 @@ public class Activity_DownloadWeb extends BaseActivity implements ADD_APK_Interf
 	private static String mId = "";
 	private static int mExper_time;
 
-	private String mPackageName = "";
+	private static String mPackageName = "";
 	/** 文件地址 */
 	private String mInstallPush = "";
 
@@ -90,9 +88,10 @@ public class Activity_DownloadWeb extends BaseActivity implements ADD_APK_Interf
 	public static ADD_APK_Interface add_APK_Interface;
 	private long downFlag;
 
-	public static void luanch(Activity activity, String id, int exper_time) {
+	public static void luanch(Activity activity, String id, String packageName, int exper_time) {
 		mId = id;
 		mExper_time = exper_time;
+		mPackageName = packageName;
 		Intent intent = new Intent(activity, Activity_DownloadWeb.class);
 		KeyGuardActivityManager.getInstance().goFoResult(activity, intent, KeyGuardActivityManager.MAIN_CODE);
 	}
@@ -171,9 +170,13 @@ public class Activity_DownloadWeb extends BaseActivity implements ADD_APK_Interf
 		// // TODO Auto-generated catch block
 		// e.printStackTrace();
 		// }
+		mExper_time = 0;
+		mId = "";
+		mPackageName = "";
 		super.onDestroy();
 	}
 
+	@OnClick({ R.id.btn_down_install, R.id.btn_down_open })
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -366,6 +369,7 @@ public class Activity_DownloadWeb extends BaseActivity implements ADD_APK_Interf
 				int timing = 0;
 				// PublicUtil.showToast(activity,
 				// "至少要运行"+howLong+"秒");
+				LogUtil.d(setTag(), "至少要运行" + mExper_time);
 				while (isRunning) {
 					try {
 						Thread.sleep(1000);

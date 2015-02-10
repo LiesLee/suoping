@@ -12,7 +12,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -30,13 +29,11 @@ import com.androidquery.AQuery;
 import com.example.activity.common.Activity_DownloadWeb;
 import com.example.activity.common.Activity_PublicWeb;
 import com.example.activity.common.BaseActivity;
-import com.example.activity.earnings.Activity_earnings;
 import com.example.entity.LockADList_Entity;
 import com.example.http.base.Code;
 import com.example.http.base.HttpCallBack;
 import com.example.http.base.Protocol;
 import com.example.http.respose.ResponseLockADList;
-import com.example.keyguard.CoverPlateView.Listener;
 import com.example.ui.VerticalViewPager;
 import com.example.util.LogUtil;
 import com.example.util.PublicUtil;
@@ -402,7 +399,7 @@ public class LockActivity extends BaseActivity {
 			// TODO Auto-generated method stub
 
 			int action = event.getAction();
-			Log.i(setTag(), "Touch:" + action);
+//			Log.i(setTag(), "Touch:" + action);
 			switch (action) {
 			case MotionEvent.ACTION_DOWN:
 				lastX = (int) event.getRawX();
@@ -435,7 +432,8 @@ public class LockActivity extends BaseActivity {
 					left = right - v.getWidth();
 				}
 				v.layout(left, v.getTop(), right, v.getBottom());
-				Log.i(setTag(), "position" + left + ", " + top + ", " + right + ", " + bottom);
+				// LogUtil.i(setTag(), "position" + left + ", " + top + ", " +
+				// right + ", " + bottom);
 				lastX = (int) event.getRawX();
 				lastY = (int) event.getRawY();
 				break;
@@ -452,13 +450,14 @@ public class LockActivity extends BaseActivity {
 					imageView_slide.setImageResource(R.drawable.lock_slide_icon_normal_no_quick_launcher);
 				} else {
 					if ((int) event.getRawX() < (image_slide_leftMargin + 100)) {
-						if (listDataEntities.get(currentRow).getApp_type() == 0) {
+						LockADList_Entity lockADList_Entity = listDataEntities.get(currentRow);
+						if (lockADList_Entity.getApp_type() == 0) {
 							YouMengUtil.onEvent(activity, YouMengUtil.OPEN_APP_DOWNLOAD);
-							Activity_DownloadWeb.luanch(LockActivity.this, listDataEntities.get(currentRow).getId(),
-									listDataEntities.get(currentRow).getExper_time());
+							Activity_DownloadWeb.luanch(LockActivity.this, lockADList_Entity.getId(),
+									lockADList_Entity.getProcess_name(), lockADList_Entity.getExper_time());
 						} else {
-							Activity_PublicWeb.luanch(activity, listDataEntities.get(currentRow).getTitle(),
-									listDataEntities.get(currentRow).getDetail_url());
+							Activity_PublicWeb.luanch(activity, lockADList_Entity.getTitle(),
+									lockADList_Entity.getDetail_url());
 						}
 						if (LockActivity.instance != null) {
 							LockActivity.instance.finish();

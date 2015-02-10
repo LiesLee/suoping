@@ -13,6 +13,7 @@ public class LockADList_Entity implements Serializable {
 	private String earn_jifen = StringUtils.EMPTY;
 	private String hp_url = StringUtils.EMPTY;
 	private String detail_url = StringUtils.EMPTY;
+	private String process_name = StringUtils.EMPTY;
 	/** 广告类型,0有下载，1没有下载 */
 	private int app_type;
 	private int exper_time;
@@ -164,6 +165,27 @@ public class LockADList_Entity implements Serializable {
 		this.exper_time = exper_time;
 	}
 
+	/**
+	 * @Description
+	 * @author Created by qinxianyuzou on 2015-2-10.
+	 * @see #process_name
+	 * @return the process_name
+	 */
+	public String getProcess_name() {
+		return process_name;
+	}
+
+	/**
+	 * @Description
+	 * @author Created by qinxianyuzou on 2015-2-10.
+	 * @see #process_name
+	 * @param process_name
+	 *            the process_name to set
+	 */
+	public void setProcess_name(String process_name) {
+		this.process_name = process_name;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -172,7 +194,8 @@ public class LockADList_Entity implements Serializable {
 	@Override
 	public String toString() {
 		return "LockADList_Entity [id=" + id + ", title=" + title + ", earn_jifen=" + earn_jifen + ", hp_url=" + hp_url
-				+ ", detail_url=" + detail_url + ", app_type=" + app_type + ", exper_time=" + exper_time + "]";
+				+ ", detail_url=" + detail_url + ", process_name=" + process_name + ", app_type=" + app_type
+				+ ", exper_time=" + exper_time + "]";
 	}
 
 }

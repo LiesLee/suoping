@@ -484,10 +484,11 @@ public class Protocol {
 	 */
 	public static long APP_RETURN(Context context, String tag, String eaid, HttpCallBack httpCallBack) {
 		ArrayList<NameValuePair> requestParam = new ArrayList<NameValuePair>();
-		requestParam.add(new BasicNameValuePair("eaid", eaid));
-		requestParam.add(new BasicNameValuePair("username", PublicUtil.getUserInfo_Entity(context).getUsername()));
+		// requestParam.add(new BasicNameValuePair("eaid", eaid));
+		// requestParam.add(new BasicNameValuePair("username",
+		// PublicUtil.getUserInfo_Entity(context).getUsername()));
 		return ConnectorManage.getInstance(context).GetHttpRequest(context,
-				Config.APP_RETURN + eaid + "/" + PublicUtil.getUserInfo_Entity(context).getUsername() + "/", tag,
+				Config.APP_RETURN + eaid + "/" + PublicUtil.getUserInfo_Entity(context).getUsername(), tag,
 				requestParam, BaseResponse.class, httpCallBack);
 	}
 
