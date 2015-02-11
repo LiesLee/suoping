@@ -119,19 +119,20 @@ public class Activity_DownloadWeb extends BaseActivity implements ADD_APK_Interf
 		// TODO Auto-generated method stub
 		super.onResume();
 		MobclickAgent.onResume(this);
-		if (StringUtils.isEmpty(mInstallPush)) {
+		if (PublicUtil.isApkInstalled(activity, mPackageName)) {
 			btn_down_install.setVisibility(View.GONE);
-			btn_down_open.setVisibility(View.GONE);
-			but_down_web.setVisibility(View.VISIBLE);
+			btn_down_open.setVisibility(View.VISIBLE);
+			but_down_web.setVisibility(View.GONE);
 		} else {
-			if (PublicUtil.isApkInstalled(activity, mPackageName)) {
-				btn_down_open.setVisibility(View.VISIBLE);
+			if (StringUtils.isEmpty(mInstallPush)) {
 				btn_down_install.setVisibility(View.GONE);
+				btn_down_open.setVisibility(View.GONE);
+				but_down_web.setVisibility(View.VISIBLE);
 			} else {
 				btn_down_install.setVisibility(View.VISIBLE);
 				btn_down_open.setVisibility(View.GONE);
+				but_down_web.setVisibility(View.GONE);
 			}
-			but_down_web.setVisibility(View.GONE);
 		}
 	}
 
@@ -149,6 +150,8 @@ public class Activity_DownloadWeb extends BaseActivity implements ADD_APK_Interf
 		rl_public_back.setVisibility(View.VISIBLE);
 		rl_public_back.setOnClickListener(this);
 		but_down_web.setOnClickListener(this);
+		btn_down_install.setOnClickListener(this);
+		btn_down_open.setOnClickListener(this);
 		but_down_web.setText("立即下载");
 	}
 
@@ -176,7 +179,6 @@ public class Activity_DownloadWeb extends BaseActivity implements ADD_APK_Interf
 		super.onDestroy();
 	}
 
-	@OnClick({ R.id.btn_down_install, R.id.btn_down_open })
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub

@@ -108,8 +108,8 @@ public class Activity_EditAddress extends BaseActivity {
 		// TODO Auto-generated method stub
 		tv_public_top_title.setText(mTitle);
 		rl_public_back.setVisibility(View.VISIBLE);
-		// rl_public_back.setOnClickListener(this);
-		// but_address_submit.setOnClickListener(this);
+		rl_public_back.setOnClickListener(this);
+		but_address_submit.setOnClickListener(this);
 		adapter = new EditAddress_Adapter(activity, bitmapUtils);
 		lv_shop_body.setAdapter(adapter);
 	}
@@ -151,7 +151,6 @@ public class Activity_EditAddress extends BaseActivity {
 	}
 
 	@Override
-	@OnClick({ R.id.rl_public_back, R.id.but_address_submit })
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
