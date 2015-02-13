@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.entity.UserInfo;
 import com.example.http.base.Protocol;
 import com.example.keyguard.R;
 import com.example.util.PublicUtil;
@@ -113,8 +114,9 @@ public class DialogDate extends Dialog implements android.view.View.OnClickListe
 	 * @param day
 	 */
 	public void setDate() {
-		if (StringUtils.isEmpty(PublicUtil.getUserInfo_Entity(mContext).getBirthday())) {
-			String birthday[] = PublicUtil.getUserInfo_Entity(mContext).getBirthday().split("/");
+		UserInfo temp = PublicUtil.getUserInfo_Entity(mContext);
+		if (!StringUtils.isEmpty(temp.getBirthday())) {
+			String birthday[] = temp.getBirthday().split("/");
 			yearString = birthday[0];
 			monthString = birthday[1];
 			dayString = birthday[2];

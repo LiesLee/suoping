@@ -134,14 +134,14 @@ public class Activity_NotActive extends BaseActivity implements ADD_APK_Interfac
 	protected void initData() {
 		// apps = PublicUtil.getDownloadAppsEntityIsInstalled();
 		UIHelper.showMsgProgressDialog(activity, "正在加载...");
-		activationFlag = Protocol.get_jihuo_earn(activity, setTag());
+		// activationFlag = Protocol.get_jihuo_earn(activity, setTag());
 	}
 
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		initData();
+		activationFlag = Protocol.get_jihuo_earn(activity, setTag());
 	}
 
 	@Override
