@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
@@ -133,6 +134,9 @@ public class Activity_OnlySubmit extends BaseActivity {
 		if (mEnumOnlySubmit == EnumOnlySubmit.LOGISTICS) {
 			if (mType == 3 || mType == 2) {
 				et_nickname_text.setInputType(InputType.TYPE_CLASS_NUMBER);
+				if (mType == 3) {
+					et_nickname_text.setFilters(new InputFilter[] { new InputFilter.LengthFilter(6) });
+				}
 			}
 		}
 		et_nickname_text.setText(mContent);

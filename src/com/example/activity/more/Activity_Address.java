@@ -26,6 +26,7 @@ import com.example.http.base.Protocol;
 import com.example.http.respose.ResponseLogistics;
 import com.example.keyguard.R;
 import com.example.util.StringUtils;
+import com.example.util.UIHelper;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -179,6 +180,10 @@ public class Activity_Address extends BaseActivity {
 			}
 			if (StringUtils.isEmpty(logistics_Entity.getTo_phone())) {
 				showToast("请填写联系电话");
+				return;
+			}
+			if (!StringUtils.phoneNumberValid(logistics_Entity.getTo_phone())) {
+				showToast("请填写正确的电话号码");
 				return;
 			}
 			int isDefault = cb_address_default.isChecked() ? 1 : 0;

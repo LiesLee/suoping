@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
+import com.example.activity.common.ADD_APK_Interface;
 import com.example.activity.common.BaseActivity;
 import com.example.activity.common.KeyGuardActivityManager;
 import com.example.activity.more.Activity_MyInfo;
@@ -40,7 +41,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
  * @Description 待激活收益
  * @author Created by qinxianyuzou on 2014-12-30.
  */
-public class Activity_NotActive extends BaseActivity {
+public class Activity_NotActive extends BaseActivity implements ADD_APK_Interface {
 
 	/** 标题栏 */
 	@ViewInject(R.id.tv_public_top_title)
@@ -93,7 +94,7 @@ public class Activity_NotActive extends BaseActivity {
 		ViewUtils.inject(activity);
 		receiveBroadCast = new APKInstalledBroadcast();
 		IntentFilter filter = new IntentFilter();
-//		filter.addAction("Activity_NotActive"); // 只有持有相同的action的接受者才能接收此广播
+		// filter.addAction("Activity_NotActive"); // 只有持有相同的action的接受者才能接收此广播
 		registerReceiver(receiveBroadCast, filter);
 		initUI();
 		initData();
@@ -134,6 +135,13 @@ public class Activity_NotActive extends BaseActivity {
 		// apps = PublicUtil.getDownloadAppsEntityIsInstalled();
 		UIHelper.showMsgProgressDialog(activity, "正在加载...");
 		activationFlag = Protocol.get_jihuo_earn(activity, setTag());
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		initData();
 	}
 
 	@Override
@@ -222,6 +230,12 @@ public class Activity_NotActive extends BaseActivity {
 				}
 			}
 		}
+
+	}
+
+	@Override
+	public void addAPK(String packageName) {
+		// TODO Auto-generated method stub
 
 	}
 }

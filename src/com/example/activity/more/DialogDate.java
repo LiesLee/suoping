@@ -22,6 +22,9 @@ public class DialogDate extends Dialog implements android.view.View.OnClickListe
 	private EditText et_dialog_date_year;
 	private EditText et_dialog_date_month;
 	private EditText et_dialog_date_day;
+	private String yearString = "";
+	private String monthString = "";
+	private String dayString = "";
 
 	public DialogDate(Context context) {
 		super(context);
@@ -45,6 +48,10 @@ public class DialogDate extends Dialog implements android.view.View.OnClickListe
 		et_dialog_date_year = (EditText) findViewById(R.id.et_dialog_date_year);
 		et_dialog_date_month = (EditText) findViewById(R.id.et_dialog_date_month);
 		et_dialog_date_day = (EditText) findViewById(R.id.et_dialog_date_day);
+		setDate();
+		et_dialog_date_year.setText(yearString);
+		et_dialog_date_month.setText(monthString);
+		et_dialog_date_day.setText(dayString);
 	}
 
 	@Override
@@ -95,6 +102,22 @@ public class DialogDate extends Dialog implements android.view.View.OnClickListe
 
 		default:
 			break;
+		}
+	}
+
+	/**
+	 * @Description 设置当前日期
+	 * @author Created by qinxianyuzou on 2015-2-13.
+	 * @param year
+	 * @param month
+	 * @param day
+	 */
+	public void setDate() {
+		if (StringUtils.isEmpty(PublicUtil.getUserInfo_Entity(mContext).getBirthday())) {
+			String birthday[] = PublicUtil.getUserInfo_Entity(mContext).getBirthday().split("/");
+			yearString = birthday[0];
+			monthString = birthday[1];
+			dayString = birthday[2];
 		}
 	}
 }

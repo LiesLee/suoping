@@ -1,5 +1,7 @@
 package com.example.activity.common;
 
+import java.io.File;
+
 import org.json.JSONObject;
 
 import android.app.Activity;
@@ -162,6 +164,27 @@ public class Activity_DownloadWeb extends BaseActivity implements ADD_APK_Interf
 		String urlString = "http://client.duowanka.com/wget_earn_detail?eaid=" + mId;
 		LogUtil.d(setTag(), urlString);
 		wv_public_web.loadUrl(urlString);
+		isDownLoad();
+	}
+
+	private void isDownLoad() {
+		String tempPath = "";
+		for (int i = 0; i < PublicUtil.getDownloadAppsEntity().size(); i++) {
+			String appPath = PublicUtil.getDownloadAppsEntity().get(i).getAppPath();
+			String packageName = PublicUtil.getPackageName(activity, appPath);
+			if (mPackageName.equals(packageName)) {
+				if (StringUtils.isEmpty(tempPath)) {
+					tempPath = appPath;
+				} else {
+					File file1 = new File(tempPath);
+					File file2 = new File(appPath);
+					if (file1.lastModified() < file2.lastModified()) {
+						tempPath = appPath;
+					}
+				}
+			}
+		}
+		mInstallPush = tempPath;
 	}
 
 	@Override
@@ -327,7 +350,7 @@ public class Activity_DownloadWeb extends BaseActivity implements ADD_APK_Interf
 			switch (msg.what) {
 			// 开始
 			case 0:
-				mPackageName = "";
+				// mPackageName = "";
 				mInstallPush = "";
 				but_down_web.setText("正在下载...");
 				but_down_web.setClickable(false);
@@ -345,8 +368,9 @@ public class Activity_DownloadWeb extends BaseActivity implements ADD_APK_Interf
 			case 2:
 				but_down_web.setText("下载完成");
 				mInstallPush = msg.obj.toString();
-				mPackageName = PublicUtil.getPackageName(activity, mInstallPush);
-				LogUtil.d(setTag(), "mPackageName:" + mPackageName);
+				// mPackageName = PublicUtil.getPackageName(activity,
+				// mInstallPush);
+				// LogUtil.d(setTag(), "mPackageName:" + mPackageName);
 				break;
 			// 下载失败
 			case 3:

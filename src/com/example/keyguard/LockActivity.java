@@ -246,10 +246,8 @@ public class LockActivity extends BaseActivity {
 	 * @author Created by qinxianyuzou on 2015-1-22.
 	 */
 	private void setData() {
-		if (!StringUtils.isEmpty(SharedPreferenceUtil.getInstance(activity).getString(SharedPreferenceUtil.ADCACHE))) {
-			ResponseLockADList msgInfo = new Gson().fromJson(
-					SharedPreferenceUtil.getInstance(activity).getString(SharedPreferenceUtil.ADCACHE),
-					ResponseLockADList.class);
+		if (!StringUtils.isEmpty(PublicUtil.getADCache(activity))) {
+			ResponseLockADList msgInfo = new Gson().fromJson(PublicUtil.getADCache(activity), ResponseLockADList.class);
 			listDataEntities = msgInfo.getData();
 			listCount = listDataEntities.size();
 			if (listCount <= 1) {
@@ -339,9 +337,7 @@ public class LockActivity extends BaseActivity {
 		if (getearnlistFlag == flag) {
 			ResponseLockADList msgInfo = (ResponseLockADList) response;
 			if (msgInfo.getCode().equals(Code.CODE_SUCCESS)) {
-				SharedPreferenceUtil.getInstance(activity).putString(SharedPreferenceUtil.ADCACHE,
-						jsonString.toString());
-				LogUtil.d(setTag(), jsonString.toString());
+				PublicUtil.setADCache(activity, jsonString.toString());
 				if (listDataEntities.size() < 1) {
 					setData();
 				}
@@ -399,7 +395,7 @@ public class LockActivity extends BaseActivity {
 			// TODO Auto-generated method stub
 
 			int action = event.getAction();
-//			Log.i(setTag(), "Touch:" + action);
+			// Log.i(setTag(), "Touch:" + action);
 			switch (action) {
 			case MotionEvent.ACTION_DOWN:
 				lastX = (int) event.getRawX();

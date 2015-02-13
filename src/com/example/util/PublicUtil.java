@@ -205,6 +205,26 @@ public class PublicUtil {
 	}
 
 	/**
+	 * @Description 获取上次保存的缓存
+	 * @author Created by qinxianyuzou on 2015-2-4.
+	 * @param mContext
+	 * @return
+	 */
+	public static String getADCache(Context mContext) {
+		return SharedPreferenceUtil.getInstance(mContext).getString(SharedPreferenceUtil.ADCACHE);
+	}
+
+	/**
+	 * @Description 保存广告
+	 * @author Created by qinxianyuzou on 2015-2-13.
+	 * @param mContext
+	 * @param rawCookies
+	 */
+	public static void setADCache(Context mContext, String rawCookies) {
+		SharedPreferenceUtil.getInstance(mContext).putString(SharedPreferenceUtil.ADCACHE, rawCookies);
+	}
+
+	/**
 	 * @Description 保存用户登录信息
 	 * @author Created by qinxianyuzou on 2015-2-9.
 	 * @param mContext
@@ -940,7 +960,7 @@ public class PublicUtil {
 	}
 
 	/**
-	 * 获取所有已下载的应用并返回集合
+	 * 获取所有已下载并安装的应用并返回集合
 	 * 
 	 * @return List<Download_APK_Install>
 	 */
@@ -1065,6 +1085,25 @@ public class PublicUtil {
 		if (tasksInfo.size() > 0) {
 			// 应用程序位于堆栈的顶层
 			if (context.getPackageName().equals(tasksInfo.get(0).topActivity.getPackageName())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * @Description 判断程序是否在前台运行
+	 * @author Created by qinxianyuzou on 2015-2-12.
+	 * @param packageName
+	 * @param context
+	 * @return
+	 */
+	public static boolean isTopActivity(String packageName, Context context) {
+		ActivityManager mActivityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+		List<RunningTaskInfo> tasksInfo = mActivityManager.getRunningTasks(1);
+		if (tasksInfo.size() > 0) {
+			// 应用程序位于堆栈的顶层
+			if (packageName.equals(tasksInfo.get(0).topActivity.getPackageName())) {
 				return true;
 			}
 		}

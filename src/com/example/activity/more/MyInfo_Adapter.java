@@ -141,20 +141,21 @@ public class MyInfo_Adapter extends BaseAdapter {
 			case 0:
 				Activity_AddressList.luanch(activity);
 				break;
+			// case 1:
+			// Activity_OnlySubmit.luanch(activity,
+			// listData.get(type).getName(), EnumOnlySubmit.INVITE_NO);
+			// break;
 			case 1:
-				Activity_OnlySubmit.luanch(activity, listData.get(type).getName(), EnumOnlySubmit.INVITE_NO);
-				break;
-			case 2:
 				DialogSex dialogSex = new DialogSex(activity);
 				dialogSex.requestWindowFeature(Window.FEATURE_NO_TITLE);
 				dialogSex.show();
 				break;
-			case 3:
+			case 2:
 				DialogDate dialogDate = new DialogDate(activity);
 				dialogDate.requestWindowFeature(Window.FEATURE_NO_TITLE);
 				dialogDate.show();
 				break;
-			case 4:
+			case 3:
 				final DialogClick dialogClick1 = new DialogClick(activity);
 				dialogClick1.requestWindowFeature(Window.FEATURE_NO_TITLE);
 				dialogClick1.show();
