@@ -1036,7 +1036,7 @@ public class PublicUtil {
 				while (isRunning) {
 					try {
 						Thread.sleep(1000);
-						if (isRunningAPK(activity, packagename)) {
+						if (isRunningAPK(activity, packagename) && isTopActivity(activity, packagename)) {
 							timing++;
 							LogUtil.d(tag, "使用了" + timing + "秒");
 							if (timing > howLong) {
@@ -1098,7 +1098,7 @@ public class PublicUtil {
 	 * @param context
 	 * @return
 	 */
-	public static boolean isTopActivity(String packageName, Context context) {
+	public static boolean isTopActivity(Context context, String packageName) {
 		ActivityManager mActivityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
 		List<RunningTaskInfo> tasksInfo = mActivityManager.getRunningTasks(1);
 		if (tasksInfo.size() > 0) {

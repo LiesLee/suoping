@@ -39,7 +39,6 @@ import com.example.util.UIHelper;
 import com.example.util.YouMengUtil;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
-import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.umeng.analytics.MobclickAgent;
 
 /**
@@ -399,7 +398,8 @@ public class Activity_DownloadWeb extends BaseActivity implements ADD_APK_Interf
 				while (isRunning) {
 					try {
 						Thread.sleep(1000);
-						if (PublicUtil.isRunningAPK(activity, mPackageName)) {
+						if (PublicUtil.isRunningAPK(activity, mPackageName)
+								&& PublicUtil.isTopActivity(activity, mPackageName)) {
 							timing++;
 							LogUtil.d(setTag(), "使用了" + timing + "秒");
 							if (timing > mExper_time) {
