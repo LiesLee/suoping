@@ -131,7 +131,7 @@ public class Activity_OnlySubmit extends BaseActivity {
 		rl_public_back.setVisibility(View.VISIBLE);
 		rl_public_back.setOnClickListener(this);
 		but_nickname_submit.setOnClickListener(this);
-		if (mEnumOnlySubmit == EnumOnlySubmit.LOGISTICS) {
+		if (mEnumOnlySubmit == EnumOnlySubmit.LOGISTICS || mEnumOnlySubmit == EnumOnlySubmit.EDIT_LOGISTICS) {
 			if (mType == 3 || mType == 2) {
 				et_nickname_text.setInputType(InputType.TYPE_CLASS_NUMBER);
 				if (mType == 3) {

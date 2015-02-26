@@ -18,6 +18,75 @@ public class FreshmanAward_Entity implements Serializable {
 	private float software = 0;
 	/** 总奖励金额 */
 	private float sum = 0;
+	/** 一完善用户信息 */
+	private int has_info = 0;
+	/** 已填邀请码 */
+	private int has_invite = 0;
+	/** 已了解锁屏赚 */
+	private int has_know_software = 0;
+
+	/**
+	 * @Description
+	 * @author Created by qinxianyuzou on 2015-2-26.
+	 * @see #has_info
+	 * @return the has_info
+	 */
+	public boolean getHas_info() {
+		return has_info == 1 ? true : false;
+	}
+
+	/**
+	 * @Description
+	 * @author Created by qinxianyuzou on 2015-2-26.
+	 * @see #has_info
+	 * @param has_info
+	 *            the has_info to set
+	 */
+	public void setHas_info(int has_info) {
+		this.has_info = has_info;
+	}
+
+	/**
+	 * @Description
+	 * @author Created by qinxianyuzou on 2015-2-26.
+	 * @see #has_invite
+	 * @return the has_invite
+	 */
+	public boolean getHas_invite() {
+		return has_invite == 1 ? true : false;
+	}
+
+	/**
+	 * @Description
+	 * @author Created by qinxianyuzou on 2015-2-26.
+	 * @see #has_invite
+	 * @param has_invite
+	 *            the has_invite to set
+	 */
+	public void setHas_invite(int has_invite) {
+		this.has_invite = has_invite;
+	}
+
+	/**
+	 * @Description
+	 * @author Created by qinxianyuzou on 2015-2-26.
+	 * @see #has_know_software
+	 * @return the has_know_software
+	 */
+	public boolean getHas_know_software() {
+		return has_know_software == 1 ? true : false;
+	}
+
+	/**
+	 * @Description
+	 * @author Created by qinxianyuzou on 2015-2-26.
+	 * @see #has_know_software
+	 * @param has_know_software
+	 *            the has_know_software to set
+	 */
+	public void setHas_know_software(int has_know_software) {
+		this.has_know_software = has_know_software;
+	}
 
 	/**
 	 * @Description
@@ -111,6 +180,7 @@ public class FreshmanAward_Entity implements Serializable {
 	@Override
 	public String toString() {
 		return "FreshmanAward_Entity [info=" + info + ", invite=" + invite + ", software=" + software + ", sum=" + sum
+				+ ", has_info=" + has_info + ", has_invite=" + has_invite + ", has_know_software=" + has_know_software
 				+ "]";
 	}
 

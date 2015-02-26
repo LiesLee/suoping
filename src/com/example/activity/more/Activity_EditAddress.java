@@ -24,15 +24,13 @@ import com.example.entity.more.Logistics_Entity;
 import com.example.http.base.BaseResponse;
 import com.example.http.base.Code;
 import com.example.http.base.Protocol;
-import com.example.http.respose.ResponseLogistics;
 import com.example.keyguard.R;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
-import com.lidroid.xutils.view.annotation.event.OnClick;
 
 /**
- * @Description 添加地址
+ * @Description 编辑地址
  * @author Created by qinxianyuzou on 2014-12-29.
  */
 public class Activity_EditAddress extends BaseActivity {

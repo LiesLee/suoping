@@ -26,9 +26,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="2.00"
+            android:text="..."
             android:textColor="@color/white"
-            android:textSize="70sp"/>
+            android:textSize="70sp" />
 
         <ImageView
             android:layout_width="30dp"
@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:text="完善信息+0.3元"
+            android:text="完善信息"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
@@ -101,7 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:text="绑定手机号+1元"
+            android:text="绑定手机号"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
@@ -138,7 +138,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:text="填写邀请码+1元"
+            android:text="填写邀请码"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
@@ -175,7 +175,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:text="了解锁屏赚+0.1元"
+            android:text="了解锁屏赚"
             android:textColor="@color/black"
             android:textSize="18sp" />
 

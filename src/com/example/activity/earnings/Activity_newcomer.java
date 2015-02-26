@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import com.example.http.base.Protocol;
 import com.example.http.respose.ResponseFreshmanAward;
 import com.example.http.respose.ResponseNewcomerAbout;
 import com.example.keyguard.R;
+import com.example.util.PublicUtil;
 import com.example.util.UIHelper;
 import com.example.util.YouMengUtil;
 import com.lidroid.xutils.ViewUtils;
@@ -56,6 +58,15 @@ public class Activity_newcomer extends BaseActivity {
 	/** 了解锁屏赚 */
 	@ViewInject(R.id.tv_newcomer_about)
 	private TextView tv_newcomer_about;
+	/** 完善信息红点 */
+	@ViewInject(R.id.iv_red_point_msg)
+	private ImageView iv_red_point_msg;
+	/** 邀请码红点 */
+	@ViewInject(R.id.iv_red_point_input_auth)
+	private ImageView iv_red_point_input_auth;
+	/** 了解锁屏赚红点 */
+	@ViewInject(R.id.iv_red_point_input_understand)
+	private ImageView iv_red_point_input_understand;
 
 	private long getDataFlag;
 	private long getAboutFlag;
@@ -85,6 +96,12 @@ public class Activity_newcomer extends BaseActivity {
 	@Override
 	protected void initData() {
 		UIHelper.showMsgProgressDialog(activity, "");
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
 		getDataFlag = Protocol.freshmanAward(activity, setTag());
 	}
 
@@ -120,6 +137,21 @@ public class Activity_newcomer extends BaseActivity {
 				tv_improve_msg.setText("完善信息+" + msgInfo.getData().getInfo() + "元");
 				tv_newcomer_invite.setText("填写邀请码+" + msgInfo.getData().getInvite() + "元");
 				tv_newcomer_about.setText("了解锁屏赚+" + msgInfo.getData().getSoftware() + "元");
+				if (msgInfo.getData().getHas_info()) {
+					iv_red_point_msg.setVisibility(View.GONE);
+				} else {
+					iv_red_point_msg.setVisibility(View.VISIBLE);
+				}
+				if (msgInfo.getData().getHas_invite()) {
+					iv_red_point_input_auth.setVisibility(View.GONE);
+				} else {
+					iv_red_point_input_auth.setVisibility(View.VISIBLE);
+				}
+				if (msgInfo.getData().getHas_know_software()) {
+					iv_red_point_input_understand.setVisibility(View.GONE);
+				} else {
+					iv_red_point_input_understand.setVisibility(View.VISIBLE);
+				}
 			} else {
 				showToast(msgInfo.getMsg());
 			}
