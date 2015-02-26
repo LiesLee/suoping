@@ -286,6 +286,12 @@ public class LockActivity extends BaseActivity {
 					currentRow = position;
 					tv_appJiFen.setText(listDataEntities.get(currentRow).getEarn_jifen());
 					tv_appJiFen.setText(listDataEntities.get(currentRow).getEarn_jifen());
+					LockADList_Entity lockADList_Entity = listDataEntities.get(currentRow);
+					if (lockADList_Entity.getApp_type() == 0) {
+						imageView_download.setImageResource(R.drawable.lock_left_download_icon_normal);
+					} else {
+						imageView_download.setImageResource(R.drawable.lock_web);
+					}
 					if (listCount > 1) {
 						if (currentRow == 0) {
 							imageView_up.setVisibility(View.GONE);
