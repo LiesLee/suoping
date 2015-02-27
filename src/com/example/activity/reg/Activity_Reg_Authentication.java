@@ -1,9 +1,12 @@
 package com.example.activity.reg;
 
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,13 +18,11 @@ import com.example.http.base.BaseResponse;
 import com.example.http.base.Code;
 import com.example.http.base.Protocol;
 import com.example.keyguard.R;
-import com.example.util.LogUtil;
 import com.example.util.StringUtils;
 import com.example.util.UIHelper;
+import com.example.util.YouMengUtil;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
-
-import org.json.JSONObject;
 
 /**
  * 注册页面2 Created by LiesLee on 2014/12/28. Email: LiesLee@foxmail.com
@@ -44,6 +45,9 @@ public class Activity_Reg_Authentication extends BaseActivity implements View.On
 	/** 返回按钮 **/
 	@ViewInject(R.id.iv_back_left)
 	private ImageView iv_back_left;
+	/** 登录按钮 **/
+	@ViewInject(R.id.but_reg_login)
+	private Button but_reg_login;
 
 	private String cellphoneNumber;
 	private long sendCodeFlag;
@@ -72,6 +76,7 @@ public class Activity_Reg_Authentication extends BaseActivity implements View.On
 
 		btn_reg_next.setOnClickListener(this);
 		iv_back_left.setOnClickListener(this);
+		but_reg_login.setOnClickListener(this);
 	}
 
 	@Override
@@ -99,6 +104,10 @@ public class Activity_Reg_Authentication extends BaseActivity implements View.On
 			break;
 		case R.id.iv_back_left:
 			this.finish();
+		case R.id.but_reg_login:
+			YouMengUtil.onEvent(activity, YouMengUtil.OPEN_LOGIN);
+			LoginActivity.luanch(activity);
+			finish();
 		default:
 			break;
 		}

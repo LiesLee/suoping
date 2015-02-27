@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.keyguard"
-    android:versionCode="13"
-    android:versionName="1.0.12" >
+    android:versionCode="14"
+    android:versionName="1.0.13" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -51,34 +51,43 @@
         <!-- 申明activity -->
         <activity
             android:name=".LockActivity"
-            android:launchMode="singleInstance" >
+            android:configChanges="orientation|keyboardHidden|locale"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".DownLoadWebActivity"
+            android:configChanges="orientation|keyboardHidden|locale"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.activity.earnings.Activity_earnings"
+            android:configChanges="orientation|keyboardHidden|locale"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.activity.invitation.Activity_invitation"
+            android:configChanges="orientation|keyboardHidden|locale"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.activity.more.Activity_more"
+            android:configChanges="orientation|keyboardHidden|locale"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.activity.shop.Activity_shop"
+            android:configChanges="orientation|keyboardHidden|locale"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.activity.common.Activity_Guide"
+            android:configChanges="orientation|keyboardHidden|locale"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.activity.main.Activity_Launch"
+            android:configChanges="orientation|keyboardHidden|locale"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -93,98 +102,120 @@
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name="com.example.activity.reg.Activity_Reg"
+            android:configChanges="orientation|keyboardHidden|locale"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.example.activity.reg.Activity_Reg_Authentication"
+            android:configChanges="orientation|keyboardHidden|locale"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.example.activity.reg.Activity_Reg_Password"
+            android:configChanges="orientation|keyboardHidden|locale"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.example.activity.more.Activity_MyInfo"
+            android:configChanges="orientation|keyboardHidden|locale"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.activity.more.Activity_Address"
+            android:configChanges="orientation|keyboardHidden|locale"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.activity.more.Activity_AddressList_Choose"
+            android:configChanges="orientation|keyboardHidden|locale"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.activity.common.Activity_Submit"
+            android:configChanges="orientation|keyboardHidden|locale"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.activity.shop.Activity_ShopInfo"
+            android:configChanges="orientation|keyboardHidden|locale"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.activity.earnings.Activity_newcomer"
+            android:configChanges="orientation|keyboardHidden|locale"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.activity.more.Activity_MyDownload"
+            android:configChanges="orientation|keyboardHidden|locale"
             android:label="@string/title_activity_activity__my_download"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.activity.earnings.Activity_EarningsShop"
+            android:configChanges="orientation|keyboardHidden|locale"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.activity.invitation.Activity_InvitationInfo"
+            android:configChanges="orientation|keyboardHidden|locale"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.activity.earnings.Activity_NotActive"
+            android:configChanges="orientation|keyboardHidden|locale"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.activity.common.Activity_PublicWeb"
+            android:configChanges="orientation|keyboardHidden|locale"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.activity.more.Activity_AddressList"
+            android:configChanges="orientation|keyboardHidden|locale"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.activity.more.Activity_MyInfoPassWord"
+            android:configChanges="orientation|keyboardHidden|locale"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.activity.more.Activity_MyInfoPhone"
+            android:configChanges="orientation|keyboardHidden|locale"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.activity.more.Activity_about"
+            android:configChanges="orientation|keyboardHidden|locale"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.activity.common.Activity_OnlySubmit"
+            android:configChanges="orientation|keyboardHidden|locale"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.activity.common.Activity_DownloadWeb"
+            android:configChanges="orientation|keyboardHidden|locale"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.activity.shop.Activity_ShopInfoWeb"
+            android:configChanges="orientation|keyboardHidden|locale"
             android:screenOrientation="portrait" >
         </activity>
         <!--
         <activity
             android:name="com.example.keyguard.Activity_YouMi"
             android:screenOrientation="portrait" >
-        </activity>
-
-
-
+        </activity>
         -->
 
-        <meta-data            android:name="UMENG_APPKEY"            android:value="54b60c39fd98c5ac58000103" />
-        <meta-data            android:name="UMENG_CHANNEL"            android:value="site" />
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="54b60c39fd98c5ac58000103" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="site" />
 
         <service
             android:name="com.umeng.update.net.DownloadingService"
@@ -314,9 +345,13 @@
         </receiver>
 
         <!-- 【必须】 请修改为APP的AccessId，“21”开头的10位数字，中间没空格 -->
-        <meta-data            android:name="XG_V2_ACCESS_ID"            android:value="2100087333" />
+        <meta-data
+            android:name="XG_V2_ACCESS_ID"
+            android:value="2100087333" />
         <!-- 【必须】 请修改为APP的AccessKey，“A”开头的12位字符串，中间没空格 -->
-        <meta-data            android:name="XG_V2_ACCESS_KEY"            android:value="A162XM4TFT2W" />
+        <meta-data
+            android:name="XG_V2_ACCESS_KEY"
+            android:value="A162XM4TFT2W" />
     </application>
 
 </manifest>

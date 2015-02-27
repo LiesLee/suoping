@@ -19,12 +19,9 @@ import com.example.http.respose.ResponseUserInfo;
 import com.example.keyguard.R;
 import com.example.util.LogUtil;
 import com.example.util.PublicUtil;
-import com.example.util.SharedPreferenceUtil;
 import com.example.util.UIHelper;
-import com.google.gson.Gson;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
-import com.umeng.analytics.MobclickAgent;
 
 /**
  * @Description 收益
@@ -109,7 +106,7 @@ public class Activity_earnings extends BaseActivity {
 			ResponseUserInfo msg = (ResponseUserInfo) response;
 			if (msg.getCode().equals(Code.CODE_SUCCESS)) {
 				PublicUtil.setUserInfo(activity, PublicUtil.userInfoToString(msg.getData()));
-				tv_allEarning.setText("" + PublicUtil.getUserInfo_Entity(activity).getSum_earn());
+				tv_allEarning.setText("" + PublicUtil.getUserInfo_Entity(activity).getTotal_earn());
 				tv_todayEarning.setText("" + PublicUtil.getUserInfo_Entity(activity).getToday_earn());
 				tv_earning.setText("" + PublicUtil.getUserInfo_Entity(activity).getSum_earn());
 			} else {

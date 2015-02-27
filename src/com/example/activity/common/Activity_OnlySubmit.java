@@ -137,9 +137,12 @@ public class Activity_OnlySubmit extends BaseActivity {
 				if (mType == 3) {
 					et_nickname_text.setFilters(new InputFilter[] { new InputFilter.LengthFilter(6) });
 				}
+				if (mType == 2) {
+					et_nickname_text.setFilters(new InputFilter[] { new InputFilter.LengthFilter(11) });
+				}
 			}
+			et_nickname_text.setText(mContent);
 		}
-		et_nickname_text.setText(mContent);
 	}
 
 	@Override
@@ -221,8 +224,8 @@ public class Activity_OnlySubmit extends BaseActivity {
 		if (inviteFlag == flag) {
 			BaseResponse msg = (BaseResponse) response;
 			showToast(msg.getMsg());
-			if (msg.equals(Code.CODE_SUCCESS)) {
-				finish();
+			if (msg.getCode().equals(Code.CODE_SUCCESS)) {
+				this.finish();
 			}
 		}
 	}

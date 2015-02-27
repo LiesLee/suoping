@@ -18,6 +18,8 @@ public class UserInfo implements Serializable {
 	private float sum_earn;
 	/** 当天积分 **/
 	private float today_earn;
+	/** 累计积分 **/
+	private float total_earn;
 	/** 性别 0代表男性，1代表女性 **/
 	private int sex;
 	/** 邀请码 **/
@@ -26,6 +28,27 @@ public class UserInfo implements Serializable {
 	private String name = "";
 	/** 生日 */
 	private String birthday = "";
+
+	/**
+	 * @Description
+	 * @author Created by qinxianyuzou on 2015-2-26.
+	 * @see #total_earn
+	 * @return the total_earn
+	 */
+	public float getTotal_earn() {
+		return total_earn;
+	}
+
+	/**
+	 * @Description
+	 * @author Created by qinxianyuzou on 2015-2-26.
+	 * @see #total_earn
+	 * @param total_earn
+	 *            the total_earn to set
+	 */
+	public void setTotal_earn(float total_earn) {
+		this.total_earn = total_earn;
+	}
 
 	/**
 	 * @Description
@@ -184,8 +207,9 @@ public class UserInfo implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "UserInfo [username=" + username + ", sum_earn=" + sum_earn + ", today_earn=" + today_earn + ", sex="
-				+ sex + ", invite_no=" + invite_no + ", name=" + name + ", birthday=" + birthday + "]";
+		return "UserInfo [username=" + username + ", sum_earn=" + sum_earn + ", today_earn=" + today_earn
+				+ ", total_earn=" + total_earn + ", sex=" + sex + ", invite_no=" + invite_no + ", name=" + name
+				+ ", birthday=" + birthday + "]";
 	}
 
 }

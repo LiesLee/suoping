@@ -275,6 +275,12 @@ public class LockActivity extends BaseActivity {
 						R.drawable.launch_bg);
 				views.add(view);
 			}
+			LockADList_Entity lockADList_Entity = listDataEntities.get(currentRow);
+			if (lockADList_Entity.getApp_type() == 0) {
+				imageView_download.setImageResource(R.drawable.lock_left_download_icon_normal);
+			} else {
+				imageView_download.setImageResource(R.drawable.lock_web);
+			}
 			adapter2.setData(views);
 			verticalViewPager1 = (VerticalViewPager) findViewById(R.id.verticalViewPager1);
 			verticalViewPager1.setAdapter(adapter2);

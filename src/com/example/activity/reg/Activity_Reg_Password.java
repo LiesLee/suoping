@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,7 +23,6 @@ import com.example.http.respose.ResponseUserInfo;
 import com.example.keyguard.R;
 import com.example.util.LogUtil;
 import com.example.util.PublicUtil;
-import com.example.util.SharedPreferenceUtil;
 import com.example.util.StringUtils;
 import com.example.util.UIHelper;
 import com.example.util.YouMengUtil;
@@ -49,6 +49,9 @@ public class Activity_Reg_Password extends BaseActivity implements View.OnClickL
 	/** 返回按钮 **/
 	@ViewInject(R.id.iv_back_left)
 	private ImageView iv_back_left;
+	/** 登录按钮 **/
+	@ViewInject(R.id.but_reg_login)
+	private Button but_reg_login;
 
 	private String cellphoneNumber;
 	private String code;
@@ -85,6 +88,7 @@ public class Activity_Reg_Password extends BaseActivity implements View.OnClickL
 		et_reg.setHint("");
 		iv_back_left.setOnClickListener(this);
 		btn_reg_next.setOnClickListener(this);
+		but_reg_login.setOnClickListener(this);
 		et_reg.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
 	}
 
@@ -109,6 +113,10 @@ public class Activity_Reg_Password extends BaseActivity implements View.OnClickL
 			break;
 		case R.id.iv_back_left:
 			this.finish();
+		case R.id.but_reg_login:
+			YouMengUtil.onEvent(activity, YouMengUtil.OPEN_LOGIN);
+			LoginActivity.luanch(activity);
+			finish();
 		default:
 			break;
 		}
