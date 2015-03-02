@@ -39,12 +39,12 @@ import org.json.JSONObject;
 
 /**
  * A simple {@link Fragment} subclass. Activities that contain this fragment
- * must implement the {@link Fragment_shop.OnFragmentInteractionListener}
+ * must implement the {@link Fragment_Shop_Cash.OnFragmentInteractionListener}
  * interface to handle interaction events. Use the
- * {@link Fragment_shop#newInstance} factory method to create an instance of
- * this fragment.
+ * {@link Fragment_Shop_Cash#newInstance} factory method to create an instance
+ * of this fragment.
  */
-public class Fragment_shop extends BaseFragment implements UpDate_Interface{
+public class Fragment_Shop_Cash extends BaseFragment implements UpDate_Interface {
 	private static final String SHOP_TYPE = "shop_type";
 
 	private String shop_type;
@@ -61,8 +61,8 @@ public class Fragment_shop extends BaseFragment implements UpDate_Interface{
 	private long exproductFlag;
 	public static UpDate_Interface upDate_Interface;
 
-	public static Fragment_shop newInstance(String shop_type) {
-		Fragment_shop fragment = new Fragment_shop();
+	public static Fragment_Shop_Cash newInstance(String shop_type) {
+		Fragment_Shop_Cash fragment = new Fragment_Shop_Cash();
 		Bundle args = new Bundle();
 		args.putString(SHOP_TYPE, shop_type);
 		// ptype = shop_type;
@@ -70,7 +70,7 @@ public class Fragment_shop extends BaseFragment implements UpDate_Interface{
 		return fragment;
 	}
 
-	public Fragment_shop() {
+	public Fragment_Shop_Cash() {
 		// Required empty public constructor
 	}
 
@@ -103,7 +103,7 @@ public class Fragment_shop extends BaseFragment implements UpDate_Interface{
 
 	@Override
 	public String setTag() {
-		return Fragment_shop.class.getSimpleName();
+		return Fragment_Shop_Cash.class.getSimpleName();
 	}
 
 	@Override

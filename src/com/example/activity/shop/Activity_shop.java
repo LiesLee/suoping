@@ -7,6 +7,8 @@ import com.android.volley.VolleyError;
 import com.example.activity.common.BaseActivity;
 import com.example.activity.common.BaseFragmentActivity;
 import com.example.activity.common.ShopInterface;
+import com.example.activity.common.UpDate_Interface;
+import com.example.fragments.Fragment_Shop_Cash;
 import com.example.fragments.Fragment_shop;
 import com.example.keyguard.R;
 import com.example.ui.astuetz.PagerSlidingTabStrip;
@@ -64,6 +66,18 @@ public class Activity_shop extends BaseFragmentActivity implements ShopInterface
 		ViewUtils.inject(this);
 		initUI();
 		initData();
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if (Fragment_shop.upDate_Interface != null) {
+			Fragment_shop.upDate_Interface.update();
+		}
+		if (Fragment_Shop_Cash.upDate_Interface != null) {
+			Fragment_Shop_Cash.upDate_Interface.update();
+		}
 	}
 
 	@Override
@@ -164,7 +178,7 @@ public class Activity_shop extends BaseFragmentActivity implements ShopInterface
 			case 0:
 				return Fragment_shop.newInstance("2");
 			case 1:
-				return Fragment_shop.newInstance("3");
+				return Fragment_Shop_Cash.newInstance("3");
 			default:
 				return Fragment_shop.newInstance("2");
 			}
