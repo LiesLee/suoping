@@ -2,8 +2,8 @@ package com.example.activity.common;
 
 import org.json.JSONObject;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -15,7 +15,6 @@ import com.example.http.base.HttpCallBack;
 import com.example.http.base.RequestManager;
 import com.example.keyguard.R;
 import com.example.util.PublicUtil;
-import com.lidroid.xutils.ViewUtils;
 import com.umeng.analytics.MobclickAgent;
 
 /**
@@ -31,6 +30,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity implements H
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		activity = this;
 		KeyGuardActivityManager.getInstance().addActivity(this);
 		setTag();
@@ -41,19 +41,19 @@ public abstract class BaseFragmentActivity extends FragmentActivity implements H
 		super.onDestroy();
 	}
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        setConnectorListener();
-    }
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+		setConnectorListener();
+	}
 
-    @Override
-    protected void onPause() {
-        // TODO Auto-generated method stub
-        super.onPause();
-        MobclickAgent.onPause(this);
-    }
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
 
 	/**
 	 * @Description 初始化ui
@@ -83,12 +83,12 @@ public abstract class BaseFragmentActivity extends FragmentActivity implements H
 	 */
 	public abstract String setTag();
 
-    @Override
-    public void finish() {
-        super.finish();
-        KeyGuardActivityManager.getInstance().removeActivity(this);
-        RequestManager.getInstance(this).getmRequestQueue().cancelAll(Tag);
-    }
+	@Override
+	public void finish() {
+		super.finish();
+		KeyGuardActivityManager.getInstance().removeActivity(this);
+		RequestManager.getInstance(this).getmRequestQueue().cancelAll(Tag);
+	}
 
 	/**
 	 * @Description 短时间toast

@@ -1,7 +1,5 @@
 package com.example.entity;
 
-import android.graphics.drawable.Drawable;
-
 import java.io.Serializable;
 
 /**

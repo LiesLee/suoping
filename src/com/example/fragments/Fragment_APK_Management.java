@@ -1,9 +1,5 @@
 package com.example.fragments;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.activity.common.ShopInterface;
-import com.example.activity.common.UpDate_Interface;
 import com.example.activity.more.My_Download_Adapter;
+import com.example.activity.shop.Shop_Adapter;
 import com.example.entity.Download_APK_Install;
 import com.example.entity.ListApks;
 import com.example.keyguard.R;
@@ -25,15 +21,19 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.bitmap.PauseOnScrollListener;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
  * contain this fragment must implement the
- * {@link com.example.fragments.Fragment_MyDownload.OnFragmentInteractionListener}
+ * {@link com.example.fragments.Fragment_APK_Management.OnFragmentInteractionListener}
  * interface to handle interaction events. Use the
- * {@link com.example.fragments.Fragment_MyDownload#newInstance} factory method
- * to create an instance of this fragment.
+ * {@link com.example.fragments.Fragment_APK_Management#newInstance} factory
+ * method to create an instance of this fragment.
  */
-public class Fragment_MyDownload extends BaseFragment implements UpDate_Interface {
+public class Fragment_APK_Management extends BaseFragment {
 	private static final String SHOP_TYPE = "shop_type";
 	private static final String APKS = "apks";
 
@@ -53,8 +53,6 @@ public class Fragment_MyDownload extends BaseFragment implements UpDate_Interfac
 	@ViewInject(R.id.btn_clear_apk_package)
 	private Button btn_clear_apk_package;
 
-	public static UpDate_Interface upDate_Interface;
-
 	/**
 	 * Use this factory method to create a new instance of this fragment using
 	 * the provided parameters.
@@ -63,8 +61,8 @@ public class Fragment_MyDownload extends BaseFragment implements UpDate_Interfac
 	 *            Parameter 1.
 	 * @return A new instance of fragment Fragment_shop.
 	 */
-	public static Fragment_MyDownload newInstance(String shop_type, ListApks apks) {
-		Fragment_MyDownload fragment = new Fragment_MyDownload();
+	public static Fragment_APK_Management newInstance(String shop_type, ListApks apks) {
+		Fragment_APK_Management fragment = new Fragment_APK_Management();
 		Bundle args = new Bundle();
 		args.putString(SHOP_TYPE, shop_type);
 		args.putSerializable(APKS, apks);
@@ -72,7 +70,7 @@ public class Fragment_MyDownload extends BaseFragment implements UpDate_Interfac
 		return fragment;
 	}
 
-	public Fragment_MyDownload() {
+	public Fragment_APK_Management() {
 		// Required empty public constructor
 	}
 
@@ -97,7 +95,6 @@ public class Fragment_MyDownload extends BaseFragment implements UpDate_Interfac
 	@Override
 	public void initUI() {
 		bitmapUtils = new BitmapUtils(activity);
-		upDate_Interface = this;
 		adapter = new My_Download_Adapter(activity, bitmapUtils, shop_type);
 		rListView.setOnScrollListener(new PauseOnScrollListener(bitmapUtils, false, true));
 		rListView.setAdapter(adapter);
@@ -114,6 +111,7 @@ public class Fragment_MyDownload extends BaseFragment implements UpDate_Interfac
 					}
 					// data.clear();
 					adapter.setData(PublicUtil.getDownloadAppsEntity());
+					Fragment_MyDownload.upDate_Interface.update();
 				}
 			});
 		} else {
@@ -159,12 +157,6 @@ public class Fragment_MyDownload extends BaseFragment implements UpDate_Interfac
 	public interface OnFragmentInteractionListener {
 		// TODO: Update argument type and name
 		public void onFragmentInteraction(Uri uri);
-	}
-
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		adapter.setData(PublicUtil.getDownloadAppsEntity());
 	}
 
 }

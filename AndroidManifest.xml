@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.keyguard"
-    android:versionCode="14"
-    android:versionName="1.0.13" >
+    android:versionCode="15"
+    android:versionName="1.0.14" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -53,11 +53,6 @@
             android:name=".LockActivity"
             android:configChanges="orientation|keyboardHidden|locale"
             android:launchMode="singleInstance"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name=".DownLoadWebActivity"
-            android:configChanges="orientation|keyboardHidden|locale"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -207,15 +202,13 @@
         <activity
             android:name="com.example.keyguard.Activity_YouMi"
             android:screenOrientation="portrait" >
-        </activity>
+        </activity>
+
+
         -->
 
-        <meta-data
-            android:name="UMENG_APPKEY"
-            android:value="54b60c39fd98c5ac58000103" />
-        <meta-data
-            android:name="UMENG_CHANNEL"
-            android:value="site" />
+        <meta-data            android:name="UMENG_APPKEY"            android:value="54b60c39fd98c5ac58000103" />
+        <meta-data            android:name="UMENG_CHANNEL"            android:value="site" />
 
         <service
             android:name="com.umeng.update.net.DownloadingService"
@@ -345,13 +338,9 @@
         </receiver>
 
         <!-- 【必须】 请修改为APP的AccessId，“21”开头的10位数字，中间没空格 -->
-        <meta-data
-            android:name="XG_V2_ACCESS_ID"
-            android:value="2100087333" />
+        <meta-data            android:name="XG_V2_ACCESS_ID"            android:value="2100087333" />
         <!-- 【必须】 请修改为APP的AccessKey，“A”开头的12位字符串，中间没空格 -->
-        <meta-data
-            android:name="XG_V2_ACCESS_KEY"
-            android:value="A162XM4TFT2W" />
+        <meta-data            android:name="XG_V2_ACCESS_KEY"            android:value="A162XM4TFT2W" />
     </application>
 
 </manifest>
