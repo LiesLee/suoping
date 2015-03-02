@@ -10,10 +10,32 @@ public class Exchange_detail implements Serializable {
 	private static final long serialVersionUID = 3401119959962727213L;
 	private String epid = "";
 	private String ep_name = "";
+	/** 兑换时间 */
+	private String ep_time = "";
 	private String hp_url = "";
 	private int is_send;
 	private String send_msg = "";
 	private int ep_jifen;
+
+	/**
+	 * @Description 
+	 * @author Created by qinxianyuzou on 2015-3-2.
+	 * @see #ep_time
+	 * @return the ep_time
+	 */
+	public String getEp_time() {
+		return ep_time;
+	}
+
+	/**
+	 * @Description 
+	 * @author Created by qinxianyuzou on 2015-3-2.
+	 * @see #ep_time
+	 * @param ep_time the ep_time to set
+	 */
+	public void setEp_time(String ep_time) {
+		this.ep_time = ep_time;
+	}
 
 	/**
 	 * @Description
@@ -105,15 +127,10 @@ public class Exchange_detail implements Serializable {
 		this.hp_url = hp_url;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "Exchange_detail [epid=" + epid + ", ep_name=" + ep_name + ", hp_url=" + hp_url + ", is_send=" + is_send
-				+ ", send_msg=" + send_msg + ", ep_jifen=" + ep_jifen + "]";
+		return "Exchange_detail [epid=" + epid + ", ep_name=" + ep_name + ", ep_time=" + ep_time + ", hp_url=" + hp_url
+				+ ", is_send=" + is_send + ", send_msg=" + send_msg + ", ep_jifen=" + ep_jifen + "]";
 	}
 
 }

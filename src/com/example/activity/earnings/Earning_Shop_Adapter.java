@@ -66,6 +66,7 @@ public class Earning_Shop_Adapter extends BaseAdapter {
 			listItemView.iv_item_shop_icon = (ImageView) convertView.findViewById(R.id.iv_item_shop_icon);
 			listItemView.tv_item_shop_name = (TextView) convertView.findViewById(R.id.tv_item_shop_name);
 			listItemView.tv_item_shop_money = (TextView) convertView.findViewById(R.id.tv_item_shop_money);
+			listItemView.tv_item_shop_time = (TextView) convertView.findViewById(R.id.tv_item_shop_time);
 			// 设置标记
 			convertView.setTag(listItemView);
 		} else {
@@ -75,15 +76,18 @@ public class Earning_Shop_Adapter extends BaseAdapter {
 		AQuery aq_ = aq.recycle(convertView);
 		listItemView.tv_item_shop_name.setText(listData.get(position).getEp_name());
 		listItemView.tv_item_shop_money.setText(listData.get(position).getEp_jifen() + "");
+		listItemView.tv_item_shop_time.setText("兑换时间：" + listData.get(position).getEp_time() + "");
 		aq_.id(listItemView.iv_item_shop_icon).image(listData.get(position).getHp_url());
 
-//		convertView.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				Activity_ShopInfoWeb.luanch((android.app.Activity) mContext, listData.get(position).getEp_name(), ""
-//						+ listData.get(position).getEp_jifen(), listData.get(position).getEpid(), 1);
-//			}
-//		});
+		// convertView.setOnClickListener(new View.OnClickListener() {
+		// @Override
+		// public void onClick(View v) {
+		// Activity_ShopInfoWeb.luanch((android.app.Activity) mContext,
+		// listData.get(position).getEp_name(), ""
+		// + listData.get(position).getEp_jifen(),
+		// listData.get(position).getEpid(), 1);
+		// }
+		// });
 		return convertView;
 	}
 
@@ -91,6 +95,7 @@ public class Earning_Shop_Adapter extends BaseAdapter {
 		private ImageView iv_item_shop_icon;
 		private TextView tv_item_shop_name;
 		private TextView tv_item_shop_money;
+		private TextView tv_item_shop_time;
 	}
 
 }
